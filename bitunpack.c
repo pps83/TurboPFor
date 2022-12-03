@@ -22,12 +22,14 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //   "Integer Compression" Bit Packing
-#define BITUTIL_IN
+
+#include <stdio.h>
 #define VINT_IN
+#define BITUTIL_IN
 #include "conf.h"
+#include "vint.h"
 #include "bitutil.h"
 #include "bitpack.h"
-#include "vint.h"
 
 #define PAD8(_x_) (((_x_)+7)/8)
 

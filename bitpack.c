@@ -24,12 +24,13 @@
 //  "Integer Compression" bit packing
 
 #include <stdio.h>
-#define BITUTIL_IN
 #define VINT_IN
+#define BITUTIL_IN
 #include "conf.h"
-#include "bitutil.h"
 #include "vint.h"
+#include "bitutil.h"
 #include "bitpack.h"
+
 #define PAD8(_x_) ( (((_x_)+8-1)/8) )
 
   #ifdef __ARM_NEON
