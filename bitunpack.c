@@ -24,9 +24,8 @@
 //   "Integer Compression" Bit Packing
 
 #include <stdio.h>
-#define VINT_IN
 #include "conf.h"
-#include "vint.h"
+#include "vint_in.h"
 #include "bitutil_in.h"
 #include "bitpack.h"
 

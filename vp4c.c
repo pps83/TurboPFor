@@ -29,9 +29,8 @@
 #pragma warning( disable : 4068)
 
 #include <stdio.h>
-#define VINT_IN
 #include "conf.h"
-#include "vint.h"
+#include "vint_in.h"
 #include "bitutil_in.h"
 #include "bitpack.h"
 #include "vp4.h"

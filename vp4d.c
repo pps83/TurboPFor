@@ -31,9 +31,8 @@
 #include <stdio.h>
 #define BITPACK_DAC
 #define TURBOPFOR_DAC
-#define VINT_IN
 #include "conf.h"
-#include "vint.h"
+#include "vint_in.h"
 #include "bitutil_in.h"
 #include "bitpack.h"
 #include "vp4.h"
