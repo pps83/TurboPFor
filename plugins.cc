@@ -270,7 +270,6 @@ SC_SIMDPACK256,
 
   #if C_TURBOPFOR
 #define TURBOPFOR_DAC
-#define BITPACK_DAC
 #include "vint_in.h"
 #include "vsimple.h"
 #include "eliasfano.h"

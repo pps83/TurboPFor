@@ -29,7 +29,6 @@
 #pragma warning( disable : 4068)
 
 #include <stdio.h>
-#define BITPACK_DAC
 #define TURBOPFOR_DAC
 #include "conf.h"
 #include "vint_in.h"
