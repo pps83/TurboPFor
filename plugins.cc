@@ -269,14 +269,13 @@ SC_SIMDPACK256,
 #endif
 
   #if C_TURBOPFOR
-#define BITUTIL_IN
 #define VINT_IN
 #define TURBOPFOR_DAC
 #define BITPACK_DAC
 #include "vint.h"
 #include "vsimple.h"
 #include "eliasfano.h"
-#include "bitutil.h"
+#include "bitutil_in.h"
 #include "transpose.h"
 #include "fp.h"
 #include "bitpack.h"

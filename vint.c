@@ -29,11 +29,10 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
-#define BITUTIL_IN
 #define VINT_IN
 #include "conf.h"
 #include "vint.h"
-#include "bitutil.h"
+#include "bitutil_in.h"
 
 #define UN 8 // 4 //
 

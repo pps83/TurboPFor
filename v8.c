@@ -27,11 +27,10 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
-#define BITUTIL_IN
 #define VINT_IN
 #include "conf.h"
 #include "vint.h"
-#include "bitutil.h"
+#include "bitutil_in.h"
 
 #define LEN32(_m_,_i_) len32[(uint8_t)(_m_>>(_i_*8))]
 static const unsigned char len32[256] = {
