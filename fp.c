@@ -27,10 +27,9 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
-#define BITUTIL_IN
 #include "conf.h"
 #include "vp4.h"
-#include "bitutil.h"
+#include "bitutil_in.h"
 #include "fp.h"
 //---------------------- template generation --------------------------------------------
 #define VSIZE 128

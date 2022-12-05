@@ -48,8 +48,7 @@
 
 #include "conf.h"
 #include "time_.h"
-#define BITUTIL_IN
-#include "bitutil.h"
+#include "bitutil_in.h"
 
   #if defined(__i386__) || defined(__x86_64__)
 #define SSE

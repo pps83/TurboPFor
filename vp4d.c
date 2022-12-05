@@ -32,10 +32,9 @@
 #define BITPACK_DAC
 #define TURBOPFOR_DAC
 #define VINT_IN
-#define BITUTIL_IN
 #include "conf.h"
 #include "vint.h"
-#include "bitutil.h"
+#include "bitutil_in.h"
 #include "bitpack.h"
 #include "vp4.h"
 
