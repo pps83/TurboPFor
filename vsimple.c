@@ -96,8 +96,8 @@ static SV_LIM64;
 #include <stdio.h>
 #include <stdlib.h>
 #include "conf.h"
-#define VINT_IN
-#include "vint.h"
+#include "vint_in.h"
+
 #define uint_t TEMPLATE3(uint, USIZE, _t)
 
 #pragma clang diagnostic push

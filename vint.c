@@ -29,9 +29,8 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
-#define VINT_IN
 #include "conf.h"
-#include "vint.h"
+#include "vint_in.h"
 #include "bitutil_in.h"
 
 #define UN 8 // 4 //

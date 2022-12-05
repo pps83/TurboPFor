@@ -66,8 +66,7 @@
 
 #include <time.h>
 #include "conf.h"
-#define VINT_IN
-#include "vint.h"
+#include "vint_in.h"
 #include "bitpack.h"
 #include "vsimple.h"
 #include "eliasfano.h"

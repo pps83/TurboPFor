@@ -27,9 +27,8 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
-#define VINT_IN
 #include "conf.h"
-#include "vint.h"
+#include "vint_in.h"
 #include "bitutil_in.h"
 
 #define LEN32(_m_,_i_) len32[(uint8_t)(_m_>>(_i_*8))]
