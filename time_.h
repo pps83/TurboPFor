@@ -96,8 +96,8 @@ typedef struct timespec tm_t;
 #define TM_T                    CLOCKS_PER_SEC
 static double TMBS(unsigned l, double t) { double dt = t, dl = l; return t/l; }
 #define TM_C 1000
-
   #else
+#define TM_T 1000000.0
 #define TM_C 1
 static double TMBS(unsigned l, double t) { return (l/t)/1000000.0; }
 
@@ -150,8 +150,8 @@ static int tmiszero(tm_t t) { return !(t.tv_sec|t.tv_nsec); }
 #define TMSLEEP do { tm_T = tmtime(); if(tmiszero(tm_0)) tm_0 = tm_T; else if(tmdiff(tm_0, tm_T) > tm_TX) { if(tm_verbose) { printf("S \b\b");fflush(stdout); } sleep(tm_slp); tm_0=tmtime();} } while(0)
 
 // benchmark loop
-#define TMBEG(_tm_Reps_) { unsigned _tm_r,_tm_c = 0,_tm_R,_tm_Rx = _tm_Reps_,_tm_Rn = _tm_Reps_; double _tm_t;\
-  for(tm_rm = tm_rep, tm_tm = DBL_MAX, _tm_R = 0; _tm_R < _tm_Rn; _tm_R++) { tm_t _tm_t0 = tminit(); /*for each run*/\
+#define TMBEG(_tm_reps_, _tm_Reps_) { unsigned _tm_r,_tm_c = 0,_tm_R,_tm_Rx = _tm_Reps_,_tm_Rn = _tm_Reps_; double _tm_t;\
+  for(tm_rm = _tm_reps_, tm_tm = DBL_MAX, _tm_R = 0; _tm_R < _tm_Rn; _tm_R++) { tm_t _tm_t0 = tminit(); /*for each run*/\
     for(_tm_r = 0;_tm_r < tm_rm;) { /*repeat tm_rm times */
 
 #define TMEND(_len_) \
@@ -168,27 +168,27 @@ static int tmiszero(tm_t t) { return !(t.tv_sec|t.tv_nsec); }
   }\
 }
 
-static unsigned tm_rep = 1<<30, tm_Rep = 3, tm_Rep2 = 3, tm_rm, tm_RepMin = 1, tm_slp = 20, tm_verbose = 2;
+static unsigned tm_rep = 1<<30, tm_Rep = 3, tm_rep2 = 1<<30, tm_Rep2 = 3, tm_rm, tm_RepMin = 1, tm_slp = 20, tm_verbose = 2;
 static tm_t tm_0, tm_T;
 static double tm_tm, tm_tx = 1, tm_TX = 60;
 
 static void tm_init(int _tm_Rep, int _tm_verbose) { tm_verbose = _tm_verbose; if(_tm_Rep) tm_Rep = _tm_Rep; }
 
 #define TMBENCH(_name_, _func_, _len_)  do { if(tm_verbose>1) printf("%s ", _name_?_name_:#_func_);\
-  TMBEG(tm_Rep) _func_; TMEND(_len_); \
+  TMBEG(tm_rep, tm_Rep) _func_; TMEND(_len_); \
   double dm = tm_tm, dr = tm_rm; if(tm_verbose) printf("%8.2f      \b\b\b\b\b", TMBS(_len_, dm*TM_C/dr) );\
 } while(0)
 
 // second TMBENCH. Example: use TMBENCH for encoding and TMBENCH2 for decoding
 #define TMBENCH2(_name_, _func_, _len_)  do { \
-  TMBEG(tm_Rep2) _func_; TMEND(_len_);\
+  TMBEG(tm_rep2, tm_Rep2) _func_; TMEND(_len_);\
   double dm = tm_tm, dr = tm_rm; if(tm_verbose) printf("%8.2f      \b\b\b\b\b", TMBS(_len_, dm*TM_C/dr) );\
   if(tm_verbose>1) printf("%s ", _name_?_name_:#_func_);\
 } while(0)
 
 // Check
 #define TMBENCHT(_name_,_func_, _len_, _res_)  do { \
-  TMBEG(tm_Rep) \
+  TMBEG(tm_rep, tm_Rep) \
   if(_func_ != _res_) { printf("ERROR: %lld != %lld", (long long)_func_, (long long)_res_ ); exit(0); };\
   TMEND(_len_);\
   if(tm_verbose) printf("%8.2f      \b\b\b\b\b", TMBS(_len_,(double)tm_tm*TM_C/(double)tm_rm) );\

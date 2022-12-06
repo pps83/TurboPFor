@@ -30,18 +30,18 @@
 
 struct codecs {
   int  coid;
-  char *name,*url,*ver;
+  const char *name,*url,*ver;
 };
 
 struct plugs {
   int  id;
-  char *name;
+  const char *name;
   unsigned codec,blksize,flag;
-  char *lev,*desc;
+  const char *lev,*desc;
 };
 
 struct plugg {
-  char id[17],*desc,*name;
+  const char id[17],*desc,*name;
 };
 
   #ifdef __cplusplus

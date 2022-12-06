@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\eliasfano.c">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="..\..\ext\bitshuffle\src\bitshuffle_core.c" />
+    <ClCompile Include="..\..\ext\bitshuffle\src\iochain.c" />
+    <ClCompile Include="..\..\ext\FastPFor-lib.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\ext\simdcomp\src\avxbitpacking.c" />
+    <ClCompile Include="..\..\ext\simdcomp\src\simdpackedselect.c" />
+    <ClCompile Include="..\..\ext\polycom\optpfd.c" />
+    <ClCompile Include="..\..\ext\polycom\polyvbyte.c" />
+    <ClCompile Include="..\..\ext\rc.c" />
+    <ClCompile Include="..\..\ext\simdcomp\src\simdbitpacking.c" />
+    <ClCompile Include="..\..\ext\simdcomp\src\simdcomputil.c" />
+    <ClCompile Include="..\..\ext\simdcomp\src\simdintegratedbitpacking.c" />
+    <ClCompile Include="..\..\ext\simdcomp_\simdfor.c" />
+    <ClCompile Include="..\..\ext\simple8b.c" />
+    <ClCompile Include="..\..\icbench.c" />
+    <ClCompile Include="..\..\plugins.cc" />
+    <ClCompile Include="..\getopt.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="TurboPFor.vcxproj">
+      <Project>{a162f37f-183f-4250-88ab-9b9fbde30b04}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2498d728-286b-45c4-be11-b7d4d90f2bcf}</ProjectGuid>
+    <RootNamespace>icbench</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CODEC2;_CRT_NONSTDC_NO_DEPRECATE=;_CRT_SECURE_NO_WARNINGS=;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CODEC2;_CRT_NONSTDC_NO_DEPRECATE=;_CRT_SECURE_NO_WARNINGS=;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CODEC2;_CRT_NONSTDC_NO_DEPRECATE=;_CRT_SECURE_NO_WARNINGS=;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CODEC2;_CRT_NONSTDC_NO_DEPRECATE=;_CRT_SECURE_NO_WARNINGS=;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

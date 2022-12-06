@@ -10,14 +10,21 @@ static inline int bsr32(int x) {
   return b + 1;
 }
   #else
+#include <intrin.h>
 static inline int bsr32(int x) {
+#ifdef _MSC_VER
+  unsigned long z;
+  _BitScanReverse(&z, x); return x?z+1:0;
+  //return x?32 - _lzcnt_u32(x):0;
+#else
   return x?32 - __builtin_clz(x):0;
+#endif
 }
   #endif
 
 #define WPUT(__x,__bit) { __bw |= (unsigned long long)(__x)<<__br; __br += __bit; } 
 #define WPUTZERO(__sel) { __bw = __br = 0; WPUT(__sel,4); } 
-#define WPUTFLUSH(__out) { *(typeof(__bw) *)__out = __bw; __out += sizeof(__bw)/sizeof(__out[0]); }
+#define WPUTFLUSH(__out) { *(unsigned long long *)__out = __bw; __out += sizeof(__bw)/sizeof(__out[0]); }
 
 #if 0 //WORD_SIZE==32
   #define CODE_TABLE                                            \

@@ -894,7 +894,7 @@ int checksort(unsigned *in, unsigned n) {
   return 0;
 }
 unsigned becomp(unsigned char *_in, unsigned _inlen, unsigned char *_out, unsigned outsize, unsigned bsize, int id, int lev, char *prm, int be_mindelta, CODCOMP codcomp) {
-  unsigned char *op,*oe = _out + outsize;
+  unsigned char *op = NULL,*oe = _out + outsize;
   unsigned char *in,*ip;
   if(!_inlen) return 0;
   TMBEG(tm_rep,tm_Rep);
@@ -919,7 +919,7 @@ unsigned becomp(unsigned char *_in, unsigned _inlen, unsigned char *_out, unsign
 }
 
 int bedecomp(unsigned char *_in, int _inlen, unsigned char *_out, unsigned _outlen, unsigned bsize, int id, int lev, char *prm, int be_mindelta, CODDECOMP coddecomp) {
-  unsigned char *ip;
+  unsigned char *ip = NULL;
   unsigned char *out,*op;
 
   TMBEG(tm_rep2,tm_Rep2);
