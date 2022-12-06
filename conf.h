@@ -76,7 +76,6 @@ static inline unsigned short bswap16(unsigned short x) { return __builtin_bswap3
 #define bswap64(x) __builtin_bswap64(x)
 
   #elif _MSC_VER //----------------------------------------------------
-#include <windows.h>
 #include <intrin.h>
     #if _MSC_VER < 1600
 #include "vs/stdint.h"
