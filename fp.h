@@ -22,13 +22,15 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //     "Floating Point + Integer Compression"
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 #if defined(_MSC_VER) && _MSC_VER < 1600
 #include "vs/stdint.h"
 #else
 #include <stdint.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 // ---------- TurboPFor Zigzag of delta (=delta of delta + zigzag encoding) (TurboPFor)
