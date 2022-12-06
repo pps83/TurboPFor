@@ -141,7 +141,7 @@
 static unsigned _cpuisa;
   #if defined(__ARM_NEON) || defined(__SSE__) || defined(__powerpc64__)
 //--------------------- CPU detection -------------------------------------------
-    #if defined(__i386__) || defined(__x86_64__)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
       #if _MSC_VER >=1300
 #include <intrin.h>
       #elif defined (__INTEL_COMPILER)
@@ -199,7 +199,7 @@ unsigned cpuisa(void) {
   int c[4] = {0};
   if(_cpuisa) return _cpuisa;
   _cpuisa++;
-    #if defined(__i386__) || defined(__x86_64__)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   cpuid(c, 0);
   if(c[0]) {
     cpuid(c, 1);
@@ -252,7 +252,7 @@ unsigned cpuini(unsigned cpuisa) { if(cpuisa) _cpuisa = cpuisa; return _cpuisa; 
 
 char *cpustr(unsigned cpuisa) {
   if(!cpuisa) cpuisa = _cpuisa;
-    #if defined(__i386__) || defined(__x86_64__)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   if(cpuisa >= IS_AVX512) {
     if(cpuisa & AVX512VBMI2) return "avx512vbmi2";
     if(cpuisa & AVX512VBMI)  return "avx512vbmi";
@@ -308,14 +308,14 @@ void tpini(int id) {
   if(tpset) return;
   tpset++;
   i = id?id:cpuisa();
-    #if defined(__i386__) || defined(__x86_64__)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   if(i >= IS_AVX2) {
     _tpe[2] = tpenc128v2; _tpd[2] = tpdec256v2; _tp4e[2] = tp4enc256v2; _tp4d[2] = tp4dec256v2; //SSE encoding _tpe[2] is faster
     _tpe[4] = tpenc128v4; _tpd[4] = tpdec256v4; _tp4e[4] = tp4enc256v4; _tp4d[4] = tp4dec256v4; //SSE encoding _tpe[4] is faster
     _tpe[8] = tpenc256v8; _tpd[8] = tpdec256v8; _tp4e[8] = tp4enc256v8; _tp4d[8] = tp4dec256v8;
   } else
     #endif
-    #if defined(__i386__) || defined(__x86_64__) || defined(__ARM_NEON) || defined(__powerpc64__)
+    #if defined(__i386__) || defined(__x86_64__)  || defined(_M_X64) || defined(_M_IX86) || defined(__ARM_NEON) || defined(__powerpc64__)
   if(i >= IS_SSE2) {
     _tpe[2] = tpenc128v2; _tpd[2] = tpdec128v2; _tp4e[2] = tp4enc128v2; _tp4d[2] = tp4dec128v2;
     _tpe[4] = tpenc128v4; _tpd[4] = tpdec128v4; _tp4e[4] = tp4enc128v4; _tp4d[4] = tp4dec128v4;
