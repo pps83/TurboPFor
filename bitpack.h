@@ -24,11 +24,8 @@
 //     bitpack.h - "Integer Compression" Binary Packing header file
 #ifndef BITPACK_H_
 #define BITPACK_H_
-#if defined(_MSC_VER) && _MSC_VER < 1600
-#include "vs/stdint.h"
-#else
+
 #include <stdint.h>
-#endif
 #include <stddef.h>
 
 #ifdef __cplusplus
