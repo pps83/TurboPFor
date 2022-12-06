@@ -29,12 +29,12 @@
 #pragma warning( disable : 4068)
 
 #include <stdio.h>
-#define TURBOPFOR_DAC
 #include "conf.h"
 #include "vint_in.h"
 #include "bitutil_in.h"
 #include "bitpack.h"
 #include "vp4.h"
+#include "vp4_dac.h"
 
 #define PAD8(__x) ( (((__x)+8-1)/8) )
 
