@@ -47,11 +47,7 @@
   #elif defined(__ARM_NEON)
 #include <arm_neon.h>
   #endif
-  #if defined(_MSC_VER) && _MSC_VER < 1600
-#include "vs/stdint.h"
-  #else
 #include <stdint.h>
-  #endif
 #include "sse_neon.h"
 
   #ifdef __ARM_NEON
