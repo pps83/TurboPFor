@@ -22,13 +22,15 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //    eliasfano.h - "Integer Compression" Elias Fano c/c++ header
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 #if defined(_MSC_VER) && _MSC_VER < 1600
 #include "vs/stdint.h"
 #else
 #include <stdint.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 // compress/decompress integer array with n values to the buffer out. Return value = end of output/input buffer
