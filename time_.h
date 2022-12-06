@@ -42,7 +42,7 @@ typedef unsigned __int64 tm_t;
 typedef struct timespec tm_t;
   #endif
 
-#if defined (__i386__) || defined( __x86_64__ )
+#if defined (__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   #ifdef _MSC_VER
 #include <intrin.h> // __rdtsc
   #else

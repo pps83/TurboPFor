@@ -50,7 +50,7 @@
 #include "time_.h"
 #include "bitutil_in.h"
 
-  #if defined(__i386__) || defined(__x86_64__)
+  #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
 #define SSE
 #define AVX2
   #elif defined(__ARM_NEON) || defined(__powerpc64__)
