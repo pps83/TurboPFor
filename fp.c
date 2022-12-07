@@ -76,6 +76,8 @@
 #define USIZE 64
 #include "fp.c"
 
+#undef VSIZE
+
   #else //-------------------------------------- Template functions ------------------------------------------------------------
 
 #define XORENC( _u_, _pu_, _usize_) ((_u_)^(_pu_))  // xor predictor

@@ -424,3 +424,6 @@ size_t bitnfpack128v32( uint32_t *__restrict in, size_t n, unsigned char *__rest
 #endif // Plain
 
 #pragma clang diagnostic pop
+
+#undef DELTA
+#undef USIZE

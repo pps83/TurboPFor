@@ -249,9 +249,11 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
   #endif
 
 #undef P4DELTA
-#undef  _P4ENC
-#undef   P4ENC
-#undef   BITPACK
+#undef _P4ENC
+#undef P4ENC
+#undef BITPACK
+#undef VSIZE
+#undef USIZE
 
 #else //------------------------------------------ Templates ---------------------------------------------------------------
 #pragma clang diagnostic push

@@ -423,6 +423,10 @@ void tp4dec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
   else tpdec(in,n,out,esize);
 }
   #endif
+
+#undef ESIZE
+#undef STRIDE
+
 #else //---------------------------------------------- Templates --------------------------------------------------------------
 
 #define SIE(p,i)  (p+=stride) //faster on ARM
