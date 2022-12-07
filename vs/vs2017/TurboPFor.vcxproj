@@ -93,8 +93,8 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 /w24018 /w24047 /w24090 /w24101 /w24102 /w24133 /w24146 /w24244 /w24267 /w24333 /w24554 /w24789 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -106,8 +106,8 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 /w24018 /w24047 /w24090 /w24101 /w24102 /w24133 /w24146 /w24244 /w24267 /w24333 /w24554 /w24789 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -122,8 +122,8 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 /w24018 /w24047 /w24090 /w24101 /w24102 /w24133 /w24146 /w24244 /w24267 /w24333 /w24554 /w24789 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -138,8 +138,8 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 /w24018 /w24047 /w24090 /w24101 /w24102 /w24133 /w24146 /w24244 /w24267 /w24333 /w24554 /w24789 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -157,58 +157,38 @@
     <ClCompile Include="..\..\vp4d.c" />
     <ClCompile Include="..\..\vsimple.c" />
     <ClCompile Include="..\bitpack_avx2.c">
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ClCompile Include="..\bitpack_sse.c" />
     <ClCompile Include="..\bitunpack_avx2.c">
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ClCompile Include="..\bitunpack_sse.c" />
     <ClCompile Include="..\transpose_avx2.c">
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ClCompile Include="..\transpose_sse.c" />
     <ClCompile Include="..\vp4c_avx2.c">
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ClCompile Include="..\vp4c_sse.c" />
     <ClCompile Include="..\vp4d_avx2.c">
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ClCompile Include="..\vp4d_sse.c" />
   </ItemGroup>

@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Source Files\ext">
+      <UniqueIdentifier>{a1acb5fa-179e-481b-86c1-f317e0211c12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\icapp.c">
@@ -16,6 +19,12 @@
     </ClCompile>
     <ClCompile Include="..\getopt.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ext\fastpfor.cc">
+      <Filter>Source Files\ext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ext\FastPFor-lib.cpp">
+      <Filter>Source Files\ext</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

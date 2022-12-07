@@ -50,6 +50,19 @@
 #include "time_.h"
 #include "bitutil_in.h"
 
+#ifdef _MSC_VER
+#define __SSE__ 1
+#define __SSE2__ 1
+#define __SSE3__ 1
+#define __SSSE3__ 1
+#define __SSE4_1__ 1
+#define __SSE4_2__ 1
+#define __BMI__ 1
+#define __BMI2__ 1
+#define __AVX__ 1
+#define __AVX2__ 1
+#endif
+
   #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
 #define SSE
 #define AVX2
@@ -432,7 +445,7 @@ unsigned befgen(unsigned char **_in, unsigned n, int fmt, int isize, FILE *fi, i
     case T_TIM32:
     case T_TIM64:                                                           if(verbose>1) printf("reading text lines. pre=%.2f, col=%d, sep=%s\n", pre, kid, keysep?keysep:"");
       while(fgets(s, LSIZE, fi)) {
-        unsigned char *p = s,*q;
+        char *p = s,*q;
         int k = 0, keyid = 1, c;
         s[strlen(s) - 1] = 0;
         q = p;
@@ -1490,7 +1503,9 @@ unsigned bench32(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
     case 112: TMBENCH("",l=streamvbyte_zzag_encode( in,m,out,0,tmp),n); pr(l,n); TMBENCH2("112", streamvbyte_zzag_decode(  out, cpy, m,0,tmp),n); break;
         #endif
         #if defined(CODEC2) && defined(__SSE4_1__)
+#ifndef _MSC_VER
     case 113: TMBENCH("",l=vbyte_encode(in, m, out),n);                 pr(l,n); TMBENCH2("113", masked_vbyte_decode(out, cpy, m),n); break;
+#endif
     case 114: TMBENCH("",l=FastPFore32(    in, m, out,ns),n);           pr(l,n); TMBENCH2("114", FastPFord32(    out, m, cpy),n); break;
     case 115: TMBENCH("",l=FastPFore128v32(in, m, out,ns),n);           pr(l,n); TMBENCH2("115", FastPFord128v32(out, m, cpy),n); break;
     case 116: TMBENCH("",l=OptPFore128v32( in, m, out,ns),n);           pr(l,n); TMBENCH2("116", OptPFord128v32( out, m, cpy),n); break;
