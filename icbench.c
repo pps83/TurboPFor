@@ -69,6 +69,7 @@
 #include "vint_in.h"
 #include "bitpack.h"
 #include "vsimple.h"
+#include "transpose.h"
 #include "eliasfano.h"
 #include "vp4.h"
 #include "plugins.h"
@@ -126,7 +127,7 @@ int memcheck64(unsigned char *_in, unsigned _n, unsigned char *_cpy, int cmp) {
       if(cmp>3) {
         int j;
         for(j=i & 0xffffff80u; j < i+128;j++) { unsigned e = in[j] != cpy[j];
-          if(e) printf("#%d:%x,%x ", j, in[j], cpy[j]);else printf("%d:%x ", j, in[j]);
+          if(e) printf("#%d:%llx,%llx ", j, in[j], cpy[j]);else printf("%d:%llx ", j, in[j]);
         }
         printf("\n");
       }
@@ -175,8 +176,7 @@ enum {
   FMT_MARKDOWN,
   FMT_VBULLETIN,  // ex. post to encode.ru
   FMT_CSV,
-  FMT_TSV,
-  FMT_SQUASH
+  FMT_TSV
 };
 
 char *fmtext[] = { "txt", "txt", "html", "htm", "md", "vbul", "csv", "tsv", "squash" };
@@ -201,7 +201,7 @@ void plugsprt(void) {
 
 void plugsprtv(FILE *f, int fmt) {
   struct codecs *co;
-  char         *pv = "";
+  const char    *pv = "";
 
   switch(fmt) {
     case FMT_HTMLT:
@@ -248,7 +248,8 @@ void plugsprtv(FILE *f, int fmt) {
 //------------------ plugin: process ----------------------------------
 struct plug {
   int       id,err,blksize,lev;
-  char      *name,prm[17],tms[20];
+  const char* name;
+  char      prm[17],tms[20];
   int64_t len,memc,memd;
   double    tc,td;
 };
@@ -450,9 +451,6 @@ void plugprtth(FILE *f, int fmt) {
     case FMT_TSV:
       fprintf(f,"size\tcsize\tratio\tbpi\tctime\tdtime\tname\tfile\n");
       break;
-    case FMT_SQUASH:
-      fprintf(f,"dataset,plugin,codec,level,compressed_size,compress_cpu,compress_wall,decompress_cpu,decompress_wall\n");
-      break;
   }
 }
 
@@ -518,12 +516,8 @@ void plugprt(struct plug *plug, int64_t totinlen, char *finame, int fmt, FILE *f
         totinlen, plug->len, ratio, ratioi, tc, td, name, finame);
       break;
     case FMT_TSV:
-      fprintf(f,"%12"PRId64"\t%11"PRId64"\t%5.1f\t5.2f\t%8.2f\t%8.2f\t%-16s\t%s\n",
+      fprintf(f, "%12"PRId64"\t%11"PRId64"\t%5.1f\t%5.2f\t%8.2f\t%8.2f\t%-16s\t%s\n",
         totinlen, plug->len, ratio, ratioi, tc, td, name, finame);
-      break;
-    case FMT_SQUASH:
-      fprintf(f,"%12"PRId64",%11"PRId64",%5.1f,%8.2f,%8.2f,%-16s,%s\n",
-        finame, name, name, plug->len,        tc, tc, td, td);
       break;
   }
 }
@@ -733,7 +727,7 @@ void plugplotc(struct plug *plug, int k, int64_t totinlen, int fmt, int speedup,
         fprintf(f, "],\ny: [");
         for(p = gs; p < g; p++)
           fprintf(f, "%.2f%s", RATIOF(p->len,totinlen, be_factor), p+1<g?",":"");
-        fprintf(f, "],\nmode: 'markers+text',\ntype: 'scatter',\nname: '%s',\ntextposition: 'top center', textfont: { family:  'Raleway, sans-serif' }, marker: { size: 12 }\n", name, txt);
+        fprintf(f, "],\nmode: 'markers+text',\ntype: 'scatter',\nname: '%s',\ntextposition: 'top center', textfont: { family:  'Raleway, sans-serif' }, marker: { size: 12 }\n", name);
         if(txt[0])
           fprintf(f, "\n,text: [%s]\n", txt);
         fprintf(f, "};\n");
@@ -758,7 +752,7 @@ void plugplotc(struct plug *plug, int k, int64_t totinlen, int fmt, int speedup,
   fprintf(f, "],\ny: [");
   for(p = gs; p < g; p++)
     fprintf(f, "%.2f%s", RATIOF(p->len,totinlen, be_factor), p+1<g?",":"");
-  fprintf(f, "],\nmode: 'markers+text',\ntype: 'scatter',\nname: '%s',\ntextposition: 'top center', textfont: { family:  'Raleway, sans-serif' }, marker: { size: 12 }\n", name, txt);
+  fprintf(f, "],\nmode: 'markers+text',\ntype: 'scatter',\nname: '%s',\ntextposition: 'top center', textfont: { family:  'Raleway, sans-serif' }, marker: { size: 12 }\n", name);
   if(txt[0])
     fprintf(f, "\n,text:[%s]\n", txt);
   fprintf(f, "};\n");
@@ -769,11 +763,11 @@ void plugplotce(FILE *f, int fmt, char *s) {
     s, (speedup&1)?"Compression":"Decompression", xlog2?"log":"", xlog2?"type: 'log',\n":"", ylog2?"type: 'log',\n":"");
 }
 
-int plugprts(struct plug *plug, int k, char *finame, int xstdout, uint64_t totlen, int fmt, char *t) {
+void plugprts(struct plug *plug, int k, char *finame, int xstdout, uint64_t totlen, int fmt, char *t) {
   struct plug *g;
   char s[257];
   FILE *fo;
-  if(!totlen) return 0;                                                                             if(verbose>1) printf("'%s'\n", finame);
+  if(!totlen) return;                                                                             if(verbose>1) printf("'%s'\n", finame);
 
   qsort(plug, k, sizeof(struct plug), (int(*)(const void*,const void*))libcmp);
   sprintf(s, "%s.%s", finame, fmtext[fmt]);
@@ -853,17 +847,17 @@ int plugread(struct plug *plug, char *finame, int64_t *totinlen) {
     memset(p, 0, sizeof(p[0]));
     p->tms[0] = 0;
     if(!fgets(ss, 255, fi)) break;
-    for(q = t;  *q && *q != '\t'; q++);  *q++ = 0; strcpy(s, t); t = q;
+    for(q = t;  *q && *q != '\t'; q++){}  *q++ = 0; strcpy(s, t); t = q;
     *totinlen = strtoull(t, &t, 10);
     p->len    = strtoull(++t, &t, 10);
     p->td     = strtod(  ++t, &t);
     p->tc     = strtod(  ++t, &t);
-    for(q = ++t; *q && *q != '\t'; q++); *q++ = 0; strcpy(name,t); t=q;
+    for(q = ++t; *q && *q != '\t'; q++){} *q++ = 0; strcpy(name,t); t=q;
     p->lev    = strtoul(t, &t, 10);
-    for(q = t; *q && *q != '\t'; q++);   *q++ = 0; strcpy(p->prm,t); t = q;
+    for(q = t; *q && *q != '\t'; q++){}   *q++ = 0; strcpy(p->prm,t); t = q;
     p->memc   = strtoull(t, &t, 10);
     p->memd   = strtoull(++t, &t, 10);
-    for(q = ++t; *q && *q != '\t'; q++); *q++ = 0; strcpy(p->tms,t); t = q;
+    for(q = ++t; *q && *q != '\t'; q++){} *q++ = 0; strcpy(p->tms,t); t = q;
     if(p->prm[0]=='!')
       p->prm[0]=0;
     for(i = 0; plugs[i].id >=0; i++)
@@ -903,7 +897,7 @@ unsigned becomp(unsigned char *_in, unsigned _inlen, unsigned char *_out, unsign
     if(be_nblocks) {                                                blknum++;
       inlen = ctou32(in); in+=4;
       vbput32(op, inlen);                                           // ctou32(op) = inlen; op+=4;
-      inlen *= 4;                                                   if(in+inlen>_in+_inlen) die("FATAL buffer overflow error %d", in - _inlen);
+      inlen *= 4;                                                   if(in+inlen>_in+_inlen) die("FATAL buffer overflow error");
     }
 
     for(ip = in, in += inlen; ip < in; ) {
@@ -911,7 +905,7 @@ unsigned becomp(unsigned char *_in, unsigned _inlen, unsigned char *_out, unsign
       op = codcomp(ip, iplen, op, oe-op, id, lev, prm, be_mindelta);
       ip += iplen;
       if(op > _out+outsize)
-        die("Compress overflow error %llu, %u in lib=%d\n", outsize, (int)(ptrdiff_t)(op - _out), id);
+        die("Compress overflow error %u, %d in lib=%d\n", outsize, (int)(ptrdiff_t)(op - _out), id);
     }
   }
   TMEND(_inlen);                   //  printf("cnt=%d, csize=%d\n", cnt, csize);
@@ -933,7 +927,7 @@ int bedecomp(unsigned char *_in, int _inlen, unsigned char *_out, unsigned _outl
     for(op = out, out += outlen; op < out; ) {
       unsigned oplen = out - op;
       oplen = min(oplen, bsize);
-      ip = coddecomp(ip, 0, op, oplen, id, lev, prm, be_mindelta);                if(ip-_in>_inlen) die("FATAL inlen %d,%d,bsize=%d ", _inlen, ip-_in, bsize);
+      ip = coddecomp(ip, 0, op, oplen, id, lev, prm, be_mindelta);                if(ip-_in>_inlen) die("FATAL inlen %d,%d,bsize=%d ", _inlen, (int)(ip-_in), bsize);
       op += oplen;
     }
   }
@@ -1088,7 +1082,7 @@ unsigned befgen(unsigned char **_in, unsigned n, int fmt, unsigned isize, FILE *
     case T_TXT:                                                             if(verbose) printf("reading text file\n");
 
       while(fgets(s, LSIZE, fi)) {
-        unsigned char *p = s,*q;
+        char *p = s,*q;
         int k;
         s[strlen(s) - 1] = 0;
         for(k = 0; *p; ) {
@@ -1296,7 +1290,7 @@ void vstest64(int id, int rm,int rx, unsigned n) {
       default: die("Fatal error: function %d not found\n", id);
       //case 5: op = efanoenc64(in, n, out, 0); break;
     }
-    fprintf(stderr,"%d %.2f%% ", (int)(op-out),  ((double)(op-out)*100.0)/(double)(n*8));                                               if(op-out>sizeof(out)) die("vstest64:Overflow %d\n", op-out);
+    fprintf(stderr,"%d %.2f%% ", (int)(op-out),  ((double)(op-out)*100.0)/(double)(n*8));                                               if(op-out>sizeof(out)) die("vstest64:Overflow\n");
     memrcpy(cpy, in, n*sizeof(in[0]));
     switch(id) {
       case  0: vbdec64(         out, n, cpy);   break;
@@ -1357,7 +1351,7 @@ void vstest16(int id, int rm,int rx, unsigned n) {
       case 11: fprintf(stderr,"p4nzenc16 ");      op = out+p4nzenc16(     in, n, out);   break;
       default: die("Fatal error: function %d not found\n", id);
     }
-    fprintf(stderr,"%d %.2f%% ", (int)(op-out),  ((double)(op-out)*100.0)/(double)(n*8));                               if(op-out>sizeof(out)) die("vstest16:Overflow %d\n", op-out);
+    fprintf(stderr,"%d %.2f%% ", (int)(op-out),  ((double)(op-out)*100.0)/(double)(n*8));                               if(op-out>sizeof(out)) die("vstest16:Overflow\n");
     memrcpy(cpy, in, n*sizeof(in[0]));
     switch(id) {
       case  0: vbdec16(         out, n, cpy);   break;
@@ -1591,14 +1585,14 @@ int main(int argc, char* argv[]) {
       insizem = (fuzz&3)?SIZE_ROUNDUP(insize, pagesize):(insize+INOVD);
 
       if(insizem && !(_in = _valloc(insizem,1)))
-        die("malloc error in size=%u\n", insizem);
+        die("malloc error in size=%zu\n", insizem);
     }
     outsize             = insize*fac + 10*Mb;
     _cpy = _in;
-    out  = (unsigned char*)_valloc(outsize,2);                                      if(!out)  die("malloc error out size=%u\n", outsize);
+    out  = (unsigned char*)_valloc(outsize,2);                                      if(!out)  die("malloc error out size=%zu\n", outsize);
 
     if((cmp || tid) && insizem && !(_cpy = _valloc(insizem,3)))
-      die("malloc error cpy size=%u\n", insizem);
+      die("malloc error cpy size=%zu\n", insizem);
 
     for(p = plug; p < plug+k; p++) {                                                                  //{ int i; for(i=0;i<=64;i++) xbits[i]=0;}
       unsigned pbsize = p->blksize?p->blksize:bsize;

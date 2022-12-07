@@ -62,7 +62,7 @@ unsigned char *coddecomps(unsigned char *in, unsigned n, unsigned char *out, int
 unsigned char *codcompz(  unsigned char *in, unsigned n, unsigned char *out, int outsize, int codec, int lev, char *prm, int mdelta);
 unsigned char *coddecompz(unsigned char *in, unsigned n, unsigned char *out, int outlen,  int codec, int lev, char *prm, int mdelta);
 
-char *codver(int codec, char *v, char *s);
+char *codver(int codec, const char *v, char *s);
 void *_valloc(size_t size, int a);
 void _vfree(void *p, size_t size);
 
