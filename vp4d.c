@@ -36,7 +36,7 @@
 #include "vp4.h"
 #include "vp4_dac.h"
 
-#define PAD8(__x) ( (((__x)+8-1)/8) )
+#define PAD8(_x_) ( (((_x_)+8-1)/8) )
 
 #define P4DELTA(a)
 #define P4DELTA_(a)

@@ -29,7 +29,7 @@
 #include "bitutil_in.h"
 #include "bitpack.h"
 
-#define PAD8(_x_) (((_x_)+7)/8)
+#define PAD8(_x_) ( (((_x_)+8-1)/8) )
 
 #pragma warning( disable : 4005)
 #pragma warning( disable : 4090)

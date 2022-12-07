@@ -263,7 +263,7 @@ SC_SIMDPACK256,
   P_MAX
 };
 
-#define PAD8(_x_)       ( (((_x_)+8-1)/8) )
+#define PAD8(_x_) ( (((_x_)+8-1)/8) )
 #if CODEC1==1 || CODEC2==1
 #include "ext/beplug_.h" // external libs
 #endif
@@ -404,7 +404,7 @@ struct plugg plugg[] = {
   { "" }
 };
 
-#define PAD8(__x) (((__x)+7)/8)
+#define PAD8(_x_) ( (((_x_)+8-1)/8) )
 //---------------------------------------------- plugins --------------------------------------------------------
 #include "conf.h"
 unsigned char sbuf[BLK_SIZE*2+1024];
