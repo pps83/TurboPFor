@@ -78,7 +78,7 @@ static inline unsigned short bswap16(unsigned short x) { return __builtin_bswap3
   #elif _MSC_VER //----------------------------------------------------
 #include <intrin.h>
 #include <stdint.h>
-#define __builtin_prefetch(x,a) _mm_prefetch((const char*)(x), _MM_HINT_NTA)
+#define __builtin_prefetch(x,...) _mm_prefetch((const char*)(x), _MM_HINT_NTA)
 
 #define ALIGNED(t,v,n)  __declspec(align(n)) t v
 #define ALWAYS_INLINE   __forceinline
