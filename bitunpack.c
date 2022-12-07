@@ -1229,3 +1229,6 @@ size_t bitnfunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__re
 
 #pragma clang diagnostic pop
 #pragma GCC pop_options
+
+#undef DELTA
+#undef USIZE
