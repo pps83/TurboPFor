@@ -34,7 +34,7 @@
 #include "bitutil_in.h"
 #include "eliasfano.h"
 
-#define PAD8(__x) ( (((__x)+8-1)/8) )
+#define PAD8(_x_) ( (((_x_)+8-1)/8) )
 
   #ifdef __SSE42__
 #include <nmmintrin.h>
