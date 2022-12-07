@@ -777,7 +777,7 @@ unsigned char *coddecomp(unsigned char *in, unsigned _n, unsigned char *_out, in
   return in;
 }
 
-char *codver(int codec, char *v, char *s) {
+char *codver(int codec, const char *v, char *s) {
   switch(codec) {
       #if C_C_BLOSC
     return BLOSC_VERSION_STRING;
