@@ -11,16 +11,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\bitunpack.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\bitpack.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\vp4d.c">
+    <ClCompile Include="..\bitpack_avx2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\vp4c.c">
+    <ClCompile Include="..\bitpack_sse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bitunpack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bitunpack_avx2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bitunpack_sse.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\bitutil.c">
@@ -32,10 +38,10 @@
     <ClCompile Include="..\..\transpose.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\vint.c">
+    <ClCompile Include="..\transpose_avx2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\vsimple.c">
+    <ClCompile Include="..\transpose_sse.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\trlec.c">
@@ -44,22 +50,13 @@
     <ClCompile Include="..\..\trled.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\bitpack_avx2.c">
+    <ClCompile Include="..\..\v8.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\bitpack_sse.c">
+    <ClCompile Include="..\..\vint.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\bitunpack_avx2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bitunpack_sse.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\transpose_avx2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\transpose_sse.c">
+    <ClCompile Include="..\..\vp4c.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\vp4c_avx2.c">
@@ -68,13 +65,16 @@
     <ClCompile Include="..\vp4c_sse.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\vp4d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\vp4d_avx2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\vp4d_sse.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\v8.c">
+    <ClCompile Include="..\..\vsimple.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,6 +85,9 @@
     <ClInclude Include="..\..\transpose.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\trle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\vint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -92,9 +95,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\vsimple.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\trle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
