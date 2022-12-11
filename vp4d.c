@@ -45,55 +45,7 @@ extern char _shuffle_32[16][16];  // defined in bitunpack.c
 extern char _shuffle_16[256][16];
   #endif
 
-  #ifdef __AVX2__
-#define VSIZE 256
-#define P4DELTA(a)
-#define P4DELTA_(a)
-
-#define _P4DEC        _p4dec256v
-#define  P4DEC         p4dec256v
-#define  P4NDEC        p4ndec256v
-#define  P4NDECS       p4dec
-#define  BITUNPACK     bitunpack256v
-#define  BITUNPACKD    bitunpack256v
-#define  _BITUNPACKD  _bitunpack256v
-#define USIZE 32
-#include "vp4d.c"
-
-#define P4DELTA(a) ,a
-#define P4DELTA_(a) a
-#define DELTA
-
-#define _P4DEC        _p4ddec256v
-#define  P4DEC         p4ddec256v
-#define  P4NDEC        p4nddec256v
-#define  P4NDECS       p4ddec
-#define  BITUNPACKD    bitdunpack256v
-#define  _BITUNPACKD  _bitdunpack256v
-#define  BITUNDD       bitddec
-#include "vp4d.c"
-
-#define _P4DEC        _p4d1dec256v
-#define  P4DEC         p4d1dec256v
-#define  P4NDEC        p4nd1dec256v
-#define  P4NDECS       p4d1dec
-#define  BITUNPACKD    bitd1unpack256v
-#define  _BITUNPACKD  _bitd1unpack256v
-#define  BITUNDD       bitd1dec
-#include "vp4d.c"
-
-#define _P4DEC        _p4zdec256v
-#define  P4DEC         p4zdec256v
-#define  P4NDEC        p4nzdec256v
-#define  P4NDECS       p4zdec
-#define  BITUNPACKD    bitzunpack256v
-#define  _BITUNPACKD  _bitzunpack256v
-#define  BITUNDD       bitzdec
-#define USIZE 32
-#include "vp4d.c"
-
-#undef  BITUNDD
-  #elif !defined(SSE2_ON) && !defined(AVX2_ON)
+  #if !defined(SSE2_ON) && !defined(AVX2_ON)
 
 #define _P4DEC      _p4dec
 #define  P4DEC       p4dec
@@ -175,6 +127,54 @@ extern char _shuffle_16[256][16];
 #undef USIZE
 #undef DELTA
 
+  #elif defined(__AVX2__)
+#define VSIZE 256
+#define P4DELTA(a)
+#define P4DELTA_(a)
+
+#define _P4DEC        _p4dec256v
+#define  P4DEC         p4dec256v
+#define  P4NDEC        p4ndec256v
+#define  P4NDECS       p4dec
+#define  BITUNPACK     bitunpack256v
+#define  BITUNPACKD    bitunpack256v
+#define  _BITUNPACKD  _bitunpack256v
+#define USIZE 32
+#include "vp4d.c"
+
+#define P4DELTA(a) ,a
+#define P4DELTA_(a) a
+#define DELTA
+
+#define _P4DEC        _p4ddec256v
+#define  P4DEC         p4ddec256v
+#define  P4NDEC        p4nddec256v
+#define  P4NDECS       p4ddec
+#define  BITUNPACKD    bitdunpack256v
+#define  _BITUNPACKD  _bitdunpack256v
+#define  BITUNDD       bitddec
+#include "vp4d.c"
+
+#define _P4DEC        _p4d1dec256v
+#define  P4DEC         p4d1dec256v
+#define  P4NDEC        p4nd1dec256v
+#define  P4NDECS       p4d1dec
+#define  BITUNPACKD    bitd1unpack256v
+#define  _BITUNPACKD  _bitd1unpack256v
+#define  BITUNDD       bitd1dec
+#include "vp4d.c"
+
+#define _P4DEC        _p4zdec256v
+#define  P4DEC         p4zdec256v
+#define  P4NDEC        p4nzdec256v
+#define  P4NDECS       p4zdec
+#define  BITUNPACKD    bitzunpack256v
+#define  _BITUNPACKD  _bitzunpack256v
+#define  BITUNDD       bitzdec
+#define USIZE 32
+#include "vp4d.c"
+
+#undef  BITUNDD
   #elif defined(__SSSE3__) || defined(__ARM_NEON)
 #define VSIZE 128
 #define P4DELTA(a)
