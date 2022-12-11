@@ -27,6 +27,7 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
+#include <string.h>
 #include "conf.h"
 #include "vp4.h"
 #include "bitutil_in.h"

@@ -33,6 +33,7 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
+#include <string.h>
 #include "conf.h"
 #include "vsimple.h"
 
