@@ -164,7 +164,7 @@ static inline void               stousz(      void *cp, size_t             x) { 
 static inline void               stof32(      void *cp, float              x) { memcpy(cp, &x, sizeof(x)); }
 static inline void               stof64(      void *cp, double             x) { memcpy(cp, &x, sizeof(x)); }
   #elif defined(__i386__) || defined(__x86_64__) || \
-    defined(_M_IX86) || defined(_M_AMD64) || _MSC_VER ||\
+    defined(_M_IX86) || defined(_M_X64) || _MSC_VER ||\
     defined(__powerpc__) || defined(__s390__) ||\
     defined(__ARM_FEATURE_UNALIGNED) || defined(__aarch64__) || defined(__arm__) ||\
     defined(__ARM_ARCH_4__) || defined(__ARM_ARCH_4T__) || \
@@ -233,7 +233,7 @@ struct _PACKED doubleu   { double             d; };
       #endif
 #define bzhi32(_u_, _b_)                 _bzhi_u32(_u_, _b_)
 
-      #if !(defined(_M_X64) || defined(__amd64__)) && (defined(__i386__) || defined(_M_IX86))
+      #if !(defined(_M_X64) || defined(__x86_64__)) && (defined(__i386__) || defined(_M_IX86))
 #define bzhi64(_u_, _b_)                 ((_u_) & ((1ull<<(_b_))-1))
       #else
 #define bzhi64(_u_, _b_)                 _bzhi_u64(_u_, _b_)

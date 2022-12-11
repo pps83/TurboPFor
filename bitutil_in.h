@@ -352,7 +352,7 @@ static ALWAYS_INLINE __m256i mm256_rbit_si128(__m256i v) { return mm256_rbit_epi
     #endif
 #define bzhi_u32(_u_, _b_)               _bzhi_u32(_u_, _b_)
 
-    #if !(defined(_M_X64) || defined(__amd64__)) && (defined(__i386__) || defined(_M_IX86))
+    #if !(defined(_M_X64) || defined(__x86_64__)) && (defined(__i386__) || defined(_M_IX86))
 #define bzhi_u64(_u_, _b_)               ((_u_) & ((1ull<<(_b_))-1))
     #else
 #define bzhi_u64(_u_, _b_)               _bzhi_u64(_u_, _b_)
