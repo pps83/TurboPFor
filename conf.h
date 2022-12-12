@@ -224,13 +224,14 @@ struct _PACKED doubleu   { double             d; };
 #include <x86intrin.h>
       #endif
 #define bzhi32(_u_, _b_)                 _bzhi_u32(_u_, _b_)
-
       #if !(defined(_M_X64) || defined(__x86_64__)) && (defined(__i386__) || defined(_M_IX86))
 #define bzhi64(_u_, _b_)                 ((_u_) & ((1ull<<(_b_))-1))
       #else
 #define bzhi64(_u_, _b_)                 _bzhi_u64(_u_, _b_)
       #endif
     #else
+#define bzhi64(_u_, _b_)                 ((_u_) & ((1ull<<(_b_))-1))
+#define bzhi32(_u_, _b_)                 ((_u_) & ((1u  <<(_b_))-1))
 #define bzhi_u64(_u_, _b_)               BZHI64(_u_, _b_) 
 #define bzhi_u32(_u_, _b_)               BZHI32(_u_, _b_) 
     #endif
