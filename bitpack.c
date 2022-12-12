@@ -266,7 +266,7 @@ unsigned char *bitpack256v32(unsigned       *__restrict in, unsigned n, unsigned
 
 
 #define VI32(_ip_, _i_, _iv_, _sv_) _iv_ = _mm256_sub_epi32(_mm256_loadu_si256(_ip_++),sv)
-#define IP32(_ip_, i, _iv_)             _iv_
+#define IP32(_ip_, i, _iv_) _iv_
 #include "bitpack_.h"
 unsigned char *bitfpack256v32(unsigned       *__restrict in, unsigned n, unsigned char *__restrict out, unsigned start, unsigned b) { unsigned char *pout = out+PAD8(256*b);
   __m256i v, sv = _mm256_set1_epi32(start);
@@ -275,14 +275,14 @@ unsigned char *bitfpack256v32(unsigned       *__restrict in, unsigned n, unsigne
 }
 
 #define VI32(_ip_, _i_, _iv_, _sv_) _iv_ = _mm256_sub_epi32(_mm256_loadu_si256(_ip_++),_sv_); _sv_ = _mm256_add_epi32(_sv_,cv);
-#define IP32(ip, i, _iv_) _iv_
+#define IP32(_ip_, i, _iv_) _iv_
 unsigned char *bitf1pack256v32(unsigned       *__restrict in, unsigned n, unsigned char *__restrict out, unsigned start, unsigned b) { unsigned char *pout = out+PAD8(256*b);
   __m256i v, sv = _mm256_set_epi32(start+8,start+7,start+6,start+5,start+4,start+3,start+2,start+1), cv = _mm256_set1_epi32(8);
   BITPACK256V32(in, b, out, sv); return pout;
 }
 
 #define VI32(_ip_, _i_, _iv_, _sv_) v = _mm256_loadu_si256(_ip_++); _iv_ = mm256_delta_epi32(v,_sv_); _sv_ = v
-#define IP32(ip, i, _iv_) _iv_
+#define IP32(_ip_, i, _iv_) _iv_
 #include "bitpack_.h"
 unsigned char *bitdpack256v32(unsigned       *__restrict in, unsigned n, unsigned char *__restrict out, unsigned start, unsigned b) { unsigned char *pout = out+PAD8(256*b);
   __m256i v,sv = _mm256_set1_epi32(start);
