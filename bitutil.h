@@ -190,6 +190,7 @@ static ALWAYS_INLINE uint64_t mm_hor_epi64( __m128i v) { v = _mm_or_si128( v, _m
 //---------------- Convert mm_cvtsi128_siXX -------------------------------------------
 static ALWAYS_INLINE uint8_t  mm_cvtsi128_si8 (__m128i v) { return (uint8_t )_mm_cvtsi128_si32(v); }
 static ALWAYS_INLINE uint16_t mm_cvtsi128_si16(__m128i v) { return (uint16_t)_mm_cvtsi128_si32(v); }
+static ALWAYS_INLINE int      mm_cvtsi128_si32(__m128i v) { return           _mm_cvtsi128_si32(v); }
   #endif
 
 //--------- memset -----------------------------------------
