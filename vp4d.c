@@ -484,6 +484,7 @@ size_t TEMPLATE2(P4NDEC, USIZE)(unsigned char *__restrict in, size_t n, uint_t *
 }
 
     #ifdef P4DECX
+#ifndef __SANITIZE_ADDRESS__
 unsigned char *TEMPLATE2(p4decx, USIZE)(unsigned char *in, unsigned n, uint_t *__restrict out) {
   unsigned b,i;
   struct p4 p4;
@@ -501,6 +502,7 @@ unsigned char *TEMPLATE2(p4decx, USIZE)(unsigned char *in, unsigned n, uint_t *_
   }
   return in + PAD8(n*b);
 }
+#endif
 
 unsigned char *TEMPLATE2(p4f1decx, USIZE)(unsigned char *in, unsigned n, uint_t *__restrict out, uint_t start) {
   unsigned b,i;
