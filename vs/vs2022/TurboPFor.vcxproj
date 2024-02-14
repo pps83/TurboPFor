@@ -24,6 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>TurboPFor</RootNamespace>
     <ProjectName>TurboPFor</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -88,26 +89,26 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -116,14 +117,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,52 +133,30 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24003 /w24005 /w24028 /w24047 /w24090 /w24133 /w24146 /w24333 /w24789 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-missing-braces -Wno-int-conversion -Wno-macro-redefined -Wno-unknown-pragmas -Wno-shift-op-parentheses -Wno-compare-distinct-pointer-types %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>../..</AdditionalIncludeDirectories>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\bitpack.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExceptionHandling>
-    </ClCompile>
+    <ClCompile Include="..\..\lib\bic.c" />
+    <ClCompile Include="..\..\lib\bitpack.c" />
     <ClCompile Include="..\..\lib\bitunpack.c" />
-    <ClCompile Include="..\..\lib\bitutil.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
+    <ClCompile Include="..\..\lib\bitutil.c" />
     <ClCompile Include="..\..\lib\eliasfano.c" />
     <ClCompile Include="..\..\lib\fp.c" />
     <ClCompile Include="..\..\lib\iccodec.c" />
-    <ClCompile Include="..\..\lib\bic.c" />
-    <ClCompile Include="..\..\lib\transpose.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotSet</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG</PreprocessorDefinitions>
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG</PreprocessorDefinitions>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</BasicRuntimeChecks>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\transpose_.c">
-      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-    </ClCompile>
+    <ClCompile Include="..\..\lib\transpose.c" />
+    <ClCompile Include="..\..\lib\transpose_.c" />
     <ClCompile Include="..\..\lib\trlec.c" />
     <ClCompile Include="..\..\lib\trled.c" />
-    <ClCompile Include="..\..\lib\v8.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\v8pack.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
+    <ClCompile Include="..\..\lib\v8.c" />
+    <ClCompile Include="..\..\lib\v8pack.c" />
     <ClCompile Include="..\..\lib\vbit.c" />
     <ClCompile Include="..\..\lib\vint.c" />
     <ClCompile Include="..\..\lib\vp4c.c" />
@@ -185,56 +164,39 @@
     <ClCompile Include="..\..\lib\vsimple.c" />
     <ClCompile Include="..\bitpack_avx2.c">
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="..\bitunpack_avx2.c">
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="..\bitutil_avx2.c">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ClCompile Include="..\transpose_avx2.c">
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="..\vp4c_avx2.c">
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="..\vp4d_avx2.c">
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
