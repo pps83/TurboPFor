@@ -35,6 +35,7 @@
     <ProjectGuid>{6876BEB8-2B45-48B9-8381-1D4094FE8868}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>icapp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -99,10 +100,9 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24146 /w24133 /w24996</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
+      <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
@@ -117,11 +117,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24146 /w24133 /w24996</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -132,16 +131,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24146 /w24133 /w24996</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
+      <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,16 +151,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24146 /w24133 /w24996</AdditionalOptions>
-      <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
