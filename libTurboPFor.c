@@ -60,43 +60,43 @@
 #include <intrin.h>
 #include <immintrin.h>
 
-#include "conf.h"
-#include "vint_in.h"
-#include "bitpack.h"
-#include "vp4.h"
-#include "bitutil_in.h"  // has __AVX2__ checks
-#include "bitpack_dac.h" // has __AVX2__ checks (bzhi)
+#include "lib/include/conf.h"
+#include "lib/include/vint_in.h"
+#include "lib/include/bitpack.h"
+#include "lib/include/vp4.h"
+#include "lib/include/bitutil_in.h"  // has __AVX2__ checks
+#include "lib/include/bitpack_dac.h" // has __AVX2__ checks (bzhi)
 
 
-#include "bitutil.c"
-#include "fp.c" // includes fp_tpl.h which has __AVX2__ checks
-#include "trlec.c"
-#include "trled.c"
-#include "v8.c"
-#include "vint.c"
-#include "vsimple.c"
+#include "lib/bitutil.c"
+#include "lib/fp.c" // includes fp_tpl.h which has __AVX2__ checks
+#include "lib/trlec.c"
+#include "lib/trled.c"
+#include "lib/v8.c"
+#include "lib/vint.c"
+#include "lib/vsimple.c"
 
-#include "bitpack.c"
-#include "bitunpack.c"
-#include "vp4c.c"
-#include "vp4d.c"
-#include "transpose.c"
+#include "lib/bitpack.c"
+#include "lib/bitunpack.c"
+#include "lib/vp4c.c"
+#include "lib/vp4d.c"
+#include "lib/transpose.c"
 
 #define AVX2_ON
-#include "bitpack.c"
-#include "bitunpack.c"
-#include "vp4c.c"
-#include "vp4d.c"
-#include "transpose.c"
+#include "lib/bitpack.c"
+#include "lib/bitunpack.c"
+#include "lib/vp4c.c"
+#include "lib/vp4d.c"
+#include "lib/transpose.c"
 #undef AVX2_ON
 
 #define SSE2_ON
 #undef __AVX2__
-#include "bitpack.c"
-#include "bitunpack.c"
-#include "vp4c.c"
-#include "vp4d.c"
-#include "transpose.c"
+#include "lib/bitpack.c"
+#include "lib/bitunpack.c"
+#include "lib/vp4c.c"
+#include "lib/vp4d.c"
+#include "lib/transpose.c"
 #undef SSE2_ON
 
 #ifdef __clang__

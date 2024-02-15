@@ -25,8 +25,8 @@
 **/
   #ifndef USIZE
 #include <string.h>
-#include "conf.h"
-#include "trle.h"
+#include "include/conf.h"
+#include "include/trle.h"
 #include "trle_.h"
 
   #ifdef __ARM_NEON

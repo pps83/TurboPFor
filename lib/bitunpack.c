@@ -24,10 +24,10 @@
 //   "Integer Compression" Bit Packing
 
 #include <stdio.h>
-#include "conf.h"
-#include "vint_in.h"
-#include "bitutil_in.h"
-#include "bitpack.h"
+#include "include/conf.h"
+#include "include/vint_in.h"
+#include "include/bitutil_in.h"
+#include "include/bitpack.h"
 
 #define PAD8(_x_) ( (((_x_)+8-1)/8) )
 

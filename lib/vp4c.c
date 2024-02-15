@@ -29,11 +29,11 @@
 #pragma warning( disable : 4068)
 
 #include <stdio.h>
-#include "conf.h"
-#include "vint_in.h"
-#include "bitutil_in.h"
-#include "bitpack.h"
-#include "vp4.h"
+#include "include/conf.h"
+#include "include/vint_in.h"
+#include "include/bitutil_in.h"
+#include "include/bitpack.h"
+#include "include/vp4.h"
 
 #undef P4DELTA
 #define PAD8(_x_) ( (((_x_)+8-1)/8) )

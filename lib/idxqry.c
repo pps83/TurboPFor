@@ -46,10 +46,10 @@
   #endif
 #include <getopt.h>
 
-#include "conf.h"
-#include "vint_in.h"
-#include "bitpack.h"
-#include "vp4.h"
+#include "include/conf.h"
+#include "include/vint_in.h"
+#include "include/bitpack.h"
+#include "include/vp4.h"
 #include "idx.h"
 #ifndef min
 #define min(x,y) (((x)<(y)) ? (x) : (y))

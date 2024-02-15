@@ -33,7 +33,7 @@
 #include <malloc.h>
 #endif
   #ifdef _MSC_VER
-#include "vs/getopt.h"
+#include "../vs/getopt.h"
   #else
 #include <getopt.h>
 #endif
@@ -46,9 +46,9 @@
 #include <math.h> // pow,fabs
 #include <float.h>
 
-#include "conf.h"
-#include "time_.h"
-#include "bitutil_in.h"
+#include "include/conf.h"
+#include "include/time_.h"
+#include "include/bitutil_in.h"
 
 #ifdef _MSC_VER
 #define __SSE__ 1
@@ -560,15 +560,15 @@ void libmemcpy(unsigned char *dst, unsigned char *src, int len) {
 }
 
 //---------------------------------------- IcApp: Benchmark --------------------------------------------------------------------------
-#include "bitpack.h"
-#include "vp4.h"
-#include "vint.h"
-#include "fp.h"
-#include "eliasfano.h"
-#include "vsimple.h"
-#include "transpose.h"
-#include "trle.h"
-//#include "bic.h"
+#include "include/bitpack.h"
+#include "include/vp4.h"
+#include "include/vint.h"
+#include "include/fp.h"
+#include "include/eliasfano.h"
+#include "include/vsimple.h"
+#include "include/transpose.h"
+#include "include/trle.h"
+//#include "include/bic.h"
 
   #ifdef STREAMVBYTE
 #include "streamvbyte/include/streamvbyte.h"

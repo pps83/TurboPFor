@@ -25,7 +25,7 @@
 
 #ifndef _SSE_NEON_H_
 #define _SSE_NEON_H_
-#include "conf.h"
+#include "../include/conf.h"
 
 #ifdef __ARM_NEON  //------------------------------------------------------------------------------------------------------------------
 #include <arm_neon.h>

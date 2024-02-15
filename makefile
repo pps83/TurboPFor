@@ -21,6 +21,7 @@ PREFIX ?= /usr/local
 DIRBIN ?= $(PREFIX)/bin
 DIRINC ?= $(PREFIX)/include
 DIRLIB ?= $(PREFIX)/lib
+SRC ?= lib/
 
 OPT=-fstrict-aliasing -fPIC
 ifeq (,$(findstring clang, $(CC)))
@@ -79,44 +80,44 @@ endif
 
 all: icapp
 
-vp4c_sse.o: vp4c.c
-	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c vp4c.c -o vp4c_sse.o
+$(SRC)vp4c_sse.o: $(SRC)vp4c.c
+	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c $(SRC)vp4c.c -o $(SRC)vp4c_sse.o
 
-vp4c_avx2.o: vp4c.c
-	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c vp4c.c -o vp4c_avx2.o
+$(SRC)vp4c_avx2.o: $(SRC)vp4c.c
+	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c $(SRC)vp4c.c -o $(SRC)vp4c_avx2.o
 
-vp4d_sse.o: vp4d.c
-	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c vp4d.c -o vp4d_sse.o
+$(SRC)vp4d_sse.o: $(SRC)vp4d.c
+	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c $(SRC)vp4d.c -o $(SRC)vp4d_sse.o
 
-vp4d_avx2.o: vp4d.c
-	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c vp4d.c -o vp4d_avx2.o
+$(SRC)vp4d_avx2.o: $(SRC)vp4d.c
+	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c $(SRC)vp4d.c -o $(SRC)vp4d_avx2.o
 
-bitpack_sse.o: bitpack.c
-	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c bitpack.c -o bitpack_sse.o
+$(SRC)bitpack_sse.o: $(SRC)bitpack.c
+	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c $(SRC)bitpack.c -o $(SRC)bitpack_sse.o
 
-bitpack_avx2.o: bitpack.c
-	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c bitpack.c -o bitpack_avx2.o
+$(SRC)bitpack_avx2.o: $(SRC)bitpack.c
+	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c $(SRC)bitpack.c -o $(SRC)bitpack_avx2.o
 
-bitunpack_sse.o: bitunpack.c
-	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c bitunpack.c -o bitunpack_sse.o
+$(SRC)bitunpack_sse.o: $(SRC)bitunpack.c
+	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c $(SRC)bitunpack.c -o $(SRC)bitunpack_sse.o
 
-bitunpack_avx2.o: bitunpack.c
-	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c bitunpack.c -o bitunpack_avx2.o
+$(SRC)bitunpack_avx2.o: $(SRC)bitunpack.c
+	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c $(SRC)bitunpack.c -o $(SRC)bitunpack_avx2.o
 
-transpose_sse.o: transpose.c
-	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c transpose.c -o transpose_sse.o
+$(SRC)transpose_sse.o: $(SRC)transpose.c
+	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c $(SRC)transpose.c -o $(SRC)transpose_sse.o
 
-transpose_avx2.o: transpose.c
-	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c transpose.c -o transpose_avx2.o
+$(SRC)transpose_avx2.o: $(SRC)transpose.c
+	$(CC) -O3 -w $(AVX2) -DAVX2_ON $(OPT) -c $(SRC)transpose.c -o $(SRC)transpose_avx2.o
 
 -include ext/libext.mak
 
-LIB=bitpack.o bitpack_sse.o bitunpack.o bitunpack_sse.o \
-    vp4c.o vp4c_sse.o vp4d.o vp4d_sse.o \
-	bitutil.o fp.o v8.o vint.o transpose.o transpose_sse.o trlec.o trled.o vsimple.o eliasfano.o
+LIB=$(SRC)bitpack.o $(SRC)bitpack_sse.o $(SRC)bitunpack.o $(SRC)bitunpack_sse.o \
+    $(SRC)vp4c.o $(SRC)vp4c_sse.o $(SRC)vp4d.o $(SRC)vp4d_sse.o \
+	$(SRC)bitutil.o $(SRC)fp.o $(SRC)v8.o $(SRC)vint.o $(SRC)transpose.o $(SRC)transpose_sse.o $(SRC)trlec.o $(SRC)trled.o $(SRC)vsimple.o $(SRC)eliasfano.o
 #bic.o
 ifeq ($(ARCH),x86_64)
-LIB+=bitpack_avx2.o bitunpack_avx2.o vp4c_avx2.o vp4d_avx2.o transpose_avx2.o
+LIB+=$(SRC)bitpack_avx2.o $(SRC)bitunpack_avx2.o $(SRC)vp4c_avx2.o $(SRC)vp4d_avx2.o $(SRC)transpose_avx2.o
 endif
 
 libic.a: $(LIB)
@@ -140,7 +141,7 @@ $(JAVA_SUBDIR)/libic.so : libic.a jic.h jic.c
 $(JAVA_SUBDIR)/jicbench : $(JAVA_SUBDIR)/jicbench.java $(JAVA_SUBDIR)/libic.so
 	cd $(JAVA_SUBDIR) && javac jicbench.java && java -Djava.library.path=. jicbench
 
-icapp: icapp.o libic.a $(OB)
+icapp: $(SRC)icapp.o libic.a $(OB)
 	$(CL) $^ $(LDFLAGS) -o icapp
 
 myapp: myapp.o libic.a

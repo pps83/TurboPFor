@@ -27,15 +27,15 @@
 #include <emmintrin.h>
     #elif defined(__ARM_NEON)
 #include <arm_neon.h>
-#include "sse_neon.h"
+#include "include/sse_neon.h"
     #endif
 #pragma warning( disable : 4005)
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
 #include <string.h>
-#include "conf.h"
-#include "vsimple.h"
+#include "include/conf.h"
+#include "include/vsimple.h"
 
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
@@ -96,8 +96,8 @@ static SV_LIM64;
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "conf.h"
-#include "vint_in.h"
+#include "include/conf.h"
+#include "include/vint_in.h"
 
 #define uint_t TEMPLATE3(uint, USIZE, _t)
 

@@ -1,3 +1,4 @@
+#define __AVX2__
 #define AVX2_ON
-#include "bitunpack.c"
+#include "lib/bitunpack.c"
 #undef AVX2_ON

@@ -43,7 +43,7 @@
 #include <emmintrin.h>
   #elif defined(__ARM_NEON)
 #include <arm_neon.h>
-#include "sse_neon.h"
+#include "include/sse_neon.h"
   #endif
 
   #ifdef __ARM_NEON
@@ -52,7 +52,7 @@
 #define PREFETCH(_ip_,_rw_) __builtin_prefetch(_ip_,_rw_)
   #endif
 
-#include "trle.h"
+#include "include/trle.h"
 #include "trle_.h"
 //------------------------------------- RLE 8 with Escape char ------------------------------------------------------------------
 //#define MEMSAFE

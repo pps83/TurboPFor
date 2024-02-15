@@ -144,18 +144,18 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\bitpack.c" />
-    <ClCompile Include="..\..\bitunpack.c" />
-    <ClCompile Include="..\..\bitutil.c" />
-    <ClCompile Include="..\..\fp.c" />
-    <ClCompile Include="..\..\transpose.c" />
-    <ClCompile Include="..\..\trlec.c" />
-    <ClCompile Include="..\..\trled.c" />
-    <ClCompile Include="..\..\v8.c" />
-    <ClCompile Include="..\..\vint.c" />
-    <ClCompile Include="..\..\vp4c.c" />
-    <ClCompile Include="..\..\vp4d.c" />
-    <ClCompile Include="..\..\vsimple.c" />
+    <ClCompile Include="..\..\lib\bitpack.c" />
+    <ClCompile Include="..\..\lib\bitunpack.c" />
+    <ClCompile Include="..\..\lib\bitutil.c" />
+    <ClCompile Include="..\..\lib\fp.c" />
+    <ClCompile Include="..\..\lib\transpose.c" />
+    <ClCompile Include="..\..\lib\trlec.c" />
+    <ClCompile Include="..\..\lib\trled.c" />
+    <ClCompile Include="..\..\lib\v8.c" />
+    <ClCompile Include="..\..\lib\vint.c" />
+    <ClCompile Include="..\..\lib\vp4c.c" />
+    <ClCompile Include="..\..\lib\vp4d.c" />
+    <ClCompile Include="..\..\lib\vsimple.c" />
     <ClCompile Include="..\bitpack_avx2.c">
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
@@ -193,12 +193,12 @@
     <ClCompile Include="..\vp4d_sse.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\bitpack.h" />
-    <ClInclude Include="..\..\transpose.h" />
-    <ClInclude Include="..\..\trle.h" />
-    <ClInclude Include="..\..\vint.h" />
-    <ClInclude Include="..\..\vp4.h" />
-    <ClInclude Include="..\..\vsimple.h" />
+    <ClInclude Include="..\..\lib\bitpack.h" />
+    <ClInclude Include="..\..\lib\transpose.h" />
+    <ClInclude Include="..\..\lib\trle.h" />
+    <ClInclude Include="..\..\lib\vint.h" />
+    <ClInclude Include="..\..\lib\vp4.h" />
+    <ClInclude Include="..\..\lib\vsimple.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

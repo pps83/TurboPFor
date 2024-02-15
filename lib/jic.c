@@ -25,11 +25,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "bitutil.h"
-#include "vint.h"
-#include "vsimple.h"
-#include "bitpack.h"
-#include "vp4.h"
+#include "include/bitutil.h"
+#include "include/vint.h"
+#include "include/vsimple.h"
+#include "include/bitpack.h"
+#include "include/vp4.h"
 
 #include "jic.h"
 

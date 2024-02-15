@@ -76,7 +76,7 @@ void rc_set_size(int size)
 	this->block_size = size;
 }*/
 //void pack(unsigned int *v, unsigned int b, unsigned int n, unsigned int *w);
-#include "../bitpack.h"
+#include "../include/bitpack.h"
 #include "rc.h"
 
 	void setBit(unsigned char *buf, unsigned int *bp, unsigned int val)

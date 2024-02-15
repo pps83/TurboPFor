@@ -42,13 +42,13 @@
 #include <emmintrin.h>
   #elif defined(__ARM_NEON)
 #include <arm_neon.h>
-#include "sse_neon.h"
+#include "include/sse_neon.h"
   #endif
 
 #pragma warning( disable : 4005)
 
-#include "conf.h"
-#include "transpose.h"
+#include "include/conf.h"
+#include "include/transpose.h"
 
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)

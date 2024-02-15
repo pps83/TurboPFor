@@ -14,55 +14,55 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\icbench.c">
+    <ClCompile Include="..\..\lib\icbench.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\plugins.cc">
+    <ClCompile Include="..\..\lib\plugins.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\getopt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\eliasfano.c">
+    <ClCompile Include="..\..\lib\eliasfano.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\bitshuffle\src\bitshuffle_core.c">
+    <ClCompile Include="..\..\lib\ext\bitshuffle\src\bitshuffle_core.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\bitshuffle\src\iochain.c">
+    <ClCompile Include="..\..\lib\ext\bitshuffle\src\iochain.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\polycom\optpfd.c">
+    <ClCompile Include="..\..\lib\ext\polycom\optpfd.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\polycom\polyvbyte.c">
+    <ClCompile Include="..\..\lib\ext\polycom\polyvbyte.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\rc.c">
+    <ClCompile Include="..\..\lib\ext\rc.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simdcomp\src\simdbitpacking.c">
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdbitpacking.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simdcomp\src\simdcomputil.c">
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdcomputil.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simdcomp_\simdfor.c">
+    <ClCompile Include="..\..\lib\ext\simdcomp_\simdfor.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simdcomp\src\simdintegratedbitpacking.c">
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdintegratedbitpacking.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simple8b.c">
+    <ClCompile Include="..\..\lib\ext\simple8b.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simdcomp\src\avxbitpacking.c">
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\avxbitpacking.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simdcomp\src\simdpackedselect.c">
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdpackedselect.c">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ext\FastPFor-lib.cpp">
+    <ClCompile Include="..\..\lib\ext\FastPFor-lib.cpp">
       <Filter>Source Files\ext</Filter>
     </ClCompile>
   </ItemGroup>

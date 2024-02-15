@@ -1,3 +1,3 @@
 #define SSE2_ON
-#include "transpose.c"
+#include "lib/transpose.c"
 #undef SSE2_ON

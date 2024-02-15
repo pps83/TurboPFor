@@ -43,7 +43,7 @@
   #endif
   #ifdef _MSC_VER
 #define PRId64       "I64d"
-#include "vs/getopt.h"
+#include "../vs/getopt.h"
   #else
 #include <inttypes.h>
 #include <getopt.h>
@@ -65,18 +65,18 @@
   #endif
 
 #include <time.h>
-#include "conf.h"
-#include "vint_in.h"
-#include "bitpack.h"
-#include "vsimple.h"
-#include "transpose.h"
-#include "eliasfano.h"
-#include "vp4.h"
-#include "plugins.h"
+#include "include/conf.h"
+#include "include/vint_in.h"
+#include "include/bitpack.h"
+#include "include/vsimple.h"
+#include "include/transpose.h"
+#include "include/eliasfano.h"
+#include "include/vp4.h"
+#include "include/plugins.h"
 
 //#define RDTSC_ON
 #define TM_F 4
-#include "time_.h"
+#include "include/time_.h"
 
 #ifndef min
 #define min(x,y) (((x)<(y)) ? (x) : (y))

@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\eliasfano.c">
+    <ClCompile Include="..\..\lib\eliasfano.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__AVX2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="..\..\ext\bitshuffle\src\bitshuffle_core.c" />
-    <ClCompile Include="..\..\ext\bitshuffle\src\iochain.c" />
-    <ClCompile Include="..\..\ext\FastPFor-lib.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+    <ClCompile Include="..\..\lib\ext\bitshuffle\src\bitshuffle_core.c" />
+    <ClCompile Include="..\..\lib\ext\bitshuffle\src\iochain.c" />
+    <ClCompile Include="..\..\lib\ext\FastPFor-lib.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\ext\simdcomp\src\avxbitpacking.c" />
-    <ClCompile Include="..\..\ext\simdcomp\src\simdpackedselect.c" />
-    <ClCompile Include="..\..\ext\polycom\optpfd.c" />
-    <ClCompile Include="..\..\ext\polycom\polyvbyte.c" />
-    <ClCompile Include="..\..\ext\rc.c" />
-    <ClCompile Include="..\..\ext\simdcomp\src\simdbitpacking.c" />
-    <ClCompile Include="..\..\ext\simdcomp\src\simdcomputil.c" />
-    <ClCompile Include="..\..\ext\simdcomp\src\simdintegratedbitpacking.c" />
-    <ClCompile Include="..\..\ext\simdcomp_\simdfor.c" />
-    <ClCompile Include="..\..\ext\simple8b.c" />
-    <ClCompile Include="..\..\icbench.c" />
-    <ClCompile Include="..\..\plugins.cc" />
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\avxbitpacking.c" />
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdpackedselect.c" />
+    <ClCompile Include="..\..\lib\ext\polycom\optpfd.c" />
+    <ClCompile Include="..\..\lib\ext\polycom\polyvbyte.c" />
+    <ClCompile Include="..\..\lib\ext\rc.c" />
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdbitpacking.c" />
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdcomputil.c" />
+    <ClCompile Include="..\..\lib\ext\simdcomp\src\simdintegratedbitpacking.c" />
+    <ClCompile Include="..\..\lib\ext\simdcomp_\simdfor.c" />
+    <ClCompile Include="..\..\lib\ext\simple8b.c" />
+    <ClCompile Include="..\..\lib\icbench.c" />
+    <ClCompile Include="..\..\lib\plugins.cc" />
     <ClCompile Include="..\getopt.c" />
   </ItemGroup>
   <ItemGroup>
@@ -121,7 +121,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext/simdcomp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>
@@ -138,7 +138,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext/simdcomp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>
@@ -157,7 +157,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext/simdcomp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>
@@ -178,7 +178,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4133;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>..\..\ext\simdcomp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext/simdcomp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalOptions Condition="'$(PlatformToolset)'!='ClangCL'">/w24005 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -mbmi2 -Wno-misleading-indentation -Wno-deprecated-register -Wno-unused-function -Wno-unused-value %(AdditionalOptions)</AdditionalOptions>

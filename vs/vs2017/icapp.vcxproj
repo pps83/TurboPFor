@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\ext\FastPFor-lib.cpp" />
-    <ClCompile Include="..\..\ext\fastpfor.cc" />
-    <ClCompile Include="..\..\icapp.c" />
+    <ClCompile Include="..\..\lib\ext\FastPFor-lib.cpp" />
+    <ClCompile Include="..\..\lib\ext\fastpfor.cc" />
+    <ClCompile Include="..\..\lib\icapp.c" />
     <ClCompile Include="..\getopt.c" />
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +105,7 @@
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -Wno-pointer-sign -Wno-unused-function -Wno-implicit-function-declaration -Wno-pointer-type-mismatch</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>..\..\ext;..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext;../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,7 +122,7 @@
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -Wno-pointer-sign -Wno-unused-function -Wno-implicit-function-declaration -Wno-pointer-type-mismatch</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>..\..\ext;..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext;../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -Wno-pointer-sign -Wno-unused-function -Wno-implicit-function-declaration -Wno-pointer-type-mismatch</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>..\..\ext;..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext;../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,7 +162,7 @@
       <AdditionalOptions Condition="'$(PlatformToolset)'=='ClangCL'">-Wno-unused-but-set-variable -Wno-constant-conversion -Wno-parentheses -Wno-unused-variable -Wno-incompatible-pointer-types -Wno-tautological-constant-out-of-range-compare -Wno-array-bounds -Wno-implicit-int -Wno-unused-label -Wno-uninitialized -Wno-macro-redefined -Wno-unknown-pragmas -Wno-compare-distinct-pointer-types -Wno-pointer-sign -Wno-unused-function -Wno-implicit-function-declaration -Wno-pointer-type-mismatch</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>..\..\ext;..\..\ext\FastPFor\headers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/ext;../../lib/ext/FastPFor/headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

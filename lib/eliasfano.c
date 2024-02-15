@@ -29,10 +29,10 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
-#include "conf.h"
-#include "bitpack.h"
-#include "bitutil_in.h"
-#include "eliasfano.h"
+#include "include/conf.h"
+#include "include/bitpack.h"
+#include "include/bitutil_in.h"
+#include "include/eliasfano.h"
 
 #define PAD8(_x_) ( (((_x_)+8-1)/8) )
 

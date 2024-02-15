@@ -34,7 +34,7 @@
 #endif
 
 #include <getopt.h>
-#include "conf.h"
+#include "include/conf.h"
 
 #ifndef min
 #define min(x,y) (((x)<(y)) ? (x) : (y))

@@ -28,9 +28,9 @@
 #pragma warning( disable : 4068)
 
 #include <string.h>
-#include "conf.h"
-#include "vint_in.h"
-#include "bitutil_in.h"
+#include "include/conf.h"
+#include "include/vint_in.h"
+#include "include/bitutil_in.h"
 
 #define LEN32(_m_,_i_) len32[(uint8_t)(_m_>>(_i_*8))]
 static const unsigned char len32[256] = {
@@ -929,7 +929,7 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 #define VD256v32(_v_,_sv_) _sv_ = mm256_scani_epi32(_v_,_sv_, cvi); _v_ = _sv_
 #include "v8.c"
 
-#include "bitpack.h"
+#include "include/bitpack.h"
 #ifndef min
 #define min(x,y) (((x)<(y)) ? (x) : (y))
 #define max(x,y) (((x)>(y)) ? (x) : (y))
