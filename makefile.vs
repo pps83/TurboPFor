@@ -8,8 +8,8 @@
 CC = cl /nologo
 LD = link /nologo
 AR = lib /nologo
-CFLAGS = /MD /O2 -I. /W0 
-LDFLAGS = 
+CFLAGS = /MD /O2 -I. /W0
+LDFLAGS =
 ARCH =
 
 LIB_LIB = libic.lib
@@ -48,7 +48,7 @@ DLL_OBJS = $(OBJS:.obj=.dllobj)
 
 all: $(LIB_LIB) icbench.exe icapp.exe
 
-#$(LIB_DLL) $(LIB_IMP) 
+#$(LIB_DLL) $(LIB_IMP)
 
 #------------
 .c.obj:

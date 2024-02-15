@@ -232,8 +232,8 @@ struct _PACKED doubleu   { double             d; };
     #else
 #define bzhi64(_u_, _b_)                 ((_u_) & ((1ull<<(_b_))-1))
 #define bzhi32(_u_, _b_)                 ((_u_) & ((1u  <<(_b_))-1))
-#define bzhi_u64(_u_, _b_)               BZHI64(_u_, _b_) 
-#define bzhi_u32(_u_, _b_)               BZHI32(_u_, _b_) 
+#define bzhi_u64(_u_, _b_)               BZHI64(_u_, _b_)
+#define bzhi_u32(_u_, _b_)               BZHI32(_u_, _b_)
     #endif
 
 #define SIZE_ROUNDUP(_n_, _a_) (((size_t)(_n_) + (size_t)((_a_) - 1)) & ~(size_t)((_a_) - 1))

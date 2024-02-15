@@ -1,9 +1,9 @@
 #cpp: $(CPPF)
 #	$(CC) -msse3 $(MSSE) $(MARCH) -w -E -P $(CPPF)
 
-CFLAGS+=-Iext 
+CFLAGS+=-Iext
 CXXFLAGS+=$(DDEBUG) -w -fpermissive -Wall -fno-rtti
-CXXFLAGS+=$(SSE) -Iext/FastPFor/headers -std=gnu99 -DUSE_THREADS 
+CXXFLAGS+=$(SSE) -Iext/FastPFor/headers -std=gnu99 -DUSE_THREADS
 
 ifeq ($(LZ),1)
 LZ4=1
@@ -44,12 +44,12 @@ endif
 #LIB+=bitunpack128h.o
 #endif
 #----------------------------------------
-icbench: $(OB) icbench.o plugins.o 
+icbench: $(OB) icbench.o plugins.o
 	$(CXX) $(XDEFS) $^ $(LDFLAGS) -o icbench
 
 idx: idxcr idxqry idxseg
 
-icb: icbench 
+icb: icbench
 
 idxseg:   idxseg.o $(LIB)
 	$(CC) $^ $(LDFLAGS) -o idxseg
@@ -58,26 +58,26 @@ ictest:   ictest.o $(LIB)
 	$(CC) $^ $(LDFLAGS) -o ictest
 
 ifeq ($(OS), Linux)
-para: CFLAGS += -DTHREADMAX=32	
+para: CFLAGS += -DTHREADMAX=32
 para: idxqry
 endif
 
-idxcr:   idxcr.o $(LIB)  
+idxcr:   idxcr.o $(LIB)
 	$(CC) $^ $(LDFLAGS) -o idxcr $(LFLAGS)
 
 idxqry:  idxqry.o $(LIB)
 	$(CC) $^ $(LDFLAGS) $(LIBTHREAD) $(LIBRT) -o idxqry $(LFLAGS)
 
 ext/polycom/optpfd.o: ext/polycom/optpfd.c
-	$(CC) -O2 $(MARCH) $(CFLAGS) $< -c -o $@ 
+	$(CC) -O2 $(MARCH) $(CFLAGS) $< -c -o $@
 
-varintg8iu.o: ext/varintg8iu.c ext/varintg8iu.h 
+varintg8iu.o: ext/varintg8iu.c ext/varintg8iu.h
 	$(CC) -O2 $(CFLAGS) $(MARCH) -c -std=c99 ext/varintg8iu.c
 
 #-------------------------------------------------------------------
 ifeq ($(BLOSC),1)
 LDFLAGS+=-lpthread
-CFLAGS+=-DBLOSC 
+CFLAGS+=-DBLOSC
 
 ext/c-blosc2/blosc/shuffle-sse2.o: ext/c-blosc2/blosc/shuffle-sse2.c
 	$(CC) -O3 $(CFLAGS) -msse2 -c ext/c-blosc2/blosc/shuffle-sse2.c -o ext/c-blosc2/blosc/shuffle-sse2.o
@@ -102,17 +102,17 @@ CFLAGS+=-DSHUFFLE_AVX2_ENABLED
 OB+=ext/c-blosc2/blosc/shuffle-avx2.o ext/c-blosc2/blosc/bitshuffle-avx2.o
 endif
 ifeq ($(ARCH),aarch64)
-CFLAGS+=-DSHUFFLE_NEON_ENABLED 
+CFLAGS+=-DSHUFFLE_NEON_ENABLED
 OB+=ext/c-blosc2/blosc/shuffle-neon.o ext/c-blosc2/blosc/bitshuffle-neon.o
 else
-CFLAGS+=-DSHUFFLE_SSE2_ENABLED 
+CFLAGS+=-DSHUFFLE_SSE2_ENABLED
 OB+=ext/c-blosc2/blosc/bitshuffle-sse2.o ext/c-blosc2/blosc/shuffle-sse2.o
 endif
 
 else
 
 ifeq ($(BITSHUFFLE),1)
-CFLAGS+=-DBITSHUFFLE -Iext/bitshuffle/lz4 
+CFLAGS+=-DBITSHUFFLE -Iext/bitshuffle/lz4
 #-DLZ4_ON
 ifeq ($(ARCH),aarch64)
 CFLAGS+=-DUSEARMNEON
@@ -148,19 +148,19 @@ endif
 endif
 
 ifeq ($(LZ4),1)
-XDEFS+=-DLZ4 -Ilz4/lib 
+XDEFS+=-DLZ4 -Ilz4/lib
 OB+=ext/lz4/lib/lz4hc.o ext/lz4/lib/lz4.o ext/lz4/lib/lz4frame.o ext/lz4/lib/xxhash.o
 endif
 
 ifeq ($(LZTURBO),1)
-CFLAGS+=-DLZTURBO 
+CFLAGS+=-DLZTURBO
 TURBORC=1
 include lzturbo.mak
 endif
 
 ifeq ($(MASKEDVBYTE),1)
 XDEFS+=-DMASKEVBYTE
-CFLAGS+=-Iext/MaskedVByte/include 
+CFLAGS+=-Iext/MaskedVByte/include
 OB+=ext/MaskedVByte/src/varintencode.o ext/MaskedVByte/src/varintdecode.o
 endif
 
@@ -176,10 +176,10 @@ endif
 
 ifeq ($(SIMDCOMP),1)
 XDEFS+=-Iext/simdcomp/include -DSIMDCOMP
-OB+=ext/simdcomp/src/simdintegratedbitpacking.o ext/simdcomp/src/simdcomputil.o ext/simdcomp/src/simdbitpacking.o ext/simdcomp/src/simdpackedselect.o 
+OB+=ext/simdcomp/src/simdintegratedbitpacking.o ext/simdcomp/src/simdcomputil.o ext/simdcomp/src/simdbitpacking.o ext/simdcomp/src/simdpackedselect.o
 OB+=ext/simdcomp_/simdfor.o
 ifeq ($(AVX2),1)
-OB+=ext/simdcomp/src/avxbitpacking.o 
+OB+=ext/simdcomp/src/avxbitpacking.o
 endif
 endif
 
@@ -207,7 +207,7 @@ OB+=ext/varintg8iu.o
 endif
 
 ifeq ($(VBZ),1)
-XDEFS+=-DVBZ 
+XDEFS+=-DVBZ
 CXXFLAGS+=-Iext/vbz_compression/third_party -Iext/vbz_compression/vbz -Iext/vbz_compression/third_party/stream_vbyte/include
 OB+=ext/vbz_compression/vbz/vbz.o ext/vbz_compression/vbz/v0/vbz_streamvbyte.o ext/vbz_compression/vbz/v1/vbz_streamvbyte.o
 endif
@@ -246,11 +246,11 @@ OB+=ext/polycom/polyvbyte.o
 endif
 
 ifeq ($(SIMPLE8B),1)
-OB+=ext/simple8b.o 
+OB+=ext/simple8b.o
 endif
 
 ifeq ($(EFANO),1)
-OB+=eliasfano.o 
+OB+=eliasfano.o
 endif
 
 CFLAGS+=$(XDEFS)

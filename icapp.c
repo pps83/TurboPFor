@@ -934,13 +934,13 @@ unsigned char *bestr(unsigned id, unsigned b, unsigned char *s, char *prms, int 
     "%3d:memcpy           memcpy              ",        //120
     "%3d:vtenc            VTEnc lib           ",
     "%3d:vbz              vbz (nanopore)      "
-  }; 
+  };
   #define CID_BEG  76
   #define CID_END 108
   if(id >= CID_BEG && id <= CID_END)
-    sprintf(s,fmt[id], id, prms, prmi); 
+    sprintf(s,fmt[id], id, prms, prmi);
   else
-    sprintf(s,fmt[id], id, b, prms, prmi);  
+    sprintf(s,fmt[id], id, b, prms, prmi);
   return s;
 }
 
@@ -1305,7 +1305,7 @@ unsigned bench16(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
                      TMBENCH( "", libmemcpy(out,in,n) ,n); l=n;      pr(l,n); TMBENCH2("120", libmemcpy( cpy,out,n) ,n); break;
       #ifdef VBZ
     case 122: { CompressionOptions opt; opt.perform_delta_zig_zag = 1; opt.integer_size = 2; opt.zstd_compression_level = 22; opt.vbz_version = VBZ_DEFAULT_VERSION;
-            TMBENCH("", l = vbz_compress(in, n, out, ns, &opt),n); pr(l,n); TMBENCH2("122", vbz_decompress(out, l, cpy, n, &opt),n); 
+            TMBENCH("", l = vbz_compress(in, n, out, ns, &opt),n); pr(l,n); TMBENCH2("122", vbz_decompress(out, l, cpy, n, &opt),n);
       } break;
       #endif
    default: goto end;
@@ -1323,7 +1323,7 @@ unsigned bench16(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
 #undef USIZE
 #define USIZE 4
 unsigned bench32(unsigned char *in, unsigned n, unsigned char *out, unsigned char *cpy, int id, char *inname, int codlev) {
-  unsigned l=0,m = n/(USIZE),rc = 0, d,ns=CBUF(n);  
+  unsigned l=0,m = n/(USIZE),rc = 0, d,ns=CBUF(n);
   uint32_t *p;
   char     *tmp = NULL;
   uint32_t dmin = mindelta32(in,m);
@@ -1851,7 +1851,7 @@ int main(int argc, char* argv[]) {
       if(!dfmt) n = fread(in, 1, n, fi);
       fclose(fi);
 	  int delta = mdelta;
-	  if(delta>=0) { uint32_t *_in = in,*p,m = n/sizeof(_in[0]); for(p = _in+1; p < _in+m; p++) { uint64_t u = (uint64_t)p[0]+p[-1]+delta; if(u>0xffffffffull) { printf("delta overflow\n"); exit(0); } p[0]=u; } 
+	  if(delta>=0) { uint32_t *_in = in,*p,m = n/sizeof(_in[0]); for(p = _in+1; p < _in+m; p++) { uint64_t u = (uint64_t)p[0]+p[-1]+delta; if(u>0xffffffffull) { printf("delta overflow\n"); exit(0); } p[0]=u; }
                   printf("delta=%d in[m-1]=%u ", delta, _in[m-1]);
 				  for(unsigned i = 1; i < m; i++) { AC(_in[i]>_in[i-1], "icapp: Not sorted at=%u,count=%d\n", i, n); }
       }
@@ -1881,7 +1881,7 @@ int main(int argc, char* argv[]) {
       }
         #endif
     }
-    be_mindelta = mindelta(in, n/abs(isize), abs(isize)); 
+    be_mindelta = mindelta(in, n/abs(isize), abs(isize));
 
     if(fi && verbose) { unsigned l;                                                                     // Calculate bits distributions
       switch(abs(isize)) {

@@ -1,11 +1,11 @@
 # powturbo (c) Copyright 2013-2019
 # Download or clone TurboPFor:
-# git clone git://github.com/powturbo/TurboPFor.git 
+# git clone git://github.com/powturbo/TurboPFor.git
 # make
 #
 # To benchmark external libraries:
-# git clone --recursive git://github.com/powturbo/TurboPFor.git 
-#        make: "make CODEC1=1 CODEC2=1 LZ=1" 
+# git clone --recursive git://github.com/powturbo/TurboPFor.git
+#        make: "make CODEC1=1 CODEC2=1 LZ=1"
 # on arm make: "make CODEC1=1 LZ=1"
 
 CC ?= gcc
@@ -24,7 +24,7 @@ DIRLIB ?= $(PREFIX)/lib
 
 OPT=-fstrict-aliasing -fPIC
 ifeq (,$(findstring clang, $(CC)))
-OPT+=-falign-loops 
+OPT+=-falign-loops
 endif
 
 #------- OS/ARCH -------------------
@@ -48,22 +48,22 @@ ifeq ($(ARCH),ppc64le)
   SSE=-D__SSSE3__
   CFLAGS=-mcpu=power9 -mtune=power9 $(SSE)
 else ifeq ($(ARCH),aarch64)
-  CFLAGS=-march=armv8-a 
+  CFLAGS=-march=armv8-a
 ifneq (,$(findstring clang, $(CC)))
-  OPT+=-fomit-frame-pointer 
+  OPT+=-fomit-frame-pointer
 #-fmacro-backtrace-limit=0
 endif
   SSE=-march=armv8-a
 else ifeq ($(ARCH),$(filter $(ARCH),x86_64))
 # set minimum arch sandy bridge SSE4.1 + AVX
-  SSE=-march=corei7-avx -mtune=corei7-avx 
+  SSE=-march=corei7-avx -mtune=corei7-avx
 # SSE+=-mno-avx -mno-aes
   CFLAGS=$(SSE)
   AVX2=-march=haswell
 #  SSE=$(AVX2)
 endif
 
-CFLAGS+=-w -Wall $(DEBUG) $(OPT) 
+CFLAGS+=-w -Wall $(DEBUG) $(OPT)
 
 ifeq ($(OS),$(filter $(OS),Linux GNU/kFreeBSD GNU OpenBSD FreeBSD DragonFly NetBSD MSYS_NT Haiku))
 LDFLAGS+=-lrt -lm
@@ -77,7 +77,7 @@ ifeq ($(STATIC),1)
 LDFLAGS+=-static
 endif
 
-all: icapp 
+all: icapp
 
 vp4c_sse.o: vp4c.c
 	$(CC) -O3 -w $(SSE) -DSSE2_ON $(OPT) -c vp4c.c -o vp4c_sse.o
@@ -114,7 +114,7 @@ transpose_avx2.o: transpose.c
 LIB=bitpack.o bitpack_sse.o bitunpack.o bitunpack_sse.o \
     vp4c.o vp4c_sse.o vp4d.o vp4d_sse.o \
 	bitutil.o fp.o v8.o vint.o transpose.o transpose_sse.o trlec.o trled.o vsimple.o eliasfano.o
-#bic.o 	
+#bic.o
 ifeq ($(ARCH),x86_64)
 LIB+=bitpack_avx2.o bitunpack_avx2.o vp4c_avx2.o vp4d_avx2.o transpose_avx2.o
 endif
@@ -150,13 +150,13 @@ mycpp: mycpp.o libic.a
 	$(CXX) $^ $(LDFLAGS) -o mycpp
 
 .c.o:
-	$(CC) -O3 $(CFLAGS) $< -c -o $@  
+	$(CC) -O3 $(CFLAGS) $< -c -o $@
 
 .cc.o:
-	$(CXX) -O2 $(CXXFLAGS) $< -c -o $@ 
+	$(CXX) -O2 $(CXXFLAGS) $< -c -o $@
 
 .cpp.o:
-	$(CXX) -O2 $(CXXFLAGS) $< -c -o $@ 
+	$(CXX) -O2 $(CXXFLAGS) $< -c -o $@
 
 ifeq ($(OS),Windows_NT)
 clean:

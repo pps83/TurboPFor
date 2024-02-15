@@ -23,7 +23,7 @@ TurboPFor: Fastest Integer Compression [![Build Status](https://travis-ci.org/po
 * **Elias fano**
   * Fastest **"Elias Fano"** implementation w/ or w/o SIMD/AVX2
 + **Transform**
-  * Scalar & SIMD Transform: Delta, Zigzag, Zigzag of delta, XOR, Transpose/Shuffle, 
+  * Scalar & SIMD Transform: Delta, Zigzag, Zigzag of delta, XOR, Transpose/Shuffle,
   * :new: **lossy** floating point compression with *TurboPFor* or [TurboTranspose](https://github.com/powturbo/TurboTranspose)+lz77
 * **Floating Point Compression**
   * Delta/Zigzag + improved gorilla style + (Differential) Finite Context Method FCM/DFCM floating point compression
@@ -34,18 +34,18 @@ TurboPFor: Fastest Integer Compression [![Build Status](https://travis-ci.org/po
   * can compress times series to only 0.01%. Speed > 10 GB/s compression and > 13 GB/s decompress.
 * **Inverted Index ...do less, go fast!**
   * Direct Access to compressed *frequency* and *position* data w/ zero decompression
-  * **Novel** **"Intersection w/ skip intervals"**, decompress the minimum necessary blocks (**~10-15%)!**. 
+  * **Novel** **"Intersection w/ skip intervals"**, decompress the minimum necessary blocks (**~10-15%)!**.
   * **Novel** Implicit skips with zero extra overhead
   * **Novel** Efficient **Bidirectional** Inverted Index Architecture (forward/backwards traversal) incl. "integer compression".
   * more than **2000! queries per second** on GOV2 dataset (25 millions documents) on a **SINGLE** core
   * :sparkles: Revolutionary Parallel Query Processing on Multicores **> 7000!!! queries/sec** on a simple quad core PC.<br>
    **...forget** ~~Map Reduce, Hadoop, multi-node clusters,~~ ...
-   
+
 ### Integer Compression Benchmark:
 - :new: Download [IcApp](https://sites.google.com/site/powturbo/downloads) a new benchmark for TurboPFor<br>
   for testing allmost all integer and floating point file types.
 - Practical (No **PURE** cache) "integer compression" benchmark w/ **large** arrays.
-- CPU: Skylake i7-6700 3.4GHz gcc 7.2 **single** thread 
+- CPU: Skylake i7-6700 3.4GHz gcc 7.2 **single** thread
 
 ##### - Synthetic data:
  - Generate and test (zipfian) skewed distribution (100.000.000 integers, Block size=128/256)<br>
@@ -53,7 +53,7 @@ TurboPFor: Fastest Integer Compression [![Build Status](https://travis-ci.org/po
    Large blocks involved, while processing queries (inverted index, search engines, databases, graphs, in memory computing,...) need to be entirely decoded.
 
         ./icbench -a1.5 -m0 -M255 -n100M ZIPF
-	
+
 |C Size|ratio%|Bits/Integer|C MB/s|D MB/s|Name|
 |--------:|-----:|--------:|----------:|----------:|--------------|
 |62,939,886| 15.7| 5.04|**1588**|**9400**|**TurboPFor256**|
@@ -82,7 +82,7 @@ TurboPFor: Fastest Integer Compression [![Build Status](https://travis-ci.org/po
 
 (*) codecs inefficient for small block sizes are tested with 64Ki integers/block.
 
-- MB/s: 1.000.000 bytes/second. **1000 MB/s = 1 GB/s**<br> 
+- MB/s: 1.000.000 bytes/second. **1000 MB/s = 1 GB/s**<br>
 - **#BOLD** = pareto frontier.<br>
 - FP=FastPFor SC:simdcomp PC:Polycom<br>
 - TurboPForDA,TurboForDA: Direct Access is normally used when accessing few individual values.<br>
@@ -97,9 +97,9 @@ TurboPFor: Fastest Integer Compression [![Build Status](https://travis-ci.org/po
 
 |Size |Ratio %|Bits/Integer|C Time MB/s|D Time MB/s|Function |
 |-----------:|------:|-----:|-------:|-------:|---------------------|
-| 3,321,663,893| 13.9| 4.44|**1320**|**6088**|**TurboPFor**| 
+| 3,321,663,893| 13.9| 4.44|**1320**|**6088**|**TurboPFor**|
 | 3,339,730,557| 14.0| 4.47|  32| 2144|PC.OptPFD|
-| 3,350,717,959| 14.0| 4.48|**1536**|**7128**|**TurboPFor256**| 
+| 3,350,717,959| 14.0| 4.48|**1536**|**7128**|**TurboPFor256**|
 | 3,501,671,314| 14.6| 4.68| 56| 2840|**VSimple**|
 | 3,768,146,467| 15.8| 5.04|**3228**| 3652|**EliasFanoV**|
 | 3,822,161,885| 16.0| 5.11| 572| 2444|PC_Simple16|
@@ -125,8 +125,8 @@ Block size: 64Ki = 256k bytes. Ki=1024 Integers
 | 3,164,940,562| 13.2|**4.23**|**1344**|**6004**|**TurboPFor 64Ki**|
 | 3,273,213,464| 13.7| 4.38|**1496**|**7008**|**TurboPFor256 64Ki**|
 | 3,965,982,954| 16.6| 5.30|**1520**| 2452|[lz4](#lz4)+DT 64Ki|
-| 4,234,154,427| 17.7| 5.66| 436| 5672|qmx 64Ki| 
-| 6,074,995,117| 25.4| 8.13| 1976| 2916|[blosc_lz4](#blosc) 64Ki| 
+| 4,234,154,427| 17.7| 5.66| 436| 5672|qmx 64Ki|
+| 6,074,995,117| 25.4| 8.13| 1976| 2916|[blosc_lz4](#blosc) 64Ki|
 | 8,773,150,644| 36.7|11.74| 2548|5204|blosc_lz 64Ki|
 
 "lz4+DT 64Ki" = Delta+Transpose from TurboPFor + lz4<br>
@@ -143,12 +143,12 @@ Block size: 64Ki = 256k bytes. Ki=1024 Integers
 |bvzzenc32       |**8914**|56,713|0.010|**13499**|ZigZag Delta of delta|
 |vsenc32         |**12294**|140,400| 0.024 |12877 |Variable Simple|
 |p4nzenc256v32   | 1932| 596,018|  0.10 |13326 |TurboPFor256 ZigZag|
-|p4ndenc256v32   | 1961| 596,018|  0.10 |13339 |TurboPFor256 Delta| 
+|p4ndenc256v32   | 1961| 596,018|  0.10 |13339 |TurboPFor256 Delta|
 |bitndpack256v32 |**12564**|909,189|  0.16 |13505 |TurboPackV256 Delta|
 |p4nzenc32       | 1810|  1,159,633|  0.20 | 8502 |TurboPFor ZigZag|
-|p4nzenc128v32   | 1795|  1,159,633|  0.20 |13338 |TurboPFor ZigZag| 
-|bitnzpack256v32 | 9651|  1,254,757|  0.22 |**13503**|TurboPackV256 ZigZag| 
-|bitnzpack128v32 |10155|  1,472,804|  0.26 |13380 |TurboPackV ZigZag| 
+|p4nzenc128v32   | 1795|  1,159,633|  0.20 |13338 |TurboPFor ZigZag|
+|bitnzpack256v32 | 9651|  1,254,757|  0.22 |**13503**|TurboPackV256 ZigZag|
+|bitnzpack128v32 |10155|  1,472,804|  0.26 |13380 |TurboPackV ZigZag|
 |vbddenc32       | 6198| 18,057,296|  3.13 |10982 |TurboVByte Delta of delta|
 |memcpy          |13397|577,141,992|100.00||
 
@@ -165,9 +165,9 @@ Block size: 64Ki = 256k bytes. Ki=1024 Integers
 |100,000,000|3156|3372|Bitshuffle AVX2|
 |100,000,000|2100|2176|Bitshuffle SSE|
 
-##### - (Lossy) Floating point compression: 
-        ./icapp -Fd file          " 64 bits floating point raw file 
-        ./icapp -Ff file          " 32 bits floating point raw file 
+##### - (Lossy) Floating point compression:
+        ./icapp -Fd file          " 64 bits floating point raw file
+        ./icapp -Ff file          " 32 bits floating point raw file
         ./icapp -Fcf file         " text file with miltiple entries (ex.  8.657,56.8,4.5 ...)
         ./icapp -Ftf file         " text file (1 entry per line)
         ./icapp -Ftf file -v5     " + display the first entries read
@@ -185,7 +185,7 @@ Block size: 64Ki = 256k bytes. Ki=1024 Integers
      Ratio = 14.37% Decoded/Total Integers.
 
    + TREC Million Query Track (1MQT):<br />
-     **~1100** queries per second (Single core)<br /> 
+     **~1100** queries per second (Single core)<br />
      **~4500** queries per second (Quad core CPU)<br />
      Ratio = 11.59% Decoded/Total Integers.
 
@@ -207,7 +207,7 @@ q/s: queries/second, ms/q:milliseconds/query
 |ALL|3.57|5036.5|0.199|100|
 
 ###### Notes:
-- Search engines are spending 90% of the time in intersections when processing queries. 
+- Search engines are spending 90% of the time in intersections when processing queries.
 - Most search engines are using pruning strategies, caching popular queries,... to reduce the time for intersections and query processing.
 - As indication, google is processing [40.000 Queries per seconds](http://www.internetlivestats.com/google-search-statistics/),
 using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-know-server-farms/) for searching [8 billions web pages](http://searchenginewatch.com/sew/study/2063479/coincidentally-googles-index-size-jumps) (320 X size of GOV2).
@@ -217,7 +217,7 @@ using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-kn
         Download or clone TurboPFor
 		git clone git://github.com/powturbo/TurboPFor.git
 		cd TurboPFor
-        
+
         To benchmark external libraries:
 		git clone --recursive git://github.com/powturbo/TurboPFor.git
 		cd TurboPFor
@@ -228,11 +228,11 @@ using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-kn
 		make AVX2=1
 
 		Include external libs
-		make CODEC1=1 CODEC2=1 
+		make CODEC1=1 CODEC2=1
 
 		Disable SIMD
 		make NSIMD=1
-      
+
 ###### Windows visual c++
 		nmake /f makefile.vs
 
@@ -248,7 +248,7 @@ using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-kn
    >*-zipfian distribution alpha = 1.2 (Ex. -a1.0=uniform -a1.5=skewed distribution)<br />
      -number of integers = 100.000.000<br />
      -integer range from 0 to 255<br />*
-  
+
   + Unsorted lists: individual function test (ex. Copy TurboPack TurboPFor)<br />
 
         ./icbench -a1.5 -m0 -M255 -ecopy/turbopack/turbopfor/turbopack256v ZIPF
@@ -263,19 +263,19 @@ using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-kn
         ./icbench -fs -eturbopack/turbopfor/turbopfor256v ZIPF
 
   + Generate interactive "file.html" plot for browsing
-  
+
         ./icbench -p2 -S2 -Q3 file.tbb
-		
+
   + Unit test: test function from bit size 0 to 32
-  
-        ./icbench -m0 -M32 -eturbpfor -fu 
-        ./icbench -m0 -M8 -eturbopack -fs -n1M 
+
+        ./icbench -m0 -M32 -eturbpfor -fu
+        ./icbench -m0 -M8 -eturbopack -fs -n1M
 
 ##### - Data files:
   - Raw 32 bits binary data file [Test data](https://github.com/ot/partitioned_elias_fano/tree/master/test/test_data)
 
         ./icbench file
-        ./icapp file           
+        ./icapp file
         ./icapp -Fs file         "16 bits raw binary file
         ./icapp -Fu file         "32 bits raw binary file
         ./icapp -Fl file         "64 bits raw binary file
@@ -302,7 +302,7 @@ using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-kn
 
   - Text file: multiple numbers separated by non-digits (0..9,-,.) characters (ex. 134534,-45678,98788,4345, )
 
-        ./icapp -Fc data.txt         "text file, 32 bits integers (ex. 56789,3245,23,678 ) 
+        ./icapp -Fc data.txt         "text file, 32 bits integers (ex. 56789,3245,23,678 )
         ./icapp -Fcd data.txt        "text file, 64 bits floting-point numbers (ex. 34.7689,5.20,45.789 )
 
   - Multiblocks of 32 bits binary file. (Example gov2 from [DocId data set](#DocId))<br />
@@ -334,12 +334,12 @@ using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-kn
 ##### - Parallel Query Processing:
   1 - Create partitions
 
-  
+
         ./idxseg gov2.sorted . -26m -s8
 
-  
+
  >*create 8 (CPU hardware threads) partitions for a total of ~26 millions document ids*
-  
+
   2 - Create index file for each partition
 
 
@@ -349,7 +349,7 @@ using [900.000 multicore servers](https://www.cloudyn.com/blog/10-facts-didnt-kn
   >*create inverted index file for all partitions "gov2.sorted.s00 - gov2.sorted.s07" in the current directory*
 
   3 - Intersections:
-  
+
   delete "idxqry.o" file and then type "make para" to compile "idxqry" w. multithreading
 
 
@@ -369,7 +369,7 @@ In general encoding/decoding functions are of the form:
   b      : number of bits. Only for bit packing functions<br />
   start  : previous value. Only for integrated delta encoding functions
 
-   
+
   >**char *endptr = decode( char *in, unsigned n, unsigned *out, [unsigned start], [int b])**<br />
   endptr : set by decode to the next character in "in" after the decoded buffer<br />
   in     : pointer to input buffer<br />
@@ -378,10 +378,10 @@ In general encoding/decoding functions are of the form:
   b      : number of bits. Only for bit unpacking functions<br />
   start  : previous value. Only for integrated delta decoding functions
 
-  **Simple high level functions:** 
+  **Simple high level functions:**
   >**size_t compressed_size = encode( unsigned *in, size_t n, char *out)**<br />
   compressed_size : number of bytes written into compressed output buffer out<br />
-   
+
   >**size_t compressed_size = decode( char *in, size_t n, unsigned *out)**<br />
   compressed_size : number of bytes read from compressed input buffer in<br />
 
@@ -392,17 +392,17 @@ In general encoding/decoding functions are of the form:
    vs:  variable simple<br />
    bit: bit packing<br />
    n :  high level array functions for large arrays.
-	
+
    ''  : encoding for unsorted integer lists<br />
    'd' : delta encoding for increasing integer lists (sorted w/ duplicate)<br />
    'd1': delta encoding for strictly increasing integer lists (sorted unique)<br />
    'f' : FOR encoding for sorted integer lists<br />
    'z' :  ZigZag encoding for unsorted integer lists<br />
-   
+
    'enc' or 'pack'  : encode or bitpack<br />
    'dec' or 'unpack': decode or bitunpack<br />
    'NN'             : integer size (8/16/32/64)<br />
-   
+
 header files to use with documentation:<br />
 
 | c/c++ header file|Integer Compression functions| examples |
@@ -432,7 +432,7 @@ Note: Some low level functions (like p4enc32) are limited to 128/256 (SSE/AVX2) 
   * <a name="FastPFor"></a>[FastPFor](https://github.com/lemire/FastPFor) + [Simdcomp](https://github.com/lemire/simdcomp): SIMDPack FPF, Vbyte FPF, VarintG8IU, StreamVbyte, GroupSimple
   * <a name="OptPFD"></a><a name="Simple16"></a>[Optimized Pfor-delta compression code](http://jinruhe.com): OptPFD/OptP4, Simple16 (limited to 28 bits integers)
   * <a name="MaskedVByte"></a>[MaskedVByte](http://maskedvbyte.org/). See also: [Vectorized VByte Decoding](http://engineering.indeed.com/blog/2015/03/vectorized-vbyte-decoding-high-performance-vector-instructions/)
-  * <a name="Streamvbyte"></a>[Streamvbyte](https://github.com/lemire/streamvbyte). 
+  * <a name="Streamvbyte"></a>[Streamvbyte](https://github.com/lemire/streamvbyte).
   * <a name="Simple-8b"></a>[Index Compression Using 64-Bit Words](http://people.eng.unimelb.edu.au/ammoffat/abstracts/am10spe.html): Simple-8b (speed optimized version tested)
   * <a name="libfor"></a>[libfor](https://github.com/cruppstahl/for)
   * <a name="QMX"></a>[Compression, SIMD, and Postings Lists](http://www.cs.otago.ac.nz/homepages/andrew/papers/) QMX integer compression from the "simple family"
@@ -497,66 +497,66 @@ TurboPForN       PFor (SSE2) large blocks
 TurboPFor256     PFor (AVX2)
 TurboPFor256N    PFor (AVX2) large blocks
 TurboPForDA      PFor direct access
-TurboPForDI      PFord min                                        
-TurboPForZZ      PFor zigzag of delta                             
-TurboFor         FOR                                              
-TurboForV        FOR (SIMD)                                       
-TurboFor256V     FOR (AVX2)                                       
-TurboForDA       FOR direct access                                
-TurboPackDA      Bit packing direct access                        
-TurboPack        Bit packing (scalar)                             
-TurboPackN       Bit packing (scalar) large blocks                
-TurboPackV       Bit packing (SSE2 Vertical)                      
-TurboPackH       Bit packing (SSE2 Horizontal)                    
-TurboPackVN      Bit packing (SSE2 large block)                   
-TurboPack256V    Bit packing (AVX2 Vertical)                      
-TurboPack256N    Bit packing (AVX2 large block)                   
-TurboVByte       Variable byte (scalar)                           
-VSimple          Variable simple (scalar)                         
-EliasFano        Elias fano (scalar)                              
-EliasFanoV       Eliasfano  (SSE2)                                
-EliasFano256V    Elias fano (AVX2                                 
-memcpy           memcpy                                           
-copy             Integer copy                                     
-tpbyte4s         Byte Transpose (scalar)                          
+TurboPForDI      PFord min
+TurboPForZZ      PFor zigzag of delta
+TurboFor         FOR
+TurboForV        FOR (SIMD)
+TurboFor256V     FOR (AVX2)
+TurboForDA       FOR direct access
+TurboPackDA      Bit packing direct access
+TurboPack        Bit packing (scalar)
+TurboPackN       Bit packing (scalar) large blocks
+TurboPackV       Bit packing (SSE2 Vertical)
+TurboPackH       Bit packing (SSE2 Horizontal)
+TurboPackVN      Bit packing (SSE2 large block)
+TurboPack256V    Bit packing (AVX2 Vertical)
+TurboPack256N    Bit packing (AVX2 large block)
+TurboVByte       Variable byte (scalar)
+VSimple          Variable simple (scalar)
+EliasFano        Elias fano (scalar)
+EliasFanoV       Eliasfano  (SSE2)
+EliasFano256V    Elias fano (AVX2
+memcpy           memcpy
+copy             Integer copy
+tpbyte4s         Byte Transpose (scalar)
 tpbyte           Byte transpose (simd)                            2,4,8
 tpnibble         Nibble transpose (simd)                          2,4,8
-ZigZag32         ZigZag encoding (sse2)                           
-Delta32          Delta encoding (sse2)                            
-DDelta32         Delta of delta encoding (sse2)                   
-Xor32            Xor encoding (sse2)                              
-FP_PREV64        Floating point PFOR                              
-FP_FCM64         Floating point PFOR (FCM)                        
-FP_DFCM64        Floating point PFOR (DFCM)                       
-TurboPFor64      PFOR 64                                          
-TurboPFor64V     PFOR 64                                          
-Simple8b         64 bits Simple family (instable)                 
-PC_Simple16      Simple 16. limited to 28 bits                    
-PC_OptPFD        OptPFD. limited to 28 bits                       
-PC_Vbyte         Variable byte                                    
-PC_Rice          Rice coding (instable)                           
-VarintG8IU       Variable byte SIMD                               
-MaskedVbyte      Variable byte SIMD                               
-StreamVbyte      Variable byte SIMD                               
-FP_FastPFor      PFor scalar (inefficient for small blocks)       
-FP_SimdFastPFor  PFor SIMD (inefficient for small blocks)         
-FP_OptPFor       OptPFor scalar                                   
-FP_SIMDOptPFor   OptPFor SIMD                                     
-FP_VByte         Variable byte                                    
-FP_Simple8bRLE   Simple-8b + rle                                  
-FP_GROUPSIMPLE   Group Simple                                     
-SC_SIMDPack128   Bit packing (SSE4.1)                             
-SC_SIMDPack256   Bit packing (SSE4.1)                             
-SC_For           For (SSE4.1)                                     
-SC_ForDA         For direct access (SSE4.1)                       
-LibFor_For       For                                              
-LibFor_ForDA     For direct access                                
-LI_Pack          Bit packing (scalar)                             
-LI_TurboPack     Bit packing (scalar)                             
-LI_SuperPack     Bit packing (scalar)                             
-LI_HorPack       Bit packing (sse4.1 horizontal)                  
-LI_BMIPack256    Bit packing (avx2)                               
-lz4              lz4                                              
+ZigZag32         ZigZag encoding (sse2)
+Delta32          Delta encoding (sse2)
+DDelta32         Delta of delta encoding (sse2)
+Xor32            Xor encoding (sse2)
+FP_PREV64        Floating point PFOR
+FP_FCM64         Floating point PFOR (FCM)
+FP_DFCM64        Floating point PFOR (DFCM)
+TurboPFor64      PFOR 64
+TurboPFor64V     PFOR 64
+Simple8b         64 bits Simple family (instable)
+PC_Simple16      Simple 16. limited to 28 bits
+PC_OptPFD        OptPFD. limited to 28 bits
+PC_Vbyte         Variable byte
+PC_Rice          Rice coding (instable)
+VarintG8IU       Variable byte SIMD
+MaskedVbyte      Variable byte SIMD
+StreamVbyte      Variable byte SIMD
+FP_FastPFor      PFor scalar (inefficient for small blocks)
+FP_SimdFastPFor  PFor SIMD (inefficient for small blocks)
+FP_OptPFor       OptPFor scalar
+FP_SIMDOptPFor   OptPFor SIMD
+FP_VByte         Variable byte
+FP_Simple8bRLE   Simple-8b + rle
+FP_GROUPSIMPLE   Group Simple
+SC_SIMDPack128   Bit packing (SSE4.1)
+SC_SIMDPack256   Bit packing (SSE4.1)
+SC_For           For (SSE4.1)
+SC_ForDA         For direct access (SSE4.1)
+LibFor_For       For
+LibFor_ForDA     For direct access
+LI_Pack          Bit packing (scalar)
+LI_TurboPack     Bit packing (scalar)
+LI_SuperPack     Bit packing (scalar)
+LI_HorPack       Bit packing (sse4.1 horizontal)
+LI_BMIPack256    Bit packing (avx2)
+lz4              lz4
 lz4_bit          Bitshuffle + [delta]+lz4                         2,4,8
 lz4_nibble       TurboPFor's [delta]+nibble transpose + lz4       2,4,8
 lz4_bitxor       Bitshuffle + [xor]+lz4                           2,4,8

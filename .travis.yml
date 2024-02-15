@@ -7,19 +7,19 @@ arch:
 # - s390x big endian
 # - ppc64le (gcc > 8.0 sse->altivec)
 
-compiler: 
+compiler:
   - gcc
   - clang
 
 branches:
   only:
-    - master 
+    - master
 
 script:
   - make
   - ./icapp ZIPF
 #  - cat /proc/cpuinfo
-  
+
 matrix:
   include:
     - name: linux-arm64-gcc
@@ -29,8 +29,8 @@ matrix:
 
     - name: windows-mingw-w64
       os: windows
-      arch: amd64 
-      script: 
+      arch: amd64
+      script:
         - mingw32-make
         - ./icapp ZIPF
 
@@ -53,7 +53,7 @@ matrix:
 #      env: CC=clang-6
 
 #    - name: linux-arm64-clang-7
-#      dist: bionic 
+#      dist: bionic
 #      os: linux
 #      arch: arm64
 #      addons:
