@@ -64,7 +64,7 @@
 #include "lib/include/vint_in.h"
 #include "lib/include/bitpack.h"
 #include "lib/include/vp4.h"
-#include "lib/include/bitutil_in.h"  // has __AVX2__ checks
+#include "lib/include/bitutil_.h"  // has __AVX2__ checks
 #include "lib/include/bitpack_dac.h" // has __AVX2__ checks (bzhi)
 
 

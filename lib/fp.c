@@ -30,7 +30,7 @@
 #include <string.h>
 #include "include/conf.h"
 #include "include/vp4.h"
-#include "include/bitutil_in.h"
+#include "include/bitutil_.h"
 #include "include/fp.h"
 //---------------------- template generation --------------------------------------------
 #define VSIZE 128

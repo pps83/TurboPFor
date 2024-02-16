@@ -24,7 +24,7 @@
 //    "Integer Compression" utility - delta, for, zigzag / Floating point compression
 #include <math.h> //nan
 #include "include/conf.h"
-#include "include/bitutil_in.h"
+#include "include/bitutil_.h"
 
 //------------ 'or' for bitsize + 'xor' for all duplicate ------------------
 #define BT(_i_) { o |= ip[_i_]; x |= ip[_i_] ^ u0; }

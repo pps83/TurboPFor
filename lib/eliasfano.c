@@ -31,7 +31,7 @@
 
 #include "include/conf.h"
 #include "include/bitpack.h"
-#include "include/bitutil_in.h"
+#include "include/bitutil_.h"
 #include "include/eliasfano.h"
 
 #define PAD8(_x_) ( (((_x_)+8-1)/8) )

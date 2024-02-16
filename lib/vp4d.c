@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include "include/conf.h"
 #include "include/vint_in.h"
-#include "include/bitutil_in.h"
+#include "include/bitutil_.h"
 #include "include/bitpack.h"
 #include "include/vp4.h"
 #include "include/vp4_dac.h"

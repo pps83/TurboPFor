@@ -272,7 +272,7 @@ SC_SIMDPACK256,
 #include "include/vint_in.h"
 #include "include/vsimple.h"
 #include "include/eliasfano.h"
-#include "include/bitutil_in.h"
+#include "include/bitutil_.h"
 #include "include/transpose.h"
 #include "include/fp.h"
 #include "include/bitpack.h"

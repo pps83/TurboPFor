@@ -48,7 +48,7 @@
 
 #include "include/conf.h"
 #include "include/time_.h"
-#include "include/bitutil_in.h"
+#include "include/bitutil_.h"
 
 #ifdef _MSC_VER
 #define __SSE__ 1
