@@ -108,6 +108,7 @@ void tpmodeset(unsigned _tpmode);
 void tpsizeset(unsigned _tpsize);
 int  lzidget(char *scmd);
 char *codstr(unsigned cid);
+unsigned* getAvailableLzs(void); // ICC_LAST will be the last entry
 
 #ifdef __cplusplus
 }
