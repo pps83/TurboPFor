@@ -11,6 +11,7 @@ ZSTD=1
 FSE=1
 FSEHUF=1
 #ZLIB=1
+HAVE_LIBDEFLATE=0
 BITSHUFFLE=1
 #LZTURBO=1
 TURBORC=1
@@ -313,6 +314,17 @@ endif
 else
 ZD=$(LB)zlib/
 OB+=$(ZD)adler32.o $(ZD)crc32.o $(ZD)compress.o $(ZD)deflate.o $(ZD)infback.o $(ZD)inffast.o $(ZD)inflate.o $(ZD)inftrees.o $(ZD)trees.o $(ZD)uncompr.o $(ZD)zutil.o
+endif
+endif
+
+ifeq ($(HAVE_LIBDEFLATE), 1)
+CFLAGS+=-DHAVE_LIBDEFLATE -I$(LB)libdeflate
+ZD=$(LB)libdeflate/lib/
+OB+=$(ZD)deflate_compress.o $(ZD)deflate_decompress.o $(ZD)utils.o
+ifeq ($(ARCH),aarch64)
+OB+=$(ZD)arm/cpu_features.o
+else
+OB+=$(ZD)x86/cpu_features.o
 endif
 endif
 
