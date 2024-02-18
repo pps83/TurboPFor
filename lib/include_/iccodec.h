@@ -28,6 +28,7 @@ enum {
   ICC_LZTURBO,
   ICC_LZ4,
   ICC_ZLIB,
+  ICC_DEFLATE,
 
   ICC_ZSTD,
   ICC_FSE,
