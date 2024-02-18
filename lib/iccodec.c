@@ -33,6 +33,10 @@
 #include "include_/iccodec.h"
 #include "include_/trle.h"
 
+#ifdef HAVE_LIBDEFLATE
+#include <libdeflate.h>
+#endif
+
   #ifdef _BITSHUFFLE
 #include "ext/bitshuffle/src/bitshuffle.h"
     #ifndef LZ4
@@ -54,6 +58,9 @@ static unsigned availableLzs[] = {
 #ifdef _ZLIB
   ICC_ZLIB,
 #endif
+#ifdef HAVE_LIBDEFLATE
+  ICC_DEFLATE,
+#endif
 #ifdef _ZSTD
   ICC_ZSTD,
 #endif
@@ -73,7 +80,7 @@ static unsigned availableLzs[] = {
   ICC_LAST
 };
 
-char *_codstr[] = { "none", "lzturbo", "lz4", "zlib", "zstd", "fse", "fsehuf", "turboanx", "turborc", "memcpy", NULL };
+char *_codstr[] = { "none", "lzturbo", "lz4", "zlib", "deflate", "zstd", "fse", "fsehuf", "turboanx", "turborc", "memcpy", NULL };
 char *codstr(unsigned cid) { return (cid < ICC_LAST)?_codstr[cid]:""; }
 
 int lzidget(char *scmd) {
@@ -220,6 +227,18 @@ size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned ou
       return outlen;
     }
       #endif
+
+#ifdef HAVE_LIBDEFLATE
+    case ICC_DEFLATE: {
+      if (codlev < 0) codlev = 0;
+      if (codlev > 12) codlev = 12;
+      struct libdeflate_compressor* ctx = libdeflate_alloc_compressor(codlev);
+      size_t ret = libdeflate_deflate_compress(ctx, in, inlen, out, outsize);
+      libdeflate_free_compressor(ctx);
+      return ret;
+    }
+#endif
+
 	case ICC_MEMCPY: memcpy(out,in,inlen); return inlen;
 	default: die("codec '%d' '%s' not implemented\n", codid, codstr(codid) );
   }
@@ -281,6 +300,17 @@ size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, unsigned ou
       #ifdef _ZLIB
     case ICC_ZLIB: { uLongf outsize = outlen; int rc = uncompress(out, &outsize, in, inlen); } break;
       #endif
+
+#ifdef HAVE_LIBDEFLATE
+    case ICC_DEFLATE: {
+      size_t outputSize = 0;
+      struct libdeflate_decompressor* ctx = libdeflate_alloc_decompressor();
+      enum libdeflate_result ret = libdeflate_deflate_decompress(ctx, in, inlen, out, outlen, &outputSize);
+      libdeflate_free_decompressor(ctx);
+      return ret == LIBDEFLATE_SUCCESS ? outputSize : 0;
+    }
+#endif
+
 	case ICC_MEMCPY: memcpy(out,in, outlen); return inlen;
 	default: die("codec '%d' '%s' not implemented\n", codid, codstr(codid) );
   }
