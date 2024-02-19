@@ -438,7 +438,7 @@ void tp4dec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
 #if !defined(SSE2_ON) && !defined(AVX2_ON) //--------------------------------------- plain -------------------------------------------------------------------
 
   #if STRIDE == ESIZE
-void TEMPLATE2(TPENC, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
+void T2(TPENC, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   unsigned char *op,*ip,*e;
   unsigned stride = n/STRIDE;
 
@@ -479,7 +479,7 @@ void TEMPLATE2(TPENC, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) 
     *op++ = *ip++;
 }
 
-void TEMPLATE2(TPDEC, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
+void T2(TPDEC, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   unsigned char *op,*ip,*e;
   unsigned      stride = n/STRIDE;
 
@@ -523,7 +523,7 @@ void TEMPLATE2(TPDEC, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) 
 
 #if ESIZE == 2 || ESIZE == 4 || ESIZE == 8
   #if defined(__AVX2__)
-void TEMPLATE2(TPENC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
+void T2(TPENC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   unsigned      v = n&~(ESIZE*32-1);
   unsigned stride = v/STRIDE;
   unsigned char *op,*ip;
@@ -703,7 +703,7 @@ void TEMPLATE2(TPENC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *o
         #endif
       #endif
   }
-  TEMPLATE2(tpenc,ESIZE)(in+v, n-v, out+v);
+  T2(tpenc,ESIZE)(in+v, n-v, out+v);
 }
 
 #define NBL0(x,y) ov[x] = _mm256_permute4x64_epi64(_mm256_castsi128_si256(_mm_loadu_si128((__m128i *)(p       ))),_MM_SHUFFLE(3, 1, 2, 0));\
@@ -718,7 +718,7 @@ void TEMPLATE2(TPENC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *o
   _iv_  = _mm256_or_si256(_mm256_slli_epi16(ov[y],4), ov[x]); \
 }
 
-void TEMPLATE2(TPDEC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
+void T2(TPDEC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   unsigned      v      = n&~(ESIZE*32-1);
   unsigned      stride = v/STRIDE;
   unsigned char *op,*ip;
@@ -808,14 +808,14 @@ void TEMPLATE2(TPDEC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *o
     ST256((__m256i *)(op+224), ov[7] );
       #endif
   }
-  if(n-v) TEMPLATE2(tpdec,ESIZE)(in+v, n-v, out+v);
+  if(n-v) T2(tpdec,ESIZE)(in+v, n-v, out+v);
 }
 
   #elif defined(__SSE3__) || defined(__ARM_NEON)
 #define ST(_p_,_v_,_i_)  _mm_storeu_si128((__m128i *)SIE(_p_,_i_), _v_)
 #define ST0(_p_,_v_)  _mm_storeu_si128((__m128i *)(_p_), _v_)
 
-void TEMPLATE2(TPENC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
+void T2(TPENC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   unsigned           v = n&~(ESIZE*32-1);
   unsigned      stride = v/STRIDE;
   unsigned char *op,*ip;
@@ -1090,10 +1090,10 @@ void TEMPLATE2(TPENC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *o
         #endif
       #endif
   }
-  TEMPLATE2(tpenc,ESIZE)(in+v, n-v, out+v);
+  T2(tpenc,ESIZE)(in+v, n-v, out+v);
 }
 
-void TEMPLATE2(TPDEC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
+void T2(TPDEC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   unsigned           v = n&~(ESIZE*32-1);
   unsigned      stride = v/STRIDE;
   unsigned char *op,*ip;
@@ -1217,7 +1217,7 @@ void TEMPLATE2(TPDEC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *o
     ST128(op+64,ov[4]); ST128(op+80,ov[5]); ST128(op+96,ov[6]); ST128(op+112,ov[7]);
       #endif
   }
-  TEMPLATE2(tpdec,ESIZE)(in+v, n-v, out+v);
+  T2(tpdec,ESIZE)(in+v, n-v, out+v);
 }
   #endif
 

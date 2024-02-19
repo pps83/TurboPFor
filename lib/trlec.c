@@ -277,7 +277,7 @@ unsigned trlec(const unsigned char *__restrict in, unsigned inlen, unsigned char
 #undef USIZE
 
 #else // ------------------- include RLE 16, 32, 64
-#define uint_t TEMPLATE3(uint, USIZE, _t)
+#define uint_t T3(uint, USIZE, _t)
 #define ctout(_x_) *(uint_t *)(_x_)
 
 #define PUTC(_op_, _x_) ctout(_op_) = _x_, _op_ += sizeof(uint_t)
@@ -292,7 +292,7 @@ unsigned trlec(const unsigned char *__restrict in, unsigned inlen, unsigned char
 } while(0)
 
   #if !SRLE8
-unsigned TEMPLATE2(_srlec, USIZE)(const unsigned char *__restrict cin, unsigned inlen, unsigned char *__restrict out, uint_t e) {
+unsigned T2(_srlec, USIZE)(const unsigned char *__restrict cin, unsigned inlen, unsigned char *__restrict out, uint_t e) {
   unsigned  char *op = out;
   unsigned  n = inlen/sizeof(uint_t);
   uint_t   *in = (uint_t *)cin, *pp = in, *ip = in, *ie = in+n;
@@ -332,8 +332,8 @@ unsigned TEMPLATE2(_srlec, USIZE)(const unsigned char *__restrict cin, unsigned 
 #undef PUTC
 #undef PUTE
 
-unsigned TEMPLATE2(srlec, USIZE)(const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint_t e) {
-  unsigned l = TEMPLATE2(_srlec, USIZE)(in, inlen, out, e);
+unsigned T2(srlec, USIZE)(const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint_t e) {
+  unsigned l = T2(_srlec, USIZE)(in, inlen, out, e);
 
   if(l < inlen)
     return l;

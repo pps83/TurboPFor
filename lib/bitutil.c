@@ -223,7 +223,7 @@ void bitddec32(uint32_t *p, unsigned n, unsigned start) {
 }
 
 //----------- Zigzag of Delta --------------------------
-#define ZDE(i, _usize_) d = (_ip[i]-start)-_md; u = TEMPLATE2(zigzagenc, _usize_)(d - startd); startd = d; start = _ip[i]
+#define ZDE(i, _usize_) d = (_ip[i]-start)-_md; u = T2(zigzagenc, _usize_)(d - startd); startd = d; start = _ip[i]
 #define BITZDE(_t_, _in_, _n_, _md_, _usize_, _act_) { _t_ *_ip, _md = _md_;\
   for(_ip = _in_; _ip != _in_+(_n_&~(4-1)); _ip += 4) { ZDE(0, _usize_);_act_; ZDE(1, _usize_);_act_; ZDE(2, _usize_);_act_; ZDE(3, _usize_);_act_; }\
   for(;_ip != _in_+_n_;_ip++) { ZDE(0, _usize_); _act_; }\
@@ -418,7 +418,7 @@ uint64_t bitf64( uint64_t *in, unsigned n, uint64_t *px, uint64_t start) { if(px
 uint64_t bitf164(uint64_t *in, unsigned n, uint64_t *px, uint64_t start) { if(px) *px = 0; return n?in[n-1] - start - n:0; }
 
 //------------------- Zigzag ---------------------------
-#define ZE(i,_it_,_usize_) u = TEMPLATE2(zigzagenc, _usize_)((_it_)_ip[i]-(_it_)start); start = _ip[i]
+#define ZE(i,_it_,_usize_) u = T2(zigzagenc, _usize_)((_it_)_ip[i]-(_it_)start); start = _ip[i]
 #define BITZENC(_ut_, _it_, _usize_, _in_,_n_, _act_) { _ut_ *_ip; o = 0; x = -1;\
   for(_ip = _in_; _ip != _in_+(_n_&~(4-1)); _ip += 4) { ZE(0,_it_,_usize_);_act_; ZE(1,_it_,_usize_);_act_; ZE(2,_it_,_usize_);_act_; ZE(3,_it_,_usize_);_act_; }\
   for(;_ip != _in_+_n_; _ip++) { ZE(0,_it_,_usize_); _act_; }\
@@ -532,7 +532,7 @@ uint32_t bitzenc32(uint32_t *in, unsigned n, uint32_t *out, uint32_t start, uint
   return bsr32(b);
 }
 
-#define ZD(_t_, _usize_, i) { _t_ _z = _ip[i]; _ip[i] = (start += TEMPLATE2(zigzagdec, _usize_)(_z)); }
+#define ZD(_t_, _usize_, i) { _t_ _z = _ip[i]; _ip[i] = (start += T2(zigzagdec, _usize_)(_z)); }
 #define BITZDEC(_t_, _usize_, _in_, _n_) { _t_ *_ip;\
   for(_ip = _in_; _ip != _in_+(_n_&~(4-1)); _ip += 4) { ZD(_t_, _usize_, 0); ZD(_t_, _usize_, 1); ZD(_t_, _usize_, 2); ZD(_t_, _usize_, 3); }\
   for(;_ip != _in_+_n_;_ip++) ZD(_t_, _usize_, 0);\
@@ -648,10 +648,10 @@ void fppad16(_Float16 *in, size_t n, _Float16 *out, float e) { int lg2e = -log(e
   #endif
 
 //do u = du & (~((1u<<(--b))-1)); while(fabsf((ctof32(&u) - d)/d) > e);
-#define OP(t,s) sign = du & ((t)1<<(s-1)); du &= ~((t)1<<(s-1));  d = TEMPLATE2(ctof,s)(&du);\
-  do u = du & (~(((t)1<<(--b))-1)); while(d - TEMPLATE2(ctof,s)(&u) > e*d);\
+#define OP(t,s) sign = du & ((t)1<<(s-1)); du &= ~((t)1<<(s-1));  d = T2(ctof,s)(&du);\
+  do u = du & (~(((t)1<<(--b))-1)); while(d - T2(ctof,s)(&u) > e*d);\
   u |= sign;\
-  return TEMPLATE2(ctof,s)(&u);
+  return T2(ctof,s)(&u);
 
 static inline float _fppad32(float d, float e, int lg2e) {
   uint32_t u, du = ctou32(&d), sign;

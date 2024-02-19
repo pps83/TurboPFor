@@ -974,9 +974,9 @@ void fpstat(unsigned char *in, size_t n, unsigned char *out, int s) {
   #define EXPO64(u) ((u>>52 & 0x7ff) - 0x3fe)
   #define MANT32(u) (u & 0x807fffffu)
   #define MANT64(u) (u & 0x800fffffffffffffull)
-  #define U(s) TEMPLATE3(uint, s, _t) u = TEMPLATE2(ctou,s)(op);\
-                t = TEMPLATE2(ctz,s)(u);      tb += t; if(u)      lb += TEMPLATE2(clz,s)(u); AC(t<=s,"Fatal t=%d ", t); \
-    start ^= u; t = TEMPLATE2(ctz,s)(start); xtb += t; if(start) xlb += TEMPLATE2(clz,s)(start); start = u
+  #define U(s) T3(uint, s, _t) u = T2(ctou,s)(op);\
+                t = T2(ctz,s)(u);      tb += t; if(u)      lb += T2(clz,s)(u); AC(t<=s,"Fatal t=%d ", t); \
+    start ^= u; t = T2(ctz,s)(start); xtb += t; if(start) xlb += T2(clz,s)(start); start = u
 
   for(ip = in, op = out; ip < in+n*esize; ip += esize, op += esize) {
     double id, od;

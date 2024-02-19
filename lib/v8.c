@@ -941,16 +941,16 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
   unsigned char *op = out;                                                          if(!n) return 0;\
   for(ip = in; ip < in+n;) {                                                        PREFETCH(ip+512,0);\
     unsigned _b, iplen = (in+n) - ip; iplen = min(iplen,_csize_);\
-    o = TEMPLATE2(_bit_,_usize_)(ip, iplen, &x); _b = TEMPLATE2(bsr,_usize_)(o);\
+    o = T2(_bit_,_usize_)(ip, iplen, &x); _b = T2(bsr,_usize_)(o);\
     if(!x) { /*st++;*/ \
       _b = (_b+7)/8; *op++ = 0xf0 | _b; \
-      TEMPLATE2(ctou, _usize_)(op) = ip[0];\
+      T2(ctou, _usize_)(op) = ip[0];\
       op += _b; \
     } else {\
       if(_b <= (_usize_==16?9:10) ) goto a;\
-      unsigned char *sp = op; *op++ = 0xfd; op = TEMPLATE2(v8enc, _usize_)(ip, iplen, op);\
-      if(op-sp >= PAD8(_b*iplen)+1) { op = sp; a:*op++ = _b; op = iplen == _csize_?TEMPLATE2(_bitpackv_, _usize_)(ip, _csize_,   op, _b):\
-                                                                                   TEMPLATE2(_bitpack_,  _usize_)(ip, iplen, op, _b); }\
+      unsigned char *sp = op; *op++ = 0xfd; op = T2(v8enc, _usize_)(ip, iplen, op);\
+      if(op-sp >= PAD8(_b*iplen)+1) { op = sp; a:*op++ = _b; op = iplen == _csize_?T2(_bitpackv_, _usize_)(ip, _csize_,   op, _b):\
+                                                                                   T2(_bitpack_,  _usize_)(ip, iplen, op, _b); }\
     }\
     ip += iplen;\
     if(op >= out + n*(_usize_/8)) { op = out; *op++ = 0xfe; memcpy(op, in, n*(_usize_/8)); op += n*(_usize_/8); break; }\
@@ -960,18 +960,18 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 
 #define _V8DE(in, n, out, _csize_, _usize_, _v8enc_, _bitd_, _bitpackv_, _bitpack_,_delta_) {   if(!n) return 0;\
   unsigned char *op = out;\
-  start = *in++; uint64_t start64 = start; start64++; TEMPLATE2(vbxput, _usize_)(op, start64);\
+  start = *in++; uint64_t start64 = start; start64++; T2(vbxput, _usize_)(op, start64);\
   for(n--,ip = in; ip < in + n; ) {                                                             PREFETCH(ip+512,0);\
     unsigned _b, iplen = (in+n) - ip; iplen = min(iplen,_csize_);\
-    o = TEMPLATE2(_bitd_, _usize_)(ip, iplen, &x, start); _b = TEMPLATE2(bsr,_usize_)(o);\
+    o = T2(_bitd_, _usize_)(ip, iplen, &x, start); _b = T2(bsr,_usize_)(o);\
     if(!x) { _b = (_b+7)/8; /*constant*/\
       *op++ = 0xf0 | _b;\
-      TEMPLATE2(ctou, _usize_)(op) = (ip[0]-start)-_delta_; op += _b; \
+      T2(ctou, _usize_)(op) = (ip[0]-start)-_delta_; op += _b; \
     } else { \
       if(_b <= (_usize_==16?9:10) ) goto a;\
-      unsigned char *sp = op; *op++ = 0xfd; op = TEMPLATE2(_v8enc_, _usize_)(ip, iplen, op, start); /*TurboByte*/\
-      if(op-sp >= PAD8(_b*iplen)+1) { op = sp; a:*op++ = _b; op = iplen == _csize_?TEMPLATE2(_bitpackv_, _usize_)(ip, _csize_, op, start, _b):/*TurboPackV*/\
-                                                                                   TEMPLATE2(_bitpack_,  _usize_)(ip, iplen,   op, start, _b);/*TurboPack*/\
+      unsigned char *sp = op; *op++ = 0xfd; op = T2(_v8enc_, _usize_)(ip, iplen, op, start); /*TurboByte*/\
+      if(op-sp >= PAD8(_b*iplen)+1) { op = sp; a:*op++ = _b; op = iplen == _csize_?T2(_bitpackv_, _usize_)(ip, _csize_, op, start, _b):/*TurboPackV*/\
+                                                                                   T2(_bitpack_,  _usize_)(ip, iplen,   op, start, _b);/*TurboPack*/\
       }\
     }\
     ip += iplen; start = ip[-1];\
@@ -1024,13 +1024,13 @@ size_t v8nzenc256v32( uint32_t *__restrict in, size_t n, unsigned char *__restri
   else for(op = out, out += n; op < out;) {                                         PREFETCH(ip+512,0);\
     unsigned oplen = min(out-op,_csize_), _b = *ip++;\
     if((_b & 0xf8)==0xf0) { _b &= 0x7; \
-      unsigned _u = TEMPLATE2(ctou,_usize_)(ip) & ((1ull<<(_b*8))-1);\
+      unsigned _u = T2(ctou,_usize_)(ip) & ((1ull<<(_b*8))-1);\
       ip+=_b;\
       BITZERO32(op, oplen, _u); \
     } else {\
-      if(_b == 0xfd) ip =                  TEMPLATE2(v8dec,        _usize_)(ip, oplen,   op);\
-      else           ip = oplen == _csize_?TEMPLATE2(_bitunpackv_, _usize_)(ip, _csize_, op, _b):\
-                                           TEMPLATE2(_bitunpack_,  _usize_)(ip, oplen,   op, _b);\
+      if(_b == 0xfd) ip =                  T2(v8dec,        _usize_)(ip, oplen,   op);\
+      else           ip = oplen == _csize_?T2(_bitunpackv_, _usize_)(ip, _csize_, op, _b):\
+                                           T2(_bitunpack_,  _usize_)(ip, oplen,   op, _b);\
     }\
     op += oplen;\
   }\
@@ -1041,20 +1041,20 @@ size_t v8nzenc256v32( uint32_t *__restrict in, size_t n, unsigned char *__restri
 
 #define _V8DD(in, n, out, _csize_, _usize_, _v8dec_, _bitunpackv_, _bitunpack_, _delta_) {      if(!n) return 0;\
   unsigned char *ip = in;\
-  uint64_t start64; TEMPLATE2(vbxget, _usize_)(ip, start64);\
+  uint64_t start64; T2(vbxget, _usize_)(ip, start64);\
   if(!start64) { memcpy(out, ip, n*(_usize_/8)); ip += n*(_usize_/8); }\
   else { start = start64 - 1;\
     for(*out++ = start,--n, op = out, out+=n; op < out; ) {                                 PREFETCH(ip+512,0);\
       unsigned oplen = min(out-op,_csize_),_b=*ip++;\
       if((_b & 0xf8)==0xf0) { \
         _b &= 0x7;\
-        unsigned _u = (TEMPLATE2(ctou,_usize_)(ip) & ((1ull<<(_b*8))-1))+_delta_;\
+        unsigned _u = (T2(ctou,_usize_)(ip) & ((1ull<<(_b*8))-1))+_delta_;\
         ip += _b;\
         BITIZERO(op, oplen, start, _u);\
       } else {\
-        if(_b==0xfd) ip = TEMPLATE2(_v8dec_, _usize_)(ip, oplen, op, start);\
-        else         ip = oplen == _csize_?TEMPLATE2(_bitunpackv_, _usize_)(ip, _csize_, op, start, _b):\
-                                           TEMPLATE2(_bitunpack_,  _usize_)(ip, oplen,   op, start, _b);\
+        if(_b==0xfd) ip = T2(_v8dec_, _usize_)(ip, oplen, op, start);\
+        else         ip = oplen == _csize_?T2(_bitunpackv_, _usize_)(ip, _csize_, op, start, _b):\
+                                           T2(_bitunpack_,  _usize_)(ip, oplen,   op, start, _b);\
       } op += oplen; start = op[-1];\
     }\
   }\
@@ -1115,7 +1115,7 @@ size_t v8nzdec256v32( unsigned char *__restrict in, size_t n, uint32_t *__restri
 
 #define mm256_packus_epi16(a, b) _mm256_permute4x64_epi64(_mm256_packus_epi16(a, b), _MM_SHUFFLE(3, 1, 2, 0))
 
-unsigned char *TEMPLATE2(V8ENC,32)(uint32_t *__restrict in, unsigned n, unsigned char *__restrict out V8DELTA32) {
+unsigned char *T2(V8ENC,32)(uint32_t *__restrict in, unsigned n, unsigned char *__restrict out V8DELTA32) {
   uint32_t      *ip,v;
   unsigned char *op = DATABEG(out,n,4),*sp=out;
 
@@ -1217,7 +1217,7 @@ unsigned char *TEMPLATE2(V8ENC,32)(uint32_t *__restrict in, unsigned n, unsigned
   _b = ((m>>6)& 3)+1; v = ctou32(ip) & ((1ull<<(_b*8))-1); op[_i_+3] = VD32(v); ip+=_b;\
 }
 
-unsigned char *TEMPLATE2(V8DEC,32)(unsigned char  *__restrict in, unsigned n, uint32_t *__restrict out V8DELTA32) {
+unsigned char *T2(V8DEC,32)(unsigned char  *__restrict in, unsigned n, uint32_t *__restrict out V8DELTA32) {
   uint32_t      *op;
   unsigned char *ip = DATABEG(in,n,4);
   uint32_t v;
@@ -1358,7 +1358,7 @@ unsigned char *TEMPLATE2(V8DEC,32)(unsigned char  *__restrict in, unsigned n, ui
   *out++ = _m;\
 }
 
-unsigned char *TEMPLATE2(V8ENC,16)(uint16_t *__restrict in, unsigned n, unsigned char *__restrict out V8DELTA16) {
+unsigned char *T2(V8ENC,16)(uint16_t *__restrict in, unsigned n, unsigned char *__restrict out V8DELTA16) {
   uint16_t      *ip,v;
   unsigned char *op = DATABEG(out,n,2);
 
@@ -1425,7 +1425,7 @@ unsigned char *TEMPLATE2(V8ENC,16)(uint16_t *__restrict in, unsigned n, unsigned
     _b = ((m>>7)& 1)+1; v = ctou16(ip) & ((1<<(_b*8))-1); op[_i_+7] = VD16(v); ip+=_b;\
   }
 
-unsigned char *TEMPLATE2(V8DEC,16)(unsigned char  *__restrict in, unsigned n, uint16_t *__restrict out V8DELTA16) {
+unsigned char *T2(V8DEC,16)(unsigned char  *__restrict in, unsigned n, uint16_t *__restrict out V8DELTA16) {
   uint16_t      *op;
   unsigned char *ip = DATABEG(in,n,2);
   uint16_t v;

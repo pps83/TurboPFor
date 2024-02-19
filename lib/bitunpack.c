@@ -69,7 +69,7 @@ typedef unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsi
 #define _BITUNPACK_ bitdunpack  // delta + 0
 #include "bitunpack_.h"
 
-#define OUT( _op_, _x_, _w_, _nb_,_parm_) OP(_op_,_x_) = (_parm_ += TEMPLATE2(zigzagdec, USIZE)(_w_))
+#define OUT( _op_, _x_, _w_, _nb_,_parm_) OP(_op_,_x_) = (_parm_ += T2(zigzagdec, USIZE)(_w_))
 #define _BITUNPACK_ bitzunpack  // zigzag
 #include "bitunpack_.h"
 
@@ -90,7 +90,7 @@ typedef unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsi
 #define BITNUNPACK(in, n, out, _csize_, _usize_) {\
   unsigned char *ip = in;\
   for(op = out,out+=n; op < out;) { unsigned oplen = out - op,b; if(oplen > _csize_) oplen = _csize_;       PREFETCH(ip+512,0);\
-    b = *ip++; ip = TEMPLATE2(bitunpacka, _usize_)[b](ip, oplen, op);\
+    b = *ip++; ip = T2(bitunpacka, _usize_)[b](ip, oplen, op);\
     op += oplen;\
   } \
   return ip - in;\
@@ -98,10 +98,10 @@ typedef unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsi
 
 #define BITNDUNPACK(in, n, out, _csize_, _usize_, _bitunpacka_) { if(!n) return 0;\
   unsigned char *ip = in;\
-  TEMPLATE2(vbxget, _usize_)(ip, start);\
+  T2(vbxget, _usize_)(ip, start);\
   for(*out++ = start,--n,op = out; op != out+(n&~(_csize_-1)); ) {                              PREFETCH(ip+512,0);\
-                         unsigned b = *ip++; ip = TEMPLATE2(_bitunpacka_, _usize_)[b](ip, _csize_, op, start); op += _csize_; start = op[-1];\
-  } if(n&=(_csize_-1)) { unsigned b = *ip++; ip = TEMPLATE2(_bitunpacka_, _usize_)[b](ip, n,       op, start); }\
+                         unsigned b = *ip++; ip = T2(_bitunpacka_, _usize_)[b](ip, _csize_, op, start); op += _csize_; start = op[-1];\
+  } if(n&=(_csize_-1)) { unsigned b = *ip++; ip = T2(_bitunpacka_, _usize_)[b](ip, n,       op, start); }\
   return ip - in;\
 }
 
@@ -135,18 +135,18 @@ size_t bitnfunpack64( unsigned char *__restrict in, size_t n, uint64_t *__restri
 #define _BITNUNPACKV(in, n, out, _csize_, _usize_, _bitunpackv_) {\
   unsigned char *ip = in;\
   for(op = out; op != out+(n&~(_csize_-1)); op += _csize_) {                                                    PREFETCH(in+512,0);\
-                         unsigned b = *ip++; ip = TEMPLATE2(_bitunpackv_, _usize_)(ip, _csize_, op,b);\
-  } if(n&=(_csize_-1)) { unsigned b = *ip++; ip = TEMPLATE2(bitunpack,    _usize_)(ip, n,       op,b); }\
+                         unsigned b = *ip++; ip = T2(_bitunpackv_, _usize_)(ip, _csize_, op,b);\
+  } if(n&=(_csize_-1)) { unsigned b = *ip++; ip = T2(bitunpack,    _usize_)(ip, n,       op,b); }\
   return ip - in;\
 }
 
 #define _BITNDUNPACKV(in, n, out, _csize_, _usize_, _bitunpackv_, _bitunpack_) { if(!n) return 0;\
   unsigned char *ip = in;\
-  TEMPLATE2(vbxget, _usize_)(ip, start); \
+  T2(vbxget, _usize_)(ip, start); \
   *out++ = start;\
   for(--n,op = out; op != out+(n&~(_csize_-1)); ) {                                 PREFETCH(ip+512,0);\
-                         unsigned b = *ip++; ip = TEMPLATE2(_bitunpackv_, _usize_)(ip, _csize_, op, start,b); op += _csize_; start = op[-1];\
-  } if(n&=(_csize_-1)) { unsigned b = *ip++; ip = TEMPLATE2(_bitunpack_,  _usize_)(ip, n,     op, start,b); }\
+                         unsigned b = *ip++; ip = T2(_bitunpackv_, _usize_)(ip, _csize_, op, start,b); op += _csize_; start = op[-1];\
+  } if(n&=(_csize_-1)) { unsigned b = *ip++; ip = T2(_bitunpack_,  _usize_)(ip, n,     op, start,b); }\
   return ip - in;\
 }
   #ifdef __AVX2__ //-------------------------------- AVX2 ----------------------------------------------------------------------------

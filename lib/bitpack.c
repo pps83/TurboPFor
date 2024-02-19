@@ -142,9 +142,9 @@ typedef unsigned char *(*BITPACK_D64)(uint64_t *__restrict out, unsigned n, cons
 #define _BITPACK_ bitepack
 #include "bitpack_.h"*/
 
-#define IP9(_ip_,_x_, _parm_)   V = TEMPLATE2(zigzagenc, USIZE)(IP(_ip_,_x_) - start); start = IP(_ip_,_x_)
+#define IP9(_ip_,_x_, _parm_)   V = T2(zigzagenc, USIZE)(IP(_ip_,_x_) - start); start = IP(_ip_,_x_)
 #define IPV(_ip_,_x_)           VX
-#define IPX(_ip_,_x_)          (V = TEMPLATE2(zigzagenc, USIZE)(IP(_ip_,_x_) - start))
+#define IPX(_ip_,_x_)          (V = T2(zigzagenc, USIZE)(IP(_ip_,_x_) - start))
 #define IP16(_ip_,_x_, _parm_)  start = IP(_ip_,_x_)
 #define IP32(_ip_,_x_, _parm_)  start = IP(_ip_,_x_)
 #define IP64(_ip_,_x_, _parm_)  start = IP(_ip_,_x_)
@@ -176,12 +176,12 @@ typedef unsigned char *(*BITPACK_D64)(uint64_t *__restrict out, unsigned n, cons
 
 #define BITNPACK(in, n, out, _csize_, _usize_) { unsigned char *op = out;\
   for(ip = in, in += n; ip < in;) { \
-    TEMPLATE3(uint, _usize_, _t) o,x;\
+    T3(uint, _usize_, _t) o,x;\
     unsigned iplen = in - ip,b; \
     if(iplen > _csize_) iplen = _csize_;\
     PREFETCH(ip+512,0);\
-    o = TEMPLATE2(bit,_usize_)(ip, iplen, &x); b = TEMPLATE2(bsr,_usize_)(o);\
-    *op++ = b; op = TEMPLATE2(bitpacka, _usize_)[b](ip, iplen, op);\
+    o = T2(bit,_usize_)(ip, iplen, &x); b = T2(bsr,_usize_)(o);\
+    *op++ = b; op = T2(bitpacka, _usize_)[b](ip, iplen, op);\
     ip += iplen;\
   }\
   return op - out;\
@@ -189,14 +189,14 @@ typedef unsigned char *(*BITPACK_D64)(uint64_t *__restrict out, unsigned n, cons
 
 #define BITNDPACK(in, n, out, _csize_, _usize_, _bitd_, _bitpacka_) { if(!n) return 0;\
   unsigned char *op = out; \
-  TEMPLATE3(uint, _usize_, _t) o,x;\
+  T3(uint, _usize_, _t) o,x;\
   start = *in++; \
-  TEMPLATE2(vbxput, _usize_)(op, start);\
+  T2(vbxput, _usize_)(op, start);\
   for(n--,ip = in; ip != in + (n&~(_csize_-1)); ) { unsigned b;     PREFETCH(ip+512,0);\
-    o = TEMPLATE2(_bitd_, _usize_)(ip, _csize_, &x, start); b = TEMPLATE2(bsr,_usize_)(o); *op++ = b; op = TEMPLATE2(_bitpacka_,_usize_)[b](ip, _csize_, op, start); ip += _csize_; start = ip[-1];\
+    o = T2(_bitd_, _usize_)(ip, _csize_, &x, start); b = T2(bsr,_usize_)(o); *op++ = b; op = T2(_bitpacka_,_usize_)[b](ip, _csize_, op, start); ip += _csize_; start = ip[-1];\
   }\
   if(n&=(_csize_-1)) { unsigned b;\
-    o = TEMPLATE2(_bitd_, _usize_)(ip, n,       &x, start); b = TEMPLATE2(bsr,_usize_)(o); *op++ = b; op = TEMPLATE2(_bitpacka_,_usize_)[b](ip, n,       op, start);\
+    o = T2(_bitd_, _usize_)(ip, n,       &x, start); b = T2(bsr,_usize_)(o); *op++ = b; op = T2(_bitpacka_,_usize_)[b](ip, n,       op, start);\
   }\
   return op - out;\
 }
@@ -229,20 +229,20 @@ size_t bitnfpack64( uint64_t *__restrict in, size_t n, unsigned char *__restrict
 #else //--------------------------------------- SIMD ----------------------------------------------------------------------------------------------
 
 #define _BITNPACKV(in, n, out, _csize_, _usize_, _bitpackv_) {\
-  unsigned char *op = out; TEMPLATE3(uint, _usize_, _t) _o,_x;\
+  unsigned char *op = out; T3(uint, _usize_, _t) _o,_x;\
   for(ip = in; ip != in + (n&~(_csize_-1)); ip += _csize_) {        PREFETCH(ip+512,0);\
-                         unsigned _b; _o = TEMPLATE2(bit,_usize_)(ip, _csize_, &_x); _b = TEMPLATE2(bsr,_usize_)(_o); *op++ = _b; op = TEMPLATE2(_bitpackv_, _usize_)(ip, _csize_, op, _b);\
-  } if(n&=(_csize_-1)) { unsigned _b; _o = TEMPLATE2(bit,_usize_)(ip, n,       &_x); _b = TEMPLATE2(bsr,_usize_)(_o); *op++ = _b; op = TEMPLATE2(bitpack,    _usize_)(ip, n,       op, _b); }\
+                         unsigned _b; _o = T2(bit,_usize_)(ip, _csize_, &_x); _b = T2(bsr,_usize_)(_o); *op++ = _b; op = T2(_bitpackv_, _usize_)(ip, _csize_, op, _b);\
+  } if(n&=(_csize_-1)) { unsigned _b; _o = T2(bit,_usize_)(ip, n,       &_x); _b = T2(bsr,_usize_)(_o); *op++ = _b; op = T2(bitpack,    _usize_)(ip, n,       op, _b); }\
   return op - out;\
 }
 
 #define _BITNDPACKV(in, n, out, _csize_, _usize_, _bitdv_, _bitpackv_,  _bitd_, _bitpack_) { if(!n) return 0;\
-  unsigned char *op = out; TEMPLATE3(uint, _usize_, _t) _o,_x;\
+  unsigned char *op = out; T3(uint, _usize_, _t) _o,_x;\
   start = *in++; \
-  TEMPLATE2(vbxput, _usize_)(op, start);\
+  T2(vbxput, _usize_)(op, start);\
   for(n--,ip = in; ip != in + (n&~(_csize_-1)); ) { PREFETCH(ip+512,0);\
-                         unsigned _b; _o = TEMPLATE2(_bitdv_, _usize_)(ip, _csize_, &_x, start); _b = TEMPLATE2(bsr,_usize_)(_o); *op++ = _b; op = TEMPLATE2(_bitpackv_, _usize_)(ip, _csize_, op, start, _b); ip += _csize_; start = ip[-1];\
-  } if(n&=(_csize_-1)) { unsigned _b; _o = TEMPLATE2(_bitd_,  _usize_)(ip, n,       &_x, start); _b = TEMPLATE2(bsr,_usize_)(_o); *op++ = _b; op = TEMPLATE2(_bitpack_,  _usize_)(ip, n,       op, start, _b); }\
+                         unsigned _b; _o = T2(_bitdv_, _usize_)(ip, _csize_, &_x, start); _b = T2(bsr,_usize_)(_o); *op++ = _b; op = T2(_bitpackv_, _usize_)(ip, _csize_, op, start, _b); ip += _csize_; start = ip[-1];\
+  } if(n&=(_csize_-1)) { unsigned _b; _o = T2(_bitd_,  _usize_)(ip, n,       &_x, start); _b = T2(bsr,_usize_)(_o); *op++ = _b; op = T2(_bitpack_,  _usize_)(ip, n,       op, start, _b); }\
   return op - out;\
 }
 

@@ -239,11 +239,11 @@ struct _PACKED doubleu   { double             d; };
 #define SIZE_ROUNDUP(_n_, _a_) (((size_t)(_n_) + (size_t)((_a_) - 1)) & ~(size_t)((_a_) - 1))
 #define ALIGN_DOWN(__ptr, __a) ((void *)((uintptr_t)(__ptr) & ~(uintptr_t)((__a) - 1)))
 
-#define TEMPLATE2_(_x_, _y_) _x_##_y_
-#define TEMPLATE2(_x_, _y_) TEMPLATE2_(_x_,_y_)
+#define T2_(_x_, _y_) _x_##_y_
+#define T2(_x_, _y_) T2_(_x_,_y_)
 
-#define TEMPLATE3_(_x_,_y_,_z_) _x_##_y_##_z_
-#define TEMPLATE3(_x_,_y_,_z_) TEMPLATE3_(_x_, _y_, _z_)
+#define T3_(_x_,_y_,_z_) _x_##_y_##_z_
+#define T3(_x_,_y_,_z_) T3_(_x_, _y_, _z_)
 
 #define CACHE_LINE_SIZE     64
 #define PREFETCH_DISTANCE   (CACHE_LINE_SIZE*4)
