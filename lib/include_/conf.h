@@ -25,16 +25,7 @@
 // conf.h - config & common
 #ifndef CONF_H_
 #define CONF_H_
-#if defined(_MSC_VER) && (_MSC_VER < 1600)
-  #if !defined(_STDINT) && !defined(_MSC_STDINT_H_)
-typedef unsigned char      uint8_t;
-typedef unsigned short     uint16_t;
-typedef unsigned int       uint32_t;
-typedef unsigned long long uint64_t;
-  #endif
-#else
 #include <stdint.h>
-#endif
 #include <stddef.h>
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
 #include <float.h>
@@ -48,7 +39,6 @@ typedef unsigned long long uint64_t;
 
 //------------------------- Compiler ------------------------------------------
   #if defined(__GNUC__)
-#include <stdint.h>
 #define ALIGNED(t,v,n)  t v __attribute__ ((aligned (n)))
 #define ALWAYS_INLINE   inline __attribute__((always_inline))
 #define NOINLINE        __attribute__((noinline))
@@ -100,14 +90,8 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
   #elif _MSC_VER //----------------------------------------------------
 #include <windows.h>
 #include <intrin.h>
-    #if _MSC_VER < 1600
-#include "vs/stdint.h"
-#define __builtin_prefetch(x,a)
-#define inline          __inline
-    #else
 #include <stdint.h>
 #define __builtin_prefetch(x,a) _mm_prefetch(x, _MM_HINT_NTA)
-    #endif
 
 #define ALIGNED(t,v,n)  __declspec(align(n)) t v
 #define ALWAYS_INLINE   __forceinline
