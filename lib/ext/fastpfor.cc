@@ -1,9 +1,3 @@
-#if defined(_MSC_VER) && _MSC_VER < 1600
-#include "../vs/stdint.h"
-#else
-#include <stdint.h>
-#endif
-
 #include "fastpfor.h"
 #include "FastPFor/headers/variablebyte.h"
 #include "FastPFor/headers/simple16.h"
