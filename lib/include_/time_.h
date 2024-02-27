@@ -75,9 +75,9 @@
    __asm volatile("rdtsc" : "=a"(_cl), "=d"(_ch) );\
   _c_ = (uint64_t)_ch << 32 | _cl;\
 } while(0)
+#define RDTSC_INI(_c_) RDTSC(_c_)
   #endif
 
-#define RDTSC_INI(_c_) RDTSC(_c_)
 #else                                          // ------------------ time --------------------------
 #define RDTSC_INI(_c_)
 #define RDTSC(_c_)
