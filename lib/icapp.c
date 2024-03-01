@@ -492,7 +492,7 @@ unsigned befgen(unsigned char **_in, unsigned n, int fmt, int isize, FILE *fi, i
           while(!isdigit(*p)) p++;
           uint64_t u = strtots(p, &q, fmt == T_TIM64?1:0);
           if(fmt == T_TIM32) u /= 1000;
-          a: IPUSH(in,n,isize,nmax,u);                          c=*q; *q=0; if(verbose>=5 && n < 100 || verbose>=9) printf("\'%s\'->%llu  ", p, u); *q = c;
+          IPUSH(in,n,isize,nmax,u);                          c=*q; *q=0; if(verbose>=5 && n < 100 || verbose>=9) printf("\'%s\'->%llu  ", p, u); *q = c;
         } else if(isize > 0) {
           while(!isdigit(*p) && *p != '-' && *p != '+') p++;
           uint64_t u = strtoll(p, &q, 10)*pre - mdelta;
@@ -1341,7 +1341,7 @@ unsigned bench8(unsigned char *in, unsigned n, unsigned char *out, unsigned char
   uint8_t       dm = mindelta8(in,m), *p = NULL;
   unsigned char *tmp = NULL;
 
-  if(!(tmp = (unsigned char*)malloc(ns))) die(stderr, "malloc error\n");
+  if(!(tmp = (unsigned char*)malloc(ns))) die("malloc error\n");
   memrcpy(cpy,in,n);
 
   switch(id) {
@@ -1444,7 +1444,7 @@ unsigned bench16(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
   uint16_t      *p = NULL;
   unsigned char *tmp = NULL;
 
-  if(!(tmp = (unsigned char*)malloc(ns))) die(stderr, "malloc error\n");
+  if(!(tmp = (unsigned char*)malloc(ns))) die("malloc error\n");
   memrcpy(cpy,in,n);
 
   switch(id) {
@@ -1611,7 +1611,7 @@ unsigned bench32(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
   uint32_t      dm = mindelta32(in,m);
   unsigned char *tmp = NULL;
   if(/*NEEDTMP &&*/ !(tmp = (unsigned char*)malloc(ns)))
-	die(stderr, "malloc error\n");
+	die("malloc error\n");
   memrcpy(cpy,in,n);
 
   switch(id) {
@@ -1887,7 +1887,7 @@ unsigned bench64(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
   uint64_t      dm = mindelta64(in,m);
   uint64_t      *p = NULL;
   unsigned char *tmp = NULL;
-  if(/*NEEDTMP &&*/ !(tmp = (unsigned char*)malloc(ns))) die(stderr, "malloc error\n");
+  if(/*NEEDTMP &&*/ !(tmp = (unsigned char*)malloc(ns))) die("malloc error\n");
   memrcpy(cpy,in,n);
 
   switch(id) {
