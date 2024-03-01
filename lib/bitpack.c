@@ -23,10 +23,6 @@
 **/
 //  "Integer Compression" bit packing
 
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
-
 #include <stdio.h>
 #include <string.h>
 #include "include_/conf.h"
@@ -44,8 +40,13 @@
 #define PREFETCH(_ip_,_rw_) __builtin_prefetch(_ip_,_rw_)
   #endif
 
+#if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunsequenced"
+#elif defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4005 4068 4090)
+#endif
 
 #ifndef __AVX2__
 #define BITNBOUND(_n_, _esize_, _csize_) ((_esize_*_n_) + ((_n_+_csize_-1)/_csize_))
@@ -582,4 +583,8 @@ size_t bitnfpack128v16( uint16_t *__restrict in, size_t n, unsigned char *__rest
 size_t bitnfpack128v32( uint32_t *__restrict in, size_t n, unsigned char *__restrict out) { uint32_t *ip,start; _BITNDPACKV(in, n, out, 128, 32, bitf,  bitfpack128v, bitf, bitfpack); }
   #endif // SSE
 
+#if defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(_MSC_VER)
+#pragma warning(pop)
+#endif

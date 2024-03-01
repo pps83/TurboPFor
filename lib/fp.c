@@ -31,9 +31,9 @@
 
 #include "include_/bitutil_.h"
 
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
+#if defined(_MSC_VER) && !defined(__clang__)
+#pragma warning(disable: 4005 4068 4090)
+#endif
 
 #define CCODEL     3
 #define lz2l(_x_)  cquant[_x_] // quantize leading zeros
