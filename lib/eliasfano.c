@@ -42,11 +42,6 @@
 
 #include "include_/bitutil_.h"
 
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
-
-
 #define PAD8(__x) ( (((__x)+8-1)/8) )
 
   #ifdef __SSE42__
@@ -145,8 +140,13 @@
 #else //--------------------------------------------- implementation ---------------------------------------------------------------
 #define uint_t T3(uint, USIZE, _t)
 
+#if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses"
+#elif defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4005 4068 4090)
+#endif
 
 unsigned char *T2(EFANOENC, USIZE)(uint_t *__restrict in, unsigned n, unsigned char *__restrict out, uint_t start) {
   uint_t *ip, e,x,hl,i;
@@ -219,5 +219,9 @@ unsigned char *T2(EFANODEC, USIZE)(unsigned char *__restrict in, unsigned n, uin
   e:return ip + PAD8((EFE(out,n-1,start)>>lb)+n);
 }
 
+#if defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 #endif
