@@ -227,7 +227,7 @@ static unsigned argtoi(char *s, unsigned def) {
   }
   return n*f;
 }
-static uint64_t argtol(char *s) {
+static inline uint64_t argtol(char *s) {
   char *p;
   uint64_t n = strtol(s, &p, 10),f=1;
   switch(*p) {
@@ -244,7 +244,7 @@ static uint64_t argtol(char *s) {
   return n*f;
 }
 
-static uint64_t argtot(char *s) {
+static inline uint64_t argtot(char *s) {
   char *p;
   uint64_t n = strtol(s, &p, 10),f=1;
   switch(*p) {
