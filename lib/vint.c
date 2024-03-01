@@ -23,10 +23,6 @@
 **/
 // vint.c - "Integer Compression" variable byte
   #ifndef USIZE
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
-
 #include <stdio.h>
 #include <string.h>
 #include "include_/conf.h"
@@ -36,6 +32,10 @@
 #include "include_/vlcbyte.h"
 
 #include "include_/bitutil_.h"
+
+#if defined(_MSC_VER) && !defined(__clang__)
+#pragma warning(disable: 4005 4068 4090)
+#endif
 
 size_t vbbound8( size_t n) { return n; }
 size_t vbbound16(size_t n) { return n*(2+1)+3; }

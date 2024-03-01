@@ -22,9 +22,6 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //   "Integer Compression" Bit Packing
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
 
 #include <string.h>
 #include "include_/conf.h"
@@ -36,10 +33,16 @@
 
 #define PAD8(_x_) (((_x_)+7)/8)
 
-#pragma GCC push_options
-#pragma GCC optimize ("align-functions=16")
+#if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunsequenced"
+#elif defined(__GNUC__)
+#pragma GCC push_options
+#pragma GCC optimize ("align-functions=16")
+#elif defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4005 4068 4090)
+#endif
 
 #ifndef __AVX2__ //----------------------------------- Plain -------------------------------------------------------------------------------------------
 typedef unsigned char *(*BITUNPACK_F8)( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out);
@@ -1403,5 +1406,10 @@ size_t bitnfunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__re
 #endif
 //#endif
 
+#if defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
 #pragma GCC pop_options
+#elif defined(_MSC_VER)
+#pragma warning(pop)
+#endif

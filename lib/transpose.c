@@ -48,7 +48,9 @@
 #include "include_/sse_neon.h"
   #endif
 
-#pragma warning( disable : 4005)
+#if defined(_MSC_VER) && !defined(__clang__)
+#pragma warning(disable: 4005)
+#endif
 
 #include "include_/bitutil_.h"
 

@@ -32,9 +32,9 @@
 #include "include_/vlcbyte.h"
 #include "include_/bitutil_.h"
 
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
+#if defined(_MSC_VER) && !defined(__clang__)
+#pragma warning(disable: 4005 4068 4090)
+#endif
 
 #define PAD8(__x) ( (((__x)+8-1)/8) )
 
@@ -258,8 +258,10 @@ extern char _shuffle_16[256][16];
 #else
 #define uint_t T3(uint, USIZE, _t)
 
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC push_options
 #pragma GCC optimize ("align-functions=16")
+#endif
 
 ALWAYS_INLINE unsigned char *T2(_P4DEC, USIZE)(unsigned char *__restrict in, unsigned n, uint_t *__restrict out P4DELTA(uint_t start), unsigned b, unsigned bx ) {
   if(!(b & 0x80)) {
@@ -529,4 +531,8 @@ unsigned char *T2(p4fdecx, USIZE)(unsigned char *in, unsigned n, uint_t *__restr
   return in + PAD8(n*b);
 }
     #endif
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC pop_options
+#endif
 #endif
