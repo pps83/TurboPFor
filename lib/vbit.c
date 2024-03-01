@@ -22,10 +22,6 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //   vbit.c - "Integer Compression" variable length coding with bitio
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
-
 #include <string.h>
 #include "include_/conf.h"
 #include "include_/vbit.h"
@@ -33,6 +29,8 @@
 #include "include_/bitutil_.h"
 #include "include_/bitiobe.h"
 #include "include_/vlcbit.h"
+
+#pragma warning(disable: 4005 4068 4090)
 
 #define OVERFLOW( _in_,_inlen_,_out_, _op_, _goto_) if( _op_                        >= _out_+((uint64_t)_inlen_*255)/256-8) { memcpy(_out_,_in_,_inlen_); _op_ = _out_+_inlen_; _goto_; }
 #define OVERFLOWR(_in_,_inlen_,_out_, _op_, _op__, _goto_) if((_out_+_inlen_-_op__) >=       ((uint64_t)_inlen_*255)/256-8) { memcpy(_out_,_in_,_inlen_); _op_ = _out_+_inlen_; _goto_; }

@@ -22,9 +22,6 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //   "Integer Compression" utility - delta, for, zigzag / Floating point compression
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
 
 #include <stdlib.h>
 #include <math.h> //nan
@@ -35,6 +32,8 @@
 #include "include_/bitutil.h"
 
 #include "include_/bitutil_.h"
+
+#pragma warning(disable: 4005 4068 4090)
 
 #define BT(_i_) { o |= ip[_i_]; x |= ip[_i_] ^ u0; }
 

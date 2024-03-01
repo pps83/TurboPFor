@@ -48,7 +48,7 @@
 #include "include_/sse_neon.h"
   #endif
 
-#pragma warning( disable : 4005)
+#pragma warning(disable: 4005)
 
 #include "include_/bitutil_.h"
 

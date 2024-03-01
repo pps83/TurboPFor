@@ -22,9 +22,6 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 // v8pack.c - "Integer Compression" TurboBitByte = Hybrid TurboByte + TurboPack (use BitPack for small values, otherwise TurboByte)
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
 
 #include <string.h>
 #include "include_/conf.h"
@@ -35,6 +32,9 @@
 #include "include_/vlcbyte.h"
 
 #include "include_/bitutil_.h"
+
+#pragma warning(disable: 4005 4068 4090)
+
 #define V8PAYLOAD(_n_, _usize_) (((_n_)*(_usize_/16)+7)/8)  //from v8.c
 #define V8BOUND_(_n_, _usize_) (V8PAYLOAD(_n_, _usize_)+ (_n_)*(_usize_/8))
 

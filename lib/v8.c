@@ -23,13 +23,12 @@
 **/
 //  v8.c - "Integer Compression" TurboByte 16/32 bits (SIMD Group Varint, Streamvbyte family)
   #ifndef V8ENC
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
 
 #include "include_/conf.h"
 #include "include_/vint.h"
 #include "include_/bitutil_.h"
+
+#pragma warning(disable: 4005 4068 4090)
 
 #define V8PAYLOAD(_n_, _usize_) (((_n_)*(_usize_/16)+7)/8)
 #define V8BOUND(_n_, _usize_) (V8PAYLOAD(_n_, _usize_)+ (_n_)*(_usize_/8))

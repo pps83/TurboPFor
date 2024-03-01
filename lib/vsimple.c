@@ -36,9 +36,7 @@
 #include "include_/vlcbyte.h"
 #include "include_/conf.h"
 
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
+#pragma warning(disable: 4005 4068 4090)
 
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
@@ -104,8 +102,10 @@ static SV_LIM64;
 
 #define uint_t T3(uint, USIZE, _t)
 
+#ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunsequenced"
+#endif
 
 unsigned char *T2(VSENC, USIZE)(uint_t *__restrict in, size_t n, unsigned char *__restrict out) {
   unsigned xm,m,r,x;
@@ -328,8 +328,9 @@ unsigned char *T2(VSENC, USIZE)(uint_t *__restrict in, size_t n, unsigned char *
   }
   return op;
 }
+#ifdef __clang__
 #pragma clang diagnostic pop
-
+#endif
 
 #define OP(__x) op[__x] // *op++ //
 #define OPI(__x) op+=__x// //
