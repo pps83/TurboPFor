@@ -33,10 +33,6 @@
 
 #include "include_/bitutil_.h"
 
-#pragma warning( disable : 4005)
-#pragma warning( disable : 4090)
-#pragma warning( disable : 4068)
-
 #undef P4DELTA
 #define PAD8(_x_) ( (((_x_)+8-1)/8) )
 
@@ -273,11 +269,17 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #undef   BITPACK
 
 #else //------------------------------------------ Templates ---------------------------------------------------------------
+
+#if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wparentheses"
-
+#elif defined(__GNUC__)
 #pragma GCC push_options
 #pragma GCC optimize ("align-functions=16")
+#elif defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4005 4068 4090)
+#endif
 
 #define uint_t T3(uint, USIZE, _t)
 
@@ -438,5 +440,11 @@ size_t T2(P4NENC, USIZE)(uint_t *__restrict in, size_t n, unsigned char *__restr
   return T2(P4NENCS, USIZE)(ip, n&(CSIZE-1), op, start) - out;
 }
     #endif
+#if defined(__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC pop_options
+#elif defined(_MSC_VER)
+#pragma warning(pop)
+#endif
   #endif
