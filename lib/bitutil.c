@@ -26,6 +26,7 @@
 #pragma warning( disable : 4090)
 #pragma warning( disable : 4068)
 
+#include <stdlib.h>
 #include <math.h> //nan
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
 #include <float.h> //_Float16
