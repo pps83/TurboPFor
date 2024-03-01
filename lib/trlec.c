@@ -24,6 +24,7 @@
     TurboRLE - "Most efficient and fastest Run Length Encoding"
 **/
   #ifndef USIZE
+#include <stdlib.h>
 #include <string.h>
 #include "include_/conf.h"
 #include "include_/trle.h"
