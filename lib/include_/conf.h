@@ -91,6 +91,7 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
 #include <windows.h>
 #include <intrin.h>
 #include <stdint.h>
+#include <math.h>
 #define __builtin_prefetch(x,a) _mm_prefetch(x, _MM_HINT_NTA)
 
 #define ALIGNED(t,v,n)  __declspec(align(n)) t v
