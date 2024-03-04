@@ -113,6 +113,10 @@ static unsigned char dcode[] = {0, 6,10, 14, 18, 20, 22, 24};
 #define USIZE 64
 #include "fp.c"
 
+#undef VSIZE
+#undef USIZE
+#undef BSIZE
+
   #else //-------------------------------------- Template functions ------------------------------------------------------------
 
 #define XORENC( _u_, _pu_, _usize_) ((_u_)^(_pu_))  // xor predictor
@@ -302,6 +306,9 @@ size_t T2(fpxdec,USIZE)(unsigned char *in, size_t n, uint_t *out, uint_t start) 
   return ip - in;
   #undef FD
 }
+#undef HASH16
+#undef HASH32
+#undef HASH64
 
 //-------- TurboFloat FCM: Finite Context Method Predictor ---------------------------------------------------------------
 #define HBITS 13 //15
@@ -620,6 +627,9 @@ size_t T2(fphdec,USIZE)(unsigned char *in, size_t n, uint_t *out, uint_t start) 
   #undef FD
 }
 
+#undef VA_BITS
+#undef FX_BITS
+
 //-- TurboFloatLz (lz77 like parsing) --------------------------------------
   #if USIZE == 64
 #define VA_BITS          7 // window size for 64 bits (integer/double)
@@ -635,6 +645,9 @@ size_t T2(fphdec,USIZE)(unsigned char *in, size_t n, uint_t *out, uint_t start) 
 #define CTZMIN(_usize_) (VA_BITS+BSIZE(_usize_))
 #define HASH(_x_)       (_x_ & ((1<<FX_BITS)-1))
 
+#undef HASH16
+#undef HASH32
+#undef HASH64
 #define HASH16(_h_,_u_) HASH(_u_)
 #define HASH32(_h_,_u_) HASH(_u_) //(((_h_) ^ (_u_)>>23) & ((1<<FX_BITS)-1))
 #define HASH64(_h_,_u_) HASH(_u_) //(((_h_) ^ (_u_)>>50) & ((1<<FX_BITS)-1))
@@ -747,6 +760,7 @@ size_t T2(fpcdec,USIZE)(unsigned char *in, size_t n, uint_t *out, uint_t start) 
   bitalign(bw,br,ip);
   return ip - in;
 }
+#undef OVERFLOW
 
 //------ Zigzag of zigzag for timestamps with bitio ------------------------------------------------------------------------------------------
 // Improved Gorilla style compression with sliding zigzag of delta + RLE + overflow handling for timestamps in time series.

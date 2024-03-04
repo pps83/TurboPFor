@@ -121,6 +121,12 @@
   #endif
 
   #ifdef __AVX2__
+#undef VSIZE
+#undef BITPACK
+#undef BITUNPACK
+#undef EF_INC
+#undef EFANOENC
+#undef EFANODEC
 #define VSIZE 256
 #define BITPACK bitpack256v
 #define BITUNPACK bitunpack256v
@@ -129,11 +135,17 @@
 #define EFANODEC efano1dec256v
 #include "eliasfano.c"
 
+#undef EF_INC
+#undef EFANOENC
+#undef EFANODEC
 #define EF_INC 0
 #define EFANOENC efanoenc256v
 #define EFANODEC efanodec256v
 #include "eliasfano.c"
   #endif
+
+#undef VSIZE
+#undef USIZE
 
 #else //--------------------------------------------- implementation ---------------------------------------------------------------
 #define uint_t T3(uint, USIZE, _t)

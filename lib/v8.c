@@ -841,6 +841,28 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 #define VD128v16(_ov_,_sv_)
 #include "v8.c"
 
+#undef V8DELTA32
+#undef V8DELTA16
+#undef V8ENC
+#undef V8DEC
+#undef VDELTA
+#undef VEINI128v16
+#undef VEINI128v32
+#undef VEINI256v32
+#undef VE16
+#undef VE32
+#undef VD16
+#undef VD32
+#undef VE128v16
+#undef VE128v32
+#undef VE256v32
+#undef VDINI128v16
+#undef VDINI128v32
+#undef VDINI256v32
+#undef VD128v16
+#undef VD128v32
+#undef VD256v32
+
 #define V8DELTA32       ,uint32_t start
 #define V8DELTA16       ,uint16_t start
 
@@ -872,6 +894,26 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 
 #include "v8.c"
 
+#undef V8ENC
+#undef V8DEC
+#undef VDELTA
+#undef VEINI128v16
+#undef VEINI128v32
+#undef VEINI256v32
+#undef VE16
+#undef VE32
+#undef VD16
+#undef VD32
+#undef VE128v16
+#undef VE128v32
+#undef VE256v32
+#undef VDINI128v16
+#undef VDINI128v32
+#undef VDINI256v32
+#undef VD128v16
+#undef VD128v32
+#undef VD256v32
+
 #define V8ENC               v8xenc //------------ xor -----------------------------
 #define V8DEC               v8xdec
 #define VDELTA              0
@@ -900,6 +942,24 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 
 #include "v8.c"
 
+#undef V8ENC
+#undef V8DEC
+#undef VEINI128v16
+#undef VEINI128v32
+#undef VEINI256v32
+#undef VE16
+#undef VE32
+#undef VD16
+#undef VD32
+#undef VE128v16
+#undef VE128v32
+#undef VE256v32
+#undef VDINI128v16
+#undef VDINI128v32
+#undef VDINI256v32
+#undef VD128v16
+#undef VD128v32
+#undef VD256v32
 
 #define V8ENC           v8denc //---------- delta ----------------------------------
 #define V8DEC           v8ddec
@@ -924,6 +984,26 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 #define VD128v32(_v_,_sv_) _sv_ = mm_scan_epi32(_v_,_sv_); _v_ = _sv_
 #define VD256v32(_v_,_sv_) _sv_ = mm256_scan_epi32(_v_,_sv_); _v_ = _sv_
 #include "v8.c"
+
+#undef V8ENC
+#undef V8DEC
+#undef VDELTA
+#undef VEINI128v16
+#undef VEINI128v32
+#undef VEINI256v32
+#undef VE16
+#undef VE32
+#undef VD16
+#undef VD32
+#undef VE128v16
+#undef VE128v32
+#undef VE256v32
+#undef VDINI128v16
+#undef VDINI128v32
+#undef VDINI256v32
+#undef VD128v16
+#undef VD128v32
+#undef VD256v32
 
 #define V8ENC           v8d1enc       // delta 1
 #define V8DEC           v8d1dec
@@ -951,7 +1031,31 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 #define VD256v32(_v_,_sv_) _sv_ = mm256_scani_epi32(_v_,_sv_, cvi); _v_ = _sv_
 #include "v8.c"
 
-  #else //---------------------------------------------- Templates -------------------------------------------------------------
+#undef V8DELTA32
+#undef V8DELTA16
+#undef V8ENC
+#undef V8DEC
+#undef VDELTA
+#undef VEINI128v16
+#undef VEINI128v32
+#undef VEINI256v32
+#undef VE16
+#undef VE32
+#undef VD16
+#undef VD32
+#undef VE128v16
+#undef VE128v32
+#undef VE256v32
+#undef VDINI128v16
+#undef VDINI128v32
+#undef VDINI256v32
+#undef VD128v16
+#undef VD128v32
+#undef VD256v32
+#undef OP
+
+#else //---------------------------------------------- Templates -------------------------------------------------------------
+#undef VLE1
 #define BN32(x) (x?(__bsr32(x)/8):0)
 #define VLE1(_m_) { VE32(ip[0]); unsigned _b = BN32(v); ctou32(op) = v; op += _b+1; _m_ |= _b<<((ip-sp)*2); }
 #define VLE4(_i_) { unsigned _b,_m;\
@@ -1058,6 +1162,7 @@ unsigned char *T2(V8ENC,32)(uint32_t *__restrict in, unsigned n, unsigned char *
   return op;
 }
 
+#undef VLD1
 #define VLD1(_i_) { unsigned _b = ((m>>((op-sp)*2))& 3)+1; v = ctou32(ip) & ((1ull<<(_b*8))-1); *op = VD32(v); ip+=_b; }
 #define VLD4(_i_) { unsigned _b,m = *in++;\
   _b =  (m    & 3)+1; v = ctou32(ip) & ((1ull<<(_b*8))-1); op[_i_+0] = VD32(v); ip+=_b;\
@@ -1206,6 +1311,7 @@ unsigned char *T2(V8DEC,32)(unsigned char  *__restrict in, unsigned n, uint32_t 
 #define LEN16(_m_,_i_) (8+popcnt32((uint8_t)(_m_>>(_i_<<3))))
 
 #define BN16(_x_) ((_x_)>0xff?1:0)
+#undef VLE1
 #define VLE1(_m_) { VE16(ip[0]); unsigned _b = BN16(v); ctou16(op) = v; op += _b+1; _m_ |= _b<<(ip-sp); }
 
 #define VLE8(_i_) { unsigned _b,_m; PNEXTA(out,op,1);\
@@ -1273,7 +1379,7 @@ unsigned char *T2(V8ENC,16)(uint16_t *__restrict in, unsigned n, unsigned char *
   if(ip != in+n) { uint16_t *sp = ip; for(PNEXTA(out,op,1),*out=0; ip != in+n;          ip++   ) VLE1(out[0]); }
   return op;
 }
-
+#undef VLD1
 #define VLD1(_i_) { unsigned _b = ((m>>(op-sp))& 1)+1; v = ctou16(ip) & ((1<<(_b*8))-1); *op = VD16(v); ip+=_b; }
 
 #define VLD8(_i_) { unsigned _b,m = *IP++;\

@@ -925,3 +925,6 @@ size_t vhidecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t 
   }
   return inlen;
 }
+
+#undef INDEC
+#undef OUTDEC

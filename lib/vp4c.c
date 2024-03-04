@@ -61,55 +61,91 @@ size_t p4nbound256v64(size_t n) { return VP4BOUND(n, 8, 128); }
 #define  P4NENC   p4nenc
 #define  BITPACK  bitpack
 #define  BITDELTA bitdienc
+#undef  USIZE
 #define USIZE 8
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4c.c"
+
+#undef P4NENC
 
 #define P4DELTA 0  // p4d functions
 #define  P4DENC   p4denc
 #define  P4NENC   p4ndenc
 #define  P4NENCS  p4denc
+#undef  USIZE
 #define USIZE 8
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4c.c"
+
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
+#undef P4DELTA
 
 #define P4DELTA 1  // p4d1 functions
 #define  P4DENC   p4d1enc
 #define  P4NENC   p4nd1enc
 #define  P4NENCS  p4d1enc
+#undef  USIZE
 #define USIZE 8
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4c.c"
+
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
+#undef BITDELTA
 
 #define  BITDELTA  bitzenc // // p4z functions
 #define  P4DENC   p4zenc
 #define  P4NENC   p4nzenc
 #define  P4NENCS  p4zenc
+#undef  USIZE
 #define USIZE 8
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4c.c"
 
+#undef P4BITS
+#undef _P4BITS
+#undef _P4ENC
+#undef P4ENC
+#undef P4NENC
 #undef P4DELTA
+#undef BITDELTA
+#undef HYBRID
+
 #define  BITDELTA bitdienc
 
 #define HYBRID 0             // Direct access
@@ -118,12 +154,16 @@ size_t p4nbound256v64(size_t n) { return VP4BOUND(n, 8, 128); }
 #define _P4ENC  _p4encx
 #define  P4ENC   p4encx
 #define  P4NENC  p4nencx
+#undef  USIZE
 #define USIZE 8
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4c.c"
 
@@ -179,8 +219,12 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #define  P4NENC    p4nenc256v
 #define  P4NENCS   p4enc
 #define  BITPACK   bitpack256v
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+
+#undef P4NENC
+#undef P4NENCS
 
 #define P4DELTA 0
 #define  P4DENC    p4denc256v
@@ -188,12 +232,21 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #define  P4NENCS   p4denc
 #include "vp4c.c"
 
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
+#undef P4DELTA
+
 #define P4DELTA 1
 #define  P4DENC    p4d1enc256v
 #define  P4NENC    p4nd1enc256v
 #define  P4NENCS   p4d1enc
 #include "vp4c.c"
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
 #undef P4DELTA
+#undef BITDELTA
 
 #define P4DELTA 0
 #define  BITDELTA  bitzenc
@@ -206,10 +259,13 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #undef   P4ENC
 #undef   BITPACK
   #elif defined(__SSE3__) || defined(__ARM_NEON) //--------------------------------------------------
+#undef P4NENCS
+#undef P4NENC
+#undef HYBRID
+#undef P4BITS
 #define  BITDELTA bitdienc
 #define HYBRID 1
 #define P4BITS _p4bits
-#define USIZE 32
 
 #define VSIZE 128
 #define _P4ENC    _p4enc128v
@@ -217,38 +273,62 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #define  P4NENCS   p4enc
 #define  P4NENC    p4nenc128v
 #define  BITPACK   bitpack128v
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4c.c"
+
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
 
 #define P4DELTA 0
 #define  P4DENC    p4denc128v
 #define  P4NENC    p4ndenc128v
 #define  P4NENCS   p4denc
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
+#undef P4DELTA
 
 #define P4DELTA 1
 #define  P4DENC    p4d1enc128v
 #define  P4NENC    p4nd1enc128v
 #define  P4NENCS   p4d1enc
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
+
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
+#undef P4DELTA
+#undef BITDELTA
 
 #define P4DELTA 0
 #define  BITDELTA  bitzenc
 #define  P4DENC    p4zenc128v
 #define  P4NENC    p4nzenc128v
 #define  P4NENCS   p4zenc
+#undef  USIZE
 #define USIZE 16
 #include "vp4c.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4c.c"
 
@@ -262,10 +342,18 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #include "vp4c.c"*/
   #endif
 
+#undef P4DENC
+#undef P4NENC
+#undef P4NENCS
 #undef P4DELTA
+#undef BITDELTA
 #undef  _P4ENC
 #undef   P4ENC
 #undef   BITPACK
+#undef VSIZE
+#undef USIZE
+#undef CSIZE
+#undef uint_t
 
 #else //------------------------------------------ Templates ---------------------------------------------------------------
 
@@ -281,7 +369,7 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #endif
 
 #define uint_t T3(uint, USIZE, _t)
-
+#undef CSIZE
   #ifdef VSIZE
 #define CSIZE VSIZE
   #else

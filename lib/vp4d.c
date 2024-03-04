@@ -58,6 +58,15 @@ extern char _shuffle_16[256][16];
 #define USIZE 32
 #include "vp4d.c"
 
+#undef  P4DELTA
+#undef  P4DELTA_
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNPACKD
+#undef _BITUNPACKD
+
 #define P4DELTA(a) ,a
 #define P4DELTA_(a) a
 #define DELTA
@@ -71,6 +80,14 @@ extern char _shuffle_16[256][16];
 #define  BITUNDD       bitddec
 #include "vp4d.c"
 
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACKD
+#undef _BITUNPACKD
+
 #define _P4DEC        _p4d1dec256v
 #define  P4DEC         p4d1dec256v
 #define  P4NDEC        p4nd1dec256v
@@ -80,6 +97,14 @@ extern char _shuffle_16[256][16];
 #define  BITUNDD       bitd1dec
 #include "vp4d.c"
 
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNPACKD
+#undef _BITUNPACKD
+#undef BITUNDD
+
 #define _P4DEC        _p4zdec256v
 #define  P4DEC         p4zdec256v
 #define  P4NDEC        p4nzdec256v
@@ -87,6 +112,7 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACKD    bitzunpack256v
 #define  _BITUNPACKD  _bitzunpack256v
 #define  BITUNDD       bitzdec
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
 
@@ -104,14 +130,27 @@ extern char _shuffle_16[256][16];
 #define  P4DECX  // direct access no 64 bits
 #define USIZE 8
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
 
 #undef  P4DECX
+#undef  USIZE
 #define USIZE 64
 #include "vp4d.c"
+
+#undef  P4DELTA
+#undef  P4DELTA_
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 
 #define P4DELTA(a) ,a
 #define P4DELTA_(a) a
@@ -124,14 +163,26 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACKD  bitdunpack
 #define _BITUNPACKD _bitdunpack
 #define  BITUNDD     bitddec
+#undef  USIZE
 #define USIZE 8
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4d.c"
+
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 
 #define _P4DEC      _p4d1dec        //delta1
 #define  P4DEC       p4d1dec
@@ -140,14 +191,26 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACKD  bitd1unpack
 #define _BITUNPACKD  bitd1unpack
 #define  BITUNDD     bitd1dec
+#undef  USIZE
 #define USIZE 8
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4d.c"
+
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 
 #define _P4DEC      _p4zdec         //zigzag0
 #define  P4DEC       p4zdec
@@ -156,22 +219,32 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACKD  bitzunpack
 #define _BITUNPACKD _bitzunpack
 #define  BITUNDD     bitzdec
+#undef  USIZE
 #define USIZE 8
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4d.c"
 
+#undef  P4DELTA
+#undef  P4DELTA_
 #undef _P4DEC
 #undef  P4DEC
-#undef  BITUNPACK
+#undef  P4NDEC
+#undef  P4NDECS
 #undef  BITUNDD
-#undef  P4DELTA
-#undef USIZE
-#undef DELTA
+#undef  BITUNPACK
+#undef  BITUNPACKD
+#undef _BITUNPACKD
+#undef  USIZE
+#undef  DELTA
+#undef  VSIZE
 
 //  #elif defined(__SSSE3__) || defined(__ARM_NEON)
 #define VSIZE 128
@@ -185,12 +258,24 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACK     bitunpack128v
 #define  BITUNPACKD    bitunpack128v
 #define  _BITUNPACKD  _bitunpack128v
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 64
 #include "vp4d.c"
+
+#undef  P4DELTA
+#undef  P4DELTA_
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 
 #define P4DELTA(a) ,a
 #define P4DELTA_(a) a
@@ -203,10 +288,20 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACKD    bitdunpack128v
 #define  _BITUNPACKD  _bitdunpack128v
 #define  BITUNDD       bitddec
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
+
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 
 #define _P4DEC        _p4d1dec128v
 #define  P4DEC         p4d1dec128v
@@ -215,10 +310,20 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACKD    bitd1unpack128v
 #define  _BITUNPACKD  _bitd1unpack128v
 #define  BITUNDD       bitd1dec
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
+
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 
 #define _P4DEC        _p4zdec128v
 #define  P4DEC         p4zdec128v
@@ -227,20 +332,30 @@ extern char _shuffle_16[256][16];
 #define  BITUNPACKD    bitzunpack128v
 #define  _BITUNPACKD  _bitzunpack128v
 #define  BITUNDD       bitzdec
+#undef  USIZE
 #define USIZE 16
 #include "vp4d.c"
+#undef  USIZE
 #define USIZE 32
 #include "vp4d.c"
 
-#undef  BITUNDD
 #undef  P4DELTA
+#undef  P4DELTA_
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACK
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 #undef  DELTA
+#undef  VSIZE
 
 #define  VSIZE 256
 
 #define P4DELTA(a)
 #define P4DELTA_(a)
-#undef  DELTA
 
 #define _P4DEC        _p4dec256w
 #define  P4DEC         p4dec256w
@@ -251,7 +366,22 @@ extern char _shuffle_16[256][16];
 #define  _BITUNPACKD  _bitunpack256w
 #include "vp4d.c"
   #endif
+
+#undef  P4DELTA
+#undef  P4DELTA_
+#undef _P4DEC
+#undef  P4DEC
+#undef  P4NDEC
+#undef  P4NDECS
+#undef  BITUNDD
+#undef  BITUNPACK
+#undef  BITUNPACKD
+#undef _BITUNPACKD
 #undef  DELTA
+#undef  VSIZE
+#undef  USIZE
+#undef  CSIZE
+#undef uint_t
 
 #else
 #define uint_t T3(uint, USIZE, _t)
@@ -259,6 +389,10 @@ extern char _shuffle_16[256][16];
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC push_options
 #pragma GCC optimize ("align-functions=16")
+#endif
+
+#ifndef VSIZE
+#define VSIZE 0
 #endif
 
 ALWAYS_INLINE unsigned char *T2(_P4DEC, USIZE)(unsigned char *__restrict in, unsigned n, uint_t *__restrict out P4DELTA(uint_t start), unsigned b, unsigned bx ) {
@@ -409,7 +543,8 @@ unsigned char *T2(P4DEC, USIZE)(unsigned char *__restrict in, unsigned n, uint_t
   }
 }
 
-#ifdef VSIZE
+#undef CSIZE
+#if VSIZE
   #define CSIZE VSIZE
 #else
   #define CSIZE 128
@@ -484,10 +619,12 @@ unsigned char *T2(p4decx, USIZE)(unsigned char *in, unsigned n, uint_t *__restri
   p4ini(&p4, &in, n, &b);
 
   if(unlikely(p4.isx)) {
+    #undef ITX
     #define ITX(k) out[i+k] = T2(p4getx, USIZE)(&p4, in, i+k, b);
     for(i = 0; i != (n&(~3)); i += 4) { ITX(0); ITX(1); ITX(2); ITX(3); }
     for(     ; i != n;    i++   )   ITX(0);
   } else {
+    #undef ITY
     #define ITY(k) out[i+k] = T2(bitgetx, USIZE)(in, i+k, b);
     for(i = 0; i != (n&(~3)); i += 4) { ITY(0); ITY(1); ITY(2); ITY(3); }
     for(     ; i != n; i++) ITY(0);
@@ -501,10 +638,12 @@ unsigned char *T2(p4f1decx, USIZE)(unsigned char *in, unsigned n, uint_t *__rest
 
   p4ini(&p4, &in, n, &b);
   if(unlikely(p4.isx)) {
+    #undef ITX
     #define ITX(k) out[i+k] = T2(p4getx, USIZE)(&p4, in, (i+k), b)+start+i+k+1;
     for(i = 0; i != (n&(~3)); i+=4) { ITX(0); ITX(1); ITX(2); ITX(3); }
     for(     ; i != n; i++) ITX(0);
   } else {
+    #undef ITY
     #define ITY(k) out[i+k] = T2(bitgetx, USIZE)(in, (i+k), b)+start+i+k+1;
     for(i = 0; i != (n&(~3)); i += 4) { ITY(0); ITY(1); ITY(2); ITY(3); }
     for(     ; i != n; i++) ITY(0);
@@ -518,10 +657,12 @@ unsigned char *T2(p4fdecx, USIZE)(unsigned char *in, unsigned n, uint_t *__restr
   p4ini(&p4, &in, n, &b);
 
   if(unlikely(p4.isx)) {
+    #undef ITX
     #define ITX(k) out[i+k] = T2(p4getx, USIZE)(&p4, in, i+k, b)+start;
     for(i = 0; i != (n&(~3)); i+=4) { ITX(0); ITX(1); ITX(2); ITX(3); }
     for(     ; i != n; i++) ITX(0);
   } else {
+    #undef ITY
     #define ITY(k) out[i+k] = T2(bitgetx, USIZE)(in, (i+k), b)+start;
     for(i = 0; i != (n&(~3)); i+=4) { ITY(0); ITY(1); ITY(2); ITY(3); }
     for(     ; i != n; i++) ITY(0);
