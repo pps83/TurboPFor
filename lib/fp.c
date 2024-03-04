@@ -111,6 +111,8 @@ static unsigned char dcode[] = {0, 6,10, 14, 18, 20, 22, 24};
 #define USIZE 64
 #include "fp.c"
 
+#undef VSIZE
+
   #else //-------------------------------------- Template functions ------------------------------------------------------------
 
 #define XORENC( _u_, _pu_, _usize_) ((_u_)^(_pu_))  // xor predictor

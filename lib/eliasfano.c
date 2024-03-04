@@ -137,6 +137,9 @@
 #include "eliasfano.c"
   #endif
 
+#undef VSIZE
+#undef USIZE
+
 #else //--------------------------------------------- implementation ---------------------------------------------------------------
 #define uint_t T3(uint, USIZE, _t)
 

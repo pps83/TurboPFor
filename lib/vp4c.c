@@ -267,6 +267,8 @@ size_t p4nsdec64(unsigned char *in, size_t n, uint64_t *out) { uint64_t  *op,sta
 #undef  _P4ENC
 #undef   P4ENC
 #undef   BITPACK
+#undef VSIZE
+#undef USIZE
 
 #else //------------------------------------------ Templates ---------------------------------------------------------------
 

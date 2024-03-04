@@ -90,6 +90,13 @@ size_t vbbound64(size_t n) { return n*(8+1)+9; }
 #include "vint.c"
 #undef USIZE
 
+#undef UN
+#undef VDELTA
+#undef VBDENC
+#undef VBDDEC
+#undef VBDGETX
+#undef VBDGETGEQ
+
   #else
 #define uint_t T3(uint, USIZE, _t)
 

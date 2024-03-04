@@ -1413,3 +1413,6 @@ size_t bitnfunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__re
 #elif defined(_MSC_VER)
 #pragma warning(pop)
 #endif
+
+#undef DELTA
+#undef USIZE

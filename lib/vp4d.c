@@ -251,7 +251,14 @@ extern char _shuffle_16[256][16];
 #define  _BITUNPACKD  _bitunpack256w
 #include "vp4d.c"
   #endif
+
+#undef P4DELTA
+#undef P4NDECS
+#undef _BITUNPACKD
+#undef P4DELTA_
 #undef  DELTA
+#undef VSIZE
+#undef USIZE
 
 #else
 #define uint_t T3(uint, USIZE, _t)

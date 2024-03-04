@@ -588,3 +588,6 @@ size_t bitnfpack128v32( uint32_t *__restrict in, size_t n, unsigned char *__rest
 #elif defined(_MSC_VER)
 #pragma warning(pop)
 #endif
+
+#undef DELTA
+#undef USIZE

@@ -429,6 +429,11 @@
 #define VD256(_v_,_sv_)                                       _sv_ = _v_ = mm256_xord_epi64(_v_,_sv_)
 #include "transpose.c"
 
+#undef ISDELTA
+#undef ESIZE
+#undef STRIDE
+#undef USIZE
+
 #else //*************************************************************  Templates ********************************************************************************************************
 
 #define SIE(p,i)  (p+=stride) //faster on ARM //#define SIE(_p_,_i_)  (_p_+ _i_*stride)

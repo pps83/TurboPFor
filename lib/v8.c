@@ -949,7 +949,10 @@ static const ALIGNED(unsigned char, svd16[256][16],16) = {
 #define VD256v32(_v_,_sv_) _sv_ = mm256_scani_epi32(_v_,_sv_, cvi); _v_ = _sv_
 #include "v8.c"
 
-  #else //---------------------------------------------- Templates -------------------------------------------------------------
+#undef V8ENC
+#undef V8DEC
+
+#else //---------------------------------------------- Templates -------------------------------------------------------------
 #define BN32(x) (x?(__bsr32(x)/8):0)
 #define VLE1(_m_) { VE32(ip[0]); unsigned _b = BN32(v); ctou32(op) = v; op += _b+1; _m_ |= _b<<((ip-sp)*2); }
 #define VLE4(_i_) { unsigned _b,_m;\
