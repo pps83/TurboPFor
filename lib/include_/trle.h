@@ -1,4 +1,5 @@
 // ----- TurboRLE - "Most efficient and fastest Run Length Encoding" -----------------------------------------------------------
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
