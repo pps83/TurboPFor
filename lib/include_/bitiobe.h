@@ -1,6 +1,14 @@
 #include <stdint.h>
 #include "../include_/conf.h"
 
+// different defines in bitutil_.h
+#undef bitbw
+#undef bitput
+#undef bitrmv
+#undef bitget32
+#undef BITGET32
+#undef BITPEEK32
+
 #define bitput_t  					     T3(uint, __WORDSIZE, _t)
 #define bitebr_t                         unsigned char
 #define bitedef(  _bw_,_br_)             bitput_t _bw_; bitebr_t _br_
