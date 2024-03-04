@@ -52,7 +52,7 @@
     #ifdef __SSE__
       #undef __SSE__
     #endif
-  #elif defined(__i386__) || defined(__x86_64__) || defined(_M_IX86) || defined(_M_AMD64) || defined(_M_X64) || defined(__amd64__)
+  #elif defined(__i386__) || defined(__x86_64__) || defined(_M_IX86) || defined(_M_X64)
     #define IC_ARCH_X86 1
   #endif
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
@@ -318,7 +318,7 @@ struct _PACKED doubleu   { double             d; };
 #define bzhi32(_u_, _b_)                 _bzhi_u32(_u_, _b_)  // b variable
 #define bextr32(x,start,len)             _bextr_u32(x,start,len)
 
-      #if !(defined(_M_X64) || defined(__amd64__)) && (defined(__i386__) || defined(_M_IX86))
+      #if !(defined(_M_X64) || defined(__x86_64__)) && (defined(__i386__) || defined(_M_IX86))
 #define bzhi64(_u_, _b_)                 BZHI64(_u_, _b_)
       #else
 #define bzhi64(_u_, _b_)                 _bzhi_u64(_u_, _b_)
