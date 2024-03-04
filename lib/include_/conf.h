@@ -182,7 +182,7 @@ static ALWAYS_INLINE void               ltou32(unsigned           *x, const void
 static ALWAYS_INLINE void               ltou64(unsigned long long *x, const void *cp) { memcpy(x, cp, sizeof(*x)); }
 
   #elif defined(__i386__) || defined(__x86_64__) || \
-    defined(_M_IX86) || defined(_M_AMD64) || _MSC_VER ||\
+    defined(_M_IX86) || defined(_M_X64) || _MSC_VER ||\
     defined(__powerpc__) || defined(__s390__) ||\
     defined(__ARM_FEATURE_UNALIGNED) || defined(__aarch64__) || defined(__arm__) ||\
     defined(__ARM_ARCH_4__) || defined(__ARM_ARCH_4T__) || \
@@ -288,7 +288,7 @@ struct _PACKED doubleu   { double             d; };
 #define bzhi32(_u_, _b_)                 _bzhi_u32(_u_, _b_)  // b variable
 #define bextr32(x,start,len)             _bextr_u32(x,start,len)
 
-      #if !(defined(_M_X64) || defined(__amd64__)) && (defined(__i386__) || defined(_M_IX86))
+      #if !(defined(_M_X64) || defined(__x86_64__)) && (defined(__i386__) || defined(_M_IX86))
 #define bzhi64(_u_, _b_)                 BZHI64(_u_, _b_)
       #else
 #define bzhi64(_u_, _b_)                 _bzhi_u64(_u_, _b_)
