@@ -31,8 +31,6 @@
 
 #include "include_/bitutil_.h"
 
-#define PAD8(_x_) (((_x_)+7)/8)
-
 #if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunsequenced"

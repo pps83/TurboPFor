@@ -45,7 +45,6 @@
 #define max(x,y) (((x)>(y)) ? (x) : (y))
 #endif
 
-#define PAD8(_x_) ( (((_x_)+8-1)/8) )
 // 0-0x1f: bitpacking, 0xff = memcpy, 0xfe:varint
 
 #define _V8E(in, _n_, out, _csize_, _usize_, _bit_, _bitpackv_, _bitpack_) {   if(!_n_) return 0;\
