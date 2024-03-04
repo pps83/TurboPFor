@@ -49,6 +49,7 @@
 #include "include_/trle.h"
 #include "trle_.h"
 
+#undef PREFETCH
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
   #else
@@ -318,13 +319,13 @@ unsigned trled(const unsigned char *__restrict in, unsigned inlen, unsigned char
 
 #define uint_t T3(uint, USIZE, _t)
 #define ctout(_x_) *(uint_t *)(_x_)
-  #if !SRLE8
+  #if !defined(SRLE8)
 unsigned T2(_srled, USIZE)(const unsigned char *__restrict in, unsigned char *__restrict cout, unsigned outlen, uint_t e) {
   uint_t *out = (uint_t *)cout, *op = out, c;
   const unsigned char *ip = in;
 
     #ifdef __AVX2__
-  #define _mm256_set1_epi64 _mm256_set1_epi64x
+  #define _mm256_set1_epi64(a) _mm256_set1_epi64x(a)
   __m256i ev = T2(_mm256_set1_epi, USIZE)(e);
     #elif (defined(__SSE__) /*|| defined(__ARM_NEON)*/)
        // #if USIZE != 64

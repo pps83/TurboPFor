@@ -52,6 +52,10 @@
   else { unsigned _b = _x_-VL_BA3; _x_ = ctou32(_ip_) & ((1u << 8 * _b << 24) - 1); _ip_ += 3 + _b; _act_;}\
 } while(0)
 
+// different defines in vlcbyte.h
+#undef vlput32
+#undef vlget32
+
 #define vlput32(_op_, _x_) { register unsigned  _x = _x_; _vlput32(_op_, _x, ;); }
 #define vlget32(_ip_, _x_) _vlget32(_ip_, _x_, ;)
 

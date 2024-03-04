@@ -28,6 +28,7 @@
 #include "include_/bitpack.h"
 #include "include_/bitutil.h"
 #include "include_/vint.h"
+#undef VB_MAX
 #define VB_MAX 0xfe
 #include "include_/vlcbyte.h"
 
@@ -202,3 +203,5 @@ size_t v8nd1dec256v32(unsigned char *__restrict in, size_t n, uint32_t *__restri
 size_t v8nzdec256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _V8DD(in, n, out, 256, 32, v8zdec, bitzunpack256v, bitzunpack, 2); }
 size_t v8nxdec256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _V8DD(in, n, out, 256, 32, v8xdec, bitxunpack256v, bitxunpack, 2); }
     #endif
+
+#undef VB_MAX

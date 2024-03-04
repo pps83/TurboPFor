@@ -34,6 +34,7 @@
 #pragma warning(disable: 4005 4068 4090)
 #endif
 
+#undef OVERFLOW
 #define OVERFLOW( _in_,_inlen_,_out_, _op_, _goto_) if( _op_                        >= _out_+((uint64_t)_inlen_*255)/256-8) { memcpy(_out_,_in_,_inlen_); _op_ = _out_+_inlen_; _goto_; }
 #define OVERFLOWR(_in_,_inlen_,_out_, _op_, _op__, _goto_) if((_out_+_inlen_-_op__) >=       ((uint64_t)_inlen_*255)/256-8) { memcpy(_out_,_in_,_inlen_); _op_ = _out_+_inlen_; _goto_; }
 // store the last bytes without encoding, when inlen is not multiple of array element size
@@ -207,6 +208,7 @@ size_t vlcenc16(unsigned char *_in, size_t _inlen, unsigned char *out) {
   bitedef(bw,br);
   biteinir(bw,br,bp);
 
+  #undef VE
   #define VE(_i_) { bitvput(bw,br,VLC_VN6,VLC_VB6, ip[_i_]); }
   for(; ip < in + (inlen&(~(4-1))); ip += 4) { VE(0); VE(1); bitenormr(bw,br,bp); VE(2); VE(3); bitenormr(bw,br,bp); if(bp <= op+20) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; } }
   for(; ip < in+inlen; ip++) { VE(0); bitenormr(bw,br,bp); if(bp <= op+5) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }}
@@ -225,6 +227,7 @@ size_t vlcdec16(unsigned char *in, size_t _outlen, unsigned char *_out) {
   uint16_t      *out = (uint16_t *)_out, *op = out, x;
   OUTDEC;
   bitddef(bw, br); bitdinir(bw,br,bp);
+  #undef VD
   #define VD(_i_) { bitvget(bw,br,VLC_VN6,VLC_VB6, op[_i_]); }
   for(; op != out+(outlen&(~(4-1))); op+=4) { bitdnormr(bw,br,bp); VD(0); VD(1); bitdnormr(bw,br,bp); VD(2); VD(3); }
   for(; op != out+outlen; op++) { bitdnormr(bw,br,bp); VD(0); }
@@ -302,3 +305,6 @@ size_t vlczdec32(unsigned char *in, size_t _outlen, unsigned char *_out) {
   }
   return inlen + 4;
 }
+
+#undef INDEC
+#undef OUTDEC

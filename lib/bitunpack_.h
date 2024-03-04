@@ -3130,6 +3130,7 @@ BITUNPACK_F8 T2(_BITUNPACK_,a8)[] = {
   &T2(_BITUNPACK_,8_8)
 };
 unsigned char *T2(_BITUNPACK_,8)( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out , unsigned b) { return T2(_BITUNPACK_,a8)[ b](in, n, out); }
+#undef USIZE
 
 #define USIZE 16
 unsigned char *T2(_BITUNPACK_,16_0 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 0,16); }
@@ -3169,6 +3170,7 @@ BITUNPACK_F16 T2(_BITUNPACK_,a16)[] = {
   &T2(_BITUNPACK_,16_16)
 };
 unsigned char *T2(_BITUNPACK_,16)( const unsigned char *__restrict in, unsigned n, uint16_t  *__restrict out , unsigned b) { return T2(_BITUNPACK_,a16)[ b](in, n, out); }
+#undef USIZE
 
 #define USIZE 32
 unsigned char *T2(_BITUNPACK_,32_0 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 0,32); }
@@ -3240,6 +3242,7 @@ BITUNPACK_F32 T2(_BITUNPACK_,a32)[] = {
   &T2(_BITUNPACK_,32_32)
 };
 unsigned char *T2(_BITUNPACK_,32)( const unsigned char *__restrict in, unsigned n, uint32_t  *__restrict out , unsigned b) { return T2(_BITUNPACK_,a32)[ b](in, n, out); }
+#undef USIZE
 
 #define USIZE 64
 unsigned char *T2(_BITUNPACK_,64_0 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 0,64); }
@@ -3375,6 +3378,7 @@ BITUNPACK_F64 T2(_BITUNPACK_,a64)[] = {
   &T2(_BITUNPACK_,64_64)
 };
 unsigned char *T2(_BITUNPACK_,64)( const unsigned char *__restrict in, unsigned n, uint64_t  *__restrict out , unsigned b) { return T2(_BITUNPACK_,a64)[ b](in, n, out); }
+#undef USIZE
 
 #else
 #define USIZE 8
@@ -3399,6 +3403,7 @@ BITUNPACK_D8 T2(_BITUNPACK_,a8)[] = {
   &T2(_BITUNPACK_,8_8)
 };
 unsigned char *T2(_BITUNPACK_,8)( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out , uint8_t start, unsigned b) { return T2(_BITUNPACK_,a8)[ b](in, n, out, start); }
+#undef USIZE
 
 #define USIZE 16
 unsigned char *T2(_BITUNPACK_,16_0 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 0,16); }
@@ -3438,6 +3443,7 @@ BITUNPACK_D16 T2(_BITUNPACK_,a16)[] = {
   &T2(_BITUNPACK_,16_16)
 };
 unsigned char *T2(_BITUNPACK_,16)( const unsigned char *__restrict in, unsigned n, uint16_t  *__restrict out , uint16_t start, unsigned b) { return T2(_BITUNPACK_,a16)[ b](in, n, out, start); }
+#undef USIZE
 
 #define USIZE 32
 unsigned char *T2(_BITUNPACK_,32_0 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 0,32); }
@@ -3509,6 +3515,7 @@ BITUNPACK_D32 T2(_BITUNPACK_,a32)[] = {
   &T2(_BITUNPACK_,32_32)
 };
 unsigned char *T2(_BITUNPACK_,32)( const unsigned char *__restrict in, unsigned n, uint32_t  *__restrict out , uint32_t start, unsigned b) { return T2(_BITUNPACK_,a32)[ b](in, n, out, start); }
+#undef USIZE
 
 #define USIZE 64
 unsigned char *T2(_BITUNPACK_,64_0 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 0,64); }
@@ -3644,6 +3651,7 @@ BITUNPACK_D64 T2(_BITUNPACK_,a64)[] = {
   &T2(_BITUNPACK_,64_64)
 };
 unsigned char *T2(_BITUNPACK_,64)( const unsigned char *__restrict in, unsigned n, uint64_t  *__restrict out , uint64_t start, unsigned b) { return T2(_BITUNPACK_,a64)[ b](in, n, out, start); }
+#undef USIZE
 
 #endif
 #endif //OPI

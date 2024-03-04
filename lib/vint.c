@@ -28,6 +28,7 @@
 #include "include_/conf.h"
 #include "include_/bitutil.h"
 #include "include_/vint.h"
+#undef VB_MAX
 #define VB_MAX 0xfd  // reserved : 0xfe=all zeros, 0xff=overflow
 #include "include_/vlcbyte.h"
 
@@ -69,6 +70,11 @@ size_t vbbound64(size_t n) { return n*(8+1)+9; }
 #define USIZE 8
 #include "vint.c"
 #undef USIZE
+#undef VDELTA
+#undef VBDENC
+#undef VBDDEC
+#undef VBDGETX
+#undef VBDGETGEQ
 
 #define VDELTA 1
 #define VBDENC    vbd1enc
@@ -91,6 +97,14 @@ size_t vbbound64(size_t n) { return n*(8+1)+9; }
 #define USIZE 8
 #include "vint.c"
 #undef USIZE
+
+#undef UN
+#undef VDELTA
+#undef VBDENC
+#undef VBDDEC
+#undef VBDGETX
+#undef VBDGETGEQ
+#undef VB_MAX
 
   #else
 #define uint_t T3(uint, USIZE, _t)

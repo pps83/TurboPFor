@@ -40,6 +40,7 @@
 #pragma warning(disable: 4005 4068 4090)
 #endif
 
+#undef PREFETCH
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
   #else
