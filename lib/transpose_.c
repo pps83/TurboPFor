@@ -4,7 +4,7 @@
 
 static unsigned _cpuisa;
 //--------------------- CPU detection -------------------------------------------
-    #if defined(__i386__) || defined(__x86_64__)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
       #if _MSC_VER >=1300
 #include <intrin.h>
       #elif defined (__INTEL_COMPILER)
@@ -62,7 +62,7 @@ unsigned cpuisa(void) {
   int c[4] = {0};
   if(_cpuisa) return _cpuisa;
   _cpuisa++;
-    #if defined(__i386__) || defined(__x86_64__)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   cpuid(c, 0);
   if(c[0]) {
     cpuid(c, 1);
@@ -114,7 +114,7 @@ unsigned cpuini(unsigned cpuisa) { if(cpuisa) _cpuisa = cpuisa; return _cpuisa; 
 
 char *cpustr(unsigned cpuisa) {
   if(!cpuisa) cpuisa = _cpuisa;
-    #if defined(__i386__) || defined(__x86_64__)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   if(cpuisa >= IS_AVX512) {
     if(cpuisa & AVX512VBMI2) return "avx512vbmi2";
     if(cpuisa & AVX512VBMI)  return "avx512vbmi";
