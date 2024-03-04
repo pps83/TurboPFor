@@ -67,23 +67,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
-    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build.msvc\.obj\$(Platform)-$(Configuration)-$(PlatformToolset)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)build.msvc\$(Platform)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
-    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build.msvc\.obj\$(Platform)-$(Configuration)-$(PlatformToolset)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)build.msvc\$(Platform)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
-    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build.msvc\.obj\$(Platform)-$(Configuration)-$(PlatformToolset)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)build.msvc\$(Platform)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)msvc.build\.obj\$(Platform)-$(Configuration)\$(ProjectName)\</IntDir>
-    <OutDir>$(SolutionDir)msvc.build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build.msvc\.obj\$(Platform)-$(Configuration)-$(PlatformToolset)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)build.msvc\$(Platform)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -95,7 +95,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -108,7 +108,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -124,7 +124,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,7 +140,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
