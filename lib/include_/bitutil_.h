@@ -104,6 +104,10 @@ static ALWAYS_INLINE unsigned mm256_hor_epi32(__m256i v) {
   return _mm256_extract_epi32(v,0) | _mm256_extract_epi32(v, 4);
 }
 
+#if defined(__i386__) || defined(_M_IX86)
+#define _mm256_extract_epi64(a, index) ((__int64)((((uint64_t)(uint32_t)_mm256_extract_epi32(a, index*2+1)) << 32) | (uint32_t)_mm256_extract_epi32(a, index*2)))
+#endif
+
 static ALWAYS_INLINE uint64_t mm256_hor_epi64(__m256i v) {
   v = _mm256_or_si256(v, _mm256_permute2x128_si256(v, v, _MM_SHUFFLE(2, 0, 0, 1)));
   return _mm256_extract_epi64(v, 1) | _mm256_extract_epi64(v,0);
@@ -175,6 +179,10 @@ static ALWAYS_INLINE __m128i mm_scani_epi32(__m128i v, __m128i sv, __m128i vi) {
   v = _ho_(v, _mm_srli_si128(v, 8));\
   v = _ho_(v, _mm_srli_si128(v, 4));\
 }
+
+#if defined(__i386__) || defined(_M_IX86)
+#define _mm_cvtsi128_si64(a) ((__int64)((((uint64_t)(uint32_t)_mm_extract_epi32(a, 1)) << 32) | (uint32_t)_mm_extract_epi32(a, 0)))
+#endif
 
 static ALWAYS_INLINE uint16_t mm_hor_epi16( __m128i v) { MM_HOZ_EPI16(v,_mm_or_si128);               return (unsigned short)_mm_cvtsi128_si32(v); }
 static ALWAYS_INLINE uint32_t mm_hor_epi32( __m128i v) { MM_HOZ_EPI32(v,_mm_or_si128);               return (unsigned      )_mm_cvtsi128_si32(v); }
