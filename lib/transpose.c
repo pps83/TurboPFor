@@ -54,6 +54,7 @@
 
 #include "include_/bitutil_.h"
 
+#undef PREFETCH
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
   #else
@@ -62,6 +63,9 @@
 
 #define powof2(n)        !((n)&((n)-1))
 
+#undef TPENC
+#undef TPDEC
+
 //-- 24 bits / 3 bytes (scalar only) ----------------------
 #define ESIZE 3
 #define STRIDE ESIZE
@@ -69,14 +73,21 @@
 #define TPENC            tpenc
 #define TPDEC            tpdec
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
 
 #define TPENC            tpzenc
 #define TPDEC            tpzdec
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
 
 #define TPENC            tpxenc
 #define TPDEC            tpxdec
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef ESIZE
 
 //-- 128 bits / 16 bytes (scalar only) --------------------
 #define ESIZE 16
@@ -85,15 +96,35 @@
 #define TPENC            tpenc
 #define TPDEC            tpdec
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
 
 #define TPENC            tpzenc
 #define TPDEC            tpzdec
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
 
 #define TPENC            tpxenc
 #define TPDEC            tpxdec
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
 
+#undef ESIZE
+#undef ST128
 //-----------------------------------------------------------
 #define LD128(_ip_)      _mm_loadu_si128( (__m128i *)(_ip_))
 #define ST128(_op_,_v_)  _mm_storeu_si128((__m128i *)(_op_),_v_)
@@ -124,6 +155,14 @@
 #include "transpose.c"
 #undef  TPENC256V
 #undef  TPDEC256V
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef VEINI128
+#undef VDINI128
+#undef VE128
+#undef VD128
 //--------------
 #define ISDELTA
 //-- zigzag
@@ -137,6 +176,13 @@
 #define VDINI128         __m128i sv = _mm_setzero_si128()
 #define VD128(_v_,_sv_)  _v_ = mm_zzagd_epi16( _v_); _sv_ = mm_scan_epi16(_v_,_sv_); _v_ = _sv_
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef VE128
+#undef VD128
+
 //-- xor
 #define TPENC            tpxenc
 #define TPDEC            tpxdec
@@ -148,8 +194,17 @@
 #define VDINI128         __m128i sv = _mm_setzero_si128()
 #define VD128(_v_,_sv_)  _sv_ = _v_ = mm_xord_epi16(_v_,_sv_)
 #include "transpose.c"
-//--
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef VEINI128
+#undef VDINI128
+#undef VE128
+#undef VD128
 #undef ISDELTA
+#undef STRIDE
+
 //----------- nibble ---------
 #define STRIDE 4
 #define TPENC            tp4enc
@@ -171,6 +226,14 @@
 #include "transpose.c"
 #undef  TPENC256V
 #undef  TPDEC256V
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef VEINI128
+#undef VDINI128
+#undef VE128
+#undef VD128
 
 #define ISDELTA
 //-- zigzag
@@ -184,6 +247,13 @@
 #define VDINI128         __m128i sv = _mm_setzero_si128()
 #define VD128(_v_,_sv_)  _v_ = mm_zzagd_epi16( _v_); _sv_ = mm_scan_epi16(_v_,_sv_); _v_ = _sv_
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef VE128
+#undef VD128
+
 //-- xor
 #define TPENC            tp4xenc
 #define TPDEC            tp4xdec
@@ -195,8 +265,19 @@
 #define VDINI128         __m128i sv = _mm_setzero_si128()
 #define VD128(_v_,_sv_)  _sv_ = _v_ = mm_xord_epi16(_v_,_sv_)
 #include "transpose.c"
-//--
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef VEINI128
+#undef VDINI128
+#undef VE128
+#undef VD128
 #undef ISDELTA
+#undef STRIDE
+#undef ESIZE
+#undef USIZE
+
 //------------------------------------------------ 32 bits ----------------------------------------------------------
 #define ESIZE 4
 #define USIZE 32
@@ -219,6 +300,21 @@
 #define VD128(_ov_,_sv_)
 #define VD256(_ov_,_sv_)
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
+
 //---------------------------------
 #define ISDELTA
 //-- zigzag
@@ -238,6 +334,17 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)  _v_ = mm256_zzagd_epi32(_v_); _sv_ = mm256_scan_epi32(_v_,_sv_); _v_ = _sv_
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
+
 //-- xor
 #define TPENC            tpxenc
 #define TPDEC            tpxdec
@@ -255,9 +362,24 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)  _sv_ = _v_ = mm256_xord_epi32(_v_,_sv_)
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
 //---------
 
 #undef ISDELTA
+#undef STRIDE
 //----------------- nibble ----------
 #define STRIDE 8
 #define TPENC            tp4enc
@@ -276,6 +398,21 @@
 #define VD128(_ov_,_sv_)
 #define VD256(_ov_,_sv_)
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
+
 //-------------
 #define ISDELTA
 //-- zigzag
@@ -295,6 +432,17 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)  _v_ = mm256_zzagd_epi32(_v_); _sv_ = mm256_scan_epi32(_v_,_sv_); _v_ = _sv_
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
+
 //-- xor
 #define TPENC            tp4xenc
 #define TPDEC            tp4xdec
@@ -312,8 +460,26 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)  _sv_ = mm256_xord_epi32(_v_,_sv_); _v_ = _sv_
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
+
 //--------------
 #undef ISDELTA
+#undef STRIDE
+#undef ESIZE
+#undef USIZE
 //------------------------------- 64 bits ---------------------------------------------------------------
 #define ESIZE 8
 #define USIZE 64
@@ -336,6 +502,20 @@
 #define VD128(_ov_,_sv_)
 #define VD256(_ov_,_sv_)
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
 
 //---------------
 #define ISDELTA
@@ -356,6 +536,21 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)                                      _v_ = mm256_zzagd_epi64(_v_); _sv_ = mm256_scan_epi64(_v_,_sv_); _v_ = _sv_
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
+
 //--- xor
 #define TPENC            tpxenc
 #define TPDEC            tpxdec
@@ -373,8 +568,23 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)                                       _sv_ = _v_ = mm256_xord_epi64(_v_,_sv_)
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
 //-----------
 #undef ISDELTA
+#undef STRIDE
 //---------- nibble ----------
 #define STRIDE 16
 #define TPENC            tp4enc
@@ -393,6 +603,20 @@
 #define VD128(_ov_,_sv_)
 #define VD256(_ov_,_sv_)
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
 //-------------------------
 #define ISDELTA
 //-- zigzag
@@ -412,6 +636,20 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)                                      _v_ = mm256_zzagd_epi64(_v_); _sv_ = mm256_scan_epi64(_v_,_sv_); _v_ = _sv_
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
 
 //-- xor
 #define TPENC            tp4xenc
@@ -430,6 +668,26 @@
 #define VDINI256         __m256i sv = _mm256_setzero_si256()
 #define VD256(_v_,_sv_)                                       _sv_ = _v_ = mm256_xord_epi64(_v_,_sv_)
 #include "transpose.c"
+#undef TPENC
+#undef TPDEC
+#undef TPENC128V
+#undef TPDEC128V
+#undef TPENC256V
+#undef TPDEC256V
+#undef VEINI128
+#undef VDINI128
+#undef VEINI256
+#undef VDINI256
+#undef VE128
+#undef VD128
+#undef VE256
+#undef VD256
+
+#undef ISDELTA
+#undef STRIDE
+#undef ESIZE
+#undef USIZE
+#undef ST
 
 #else //*************************************************************  Templates ********************************************************************************************************
 
@@ -586,6 +844,7 @@ void T2(TPENC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
         #endif
 
       #else //---------------------- Nibble Transpose ------------------------
+    #undef ST128
     #define mm256_packus_epi16(a, b) _mm256_permute4x64_epi64(_mm256_packus_epi16(a, b), _MM_SHUFFLE(3, 1, 2, 0))
     #define ST128(_p_,_v_,_i_) _mm_storeu_si128((__m256i *)SIE(_p_,_i_), _mm256_castsi256_si128(_v_))
     #define ST1280(_p_,_v_)    _mm_storeu_si128((__m256i *)(_p_), _mm256_castsi256_si128(_v_))

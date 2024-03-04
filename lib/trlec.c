@@ -30,6 +30,7 @@
 #include "include_/trle.h"
 #include "trle_.h"
 
+#undef PREFETCH
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
   #else
@@ -343,11 +344,14 @@ unsigned trlelen(const unsigned char *__restrict in, unsigned inlen) {
 #define USIZE 64
 #include "trlec.c"
 #undef USIZE
+#undef CSIZE
+#undef uint_t
 
 #else // ------------------- include RLE 16, 32, 64
 #define uint_t T3(uint, USIZE, _t)
 #define ctout(_x_) *(uint_t *)(_x_)
 
+#undef PUTC
 #define PUTC(_op_, _x_) ctout(_op_) = _x_, _op_ += sizeof(uint_t)
 #define PUTE(_op_, _e_) do { PUTC(_op_, _e_); vlput32(_op_, 0); } while(0)
 
@@ -359,7 +363,7 @@ unsigned trlelen(const unsigned char *__restrict in, unsigned inlen) {
   } else while(_r--) PUTC(_op_, pp[0]);\
 } while(0)
 
-  #if !SRLE8
+  #if !defined(SRLE8)
 unsigned T2(_srlec, USIZE)(const unsigned char *__restrict cin, unsigned inlen, unsigned char *__restrict out, uint_t e) {
   unsigned  char *op = out;
   unsigned  n = inlen/sizeof(uint_t);

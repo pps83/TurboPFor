@@ -137,6 +137,8 @@ size_t bicbound32(size_t n) { return n*4+4; }
 #define uint_t  uint32_t
 #include "bic.c"
 
+#undef USIZE
+#undef uint_t
 
 #else //-------------------- Template functions ----------------------------------------------------------------------------------------------------------
 
