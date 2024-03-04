@@ -1,4 +1,5 @@
 //---------- "Floating Point + Integer Compression" -----------------------------------------
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,4 +1,5 @@
 //-- "Integer Compression" variable byte (scalar TurboVByte+ SIMD TurboByte) ---------------------------------------------------------------
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
