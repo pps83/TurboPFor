@@ -144,6 +144,8 @@ static ALWAYS_INLINE int clz64(uint64_t x) { unsigned long z;   _BitScanReverse6
 static ALWAYS_INLINE double round(double num) { return (num > 0.0) ? floor(num + 0.5) : ceil(num - 0.5); }
   #endif
 
+#define PAD8(_x_) (((_x_)+7)/8)
+
 #define __bsr8(_x_)  __bsr32(_x_)
 #define __bsr16(_x_) __bsr32(_x_)
 #define bsr8(_x_)    bsr32(_x_)

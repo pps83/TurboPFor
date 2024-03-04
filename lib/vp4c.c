@@ -34,7 +34,6 @@
 #include "include_/bitutil_.h"
 
 #undef P4DELTA
-#define PAD8(_x_) ( (((_x_)+8-1)/8) )
 
 #define HYBRID 1 // Hybrid TurboPFor : 0=fixed bit packing, 1=fixed BP+Variable byte
 
