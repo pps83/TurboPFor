@@ -1,4 +1,5 @@
 //-- "TurboPFor: Integer Compression" PFor/PForDelta  + Direct access ----------------------------------------
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
