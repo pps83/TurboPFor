@@ -32,8 +32,9 @@
 #include "include_/vlcbyte.h"
 #include "include_/bitutil_.h"
 
-#define PAD8(_x_) ( (((_x_)+8-1)/8) )
+#define PAD8(_x_) (((_x_)+7)/8)
 
+#undef PREFETCH
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
   #else
@@ -306,7 +307,7 @@ size_t bitnfpack64( uint64_t *__restrict in, size_t n, unsigned char *__restrict
 #define OPPE(__op)
 #define IPPE(__op)
 
-#define PAD8(__x) (((__x)+8-1)/8)
+#define PAD8(__x) (((__x)+7)/8)
 #define OPPE(__op)
 #define IPPE(__op)
 
