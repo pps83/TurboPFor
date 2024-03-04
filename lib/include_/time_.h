@@ -37,7 +37,7 @@ typedef unsigned long long uint64_t;
 #define Sleep(ms) usleep((ms) * 1000)
   #endif
 
-#if defined (__i386__) || defined( __x86_64__ )  // ------------------ rdtsc --------------------------
+#if defined (__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86) // ------------------ rdtsc --------------------------
   #ifdef _MSC_VER
 #include <intrin.h> // __rdtsc
   #else
