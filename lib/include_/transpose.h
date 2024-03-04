@@ -1,4 +1,5 @@
 //--  transpose.h - Byte/Nibble transpose for further compressing with lz77 or other compressors -------------------------------------
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {

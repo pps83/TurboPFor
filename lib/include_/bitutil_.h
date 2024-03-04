@@ -22,6 +22,8 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //     "Integer Compression: max.bits, delta, zigzag, xor"
+#pragma once
+
   #ifdef __AVX2__
 #include <immintrin.h>
   #elif defined(__AVX__)
