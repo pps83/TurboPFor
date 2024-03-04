@@ -36,8 +36,6 @@
 #pragma warning(disable: 4005 4068 4090)
 #endif
 
-#define PAD8(__x) ( (((__x)+8-1)/8) )
-
 #define P4DELTA(a)
 #define P4DELTA_(a)
   #if defined(__SSSE3__) || defined(__ARM_NEON)

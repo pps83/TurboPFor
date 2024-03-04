@@ -42,8 +42,6 @@
 
 #include "include_/bitutil_.h"
 
-#define PAD8(__x) ( (((__x)+8-1)/8) )
-
   #ifdef __SSE42__
 #include <nmmintrin.h>
 #define bslr32(x) _blsr_u32(x)
