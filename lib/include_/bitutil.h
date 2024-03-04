@@ -1,5 +1,7 @@
 //-- "Integer Compression: max.bits, delta, zigzag, xor" -----------------------------------------------------------------------
 //---------- max. bit length + transform for sorted/unsorted arrays, delta,delta 1, delta > 1, zigzag, zigzag of delta, xor, FOR,----------------
+#pragma once
+
 #ifdef __cplusplus
 extern "C" {
 #endif
