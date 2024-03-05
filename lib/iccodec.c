@@ -925,3 +925,80 @@ size_t vhidecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t 
   }
   return inlen;
 }
+
+
+size_t vlccomp32x(const unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, codec_func enc) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
+  unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
+  uint32_t      *in = (uint32_t *)_in, *ip;
+  INDEC;
+  bitedef(bw,br); biteinir(bw,br,bp);
+  for(ip = in; ip < in+inlen; ip++) {
+    uint32_t x = ip[0];
+    bitvcput(bw,br,tp,bp,VLC_VN8,VLC_VB8, x); bitenormr(bw,br,bp);              if(bp <= tp+8) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }
+  }
+  bitflushr(bw,br,bp);
+  unsigned l = tmp_ - bp;
+
+  size_t clen = enc(tmp, tp-tmp, op, outsize-4-l);                              if(clen > 0xffffffff || op+clen+l >= out+_inlen) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }
+  ctou32(out) = (unsigned)clen; op += clen;
+  memmove(op, bp, l); op += l;
+  e:return op - out;
+}
+
+size_t vlcdecomp32x(const unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, codec_func dec) {
+  unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
+  uint32_t      *out = (uint32_t *)_out, *op = out, x=0;
+  if(inlen >= _outlen){ memcpy(_out, in, _outlen); return inlen; }
+  OUTDEC;
+  bitddef(bw, br); bitdinir(bw,br,bp);
+  unsigned clen = ctou32(ip-4);
+  dec(ip, clen, tmp, outlen);
+  for(; op != out+(outlen&~(2-1)); op+=2) {
+    bitdnormr(bw,br,bp);
+    bitvcget(bw,br,tp,bp,VLC_VN8,VLC_VB8, op[0]);
+    bitvcget(bw,br,tp,bp,VLC_VN8,VLC_VB8, op[1]);
+  }
+  for(; op != out+outlen; op++) {
+    bitdnormr(bw,br,bp);
+    bitvcget(bw,br,tp,bp,VLC_VN8,VLC_VB8, op[0]);
+  }
+  return inlen;
+}
+
+size_t vhicomp32x(const unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, codec_func enc) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
+  unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
+  uint32_t      *in = (uint32_t *)_in, *ip;
+  INDEC;
+  bitedef(bw,br); biteinir(bw,br,bp);
+  for(ip = in; ip < in+inlen; ip++) {
+    uint32_t x = ip[0];
+    bithcput(bw,br,tp,bp,VHI_K,VHI_I,VHI_J,x); bitenormr(bw,br,bp);              if(bp <= tp+8) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }
+  }
+  bitflushr(bw,br,bp);
+  unsigned l = tmp_ - bp;
+
+  size_t clen = enc(tmp, tp-tmp, op, outsize-4-l);                               if(clen > 0xffffffff || op+clen+l >= out+_inlen) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }
+  ctou32(out) = (unsigned)clen; op += clen;
+  memmove(op, bp, l); op += l;
+  e:return op - out;
+}
+
+size_t vhidecomp32x(const unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, codec_func dec) {
+  unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
+  uint32_t      *out = (uint32_t *)_out, *op = out, x=0;
+  if(inlen >= _outlen){ memcpy(_out, in, _outlen); return inlen; }
+  OUTDEC;
+  bitddef(bw, br); bitdinir(bw,br,bp);
+  unsigned clen = ctou32(ip-4);
+  dec(ip, clen, tmp, outlen);
+  for(; op != out+(outlen&~(2-1)); op+=2) {
+    bitdnormr(bw,br,bp);
+    bithcget(bw,br,tp,bp,VHI_K,VHI_I,VHI_J, op[0]);
+    bithcget(bw,br,tp,bp,VHI_K,VHI_I,VHI_J, op[1]);
+  }
+  for(; op != out+outlen; op++) {
+    bitdnormr(bw,br,bp);
+    bithcget(bw,br,tp,bp,VHI_K,VHI_I,VHI_J, op[0]);
+  }
+  return inlen;
+}
