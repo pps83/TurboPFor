@@ -1652,3 +1652,21 @@ unsigned char *vsdec64(unsigned char  *__restrict in, size_t n, uint64_t       *
 #ifdef __cplusplus
 }
 #endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef size_t(*codec_func)(const void* in, size_t inlen, void* out, size_t outlen); // secondary compression function
+
+//-- TurboVLC : Novel Variable Length Coding for large integers with exponent + mantissa ------------------------
+size_t   vlccomp32x(const unsigned char* in, size_t inlen, unsigned char* out, size_t outlen, unsigned char* tmp, codec_func enc);
+size_t vlcdecomp32x(const unsigned char* in, size_t inlen, unsigned char* out, size_t outlen, unsigned char* tmp, codec_func dec);
+//-- Hybrid integer ------
+size_t   vhicomp32x(const unsigned char* in, size_t inlen, unsigned char* out, size_t outlen, unsigned char* tmp, codec_func enc);
+size_t vhidecomp32x(const unsigned char* in, size_t inlen, unsigned char* out, size_t outlen, unsigned char* tmp, codec_func dec);
+
+#ifdef __cplusplus
+}
+#endif
