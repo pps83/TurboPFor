@@ -853,6 +853,7 @@ unsigned lztp1zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 size_t vlccomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
   unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
   uint32_t      *in = (uint32_t *)_in, *ip;
+  if(_inlen < 8){ memcpy(out, _in, _inlen); return _inlen; }
   INDEC;
   bitedef(bw,br); biteinir(bw,br,bp);
   for(ip = in; ip < in+inlen; ip++) {
@@ -891,6 +892,7 @@ size_t vlcdecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t 
 size_t vhicomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
   unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
   uint32_t      *in = (uint32_t *)_in, *ip;
+  if(_inlen < 8){ memcpy(out, _in, _inlen); return _inlen; }
   INDEC;
   bitedef(bw,br); biteinir(bw,br,bp);
   for(ip = in; ip < in+inlen; ip++) {
@@ -930,6 +932,7 @@ size_t vhidecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t 
 size_t vlccomp32x(const unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, codec_func enc) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
   unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
   uint32_t      *in = (uint32_t *)_in, *ip;
+  if(_inlen < 8){ memcpy(out, _in, _inlen); return _inlen; }
   INDEC;
   bitedef(bw,br); biteinir(bw,br,bp);
   for(ip = in; ip < in+inlen; ip++) {
@@ -968,6 +971,7 @@ size_t vlcdecomp32x(const unsigned char *in, size_t inlen, unsigned char *_out, 
 size_t vhicomp32x(const unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, codec_func enc) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
   unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
   uint32_t      *in = (uint32_t *)_in, *ip;
+  if(_inlen < 8){ memcpy(out, _in, _inlen); return _inlen; }
   INDEC;
   bitedef(bw,br); biteinir(bw,br,bp);
   for(ip = in; ip < in+inlen; ip++) {
