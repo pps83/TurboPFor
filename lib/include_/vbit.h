@@ -1,8 +1,9 @@
 //-- "Integer Compression" variable length encoding with bitio ------------------
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
+
 //-- Gamma coding (length limited) : Full 32 bit range
 size_t bitgenc32(  unsigned char *_in, size_t _inlen,  unsigned char  *out);
 size_t bitgdec32(  unsigned char  *in, size_t _outlen, unsigned char *_out);
@@ -23,7 +24,4 @@ size_t vlczdec16(  unsigned char  *in, size_t _outlen, unsigned char *_out);
 size_t vlczenc32(  unsigned char *_in, size_t _inlen,  unsigned char  *out);  // TurboVLC 32 bits zigzag
 size_t vlczdec32(  unsigned char  *in, size_t _outlen, unsigned char *_out);
 
-#ifdef __cplusplus
-}
-#endif
-
+IC_EXTERN_C_END
