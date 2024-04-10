@@ -1,9 +1,9 @@
 //---------- "Floating Point + Integer Compression" -----------------------------------------
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
 
 // ---------- TurboPFor Zigzag of delta (=delta of delta + zigzag encoding) (TurboPFor)
 size_t p4nzzenc128v8(    uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
@@ -109,7 +109,4 @@ size_t fp2dfcmdec32(unsigned char *in, size_t n, uint32_t      *out, uint32_t st
 size_t fp2dfcmenc64(uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
 size_t fp2dfcmdec64(unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 
-#ifdef __cplusplus
-}
-#endif
-
+IC_EXTERN_C_END

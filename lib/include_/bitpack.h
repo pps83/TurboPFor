@@ -1,9 +1,9 @@
 //-- bitpack -------------------------------------------------------------------------------------------------------
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
 
 size_t bitnbound8(     size_t n);
 size_t bitnbound16(    size_t n);
@@ -324,7 +324,5 @@ unsigned char *_bitunpack256v32(  const unsigned char *__restrict in, unsigned n
 unsigned char *_bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb);
 unsigned char *_bitd1unpack256v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb);
 unsigned char *_bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb);
-#ifdef __cplusplus
-}
-#endif
 
+IC_EXTERN_C_END
