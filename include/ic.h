@@ -51,14 +51,7 @@ unsigned bicmdec16(unsigned char *in, unsigned n, uint16_t      *out);
 unsigned bicmenc32(uint32_t      *in, unsigned n, unsigned char *out);
 unsigned bicmdec32(unsigned char *in, unsigned n, uint32_t      *out);
 
-#ifdef __cplusplus
-}
-#endif
-
 //-- bitpack -------------------------------------------------------------------------------------------------------
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 size_t bitnbound8(     size_t n);
 size_t bitnbound16(    size_t n);
@@ -379,15 +372,10 @@ unsigned char *_bitunpack256v32(  const unsigned char *__restrict in, unsigned n
 unsigned char *_bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb);
 unsigned char *_bitd1unpack256v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb);
 unsigned char *_bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb);
-#ifdef __cplusplus
-}
-#endif
 
 //-- "Integer Compression: max.bits, delta, zigzag, xor" -----------------------------------------------------------------------
 //---------- max. bit length + transform for sorted/unsorted arrays, delta,delta 1, delta > 1, zigzag, zigzag of delta, xor, FOR,----------------
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 //------ ORed array, used to determine the maximum bit length of the elements in an unsorted integer array ---------------------
 uint8_t  bit8(     uint8_t  *in, unsigned n, uint8_t  *px);
 uint16_t bit16(    uint16_t *in, unsigned n, uint16_t *px);
@@ -576,15 +564,8 @@ double _fprazor64(double d, double e, int lg2e);
 void   fprazor32( float  *in, unsigned n, float  *out, float  e);
 void   fprazor64(double  *in, unsigned n, double *out, double e);
 
-#ifdef __cplusplus
-}
-#endif
-
 //--  eliasfano.h - "Integer Compression" Elias Fano c/c++ header ---------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 // compress/decompress integer array with n values to the buffer out. Return value = end of output/input buffer
 unsigned char *efanoenc32(     unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
 unsigned char *efanoenc64(     uint64_t      *__restrict in, unsigned n, unsigned char  *__restrict out, uint64_t start);
@@ -610,15 +591,7 @@ unsigned char *efanodec256v32( unsigned char *__restrict in, unsigned n, unsigne
 unsigned char *efano1enc256v32(unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
 unsigned char *efano1dec256v32(unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
 
-#ifdef __cplusplus
-}
-#endif
-
 //---------- "Floating Point + Integer Compression" -----------------------------------------
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 // ---------- TurboPFor Zigzag of delta (=delta of delta + zigzag encoding) (TurboPFor)
 size_t p4nzzenc128v8(    uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
@@ -724,15 +697,8 @@ size_t fp2dfcmdec32(unsigned char *in, size_t n, uint32_t      *out, uint32_t st
 size_t fp2dfcmenc64(uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
 size_t fp2dfcmdec64(unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 
-#ifdef __cplusplus
-}
-#endif
-
 //--  transpose.h - Byte/Nibble transpose for further compressing with lz77 or other compressors -------------------------------------
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 // Syntax
 // in    : Input buffer
 // n     : Total number of bytes in input buffer
@@ -955,15 +921,9 @@ unsigned cpuini(unsigned cpuiset);
 char *cpustr(unsigned cpuisa);
 
 unsigned cpuisa(void);
-#ifdef __cplusplus
-}
-#endif
 
 // ----- TurboRLE - "Most efficient and fastest Run Length Encoding" -----------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 // RLE with specified escape char
 unsigned _srlec8( const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint8_t e);
 unsigned _srled8( const unsigned char *__restrict in,                 unsigned char *__restrict out, unsigned outlen, uint8_t e);
@@ -999,15 +959,9 @@ unsigned  srled(  const unsigned char *__restrict in, unsigned inlen, unsigned c
 unsigned  trlec(  const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out);
 unsigned _trled(  const unsigned char *__restrict in,                 unsigned char *__restrict out, unsigned outlen);
 unsigned  trled(  const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, unsigned outlen);
-#ifdef __cplusplus
-}
-#endif
 
 //-- "Integer Compression" variable length encoding with bitio ------------------
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 //-- Gamma coding (length limited) : Full 32 bit range
 size_t bitgenc32(  unsigned char *_in, size_t _inlen,  unsigned char  *out);
 size_t bitgdec32(  unsigned char  *in, size_t _outlen, unsigned char *_out);
@@ -1028,15 +982,7 @@ size_t vlczdec16(  unsigned char  *in, size_t _outlen, unsigned char *_out);
 size_t vlczenc32(  unsigned char *_in, size_t _inlen,  unsigned char  *out);  // TurboVLC 32 bits zigzag
 size_t vlczdec32(  unsigned char  *in, size_t _outlen, unsigned char *_out);
 
-#ifdef __cplusplus
-}
-#endif
-
 //-- "Integer Compression" variable byte (scalar TurboVByte+ SIMD TurboByte) ---------------------------------------------------------------
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 //----------------------------- TurboVByte 'vb':Variable byte + SIMD TurboByte 'v8': array functions -----
 size_t vbbound8( size_t n);
@@ -1277,15 +1223,7 @@ size_t v8nzdec256v32( unsigned char *__restrict in, size_t n, uint32_t      *__r
 size_t v8nxenc256v32( uint32_t      *__restrict in, size_t n, unsigned char *__restrict out);
 size_t v8nxdec256v32( unsigned char *__restrict in, size_t n, uint32_t      *__restrict out);
 
-#ifdef __cplusplus
-}
-#endif
-
 //-- "TurboPFor: Integer Compression" PFor/PForDelta  + Direct access ----------------------------------------
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 size_t p4nbound8( size_t n);
 size_t p4nbound16(size_t n);
@@ -1618,18 +1556,10 @@ unsigned char *p4fdecx32(  unsigned char *in, unsigned n, uint32_t *out, uint32_
 unsigned char *p4f1decx32( unsigned char *in, unsigned n, uint32_t *out, uint32_t start); // FOR strictly increasing
   #endif
 
-#ifdef __cplusplus
-}
-#endif
-
 // -- "Integer Compression" variable simple "SimpleV" -----------------------------------------------------------
 //  this belongs to the integer compression known as "simple family", like simple-9,simple-16
 //  or simple-8b. SimpleV is compressing integers in groups into variable word size 32, 40 and 64 bits + RLE (run length encoding)
 //  SimpleV is faster than simple-16 and compress better than simple-16 or simple-8b.
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 size_t vsbound8( size_t n);
 size_t vsbound16(size_t n);
@@ -1647,15 +1577,6 @@ unsigned char *vsdec8( unsigned char  *__restrict in, size_t n, unsigned char  *
 unsigned char *vsdec16(unsigned char  *__restrict in, size_t n, unsigned short *__restrict out);
 unsigned char *vsdec32(unsigned char  *__restrict in, size_t n, unsigned       *__restrict out);
 unsigned char *vsdec64(unsigned char  *__restrict in, size_t n, uint64_t       *__restrict out);
-
-#ifdef __cplusplus
-}
-#endif
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 typedef size_t(*codec_func)(const void* in, size_t inlen, void* out, size_t outlen); // secondary compression function
 
