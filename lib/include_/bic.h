@@ -22,12 +22,9 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //-- "Interpolative Coding" --------------------------------------------------------------
-#include <stdint.h>
-#include <stddef.h>
+#include "conf.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+IC_EXTERN_C_BEGIN
 
 //-- maximum output size for encoding
 size_t bicbound16(size_t n);
@@ -51,7 +48,4 @@ unsigned bicmdec16(unsigned char *in, unsigned n, uint16_t      *out);
 unsigned bicmenc32(uint32_t      *in, unsigned n, unsigned char *out);
 unsigned bicmdec32(unsigned char *in, unsigned n, uint32_t      *out);
 
-#ifdef __cplusplus
-}
-#endif
-
+IC_EXTERN_C_END

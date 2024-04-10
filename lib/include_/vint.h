@@ -1,9 +1,9 @@
 //-- "Integer Compression" variable byte (scalar TurboVByte+ SIMD TurboByte) ---------------------------------------------------------------
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
 
 //----------------------------- TurboVByte 'vb':Variable byte + SIMD TurboByte 'v8': array functions -----
 size_t vbbound8( size_t n);
@@ -244,7 +244,4 @@ size_t v8nzdec256v32( unsigned char *__restrict in, size_t n, uint32_t      *__r
 size_t v8nxenc256v32( uint32_t      *__restrict in, size_t n, unsigned char *__restrict out);
 size_t v8nxdec256v32( unsigned char *__restrict in, size_t n, uint32_t      *__restrict out);
 
-#ifdef __cplusplus
-}
-#endif
-
+IC_EXTERN_C_END

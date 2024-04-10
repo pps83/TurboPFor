@@ -1,9 +1,10 @@
 // ----- TurboRLE - "Most efficient and fastest Run Length Encoding" -----------------------------------------------------------
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
+
 // RLE with specified escape char
 unsigned _srlec8( const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint8_t e);
 unsigned _srled8( const unsigned char *__restrict in,                 unsigned char *__restrict out, unsigned outlen, uint8_t e);
@@ -39,7 +40,5 @@ unsigned  srled(  const unsigned char *__restrict in, unsigned inlen, unsigned c
 unsigned  trlec(  const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out);
 unsigned _trled(  const unsigned char *__restrict in,                 unsigned char *__restrict out, unsigned outlen);
 unsigned  trled(  const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, unsigned outlen);
-#ifdef __cplusplus
-}
-#endif
 
+IC_EXTERN_C_END

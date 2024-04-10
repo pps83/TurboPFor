@@ -1,9 +1,9 @@
 //-- "TurboPFor: Integer Compression" PFor/PForDelta  + Direct access ----------------------------------------
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
 
 size_t p4nbound8( size_t n);
 size_t p4nbound16(size_t n);
@@ -336,7 +336,4 @@ unsigned char *p4fdecx32(  unsigned char *in, unsigned n, uint32_t *out, uint32_
 unsigned char *p4f1decx32( unsigned char *in, unsigned n, uint32_t *out, uint32_t start); // FOR strictly increasing
   #endif
 
-#ifdef __cplusplus
-}
-#endif
-
+IC_EXTERN_C_END
