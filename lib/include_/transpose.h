@@ -1,9 +1,10 @@
 //--  transpose.h - Byte/Nibble transpose for further compressing with lz77 or other compressors -------------------------------------
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
+
 // Syntax
 // in    : Input buffer
 // n     : Total number of bytes in input buffer
@@ -226,7 +227,5 @@ unsigned cpuini(unsigned cpuiset);
 char *cpustr(unsigned cpuisa);
 
 unsigned cpuisa(void);
-#ifdef __cplusplus
-}
-#endif
 
+IC_EXTERN_C_END

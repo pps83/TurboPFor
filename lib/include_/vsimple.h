@@ -3,9 +3,9 @@
 //  or simple-8b. SimpleV is compressing integers in groups into variable word size 32, 40 and 64 bits + RLE (run length encoding)
 //  SimpleV is faster than simple-16 and compress better than simple-16 or simple-8b.
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
 
 size_t vsbound8( size_t n);
 size_t vsbound16(size_t n);
@@ -24,7 +24,4 @@ unsigned char *vsdec16(unsigned char  *__restrict in, size_t n, unsigned short *
 unsigned char *vsdec32(unsigned char  *__restrict in, size_t n, unsigned       *__restrict out);
 unsigned char *vsdec64(unsigned char  *__restrict in, size_t n, uint64_t       *__restrict out);
 
-#ifdef __cplusplus
-}
-#endif
-
+IC_EXTERN_C_END

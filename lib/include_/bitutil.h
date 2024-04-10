@@ -2,9 +2,10 @@
 //---------- max. bit length + transform for sorted/unsorted arrays, delta,delta 1, delta > 1, zigzag, zigzag of delta, xor, FOR,----------------
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
+
 //------ ORed array, used to determine the maximum bit length of the elements in an unsorted integer array ---------------------
 uint8_t  bit8(     uint8_t  *in, unsigned n, uint8_t  *px);
 uint16_t bit16(    uint16_t *in, unsigned n, uint16_t *px);
@@ -194,7 +195,4 @@ double _fprazor64(double d, double e, int lg2e);
 void   fprazor32( float  *in, unsigned n, float  *out, float  e);
 void   fprazor64(double  *in, unsigned n, double *out, double e);
 
-#ifdef __cplusplus
-}
-#endif
-
+IC_EXTERN_C_END
