@@ -25,9 +25,20 @@
 // conf.h - config & common
 #ifndef CONF_H_
 #define CONF_H_
+
+#if defined(__cplusplus) && !defined(IC_NO_EXTERN_C)
+#define IC_EXTERN_C_BEGIN extern "C" {
+#define IC_EXTERN_C_END   }
+#else
+#define IC_EXTERN_C_BEGIN
+#define IC_EXTERN_C_END
+#endif
+
+#define __STDC_WANT_IEC_60559_TYPES_EXT__
+
 #include <stdint.h>
 #include <stddef.h>
-#define __STDC_WANT_IEC_60559_TYPES_EXT__
+#include <math.h>
 #include <float.h>
 #if defined(__clang__) && defined(__is_identifier)
   #if !__is_identifier(_Float16)
@@ -89,8 +100,6 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
 
   #elif defined(_MSC_VER) //----------------------------------------------------
 #include <intrin.h>
-#include <stdint.h>
-#include <math.h>
 #define __builtin_prefetch(x,a) _mm_prefetch(x, _MM_HINT_NTA)
 
 #define ALIGNED(t,v,n)  __declspec(align(n)) t v
@@ -265,7 +274,6 @@ struct _PACKED doubleu   { double             d; };
   #else
 #define __WORDSIZE 32
   #endif
-#endif
 
 //---------------------misc ---------------------------------------------------
 #define BZMASK64(_b_)                    (~(~0ull << (_b_)))
@@ -339,3 +347,5 @@ struct _PACKED doubleu   { double             d; };
 #define die(fmt,args...) do { fprintf(stderr, "%s:%s:%d:", __FILE__, __FUNCTION__, __LINE__); fprintf(stderr, fmt, ## args ); fflush(stderr); exit(-1); } while(0)
     #endif
   #endif
+
+#endif // CONF_H
