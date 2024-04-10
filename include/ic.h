@@ -25,7 +25,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(IC_NO_EXTERN_C)
 extern "C" {
 #endif
 
@@ -1478,6 +1478,6 @@ size_t vlcdecomp32x(const unsigned char* in, size_t inlen, unsigned char* out, s
 size_t   vhicomp32x(const unsigned char* in, size_t inlen, unsigned char* out, size_t outlen, unsigned char* tmp, codec_func enc);
 size_t vhidecomp32x(const unsigned char* in, size_t inlen, unsigned char* out, size_t outlen, unsigned char* tmp, codec_func dec);
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(IC_NO_EXTERN_C)
 }
 #endif

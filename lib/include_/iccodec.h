@@ -22,6 +22,9 @@
     - email    : powturbo [_AT_] gmail [_DOT_] com
 **/
 //-- codec: general purpose compression (lz, entropy coder, bwt,....)---------------------------------------------------------------------------------------------------
+#include "conf.h"
+
+IC_EXTERN_C_BEGIN
 
 enum {
   ICC_NONE,
@@ -38,10 +41,6 @@ enum {
   ICC_MEMCPY,
   ICC_LAST,
 };
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 //------------------- codecs -----------------------------------------------------------------------------------------------
 size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned outsize, int codid, int codlev, unsigned char *codprm);
@@ -139,6 +138,4 @@ int  lzidget(char *scmd);
 char *codstr(unsigned cid);
 unsigned* getAvailableLzs(); // ICC_LAST will be the last entry
 
-#ifdef __cplusplus
-}
-#endif
+IC_EXTERN_C_END
