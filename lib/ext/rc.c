@@ -112,7 +112,7 @@ unsigned char *rc_turbo_rice_encode(unsigned *w, unsigned int **buf, unsigned in
     for (i = 0; i < s; i++)  w[i] = 0;
     for (i = 0; i < block_size; i++)  out[i] = (*buf)[i] & ((1u<<bits)-1);// MASK[bits];
     //pack(out, bits, block_size, *w);
-	w = bitpack32(out, block_size, w, bits);
+	w = (unsigned int*)bitpack32(out, block_size, (unsigned char*)w, bits);
     //*w += s;
   }
 
@@ -129,7 +129,7 @@ unsigned char *rc_turbo_rice_encode(unsigned *w, unsigned int **buf, unsigned in
     if (bp&31) w += 1;
   }
   *buf += block_size;
-  return w;
+  return (unsigned char*)w;
 }
 
 unsigned char *rcenc32(unsigned* input, int size, unsigned* output)
@@ -163,10 +163,10 @@ unsigned char *rcenc32(unsigned* input, int size, unsigned* output)
 
 	unsigned* tmp = input;
 	unsigned* tmp2 = output+1;
-	tmp2 = rc_turbo_rice_encode(tmp2, &tmp, b);
+	tmp2 = (unsigned*)rc_turbo_rice_encode(tmp2, &tmp, b);
 	*output = (unsigned)((b<<6)|fres);
 
-	return tmp2;// - output;
+	return (unsigned char*)tmp2;// - output;
 }
 
 unsigned char *rc_turbo_rice_decode(unsigned int *w, unsigned int *buf,
@@ -179,7 +179,7 @@ unsigned char *rc_turbo_rice_decode(unsigned int *w, unsigned int *buf,
   unsigned int val;
 
   //(unpack[flag])(buf, *w, block_size);
-  w = bitunpack32(w, block_size, (unsigned char *)buf, flag);
+  w = (unsigned*)bitunpack32((unsigned char*)w, block_size, buf, flag);
   //*w += ((bits * block_size)>>5);
 
 if (bits < 32)
@@ -1796,7 +1796,7 @@ if (bits < 32)
   w += (i>>2);
   if (i & 3)  w += 1;
 }
-  return w;
+  return (unsigned char*)w;
 }
 
 unsigned char *rcdec32(unsigned* input, int size, unsigned* output)
