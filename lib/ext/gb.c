@@ -85,8 +85,8 @@ void ccr_gbr 			/* [fnc] Granular BitRound buffer of float values */
     /* Missing value for comparison is _FillValue (if any) otherwise default NC_FILL_FLOAT/DOUBLE */
     if(has_mss_val) mss_val_cmp_flt=*mss_val.fp; else mss_val_cmp_flt=NC_FILL_FLOAT;
     bit_xpl_nbr_sgn=bit_xpl_nbr_sgn_flt;
-    u32_ptr=op1; //.ui32p;
-	float *fp = op1;
+    u32_ptr=(unsigned int*)op1; //.ui32p;
+	float *fp = (float*)op1;
 
     for(idx=0L;idx<sz;idx++){
       if((val=fp[idx]) != mss_val_cmp_flt && u32_ptr[idx] != 0U){
@@ -116,8 +116,8 @@ void ccr_gbr 			/* [fnc] Granular BitRound buffer of float values */
     /* Missing value for comparison is _FillValue (if any) otherwise default NC_FILL_FLOAT/DOUBLE */
     if(has_mss_val) mss_val_cmp_dbl=*mss_val.dp; else mss_val_cmp_dbl=NC_FILL_FLOAT;
     bit_xpl_nbr_sgn=bit_xpl_nbr_sgn_dbl;
-    u64_ptr=op1;
-	double *dp = op1;
+    u64_ptr=(unsigned long long*)op1;
+	double *dp = (double*)op1;
 
     for(idx=0L;idx<sz;idx++){
       if((val=dp[idx]) != mss_val_cmp_dbl && u64_ptr[idx] != 0U){

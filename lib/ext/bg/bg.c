@@ -129,7 +129,7 @@ unsigned char* BG_compress_args(int dataType, void *data, size_t *outSize, int b
 				return NULL;
 			}
 
-			u64_ptr=(unsigned long int*)data_;
+			u64_ptr=(unsigned long long int*)data_;
 			/* Create mask */
 			msk_f64_u64_zro=0ul; /* Zero all bits */
 			msk_f64_u64_zro=~msk_f64_u64_zro; /* Turn all bits to ones */
