@@ -473,6 +473,13 @@ void bitzdec(unsigned char *in, unsigned n,                     unsigned esize);
 #define FLOAT2INT(fval, scalse, bias) round(fval * scale + bias)
 #define INT2FLOAT(ival, scalse, bias) ((ival - bias) / scale)
 
+#if defined(__clang__) && defined(__is_identifier)
+  #if !__is_identifier(_Float16)
+    #undef FLT16_BUILTIN
+  #endif
+#elif defined(FLT16_MAX)
+#define FLT16_BUILTIN
+#endif
 //------- Quantization : b number of bits quantized in out ----------------
   #if defined(FLT16_BUILTIN)
 void fpquant8e16( _Float16 *in, size_t n, uint8_t  *out, unsigned b, _Float16 *pfmin, _Float16 *pfmax);
@@ -502,15 +509,9 @@ void fpquant16d64(uint16_t *in, size_t n, double   *out, unsigned b, double     
 void fpquant32d64(uint32_t *in, size_t n, double   *out, unsigned b, double     fmin,   double   fmax);
 void fpquant64d64(uint64_t *in, size_t n, double   *out, unsigned b, double     fmin,   double   fmax);
 
+
 //------- Lossy floating point transform: pad the trailing mantissa bits with zeros according to the error e (ex. e=0.00001)
 // must include float.h to use _Float16 (see icapp.c)
-#if defined(__clang__) && defined(__is_identifier)
-  #if !__is_identifier(_Float16)
-    #undef FLT16_BUILTIN
-  #endif
-#elif defined(FLT16_MAX)
-#define FLT16_BUILTIN
-#endif
  #ifdef FLT16_BUILTIN
 _Float16 _fprazor16(_Float16 d, float e, int lg2e);
 void fprazor16(_Float16 *in, unsigned n, _Float16  *out, float  e);
