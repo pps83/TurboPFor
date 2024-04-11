@@ -605,10 +605,10 @@ size_t T2(fphdec,USIZE)(unsigned char *in, size_t n, uint_t *out, uint_t start) 
         break;\
       case 2: bitdnorm(bw,br,ip); T2(bitget,_usize_)(bw,br,(_usize_-ol), z, ip);                                            s = _usize_ == ol?_usize_:_usize_ - ol;\
         break;\
-      case 1: BITGET32(bw,br, CCODEL, ol); ol = c2l(ol); BITGET32(bw,br,BSIZE(_usize_), s);                                 s = s?s:_usize_;\
+      case 1:{BITGET32(bw,br, CCODEL, ol); ol = c2l(ol); BITGET32(bw,br,BSIZE(_usize_), s);                                 s = s?s:_usize_;\
         int ot = _usize_ - s - ol;\
         bitdnorm(bw,br,ip); T2(bitget,_usize_)(bw,br, (_usize_ - ol - ot), z, ip); z <<= ot;\
-        break;\
+        break;}\
 	  case 0: ;\
     } op[_i_] = start = XORDEC(z, start,_usize_);\
   }
