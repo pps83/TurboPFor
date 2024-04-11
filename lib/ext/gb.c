@@ -81,7 +81,7 @@ void ccr_gbr 			/* [fnc] Granular BitRound buffer of float values */
   if(type == NC_DOUBLE && prc_bnr_xpl_rqr >= bit_xpl_nbr_sgn_dbl) return;
 
   switch(type){
-  case NC_FLOAT:
+  case NC_FLOAT:{
     /* Missing value for comparison is _FillValue (if any) otherwise default NC_FILL_FLOAT/DOUBLE */
     if(has_mss_val) mss_val_cmp_flt=*mss_val.fp; else mss_val_cmp_flt=NC_FILL_FLOAT;
     bit_xpl_nbr_sgn=bit_xpl_nbr_sgn_flt;
@@ -111,8 +111,8 @@ void ccr_gbr 			/* [fnc] Granular BitRound buffer of float values */
 	u32_ptr[idx]&=msk_f32_u32_zro; /* Shave it */
       } /* !mss_val_cmp_flt */
     } /* !idx */
-    break; /* !NC_FLOAT */
-  case NC_DOUBLE:
+    break;} /* !NC_FLOAT */
+  case NC_DOUBLE:{
     /* Missing value for comparison is _FillValue (if any) otherwise default NC_FILL_FLOAT/DOUBLE */
     if(has_mss_val) mss_val_cmp_dbl=*mss_val.dp; else mss_val_cmp_dbl=NC_FILL_FLOAT;
     bit_xpl_nbr_sgn=bit_xpl_nbr_sgn_dbl;
@@ -142,7 +142,7 @@ void ccr_gbr 			/* [fnc] Granular BitRound buffer of float values */
 	u64_ptr[idx]&=msk_f64_u64_zro; /* Shave it */
       } /* !mss_val_cmp_dbl */
     } /* !idx */
-    break; /* !NC_DOUBLE */
+    break;} /* !NC_DOUBLE */
   default:
     (void)fprintf(stderr,"ERROR: %s reports datum size = %d B is invalid for %s filter\n",fnc_nm,type,""/*CCR_FLT_NAME*/);
     break;
