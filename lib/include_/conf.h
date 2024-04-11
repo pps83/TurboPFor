@@ -100,7 +100,7 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
 
   #elif defined(_MSC_VER) //----------------------------------------------------
 #include <intrin.h>
-#define __builtin_prefetch(x,a) _mm_prefetch(x, _MM_HINT_NTA)
+#define __builtin_prefetch(x,a) _mm_prefetch((const char*)(x), _MM_HINT_NTA)
 
 #define ALIGNED(t,v,n)  __declspec(align(n)) t v
 #define ALWAYS_INLINE   __forceinline
