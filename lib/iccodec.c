@@ -344,9 +344,9 @@ unsigned lzv8enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned
   unsigned clen = 0;
   switch(esize) {
     case 1: clen = inlen; memcpy(tmp, in, inlen); break;
-    case 2: clen = v8enc16(in, inlen/2, tmp) - tmp; break;
-	case 4: clen = v8enc32(in, inlen/4, tmp) - tmp; break;
-	case 8: clen = vbenc64(in, inlen/8, tmp) - tmp; break;
+    case 2: clen = v8enc16((uint16_t*)in, inlen/2, tmp) - tmp; break;
+	case 4: clen = v8enc32((uint32_t*)in, inlen/4, tmp) - tmp; break;
+	case 8: clen = vbenc64((uint64_t*)in, inlen/8, tmp) - tmp; break;
   }
   ctou32(out) = clen;
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
@@ -357,9 +357,9 @@ unsigned lzv8dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned
   codecdec(in+4, inlen-4, tmp, clen, codid, codlev, codprm);
   switch(esize) {
     case 1: memcpy( out, tmp, outlen);   break;
-    case 2: v8dec16(tmp, outlen/2, out); break;
-	case 4: v8dec32(tmp, outlen/4, out); break;
-  	case 8: vbdec64(tmp, outlen/8, out); break;
+    case 2: v8dec16(tmp, outlen/2, (uint16_t*)out); break;
+	case 4: v8dec32(tmp, outlen/4, (uint32_t*)out); break;
+  	case 8: vbdec64(tmp, outlen/8, (uint64_t*)out); break;
 }
   return inlen;
 }
@@ -369,9 +369,9 @@ unsigned lzv8xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   unsigned clen=0;
     switch(esize) {
     case 1: clen = inlen; memcpy(tmp, in, inlen); break;
-    case 2: clen = v8xenc16(in, inlen/2, tmp, 0) - tmp; break;
-	case 4: clen = v8xenc32(in, inlen/4, tmp, 0) - tmp; break;
-	case 8: clen = vbxenc64(in, inlen/8, tmp, 0) - tmp; break;
+    case 2: clen = v8xenc16((uint16_t*)in, inlen/2, tmp, 0) - tmp; break;
+	case 4: clen = v8xenc32((uint32_t*)in, inlen/4, tmp, 0) - tmp; break;
+	case 8: clen = vbxenc64((uint64_t*)in, inlen/8, tmp, 0) - tmp; break;
   }
   ctou32(out) = clen;
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
@@ -381,9 +381,9 @@ unsigned lzv8xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   unsigned clen = ctou32(in); codecdec(in+4, inlen-4, tmp, clen, codid, codlev, codprm);
   switch(esize) {
     case 1: memcpy(out, tmp, outlen);   break;
-    case 2: v8xdec16(tmp, outlen/2, out, 0); break;
-	case 4: v8xdec32(tmp, outlen/4, out, 0); break;
-	case 8: vbxdec64(tmp, outlen/8, out, 0); break;
+    case 2: v8xdec16(tmp, outlen/2, (uint16_t*)out, 0); break;
+	case 4: v8xdec32(tmp, outlen/4, (uint32_t*)out, 0); break;
+	case 8: vbxdec64(tmp, outlen/8, (uint64_t*)out, 0); break;
   }
   return inlen;
 }
@@ -393,9 +393,9 @@ unsigned lzv8zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   unsigned clen = 0;
   switch(esize) {
     case 1: clen = inlen; memcpy(tmp, in, inlen); break;
-    case 2: clen = v8zenc16(in, inlen/2, tmp, 0) - tmp; break;
-	case 4: clen = v8zenc32(in, inlen/4, tmp, 0) - tmp; break;
-	case 8: clen = vbzenc64(in, inlen/8, tmp, 0) - tmp; break;
+    case 2: clen = v8zenc16((uint16_t*)in, inlen/2, tmp, 0) - tmp; break;
+	case 4: clen = v8zenc32((uint32_t*)in, inlen/4, tmp, 0) - tmp; break;
+	case 8: clen = vbzenc64((uint64_t*)in, inlen/8, tmp, 0) - tmp; break;
   }
   ctou32(out) = clen;
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
@@ -405,9 +405,9 @@ unsigned lzv8zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   unsigned clen = ctou32(in); codecdec(in+4, inlen-4, tmp, clen, codid, codlev, codprm);
   switch(esize) {
     case 1: memcpy( out, tmp, outlen);   break;
-    case 2: v8zdec16(tmp, outlen/2, out, 0); break;
-	case 4: v8zdec32(tmp, outlen/4, out, 0); break;
-	case 8: vbzdec64(tmp, outlen/8, out, 0); break;
+    case 2: v8zdec16(tmp, outlen/2, (uint16_t*)out, 0); break;
+	case 4: v8zdec32(tmp, outlen/4, (uint32_t*)out, 0); break;
+	case 8: vbzdec64(tmp, outlen/8, (uint64_t*)out, 0); break;
   }
   return inlen;
 }
