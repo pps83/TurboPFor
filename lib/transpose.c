@@ -766,7 +766,7 @@ void T2(TPENC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
     #endif
     #if STRIDE > ESIZE // ------------------ byte transpose ----------------------------------
   __m256i cl = _mm256_set1_epi8( 0x0f),
-          ch = _mm256_set1_epi8( 0xf0),
+          ch = _mm256_set1_epi8( 0xf0u),
           cb = _mm256_set1_epi16(0xff);
     #endif
 
@@ -900,7 +900,7 @@ void T2(TPDEC256V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   VDINI256;
 
     #if STRIDE > ESIZE
-  __m256i cl = _mm256_set1_epi8(0x0f), ch=_mm256_set1_epi8(0xf0), cb = _mm256_set1_epi16(0xff);
+  __m256i cl = _mm256_set1_epi8(0x0f), ch=_mm256_set1_epi8(0xf0u), cb = _mm256_set1_epi16(0xff);
     #endif
 
   for(op = out,ip = in; op != out+v; ip += ESIZE*32/STRIDE, op += ESIZE*32) { unsigned char *p = ip;    PREFETCH(ip+ESIZE*192,0);
@@ -1020,7 +1020,7 @@ void T2(TPENC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
     #endif
   VEINI128;
       #if STRIDE > ESIZE
-  __m128i cl = _mm_set1_epi8(0x0f), ch=_mm_set1_epi8(0xf0), cb = _mm_set1_epi16(0xff);
+  __m128i cl = _mm_set1_epi8(0x0f), ch=_mm_set1_epi8(0xf0u), cb = _mm_set1_epi16(0xff);
       #endif
 
   for(ip = in, op = out; ip != in+v; ip+=ESIZE*16,op += ESIZE*16/STRIDE) { unsigned char *p = op;   PREFETCH(ip+(ESIZE*16)*ESIZE,0);
@@ -1293,7 +1293,7 @@ void T2(TPDEC128V, ESIZE)(unsigned char *in, unsigned n, unsigned char *out) {
   unsigned char *op,*ip;
 
     #if STRIDE > ESIZE
-  __m128i cl = _mm_set1_epi8(0x0f), ch=_mm_set1_epi8(0xf0), cb = _mm_set1_epi16(0xff);
+  __m128i cl = _mm_set1_epi8(0x0f), ch=_mm_set1_epi8(0xf0u), cb = _mm_set1_epi16(0xff);
     #endif
   VDINI128;
   for(op = out,ip = in; op != out+v; op+=ESIZE*16,ip += ESIZE*16/STRIDE) {
