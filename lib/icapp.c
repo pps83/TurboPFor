@@ -625,6 +625,7 @@ void libmemcpy(unsigned char *dst, unsigned char *src, int len) {
   #ifdef _STREAMVBYTE
 #include "ext/streamvbyte/include/streamvbyte.h"
 #include "ext/streamvbyte/include/streamvbytedelta.h"
+#include "ext/streamvbyte/include/streamvbyte_zigzag.h"
 static size_t streamvbyte_zzag_encode(const uint32_t *in, uint32_t length, uint8_t *out, uint32_t prev, uint8_t *tmp) {
   zigzag_delta_encode((const int32_t*)in, (uint32_t*)tmp, length, prev);
   return streamvbyte_encode((uint32_t*)tmp, length, out);
@@ -1564,8 +1565,8 @@ unsigned bench16(unsigned char * const in8, unsigned n, unsigned char * const ou
     case 107: if(nw>0) { TM("",l=lztpd4xenc(in8,n,out,ns,USIZE,tmp8,nx,ny,nz,nw,codid,codlev,codprm), n,l, lztpd4xdec(out,l,cpy8,n,USIZE,tmp8, nx,ny,nz,nw,codid,codlev,codprm)); } break;
     case 108: if(nw>0) { TM("",l=lztpd4zenc(in8,n,out,ns,USIZE,tmp8,nx,ny,nz,nw,codid,codlev,codprm), n,l, lztpd4zdec(out,l,cpy8,n,USIZE,tmp8, nx,ny,nz,nw,codid,codlev,codprm)); } break;
       #endif
-    case 110: TM("", l=vlcenc16(in8,  n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlcdec16( out,n,cpy8)); break;
-    case 111: TM("", l=vlczenc16(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlczdec16(out,n,cpy8)); break;
+    case 110: TM("", l=vlcenc16(in8,  n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlcdec16( out,n,cpy8)); break;
+    case 111: TM("", l=vlczenc16(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlczdec16(out,n,cpy8)); break;
 
     case 117: TM("", tpenc( in8, l=n, out,USIZE), n,l, tpdec( out, n,cpy8, USIZE)); break;
     case 118: TM("", tp4enc(in8, l=n, out,USIZE), n,l, tp4dec(out, n,cpy8, USIZE)); break;
@@ -1769,8 +1770,8 @@ unsigned bench32(unsigned char * const in8, unsigned n, unsigned char * const ou
     case 93:               TM("",l=lzv8enc(    in8,n,out,ns,USIZE,tmp8,codid,codlev,codprm), n,l, lzv8dec(    out,l,cpy8,n,USIZE,tmp8,codid,codlev,codprm)); break;
     case 94:               TM("",l=lzv8xenc(   in8,n,out,ns,USIZE,tmp8,codid,codlev,codprm), n,l, lzv8xdec(   out,l,cpy8,n,USIZE,tmp8,codid,codlev,codprm)); break;
     case 95:               TM("",l=lzv8zenc(   in8,n,out,ns,USIZE,tmp8,codid,codlev,codprm), n,l, lzv8zdec(   out,l,cpy8,n,USIZE,tmp8,codid,codlev,codprm)); break;
-    case 96:               TM("",l=vlccomp32(  in8,n,out,ns,      tmp8,codid,codlev,codprm), n,l, l==n?memcpy(cpy,in,n):(void *)vlcdecomp32(out, l, cpy8, n, tmp8,codid,codlev,codprm)); break;
-    case 97:               TM("",l=vhicomp32(  in8,n,out,ns,      tmp8,codid,codlev,codprm), n,l, l==n?memcpy(cpy,in,n):(void *)vhidecomp32(out, l, cpy8, n, tmp8,codid,codlev,codprm)); break;
+    case 96:               TM("",l=vlccomp32(  in8,n,out,ns,      tmp8,codid,codlev,codprm), n,l, if(l==n)memcpy(cpy,in,n); else vlcdecomp32(out, l, cpy8, n, tmp8,codid,codlev,codprm)); break;
+    case 97:               TM("",l=vhicomp32(  in8,n,out,ns,      tmp8,codid,codlev,codprm), n,l, if(l==n)memcpy(cpy,in,n); else vhidecomp32(out, l, cpy8, n, tmp8,codid,codlev,codprm)); break;
 
     case 100: if(ny>0) { unsigned _ny = ny*(nz?nz:1)*(nw?nw:1);  if(verbose) printf("2D=%dx%d ", nx,_ny);
                            TM("",l=lztpd2enc( in8,n,out,ns,USIZE,tmp8,nx,_ny,codid,codlev,codprm),n,l, lztpd2dec( out,l,cpy8,n,USIZE,tmp8, nx,_ny,codid,codlev,codprm));
@@ -1794,10 +1795,10 @@ unsigned bench32(unsigned char * const in8, unsigned n, unsigned char * const ou
     case 107: if(nw>0) {   TM("",l=lztpd4xenc(in8,n,out,ns,USIZE,tmp8,nx,ny,nz,nw,codid,codlev,codprm), n,l, lztpd4xdec(out,l,cpy8,n,USIZE,tmp8, nx,ny,nz,nw,codid,codlev,codprm));} break;
     case 108: if(nw>0) {   TM("",l=lztpd4zenc(in8,n,out,ns,USIZE,tmp8,nx,ny,nz,nw,codid,codlev,codprm), n,l, lztpd4zdec(out,l,cpy8,n,USIZE,tmp8, nx,ny,nz,nw,codid,codlev,codprm));} break;
       #endif
-    case 110:              TM("",l=vlcenc32( in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlcdec32( out, n,cpy8)); break;
-    case 111:              TM("",l=vlczenc32(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlczdec32(out, n,cpy8)); break;
-    case 113:              TM("",l=bitgenc32(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)bitgdec32(out, n,cpy8)); break;
-    case 114:              TM("",l=bitrenc32(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)bitrdec32(out, n,cpy8)); break;
+    case 110:              TM("",l=vlcenc32( in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlcdec32( out, n,cpy8)); break;
+    case 111:              TM("",l=vlczenc32(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlczdec32(out, n,cpy8)); break;
+    case 113:              TM("",l=bitgenc32(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else bitgdec32(out, n,cpy8)); break;
+    case 114:              TM("",l=bitrenc32(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else bitrdec32(out, n,cpy8)); break;
 
     case 117: l = n;       TM("", tpenc( in8, n, out,USIZE), n,l, tpdec( out, n,cpy8, USIZE)); break;
     case 118: l = n;       TM("", tp4enc(in8, n, out,USIZE), n,l, tp4dec(out, n,cpy8, USIZE)); break;
@@ -1840,12 +1841,12 @@ unsigned bench32(unsigned char * const in8, unsigned n, unsigned char * const ou
 	  #endif
 
 	  #ifdef _BLOSC
-    case 143: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE,           0,            0),n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); } break;
-    case 144: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_DELTA,            0),n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); } break;
-    case 145: { blosc2_init(); TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_FILTER_BYTEDELTA, 0),n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); } break;
-    case 146: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,              0,            0),n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); } break;
-    case 147: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,    BLOSC_DELTA,            0),n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); } break;
-    case 148: { blosc2_init(); TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_FILTER_BYTEDELTA, BLOSC_SHUFFLE,    0),n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); } break;
+    case 143: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE,           0,            0),n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); } break;
+    case 144: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_DELTA,            0),n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); } break;
+    case 145: { blosc2_init(); TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_FILTER_BYTEDELTA, 0),n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); } break;
+    case 146: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,              0,            0),n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); } break;
+    case 147: {                TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,    BLOSC_DELTA,            0),n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); } break;
+    case 148: { blosc2_init(); TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_FILTER_BYTEDELTA, BLOSC_SHUFFLE,    0),n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); } break;
 	  #endif
 	// ----- speed test & lossy error bound analysis (with option -v1) -----------------------
     case 149: l=n;             TM0("", fprazor32(  (float*)in, m, (float*)out,zerrlim), n, l);                                         memcpy(cpy,in,n); if(verbose) fpstat(in8, m, out, -4, tmp8); break;
@@ -2020,12 +2021,12 @@ unsigned bench64(unsigned char * const in8, unsigned n, unsigned char * const ou
 	  #endif
 
 	  #ifdef _BLOSC
-    case 143: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE,           0,            0), n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); break;
-    case 144: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_DELTA,            0), n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); break;
-    case 145: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_FILTER_BYTEDELTA, 0), n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); break;
-    case 146: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,              0,            0), n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); break;
-    case 147: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,    BLOSC_DELTA,            0), n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); break;
-    case 148: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_FILTER_BYTEDELTA, BLOSC_SHUFFLE,    0), n,l, l==n?memcpy(cpy,in,n):bloscdecomp(out, l, cpy8, n,USIZE)); break;
+    case 143: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE,           0,            0), n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); break;
+    case 144: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_DELTA,            0), n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); break;
+    case 145: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_BITSHUFFLE, BLOSC_FILTER_BYTEDELTA, 0), n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); break;
+    case 146: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,              0,            0), n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); break;
+    case 147: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_SHUFFLE,    BLOSC_DELTA,            0), n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); break;
+    case 148: TM("",l = blosccomp(in8, n, out, ns, codid, codlev, USIZE, BLOSC_FILTER_BYTEDELTA, BLOSC_SHUFFLE,    0), n,l, if(l==n)memcpy(cpy,in,n);else bloscdecomp(out, l, cpy8, n,USIZE)); break;
 	  #endif
 	// ----- speed test & lossy error bound analysis (with option -v1) -----------------------
     case 149: TM("", fprazor64((double*)in,m,(double*)out,zerrlim),                                       n,n, fprazor64((double*)in, m, (double*)out,zerrlim));                                    memcpy(cpy,in,n); if(verbose) fpstat(in8, m, out, -8, tmp8); l=n; break;

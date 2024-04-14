@@ -66,6 +66,7 @@
 
 #define QMAX_G 12
 size_t bitgenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
+  size_t l;
   unsigned char *op = out+4, *out_ = out+_inlen, *bp = out_;
   uint32_t      *in = (uint32_t *)_in, *ip;
   INDEC;
@@ -78,7 +79,7 @@ size_t bitgenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
   }
 
   bitflushr(bw,br,bp);
-  unsigned l = out_ - bp;
+  l = out_ - bp;
   memmove(op, bp, l); op += l;
   ctou32(out) = op - out;                                                    OVERFLOW(_in,_inlen,out, op, goto e);
   e:return op - out;
@@ -128,6 +129,7 @@ size_t bitgdec32(unsigned char *in, size_t _outlen, unsigned char *_out) {
 
 #define QMAX_R 7
 size_t bitrenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
+  size_t l;
   unsigned char *op = out+4, *out_ = out+_inlen, *op_ = out_;
   uint32_t      *in = (uint32_t *)_in, *ip, log2m=1,ema=0;
   INDEC;
@@ -141,7 +143,7 @@ size_t bitrenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
   }
 
   bitflushr(bw,br,op_);
-  unsigned l = out_-op_;
+  l = out_-op_;
   memmove(op, op_, l); op += l;
   ctou32(out) = op - out;                                                   OVERFLOW(_in,_inlen,out, op, goto e);
   e: return op - out;
@@ -168,6 +170,7 @@ size_t bitrdec32(unsigned char *in, size_t _outlen, unsigned char *_out) {
 
 //-------- Turbo VLC: Variable Length Code for large integers: 16+32 bits similar to µ-Law/Extra Bit Codes encoding ------------------------
 size_t vlcenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
+  size_t l;
   unsigned char *op   = out+4, *out_ = out+_inlen, *bp = out_;
   uint32_t      *in   = (uint32_t *)_in, *ip = in;
   INDEC;
@@ -179,7 +182,7 @@ size_t vlcenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
   for(; ip < in+inlen; ip++) { VE(0); bitenormr(bw,br,bp); if(bp <= op+5) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }}
 
   bitflushr(bw,br,bp);
-  unsigned l  = out_ - bp;
+  l  = out_ - bp;
   if(op+l >= out+_inlen) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }
   memmove(op, bp, l); op += l;
   ctou32(out) = op-out;
@@ -199,6 +202,7 @@ size_t vlcdec32(unsigned char *in, size_t _outlen, unsigned char *_out) {
 }
 
 size_t vlcenc16(unsigned char *_in, size_t _inlen, unsigned char *out) {
+  size_t l;
   unsigned char *op   = out+4, *out_ = out+_inlen, *bp = out_;
   uint16_t      *in   = (uint16_t *)_in, *ip = in;
   INDEC;
@@ -210,7 +214,7 @@ size_t vlcenc16(unsigned char *_in, size_t _inlen, unsigned char *out) {
   for(; ip < in+inlen; ip++) { VE(0); bitenormr(bw,br,bp); if(bp <= op+5) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }}
 
   bitflushr(bw,br,bp);
-  unsigned l  = out_ - bp;
+  l  = out_ - bp;
   if(op+l >= out+_inlen) { memcpy(out,_in,_inlen); op = out+_inlen; goto e; }
   memmove(op, bp, l); op += l;
   ctou32(out) = op-out;
@@ -230,6 +234,7 @@ size_t vlcdec16(unsigned char *in, size_t _outlen, unsigned char *_out) {
 }
 
 size_t vlczenc16(unsigned char *_in, size_t _inlen, unsigned char *out) {
+  size_t l;
   unsigned char *op = out+4, *out_ = out+_inlen, *bp = out_;
   uint16_t      *in = (uint16_t *)_in, *ip, start = 0;
   INDEC;
@@ -243,7 +248,7 @@ size_t vlczenc16(unsigned char *_in, size_t _inlen, unsigned char *out) {
   }
 
   bitflushr(bw,br,bp);
-  unsigned l = out_-bp;
+  l = out_-bp;
   memmove(op, bp, l); op += l;
   ctou32(out) = op-out;
   OVERFLOW(_in,_inlen,out, op, goto e);
@@ -266,6 +271,7 @@ size_t vlczdec16(unsigned char *in, size_t _outlen, unsigned char *_out) {
 }
 
 size_t vlczenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
+  size_t l;
   unsigned char *op = out+4, *out_ = out+_inlen, *bp = out_;
   uint32_t      *in = (uint32_t *)_in, *ip, start = 0;
   INDEC;
@@ -279,7 +285,7 @@ size_t vlczenc32(unsigned char *_in, size_t _inlen, unsigned char *out) {
   }
 
   bitflushr(bw,br,bp);
-  unsigned l = out_-bp;
+  l = out_-bp;
   memmove(op, bp, l); op += l;
   ctou32(out) = op-out;
   OVERFLOW(_in,_inlen,out, op, goto e);

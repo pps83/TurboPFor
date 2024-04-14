@@ -54,6 +54,10 @@ size_t FSE_buildCTable_raw (FSE_CTable* ct, unsigned nbBits)
  * Same as FSE_compress2(), but using an externally allocated scratch buffer (`workSpace`).
  * `wkspSize` size must be `(1<<tableLog)`.
  */
+size_t HIST_count_wksp(unsigned* count, unsigned* maxSymbolValuePtr,
+    const void* src, size_t srcSize,
+    void* workSpace, size_t workSpaceSize);
+
 size_t FSE_compress_wksp (void* dst, size_t dstSize, const void* src, size_t srcSize, unsigned maxSymbolValue, unsigned tableLog, void* workSpace, size_t wkspSize)
 {
     BYTE* const ostart = (BYTE*) dst;
