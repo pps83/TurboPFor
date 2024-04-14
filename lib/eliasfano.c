@@ -172,7 +172,7 @@ unsigned char *T2(EFANOENC, USIZE)(uint_t *__restrict in, unsigned n, unsigned c
   lb = T2(bsr, USIZE)(e/n);
   x = ((uint_t)1 << lb)-1; hl = PAD8((e>>lb)+n);
 
-  for(i = 0; i != n&~3;) {
+  for(i = 0; i != (n&~3);) {
     pa[i] = EFE(in,i,start) & x; ++i;
     pa[i] = EFE(in,i,start) & x; ++i;
     pa[i] = EFE(in,i,start) & x; ++i;
@@ -183,7 +183,7 @@ unsigned char *T2(EFANOENC, USIZE)(uint_t *__restrict in, unsigned n, unsigned c
   op = T2(BITPACK,USIZE)(pa, n, out+1, lb);
 
   memset(op, 0, hl);
-  for(i = 0; i != n&~3; ) {
+  for(i = 0; i != (n&~3); ) {
     x = i + (EFE(in,i,start) >> lb), op[x >> 3] |= (uint_t)1 << (x & 7); ++i;
     x = i + (EFE(in,i,start) >> lb), op[x >> 3] |= (uint_t)1 << (x & 7); ++i;
     x = i + (EFE(in,i,start) >> lb), op[x >> 3] |= (uint_t)1 << (x & 7); ++i;
