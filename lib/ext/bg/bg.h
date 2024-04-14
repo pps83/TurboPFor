@@ -15,8 +15,8 @@
 extern "C" {
 #endif
 
-# define M_LN10      2.30258509299404568401799145468436421   /* loge(10)       */
-# define M_LN2       0.693147180559945309417232121458176568  /* loge(2)        */
+# define BG_M_LN10      2.30258509299404568401799145468436421   /* loge(10)       */
+# define BG_M_LN2       0.693147180559945309417232121458176568  /* loge(2)        */
 #define int_CEWI 0
 #define NCO_PPC_BIT_XPL_NBR_MIN 2
 
