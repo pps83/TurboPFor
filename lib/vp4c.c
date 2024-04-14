@@ -454,7 +454,7 @@ unsigned char *T2(_P4ENC, USIZE)(uint_t *__restrict in, unsigned n, unsigned cha
   }
     #endif
   #define MISS { miss[xn] = i; xn += in[i] > msk; _in[i] = in[i] & msk; i++; } //eq+= (_in[i] == a); } a = in[0] & msk;
-  for(xn = i = 0; i != n&~3; ) { MISS; MISS; MISS; MISS; }
+  for(xn = i = 0; i != (n&~3); ) { MISS; MISS; MISS; MISS; }
   while(i != n) MISS;
                                                                                 //ax = inx[miss[0]] >> b;
   for(i = 0; i != xn; ++i) {
