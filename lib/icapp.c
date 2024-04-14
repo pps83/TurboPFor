@@ -626,6 +626,7 @@ void libmemcpy(unsigned char *dst, unsigned char *src, int len) {
   #ifdef _STREAMVBYTE
 #include "ext/streamvbyte/include/streamvbyte.h"
 #include "ext/streamvbyte/include/streamvbytedelta.h"
+#include "ext/streamvbyte/include/streamvbyte_zigzag.h"
 static size_t streamvbyte_zzag_encode(const uint32_t *in, uint32_t length, uint8_t *out, uint32_t prev, uint8_t *tmp) {
   zigzag_delta_encode((const int32_t*)in, (uint32_t*)tmp, length, prev);
   return streamvbyte_encode((uint32_t*)tmp, length, out);
@@ -1687,8 +1688,8 @@ unsigned bench16(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
     case 107: if(nw>0) { TM("",l=lztpd4xenc(in,n,out,ns,USIZE,tmp,nx,ny,nz,nw,codid,icodlev,codprm), n,l, lztpd4xdec(out,l,cpy,n,USIZE,tmp, nx,ny,nz,nw,codid,icodlev,codprm)); } break;
     case 108: if(nw>0) { TM("",l=lztpd4zenc(in,n,out,ns,USIZE,tmp,nx,ny,nz,nw,codid,icodlev,codprm), n,l, lztpd4zdec(out,l,cpy,n,USIZE,tmp, nx,ny,nz,nw,codid,icodlev,codprm)); } break;
       #endif
-    case 110: TM("", l=vlcenc16(in8,  n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlcdec16( out,n,cpy8)); break;
-    case 111: TM("", l=vlczenc16(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlczdec16(out,n,cpy8)); break;
+    case 110: TM("", l=vlcenc16(in8,  n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlcdec16( out,n,cpy8)); break;
+    case 111: TM("", l=vlczenc16(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlczdec16(out,n,cpy8)); break;
 
     case 117: TM("", tpenc( in8, l=n, out,USIZE), n,l, tpdec( out, n,cpy8, USIZE)); break;
     case 118: TM("", tp4enc(in8, l=n, out,USIZE), n,l, tp4dec(out, n,cpy8, USIZE)); break;
@@ -1913,10 +1914,10 @@ unsigned bench32(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
     case 107: if(nw>0) {   TM("",l=lztpd4xenc(in,n,out,ns,USIZE,tmp,nx,ny,nz,nw,codid,icodlev,codprm), n,l, lztpd4xdec(out,l,cpy,n,USIZE,tmp, nx,ny,nz,nw,codid,icodlev,codprm));} break;
     case 108: if(nw>0) {   TM("",l=lztpd4zenc(in,n,out,ns,USIZE,tmp,nx,ny,nz,nw,codid,icodlev,codprm), n,l, lztpd4zdec(out,l,cpy,n,USIZE,tmp, nx,ny,nz,nw,codid,icodlev,codprm));} break;
       #endif
-    case 110:              TM("",l=vlcenc32( in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlcdec32( out, n,cpy8)); break;
-    case 111:              TM("",l=vlczenc32(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)vlczdec32(out, n,cpy8)); break;
-    case 113:              TM("",l=bitgenc32(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)bitgdec32(out, n,cpy8)); break;
-    case 114:              TM("",l=bitrenc32(in8, n, out), n,l, l==n?memcpy(cpy,in,n):(void*)bitrdec32(out, n,cpy8)); break;
+    case 110:              TM("",l=vlcenc32( in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlcdec32( out, n,cpy8)); break;
+    case 111:              TM("",l=vlczenc32(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else vlczdec32(out, n,cpy8)); break;
+    case 113:              TM("",l=bitgenc32(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else bitgdec32(out, n,cpy8)); break;
+    case 114:              TM("",l=bitrenc32(in8, n, out), n,l, if(l==n)memcpy(cpy,in,n);else bitrdec32(out, n,cpy8)); break;
 
     case 117: l = n;       TM("", tpenc( in8, n, out,USIZE), n,l, tpdec( out, n,cpy8, USIZE)); break;
     case 118: l = n;       TM("", tp4enc(in8, n, out,USIZE), n,l, tp4dec(out, n,cpy8, USIZE)); break;

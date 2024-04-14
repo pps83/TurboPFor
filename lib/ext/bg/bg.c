@@ -35,8 +35,8 @@ unsigned char* BG_compress_args(int dataType, void *data, size_t *outSize, int b
 
 	size_t bufferSize = dataTypeLen*nbEle;
 
-	const double bit_per_dcm_dgt_prc=M_LN10/M_LN2; /* 3.32 [frc] Bits per decimal digit of precision */
-	//const double dcm_per_bit_dgt_prc=M_LN2/M_LN10; /* 0.301 [frc] Bits per decimal digit of precision */
+	const double bit_per_dcm_dgt_prc=BG_M_LN10/BG_M_LN2; /* 3.32 [frc] Bits per decimal digit of precision */
+	//const double dcm_per_bit_dgt_prc=BG_M_LN2/BG_M_LN10; /* 0.301 [frc] Bits per decimal digit of precision */
 	const int bit_xpl_nbr_sgn_flt=23; /* [nbr] Bits 0-22 of SP significands are explicit. Bit 23 is implicitly 1. */
 	const int bit_xpl_nbr_sgn_dbl=53; /* [nbr] Bits 0-52 of DP significands are explicit. Bit 53 is implicitly 1. */
 	//const int ieee_xpn_fst_flt=127; /* [nbr] IEEE "exponent bias" = actual exponent minus stored exponent */
