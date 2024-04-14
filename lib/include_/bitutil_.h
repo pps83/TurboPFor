@@ -159,7 +159,7 @@ static ALWAYS_INLINE __m128i mm_xord_epi16(__m128i v, __m128i sv) { MM_HDEC_EPI1
   _v_  = _ho_(      _v_, _mm_slli_si128(_v_, 1));\
   _v_  = _ho_(      _v_, _mm_slli_si128(_v_, 2));\
   _v_  = _ho_(      _v_, _mm_slli_si128(_v_, 4));\
-  _v_  = _ho_(_ho_(_v_, _mm_slli_si128(_v_, 8)), _mm_shuffle_epi8(_sv_, _mm_set1_epi8(0xfe)));/*TODO: test*/\
+  _v_  = _ho_(_ho_(_v_, _mm_slli_si128(_v_, 8)), _mm_shuffle_epi8(_sv_, _mm_set1_epi8(0xfeu)));/*TODO: test*/\
 }
 static ALWAYS_INLINE __m128i mm_scan_epi8(__m128i v, __m128i sv) { MM_HDEC_EPI8(v,sv,_mm_add_epi8);  return v; }
 static ALWAYS_INLINE __m128i mm_xord_epi8(__m128i v, __m128i sv) { MM_HDEC_EPI8(v,sv,_mm_xor_si128); return v; }
