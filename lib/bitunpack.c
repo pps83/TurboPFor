@@ -806,7 +806,7 @@ const unsigned char *bitunpack128v64( const unsigned char *__restrict in, unsign
 #undef BITUNPACK0
 
     #if defined(__SSSE3__) || defined(__ARM_NEON)
-  #define _ (char)0x80
+  #define _ (char)0x80u
 ALIGNED(char, _shuffle_32[16][16],16) = {
         { _,_,_,_, _,_,_,_, _,_, _, _,  _, _, _,_  },
         { 0,1,2,3, _,_,_,_, _,_, _, _,  _, _, _,_  },
