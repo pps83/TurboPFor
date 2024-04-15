@@ -36,10 +36,18 @@
 
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
 
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <math.h>
 #include <float.h>
+#include <string.h>
+#include <stdio.h>
+#if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
+#include <intrin.h>
+#elif defined(__i386__) || defined(__x86_64__)
+#include <x86intrin.h>
+#endif
+
 #if defined(__clang__) && defined(__is_identifier)
   #if !__is_identifier(_Float16)
     #undef FLT16_BUILTIN
@@ -99,7 +107,6 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
 #define clz32(_x_) __builtin_clz(_x_)    // 00000000 00000000 00000000 01000000 = 25
 
   #elif defined(_MSC_VER) //----------------------------------------------------
-#include <intrin.h>
 #define __builtin_prefetch(x,a) _mm_prefetch((const char*)(x), _MM_HINT_NTA)
 
 #define ALIGNED(t,v,n)  __declspec(align(n)) t v
@@ -166,7 +173,6 @@ static ALWAYS_INLINE double round(double num) { return (num > 0.0) ? floor(num +
 
 //--------------- Unaligned memory access -------------------------------------
   #ifdef UA_MEMCPY
-#include <string.h>
 static ALWAYS_INLINE unsigned short     ctou16(const void *cp) { unsigned short     x; memcpy(&x, cp, sizeof(x)); return x; } // ua read
 static ALWAYS_INLINE unsigned           ctou32(const void *cp) { unsigned           x; memcpy(&x, cp, sizeof(x)); return x; }
 static ALWAYS_INLINE unsigned long long ctou64(const void *cp) { unsigned long long x; memcpy(&x, cp, sizeof(x)); return x; }
@@ -288,11 +294,6 @@ struct _PACKED doubleu   { double             d; };
 #define BEXTR32(x,start,len)             (((x) >> (start)) & ((1u << (len)) - 1)) //Bit field extract (with register)
 
     #ifdef __AVX2__
-      #if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
-#include <intrin.h>
-      #else
-#include <x86intrin.h>
-      #endif
 #define bzhi32(_u_, _b_)                 _bzhi_u32(_u_, _b_)  // b variable
 #define bextr32(x,start,len)             _bextr_u32(x,start,len)
 
@@ -325,7 +326,6 @@ struct _PACKED doubleu   { double             d; };
 #define CLAMP(_x_, _low_, _high_)  (((_x_) > (_high_)) ? (_high_) : (((_x_) < (_low_)) ? (_low_) : (_x_)))
 
 //--- NDEBUG -------
-#include <stdio.h>
   #ifdef _MSC_VER
     #ifdef NDEBUG
 #define AS(expr, fmt, ...)
