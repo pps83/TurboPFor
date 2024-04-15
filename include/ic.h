@@ -256,26 +256,6 @@ unsigned char *bitunpack16( const unsigned char *__restrict in, unsigned n, uint
 unsigned char *bitunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, unsigned b);
 unsigned char *bitunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, unsigned b);
 
-// ---------------- Direct Access to a single packed integer array entry --------------------------------------------------------------
-  #ifdef TURBOPFOR_DAC
-#include "conf.h"
-
-static ALWAYS_INLINE unsigned  bitgetx32(const unsigned char *__restrict in, unsigned  idx, unsigned b) { unsigned bidx = b*idx; return bzhi64( ctou64((uint32_t *)in+(bidx>>5)) >> (bidx&0x1f), b ); }
-//static ALWAYS_INLINE unsigned  bitgetx32(const unsigned char *__restrict in, unsigned  idx, unsigned b) { unsigned bidx = b*idx;
- //return (ctou64((uint32_t *)in+(bidx>>5)) << 32+(bidx&0x1f)) >> (64-b);
-// return bzhi64( ctou64((uint32_t *)in+(bidx>>5)) >> (bidx&0x1f), b ); }
-static ALWAYS_INLINE unsigned _bitgetx32(const unsigned char *__restrict in, uint64_t bidx, unsigned b) {                        return bzhi64( ctou64((uint32_t *)in+(bidx>>5)) >> (bidx&0x1f), b ); }
-
-// like  bitgetx32 but for 16 bits integer array
-static ALWAYS_INLINE unsigned  bitgetx8( const unsigned char *__restrict in, unsigned  idx, unsigned b) { unsigned bidx = b*idx; return bzhi32( ctou16((uint16_t *)in+(bidx>>4)) >> (bidx& 0xf), b ); }
-static ALWAYS_INLINE unsigned _bitgetx8( const unsigned char *__restrict in, unsigned bidx, unsigned b) {                        return bzhi32( ctou16((uint16_t *)in+(bidx>>4)) >> (bidx& 0xf), b ); }
-static ALWAYS_INLINE unsigned  bitgetx16(const unsigned char *__restrict in, unsigned  idx, unsigned b) { unsigned bidx = b*idx; return bzhi32( ctou32((uint32_t *)in+(bidx>>4)) >> (bidx& 0xf), b ); }
-static ALWAYS_INLINE unsigned _bitgetx16(const unsigned char *__restrict in, unsigned bidx, unsigned b) {                        return bzhi32( ctou32((uint32_t *)in+(bidx>>4)) >> (bidx& 0xf), b ); }
-
-// Set a single value with index "idx"
-static ALWAYS_INLINE void      bitsetx16(const unsigned char *__restrict in, unsigned  idx, unsigned v, unsigned b) { unsigned bidx = b*idx;  unsigned           *p = (unsigned           *)             in+(bidx>>4) ; *p = ( *p & ~(((1u  <<b)-1) << (bidx& 0xf)) ) |                     v<<(bidx& 0xf);}
-static ALWAYS_INLINE void      bitsetx32(const unsigned char *__restrict in, unsigned  idx, unsigned v, unsigned b) { unsigned bidx = b*idx;  unsigned long long *p = (unsigned long long *)((unsigned *)in+(bidx>>5)); *p = ( *p & ~(((1ull<<b)-1) << (bidx&0x1f)) ) | (unsigned long long)v<<(bidx&0x1f);}
-   #endif
 // ---------------- DFOR : integrated bitpacking, for delta packed SORTED array (Ex. DocId in inverted index) -------------------------------
 // start <= out[0] <= out[1] <= ... <= out[n-2] <= out[n-1] <= (1<<N)-1  N=8,16,32 or 64
 // out[0] = start + in[0];  out[1] = out[0] + in[1]; ... ;  out[i] = out[i-1] + in[i]
@@ -1489,72 +1469,6 @@ unsigned char *p4zdec128v16(  unsigned char *__restrict in, unsigned n, uint16_t
 unsigned char *p4zdec128v32(  unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
 unsigned char *p4zdec256v32(  unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
 unsigned char *p4zdec64(      unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
-
-//---------------- Direct Access functions to compressed TurboPFor array p4encx16/p4encx32 -------------------------------------------------------
-  #ifdef TURBOPFOR_DAC
-#include "conf.h"
-#include "../include_/bitpack.h"
-#define P4D_PAD8(_x_)       ( (((_x_)+8-1)/8) )
-#define P4D_B(_x_)          ((_x_) & 0x7f)
-#define P4D_XB(_x_)         (((_x_) & 0x80)?((_x_) >> 8):0)
-#define P4D_ININC(_in_, _x_) _in_ += 1+((_x_) >> 7)
-
-static inline unsigned p4bits(unsigned char *__restrict in, int *bx) { unsigned i = ctou16(in); *bx = P4D_XB(i); return P4D_B(i); }
-
-struct p4 {
-  unsigned long long *xmap;
-  unsigned char *ex;
-  unsigned isx,bx,cum[P4D_MAX/64+1];
-  int oval,idx;
-};
-
-static unsigned long long p4xmap[P4D_MAX/64+1] = { 0 };
-
-// prepare direct access usage
-static inline void p4ini(struct p4 *p4, unsigned char **pin, unsigned n, unsigned *b) { unsigned char *in = *pin;
-  unsigned p4i  = ctou16(in);
-  p4->isx       = p4i&0x80;
-  *b            = P4D_B(p4i);
-  p4->bx        = P4D_XB(p4i);              //printf("p4i=%x,b=%d,bx=%d ", p4->i, *b, p4->bx);                        //assert(n <= P4D_MAX);
-  *pin = p4->ex = ++in;
-  if(p4->isx) {
-    unsigned num=0,j;
-    unsigned char *p;
-    ++in;
-    p4->xmap = (unsigned long long *)in;
-    for(j=0; j < n/64; j++) { p4->cum[j] = num; num += popcnt64(ctou64(in+j*8)); }
-    if(n & 0x3f) num += popcnt64(ctou64(in+j*8) & ((1ull<<(n&0x3f))-1) );
-    p4->ex = p = in + (n+7)/8;
-    *pin   = p = p4->ex+(((uint64_t)num*p4->bx+7)/8);
-  } else p4->xmap = p4xmap;
-  p4->oval = p4->idx  = -1;
-}
-
-//---------- Get a single value with index "idx" from a "p4encx32" packed array
-static ALWAYS_INLINE uint8_t  p4getx8( struct p4 *p4, unsigned char *in, unsigned idx, unsigned b) { unsigned bi, cl, u = bitgetx8( in, idx, b);
-  if(p4->xmap[bi=idx>>6] & (1ull<<(cl=idx&63))) u += bitgetx8(p4->ex, p4->cum[bi] + popcnt64(p4->xmap[bi] & ~(~0ull<<cl)), p4->bx) << b;
-  return u;
-}
-
-static ALWAYS_INLINE uint16_t p4getx16(struct p4 *p4, unsigned char *in, unsigned idx, unsigned b) { unsigned bi, cl, u = bitgetx16(in, idx, b);
-  if(p4->xmap[bi=idx>>6] & (1ull<<(cl=idx&63))) u += bitgetx16(p4->ex, p4->cum[bi] + popcnt64(p4->xmap[bi] & ~(~0ull<<cl)), p4->bx) << b;
-  return u;
-}
-static ALWAYS_INLINE uint32_t p4getx32(struct p4 *p4, unsigned char *in, unsigned idx, unsigned b) { unsigned bi, cl, u = bitgetx32(in, idx, b);
-  if(p4->xmap[bi=idx>>6] & (1ull<<(cl=idx&63))) u += bitgetx32(p4->ex, p4->cum[bi] + popcnt64(p4->xmap[bi] & ~(~0ull<<cl)), p4->bx) << b;
-  return u;
-}
-
-// Get the next single value greater of equal to val
-static ALWAYS_INLINE uint16_t p4geqx8( struct p4 *p4, unsigned char *in, unsigned b, uint8_t  val) { do p4->oval += p4getx8( p4, in, ++p4->idx, b)+1; while(p4->oval < val); return p4->oval; }
-static ALWAYS_INLINE uint16_t p4geqx16(struct p4 *p4, unsigned char *in, unsigned b, uint16_t val) { do p4->oval += p4getx16(p4, in, ++p4->idx, b)+1; while(p4->oval < val); return p4->oval; }
-static ALWAYS_INLINE uint32_t p4geqx32(struct p4 *p4, unsigned char *in, unsigned b, uint32_t val) { do p4->oval += p4getx32(p4, in, ++p4->idx, b)+1; while(p4->oval < val); return p4->oval; }
-
-/* DO NOT USE : like p4dec32 but using direct access. This is only a demo showing direct access usage. Use p4dec32 instead for decompressing entire blocks */
-unsigned char *p4decx32(   unsigned char *in, unsigned n, uint32_t *out);  // unsorted
-unsigned char *p4fdecx32(  unsigned char *in, unsigned n, uint32_t *out, uint32_t start); // FOR increasing
-unsigned char *p4f1decx32( unsigned char *in, unsigned n, uint32_t *out, uint32_t start); // FOR strictly increasing
-  #endif
 
 // -- "Integer Compression" variable simple "SimpleV" -----------------------------------------------------------
 //  this belongs to the integer compression known as "simple family", like simple-9,simple-16
