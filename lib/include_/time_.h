@@ -38,11 +38,12 @@ typedef unsigned long long uint64_t;
   #endif
 
 #if defined (__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86) // ------------------ rdtsc --------------------------
-  #ifdef _MSC_VER
-#include <intrin.h> // __rdtsc
-  #else
+#if defined(_MSC_VER)
+#include <intrin.h>
+#endif
+#if defined(__i386__) || defined(__x86_64__)
 #include <x86intrin.h>
-  #endif
+#endif
 
   #ifdef __corei7__
 #define RDTSC_INI(_c_) do { unsigned _cl, _ch;              \

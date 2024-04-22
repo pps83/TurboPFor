@@ -27,26 +27,16 @@
 #include "include_/conf.h"
 #include "include_/transpose.h"
 
-  #ifdef __AVX2__
-#include <immintrin.h>
-  #elif defined(__AVX__)
-#include <immintrin.h>
-  #elif defined(__SSE4_1__)
-#include <smmintrin.h>
-  #elif defined(__SSSE3__)
-    #ifdef __powerpc64__
+#if defined(__SSSE3__) && defined(__powerpc64__)
 #define __SSE__   1
 #define __SSE2__  1
 #define __SSE3__  1
 #define NO_WARN_X86_INTRINSICS 1
-    #endif
-#include <tmmintrin.h>
-  #elif defined(__SSE2__)
-#include <emmintrin.h>
-  #elif defined(__ARM_NEON)
+#endif
+#if defined(__ARM_NEON)
 #include <arm_neon.h>
 #include "include_/sse_neon.h"
-  #endif
+#endif
 
 #if defined(_MSC_VER) && !defined(__clang__)
 #pragma warning(disable: 4005)
