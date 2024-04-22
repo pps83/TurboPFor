@@ -15,13 +15,13 @@ size_t vbbound64(size_t n);
 
 //----------------------- Encoding/Decoding unsorted array with n integer values --------------------------
 unsigned char *vbenc16(  unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out); //TurboVByte
-unsigned char *vbdec16(  unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
+const unsigned char *vbdec16(  const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
 
 unsigned char *vbenc32(  unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out);
-unsigned char *vbdec32(  unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
+const unsigned char *vbdec32(  const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
 
 unsigned char *vbenc64(  uint64_t       *__restrict in, unsigned n, unsigned char  *__restrict out);
-unsigned char *vbdec64(  unsigned char  *__restrict in, unsigned n, uint64_t       *__restrict out);
+const unsigned char *vbdec64(  const unsigned char  *__restrict in, unsigned n, uint64_t       *__restrict out);
 
 //-- Get value stored at index idx (idx:0...n-1)
 unsigned short vbgetx16( unsigned char *__restrict in, unsigned idx);
@@ -133,38 +133,38 @@ size_t v8len32(const uint32_t *in, size_t n);
 size_t v8len16(const uint16_t *in, size_t n);
 
 unsigned char *v8enc16(  unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out); //TurboByte
-unsigned char *v8dec16(  unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
+const unsigned char *v8dec16(  const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
 
 unsigned char *v8enc32(  unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out);
-unsigned char *v8dec32(  unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
+const unsigned char *v8dec32(  const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
 
 //------ delta ---------
 unsigned char *v8denc16( unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
-unsigned char *v8ddec16( unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8ddec16( const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
 
 unsigned char *v8denc32( unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
-unsigned char *v8ddec32( unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8ddec32( const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //------ delta 1 -------
 unsigned char *v8d1enc16(unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
-unsigned char *v8d1dec16(unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8d1dec16(const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
 
 unsigned char *v8d1enc32(unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
-unsigned char *v8d1dec32(unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8d1dec32(const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //------- zigzag -------
 unsigned char *v8zenc16( unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
-unsigned char *v8zdec16( unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8zdec16( const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
 
 unsigned char *v8zenc32( unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
-unsigned char *v8zdec32( unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8zdec32( const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //------- xor ----------
 unsigned char *v8xenc16( unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
 unsigned char *v8xenc32( unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
 
-unsigned char *v8xdec16( unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
-unsigned char *v8xdec32( unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8xdec16( const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8xdec32( const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //-------------------------- TurboByte Hybrid (SIMD Group varint) + Bitpacking -------------------------------------------
 size_t v8nenc16(  uint16_t      *__restrict in, size_t n, unsigned char *__restrict out);

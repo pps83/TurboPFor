@@ -43,14 +43,14 @@
 #endif
 
 #ifndef __AVX2__ //----------------------------------- Plain -------------------------------------------------------------------------------------------
-typedef unsigned char *(*BITUNPACK_F8)( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out);
-typedef unsigned char *(*BITUNPACK_D8)( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t start);
-typedef unsigned char *(*BITUNPACK_F16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out);
-typedef unsigned char *(*BITUNPACK_D16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
-typedef unsigned char *(*BITUNPACK_F32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
-typedef unsigned char *(*BITUNPACK_D32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-typedef unsigned char *(*BITUNPACK_F64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out);
-typedef unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
+typedef const unsigned char *(*BITUNPACK_F8)( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out);
+typedef const unsigned char *(*BITUNPACK_D8)( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t start);
+typedef const unsigned char *(*BITUNPACK_F16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out);
+typedef const unsigned char *(*BITUNPACK_D16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
+typedef const unsigned char *(*BITUNPACK_F32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
+typedef const unsigned char *(*BITUNPACK_D32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+typedef const unsigned char *(*BITUNPACK_F64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out);
+typedef const unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
 
   #if 0   //????
 #define OP(_op_, _x_) *_op_++
@@ -114,7 +114,7 @@ typedef unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsi
 
 //------------------------------------------------------- bitnunpack ----------------------------------------------------------
 #define BITNUNPACK(in, n, out, _csize_, _usize_) {\
-  unsigned char *ip = in;\
+  const unsigned char *ip = in;\
   for(op = out,out+=n; op < out;) { unsigned oplen = out - op,b; if(oplen > _csize_) oplen = _csize_;       /*PREFETCH(ip+512,0);*/\
     b = *ip++; ip = T2(bitunpacka, _usize_)[b](ip, oplen, op);\
     op += oplen;\
@@ -123,7 +123,7 @@ typedef unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsi
 }
 
 #define BITNDUNPACK(in, n, out, _csize_, _usize_, _bitunpacka_) { if(!n) return 0;\
-  unsigned char *ip = in;\
+  const unsigned char *ip = in;\
   T2(vbxget, _usize_)(ip, start);\
   for(*out++ = start,--n,op = out; op != out+(n&~(_csize_-1)); ) {                              /*PREFETCH(ip+512,0);*/\
                          unsigned b = *ip++; ip = T2(_bitunpacka_, _usize_)[b](ip, _csize_, op, start); op += _csize_; start = op[-1];\
@@ -131,40 +131,40 @@ typedef unsigned char *(*BITUNPACK_D64)(const unsigned char *__restrict in, unsi
   return ip - in;\
 }
 
-size_t bitnunpack8(   unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op; BITNUNPACK(in, n, out, 128,  8); }
-size_t bitnunpack16(  unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op; BITNUNPACK(in, n, out, 128, 16); }
-size_t bitnunpack32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op; BITNUNPACK(in, n, out, 128, 32); }
-size_t bitnunpack64(  unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op; BITNUNPACK(in, n, out, 128, 64); }
+size_t bitnunpack8(   const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op; BITNUNPACK(in, n, out, 128,  8); }
+size_t bitnunpack16(  const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op; BITNUNPACK(in, n, out, 128, 16); }
+size_t bitnunpack32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op; BITNUNPACK(in, n, out, 128, 32); }
+size_t bitnunpack64(  const unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op; BITNUNPACK(in, n, out, 128, 64); }
 
-size_t bitndunpack8(  unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitdunpacka); }
-size_t bitndunpack16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitdunpacka); }
-size_t bitndunpack32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitdunpacka); }
-size_t bitndunpack64( unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitdunpacka); }
+size_t bitndunpack8(  const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitdunpacka); }
+size_t bitndunpack16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitdunpacka); }
+size_t bitndunpack32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitdunpacka); }
+size_t bitndunpack64( const unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitdunpacka); }
 
-size_t bitnd1unpack8( unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitd1unpacka); }
-size_t bitnd1unpack16(unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitd1unpacka); }
-size_t bitnd1unpack32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitd1unpacka); }
-size_t bitnd1unpack64(unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitd1unpacka); }
+size_t bitnd1unpack8( const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitd1unpacka); }
+size_t bitnd1unpack16(const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitd1unpacka); }
+size_t bitnd1unpack32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitd1unpacka); }
+size_t bitnd1unpack64(const unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitd1unpacka); }
 
-size_t bitnzunpack8(  unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitzunpacka); }
-size_t bitnzunpack16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitzunpacka); }
-size_t bitnzunpack32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitzunpacka); }
-size_t bitnzunpack64( unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitzunpacka); }
+size_t bitnzunpack8(  const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitzunpacka); }
+size_t bitnzunpack16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitzunpacka); }
+size_t bitnzunpack32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitzunpacka); }
+size_t bitnzunpack64( const unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitzunpacka); }
 
-size_t bitnxunpack8(  unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitxunpacka); }
-size_t bitnxunpack16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitxunpacka); }
-size_t bitnxunpack32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitxunpacka); }
-size_t bitnxunpack64( unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitxunpacka); }
+size_t bitnxunpack8(  const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitxunpacka); }
+size_t bitnxunpack16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitxunpacka); }
+size_t bitnxunpack32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitxunpacka); }
+size_t bitnxunpack64( const unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitxunpacka); }
 
-size_t bitnfunpack8(  unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitfunpacka); }
-size_t bitnfunpack16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitfunpacka); }
-size_t bitnfunpack32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitfunpacka); }
-size_t bitnfunpack64( unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitfunpacka); }
+size_t bitnfunpack8(  const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out) { uint8_t  *op,start; BITNDUNPACK(in, n, out, 128,  8, bitfunpacka); }
+size_t bitnfunpack16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; BITNDUNPACK(in, n, out, 128, 16, bitfunpacka); }
+size_t bitnfunpack32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; BITNDUNPACK(in, n, out, 128, 32, bitfunpacka); }
+size_t bitnfunpack64( const unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op,start; BITNDUNPACK(in, n, out, 128, 64, bitfunpacka); }
   #endif
 //#else //-------------------------------------------- SSE/AVX2 ---------------------------------------------------------------------------------------
 
 #define _BITNUNPACKV(in, n, out, _csize_, _usize_, _bitunpackv_) {\
-  unsigned char *ip = in;\
+  const unsigned char *ip = in;\
   for(op = out; op != out+(n&~(_csize_-1)); op += _csize_) {                                                    /*PREFETCH(in+512,0);*/\
                          unsigned b = *ip++; ip = T2(_bitunpackv_, _usize_)(ip, _csize_, op,b);\
   } if(n&=(_csize_-1)) { unsigned b = *ip++; ip = T2(bitunpack,    _usize_)(ip, n,       op,b); }\
@@ -172,7 +172,7 @@ size_t bitnfunpack64( unsigned char *__restrict in, size_t n, uint64_t *__restri
 }
 
 #define _BITNDUNPACKV(in, n, out, _csize_, _usize_, _bitunpackv_, _bitunpack_) { if(!n) return 0;\
-  unsigned char *ip = in;\
+  const unsigned char *ip = in;\
   T2(vbxget, _usize_)(ip, start); \
   *out++ = start;\
   for(--n,op = out; op != out+(n&~(_csize_-1)); ) {                                 /*PREFETCH(ip+512,0);*/\
@@ -497,11 +497,11 @@ static ALIGNED(unsigned char, permv[256][8], 32) = {
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) _parm_ = _mm256_setzero_si256()
 
-unsigned char *bitunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned b) {
+const unsigned char *bitunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned b) {
   const unsigned char *ip = in+PAD8(256*b);
   __m256i sv;
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VOZ32
@@ -513,13 +513,13 @@ unsigned char *bitunpack256v32( const unsigned char *__restrict in, unsigned n, 
 #define VOZ32(_op_, _i_, _ov_, _nb_,_parm_) xm = *bb++; _mm256_storeu_si256(_op_++,                                          mm256_maskz_loadu_epi32(xm,(__m256i*)pex) );         pex += popcnt32(xm)
 #define BITUNPACK0(_parm_)
 #include "bitunpack_.h"
-unsigned char *_bitunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned b, unsigned *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned b, unsigned *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(256*b);
              unsigned xm;
               __m256i zv = _mm256_setzero_si256(), sv,
                       tv = _mm256_set_epi32(0,1,2,3,4,5,6,7);
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VOZ32
@@ -529,11 +529,11 @@ unsigned char *_bitunpack256v32( const unsigned char *__restrict in, unsigned n,
 #define VO32(_op_, i, _ov_, _nb_,_sv_) _ov_ = mm256_zzagd_epi32(_ov_); _sv_ = mm256_scan_epi32(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_)
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(256*b);
   __m256i sv = _mm256_set1_epi32(start);          //, zv = _mm256_setzero_si256();
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VOZ32
 #undef VO32
@@ -543,11 +543,11 @@ unsigned char *bitzunpack256v32( const unsigned char *__restrict in, unsigned n,
 #define VO32(_op_, i, _ov_, _nb_,_sv_)    _sv_ = mm256_xord_epi32(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_)
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitxunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitxunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(256*b);
   __m256i sv = _mm256_set1_epi32(start);
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 
@@ -555,11 +555,11 @@ unsigned char *bitxunpack256v32( const unsigned char *__restrict in, unsigned n,
 #define VO32(_op_, i, _ov_, _nb_,_sv_) _sv_ = mm256_scan_epi32(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_)
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(256*b);
   __m256i sv = _mm256_set1_epi32(start);                // zv = _mm256_setzero_si256();
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 
@@ -567,11 +567,11 @@ unsigned char *bitdunpack256v32( const unsigned char *__restrict in, unsigned n,
 #define VO32( _op_, _i_, _ov_, _nb_,_parm_) _mm256_storeu_si256(_op_++, _mm256_add_epi32(_ov_, sv))
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitfunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitfunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(256*b);
   __m256i sv = _mm256_set1_epi32(start);
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VOZ32
@@ -586,11 +586,11 @@ unsigned char *bitfunpack256v32( const unsigned char *__restrict in, unsigned n,
 #define VOZ32(_op_, _i_, _ov_, _nb_,_sv_) VXZ32(_i_, _nb_,_ov_); _sv_ = mm256_scan_epi32(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_);
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *_bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(256*b); unsigned xm;
   __m256i sv = _mm256_set1_epi32(start), tv = _mm256_set_epi32(0,1,2,3,4,5,6,7),zv = _mm256_setzero_si256();
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VOZ32
@@ -619,14 +619,14 @@ unsigned char *_bitdunpack256v32( const unsigned char *__restrict in, unsigned n
 
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *_bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(256*b);
         unsigned xm;
   const __m256i zv = _mm256_setzero_si256(),
                 tv = _mm256_set_epi32(0,1,2,3,4,5,6,7);
         __m256i sv = _mm256_set1_epi32(start);
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VOZ32
@@ -637,13 +637,13 @@ unsigned char *_bitzunpack256v32( const unsigned char *__restrict in, unsigned n
 #include "bitunpack_.h"
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) _parm_ = _mm256_add_epi32(_parm_, cv); cv = _mm256_set1_epi32(8)
-unsigned char *bitd1unpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitd1unpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(256*b);
   const __m256i zv = _mm256_setzero_si256();
         __m256i sv = _mm256_set1_epi32(start),
 		        cv = _mm256_set_epi32(8,7,6,5,4,3,2,1);
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VOZ32
@@ -654,12 +654,12 @@ unsigned char *bitd1unpack256v32( const unsigned char *__restrict in, unsigned n
 #include "bitunpack_.h"
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_)
-unsigned char *bitf1unpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitf1unpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(256*b);
   const __m256i cv = _mm256_set1_epi32(8);
         __m256i sv = _mm256_set_epi32(start+8,start+7,start+6,start+5,start+4,start+3,start+2,start+1);
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VOZ32
@@ -670,7 +670,7 @@ unsigned char *bitf1unpack256v32( const unsigned char *__restrict in, unsigned n
 #include "bitunpack_.h"
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) mv = _mm256_set1_epi32(0) //_parm_ = _mm_setzero_si128()
-unsigned char *_bitd1unpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitd1unpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(256*b);
   unsigned xm;
   const __m256i cv = _mm256_set_epi32(8,7,6,5,4,3,2,1),
@@ -678,17 +678,17 @@ unsigned char *_bitd1unpack256v32( const unsigned char *__restrict in, unsigned 
 				tv = _mm256_set_epi32(0,1,2,3,4,5,6,7);
         __m256i sv = _mm256_set1_epi32(start);
   BITUNPACK256V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
 //---------------------------------------------------- bitnunpack ---------------------------------------------------------------------
-size_t bitnunpack256v32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op;       _BITNUNPACKV( in, n, out, 256, 32, bitunpack256v); }
-size_t bitndunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitdunpack256v,  bitdunpack); }
-size_t bitnd1unpack256v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitd1unpack256v, bitd1unpack); }
-//size_t bitns1unpack256v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bits1unpack256v, bitd1unpack); }
-size_t bitnzunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitzunpack256v,  bitzunpack); }
-size_t bitnxunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitxunpack256v,  bitxunpack); }
-size_t bitnfunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitfunpack256v,  bitfunpack); }
+size_t bitnunpack256v32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op;       _BITNUNPACKV( in, n, out, 256, 32, bitunpack256v); }
+size_t bitndunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitdunpack256v,  bitdunpack); }
+size_t bitnd1unpack256v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitd1unpack256v, bitd1unpack); }
+//size_t bitns1unpack256v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bits1unpack256v, bitd1unpack); }
+size_t bitnzunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitzunpack256v,  bitzunpack); }
+size_t bitnxunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitxunpack256v,  bitxunpack); }
+size_t bitnfunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 256, 32, bitfunpack256v,  bitfunpack); }
 
   #elif defined(__SSE2__) || defined(__ARM_NEON) //------------------------------ SSE2/SSSE3 ---------------------------------------------------------
 #undef VO32
@@ -774,13 +774,13 @@ size_t bitnfunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__re
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) _parm_ = _mm_setzero_si128()
 
-unsigned char *bitunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned b) { const unsigned char *ip = in+PAD8(128*b); __m128i sv; BITUNPACK128V16(in, b, out, sv); return (unsigned char *)ip; }
-unsigned char *bitunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned b) { const unsigned char *ip = in+PAD8(128*b); __m128i sv; BITUNPACK128V32(in, b, out, sv); return (unsigned char *)ip; }
-unsigned char *bitunpack256w32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned b) {
+const unsigned char *bitunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned b) { const unsigned char *ip = in+PAD8(128*b); __m128i sv; BITUNPACK128V16(in, b, out, sv); return ip; }
+const unsigned char *bitunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned b) { const unsigned char *ip = in+PAD8(128*b); __m128i sv; BITUNPACK128V32(in, b, out, sv); return ip; }
+const unsigned char *bitunpack256w32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned b) {
   const unsigned char *_in=in; unsigned *_out=out; __m128i sv;
   BITUNPACK128V32(in, b, out, sv); out = _out+128; in=_in+PAD8(128*b);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)_in+PAD8(256*b);
+  return _in+PAD8(256*b);
 }
 
 #define STOZ64(_op_, _ov_) _mm_storeu_si128(_op_++, _ov_); _mm_storeu_si128(_op_++, _ov_)
@@ -792,11 +792,11 @@ unsigned char *bitunpack256w32( const unsigned char *__restrict in, unsigned n, 
 #define VOZ32(_op_, _i_, ov, _nb_,_parm_) STOZ64(_op_, _parm_)
 #define VO32( _op_, _i_, ov, _nb_,_parm_) STO64(_op_, ov, zv)
 #include "bitunpack_.h"
-unsigned char *bitunpack128v64( const unsigned char *__restrict in, unsigned n, uint64_t      *__restrict out, unsigned b) {
+const unsigned char *bitunpack128v64( const unsigned char *__restrict in, unsigned n, uint64_t      *__restrict out, unsigned b) {
   if(b <= 32) { const unsigned char *ip = in+PAD8(128*b);
     __m128i sv,zv = _mm_setzero_si128();
     BITUNPACK128V32(in, b, out, sv);
-    return (unsigned char *)ip;
+    return ip;
   } else return bitunpack64(in,n,out,b);
 }
 #undef VO32
@@ -806,7 +806,7 @@ unsigned char *bitunpack128v64( const unsigned char *__restrict in, unsigned n, 
 #undef BITUNPACK0
 
     #if defined(__SSSE3__) || defined(__ARM_NEON)
-  #define _ 0x80
+  #define _ (char)0x80
 ALIGNED(char, _shuffle_32[16][16],16) = {
         { _,_,_,_, _,_,_,_, _,_, _, _,  _, _, _,_  },
         { 0,1,2,3, _,_,_,_, _,_, _, _,  _, _, _,_  },
@@ -1100,23 +1100,23 @@ ALIGNED(char, _shuffle_16[256][16],16) = {
 #include "bitunpack_.h"
 
 //--- bitunpack for vp4d.c ------------------------------
-unsigned char *_bitunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned b, unsigned short *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned b, unsigned short *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
         unsigned m;
   __m128i sv;
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
-unsigned char *_bitunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned b, unsigned *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned b, unsigned *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
   unsigned m;
   __m128i sv;
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
-unsigned char *_bitunpack256w32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned b, unsigned *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitunpack256w32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned b, unsigned *__restrict pex, const unsigned char *bb) {
   const unsigned char *_in=in;
   unsigned *_out=out, m;
   __m128i sv;
@@ -1124,7 +1124,7 @@ unsigned char *_bitunpack256w32( const unsigned char *__restrict in, unsigned n,
   out = _out+128;
   in  = _in+PAD8(128*b);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)_in+PAD8(256*b);
+  return _in+PAD8(256*b);
 }
 #undef VO32
 #undef VOZ32
@@ -1137,12 +1137,12 @@ unsigned char *_bitunpack256w32( const unsigned char *__restrict in, unsigned n,
 #define BITUNPACK0(_parm_)
 
 #include "bitunpack_.h"
-unsigned char *_bitunpack128v64( const unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, unsigned b, uint32_t *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitunpack128v64( const unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, unsigned b, uint32_t *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
   unsigned m;
   __m128i zv = _mm_setzero_si128();
   BITUNPACK128V32(in, b, out, 0);
-  return (unsigned char *)ip;
+  return ip;
 }
 
 #undef VO32
@@ -1163,18 +1163,18 @@ unsigned char *_bitunpack128v64( const unsigned char *__restrict in, unsigned n,
 #define VO32( _op_, _i_, _ov_, _nb_,_sv_) _ov_ = mm_zzagd_epi32(_ov_); _sv_ = mm_scan_epi32(_ov_,_sv_); _mm_storeu_si128(_op_++, _sv_)
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitzunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b) {
+const unsigned char *bitzunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set1_epi16(start);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
-unsigned char *bitzunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitzunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
               __m128i sv = _mm_set1_epi32(start);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO16
 #undef VO32
@@ -1183,18 +1183,18 @@ unsigned char *bitzunpack128v32( const unsigned char *__restrict in, unsigned n,
 #define VO32( _op_, _i_, _ov_, _nb_,_sv_) _sv_ = mm_xord_epi32(_ov_,_sv_); _mm_storeu_si128(_op_++, _sv_)
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitxunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b) {
+const unsigned char *bitxunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set1_epi16(start);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
-unsigned char *bitxunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitxunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
               __m128i sv = _mm_set1_epi32(start);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO32
 #undef VO16
@@ -1204,15 +1204,15 @@ unsigned char *bitxunpack128v32( const unsigned char *__restrict in, unsigned n,
 #define VO16(_op_, i, _ov_, _nb_,_sv_) _sv_ = mm_scan_epi16(_ov_,_sv_); _mm_storeu_si128(_op_++, _sv_)
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitdunpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
+const unsigned char *bitdunpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
               __m128i sv = _mm_set1_epi16(start);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
-unsigned char *bitdunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
-  const unsigned char *ip = in+PAD8(128*b); __m128i sv = _mm_set1_epi32(start); BITUNPACK128V32(in, b, out, sv); return (unsigned char *)ip;
+const unsigned char *bitdunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+  const unsigned char *ip = in+PAD8(128*b); __m128i sv = _mm_set1_epi32(start); BITUNPACK128V32(in, b, out, sv); return ip;
 }
 #undef VO32
 #undef VO16
@@ -1222,18 +1222,18 @@ unsigned char *bitdunpack128v32( const unsigned char *__restrict in, unsigned n,
 #define VO16( _op_, _i_, _ov_, _nb_,_parm_) _mm_storeu_si128(_op_++, _mm_add_epi16(_ov_, sv))
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *bitfunpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
+const unsigned char *bitfunpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set1_epi16(start);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
-unsigned char *bitfunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitfunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set1_epi32(start);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
     #if defined(__SSSE3__) || defined(__ARM_NEON)
@@ -1260,26 +1260,26 @@ unsigned char *bitfunpack128v32( const unsigned char *__restrict in, unsigned n,
 #define VOZ16(_op_, _i_, _ov_, _nb_,_sv_)   VXZ16( _i_, _nb_,_ov_); _sv_ = mm_scan_epi16(_ov_,_sv_); _mm_storeu_si128(_op_++, _sv_);
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *_bitdunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitdunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
   unsigned m;
   __m128i sv = _mm_set1_epi16(start);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
-unsigned char *_bitdunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start, unsigned b, unsigned       *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitdunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start, unsigned b, unsigned       *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
   unsigned m; __m128i sv = _mm_set1_epi32(start);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
 /*
 #define VO32( _op_, _i_, _ov_, _nb_,_sv_)   VX32( _i_, _ov_); mm_scan_epi32(_ov_,_sv_);   STO64( _op_, _sv_) //_mm_storeu_si128(_op_++, _sv_);
 #define VOZ32(_op_, _i_, _ov_, _nb_,_sv_)   VXZ32( _i_, _ov_); mm_scan_epi32(_ov_,_sv_); STOZ64( _op_, _sv_, zv) //_mm_storeu_si128(_op_++, _sv_);
-unsigned char *_bitdunpack128v64( const unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, uint64_t       start, unsigned b, uint64_t       *__restrict pex, unsigned char *bb) {
-  const unsigned char *ip = in+PAD8(128*b); unsigned m; __m128i sv = _mm_set1_epi32(start),zv = _mm_setzero_si128(); BITUNPACK128V32(in, b, out, sv); return (unsigned char *)ip;
+const unsigned char *_bitdunpack128v64( const unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, uint64_t       start, unsigned b, uint64_t       *__restrict pex, const unsigned char *bb) {
+  const unsigned char *ip = in+PAD8(128*b); unsigned m; __m128i sv = _mm_set1_epi32(start),zv = _mm_setzero_si128(); BITUNPACK128V32(in, b, out, sv); return ip;
 }*/
 #undef VO16
 #undef VOZ16
@@ -1301,17 +1301,17 @@ unsigned char *_bitdunpack128v64( const unsigned char *__restrict in, unsigned n
 
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
-unsigned char *_bitzunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitzunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
   unsigned m; __m128i sv = _mm_set1_epi16(start);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
-unsigned char *_bitzunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitzunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b, unsigned *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
   unsigned m; __m128i sv = _mm_set1_epi32(start);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef BITMAX16
 #undef BITMAX32
@@ -1332,22 +1332,22 @@ unsigned char *_bitzunpack128v32( const unsigned char *__restrict in, unsigned n
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) _parm_ = _mm_add_epi16(_parm_, cv); cv = _mm_set1_epi16(8)
 
-unsigned char *bitd1unpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
+const unsigned char *bitd1unpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set1_epi16(start),
           cv = _mm_set_epi16(8,7,6,5,4,3,2,1);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef BITUNPACK0
 
 #define BITUNPACK0(_parm_) _parm_ = _mm_add_epi32(_parm_, cv); cv = _mm_set1_epi32(4)
-unsigned char *bitd1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitd1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
               __m128i sv  = _mm_set1_epi32(start),
                       cv  = _mm_set_epi32(4,3,2,1);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO16
 #undef VO32
@@ -1360,22 +1360,22 @@ unsigned char *bitd1unpack128v32( const unsigned char *__restrict in, unsigned n
 #include "bitunpack_.h"
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) _parm_ = _mm_add_epi16(_parm_, cv); cv = _mm_set1_epi16(8)
-unsigned char *bits1unpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
+const unsigned char *bits1unpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set1_epi16(start),
           cv = _mm_set1_epi16(8);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) _parm_ = _mm_add_epi32(_parm_, cv); cv = _mm_set1_epi32(4)
-unsigned char *bits1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bits1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set1_epi32(start),
           cv = _mm_set1_epi32(4);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef VO16
 #undef VO32
@@ -1388,19 +1388,19 @@ unsigned char *bits1unpack128v32( const unsigned char *__restrict in, unsigned n
 #include "bitunpack_.h"
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_)
-unsigned char *bitf1unpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b) {
+const unsigned char *bitf1unpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set_epi16(start+8,start+7,start+6,start+5,start+4,start+3,start+2,start+1),
           cv = _mm_set1_epi16(8);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
-unsigned char *bitf1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
+const unsigned char *bitf1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b) {
   const unsigned char *ip = in+PAD8(128*b);
   __m128i sv = _mm_set_epi32(start+4,start+3,start+2,start+1),
           cv = _mm_set1_epi32(4);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
     #if defined(__SSSE3__) || defined(__ARM_NEON)
@@ -1431,19 +1431,19 @@ unsigned char *bitf1unpack128v32( const unsigned char *__restrict in, unsigned n
 #include "bitunpack_.h"
 #undef BITUNPACK0
 #define BITUNPACK0(_parm_) mv = _mm_setzero_si128() //_parm_ = _mm_setzero_si128()
-unsigned char *_bitd1unpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, unsigned char *bb) {
+const unsigned char *_bitd1unpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
              unsigned m;
 			 __m128i sv = _mm_set1_epi16(start),
 			         cv = _mm_set_epi16(8,7,6,5,4,3,2,1);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef BITUNPACK0
 
 #define BITUNPACK0(_parm_) mv = _mm_setzero_si128()
-unsigned char *_bitd1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start, unsigned b, unsigned       *__restrict pex, unsigned char *bb) {
-  const unsigned char *ip = in+PAD8(128*b); unsigned m; __m128i sv = _mm_set1_epi32(start), cv = _mm_set_epi32(        4,3,2,1); BITUNPACK128V32(in, b, out, sv); return (unsigned char *)ip;
+const unsigned char *_bitd1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start, unsigned b, unsigned       *__restrict pex, const unsigned char *bb) {
+  const unsigned char *ip = in+PAD8(128*b); unsigned m; __m128i sv = _mm_set1_epi32(start), cv = _mm_set_epi32(        4,3,2,1); BITUNPACK128V32(in, b, out, sv); return ip;
 }
 #undef VO16
 #undef VOZ16
@@ -1458,23 +1458,23 @@ unsigned char *_bitd1unpack128v32( const unsigned char *__restrict in, unsigned 
 
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_) mv = _mm_setzero_si128() //_parm_ = _mm_setzero_si128()
-unsigned char *_bits1unpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, unsigned char *bb) {
+const unsigned char *_bits1unpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b, unsigned short *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
              unsigned m;
 			  __m128i sv = _mm_set1_epi16(start),
 			          cv = _mm_set1_epi16(8);
   BITUNPACK128V16(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 
 #define BITUNPACK0(_parm_) mv = _mm_setzero_si128()
-unsigned char *_bits1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start, unsigned b, unsigned       *__restrict pex, unsigned char *bb) {
+const unsigned char *_bits1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start, unsigned b, unsigned       *__restrict pex, const unsigned char *bb) {
   const unsigned char *ip = in+PAD8(128*b);
              unsigned m;
 			 __m128i  sv = _mm_set1_epi32(start),
 			          cv = _mm_set1_epi32(4);
   BITUNPACK128V32(in, b, out, sv);
-  return (unsigned char *)ip;
+  return ip;
 }
 #undef BITMAX16
 #undef BITMAX32
@@ -1483,28 +1483,28 @@ unsigned char *_bits1unpack128v32( const unsigned char *__restrict in, unsigned 
     #endif
 
 //--------------------------------------------------- bitnunpack ------------------------------------------------------------------------------------------------------------------
-size_t bitnunpack128v16(  unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op;       _BITNUNPACKV( in, n, out, 128, 16, bitunpack128v); }
-size_t bitnunpack128v32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op;       _BITNUNPACKV( in, n, out, 128, 32, bitunpack128v); }
-size_t bitnunpack128v64(  unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op;       _BITNUNPACKV( in, n, out, 128, 64, bitunpack128v); }
-size_t bitnunpack256w32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op;       _BITNUNPACKV( in, n, out, 256, 32, bitunpack256w); }
+size_t bitnunpack128v16(  const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op;       _BITNUNPACKV( in, n, out, 128, 16, bitunpack128v); }
+size_t bitnunpack128v32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op;       _BITNUNPACKV( in, n, out, 128, 32, bitunpack128v); }
+size_t bitnunpack128v64(  const unsigned char *__restrict in, size_t n, uint64_t *__restrict out) { uint64_t *op;       _BITNUNPACKV( in, n, out, 128, 64, bitunpack128v); }
+size_t bitnunpack256w32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op;       _BITNUNPACKV( in, n, out, 256, 32, bitunpack256w); }
 
-size_t bitndunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitdunpack128v, bitdunpack); }
-size_t bitndunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitdunpack128v, bitdunpack); }
+size_t bitndunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitdunpack128v, bitdunpack); }
+size_t bitndunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitdunpack128v, bitdunpack); }
 
-size_t bitnd1unpack128v16(unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitd1unpack128v, bitd1unpack); }
-size_t bitnd1unpack128v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitd1unpack128v, bitd1unpack); }
+size_t bitnd1unpack128v16(const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitd1unpack128v, bitd1unpack); }
+size_t bitnd1unpack128v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitd1unpack128v, bitd1unpack); }
 
-size_t bitns1unpack128v16(unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bits1unpack128v, bitd1unpack); }
-size_t bitns1unpack128v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bits1unpack128v, bitd1unpack); }
+size_t bitns1unpack128v16(const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bits1unpack128v, bitd1unpack); }
+size_t bitns1unpack128v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bits1unpack128v, bitd1unpack); }
 
-size_t bitnzunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitzunpack128v, bitzunpack); }
-size_t bitnzunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitzunpack128v, bitzunpack); }
+size_t bitnzunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitzunpack128v, bitzunpack); }
+size_t bitnzunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitzunpack128v, bitzunpack); }
 
-size_t bitnxunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitxunpack128v, bitxunpack); }
-size_t bitnxunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitxunpack128v, bitxunpack); }
+size_t bitnxunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitxunpack128v, bitxunpack); }
+size_t bitnxunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitxunpack128v, bitxunpack); }
 
-size_t bitnfunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitfunpack128v, bitfunpack); }
-size_t bitnfunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitfunpack128v, bitfunpack); }
+size_t bitnfunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _BITNDUNPACKV(in, n, out, 128, 16, bitfunpack128v, bitfunpack); }
+size_t bitnfunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _BITNDUNPACKV(in, n, out, 128, 32, bitfunpack128v, bitfunpack); }
 
 #endif
 //#endif
