@@ -23,12 +23,10 @@
 **/
 //  "Integer Compression" variable simple
   #ifndef USIZE
-    #ifdef __SSE2__
-#include <emmintrin.h>
-    #elif defined(__ARM_NEON)
+#if defined(__ARM_NEON)
 #include <arm_neon.h>
 #include "include_/sse_neon.h"
-    #endif
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

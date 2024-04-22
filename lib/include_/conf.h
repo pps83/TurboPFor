@@ -42,9 +42,10 @@
 #include <float.h>
 #include <string.h>
 #include <stdio.h>
-#if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
+#if defined(_MSC_VER)
 #include <intrin.h>
-#elif defined(__i386__) || defined(__x86_64__)
+#endif
+#if defined(__i386__) || defined(__x86_64__)
 #include <x86intrin.h>
 #endif
 

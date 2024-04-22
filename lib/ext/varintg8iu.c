@@ -22,7 +22,12 @@
 #else
 #ifndef VARINTG8IU_H__
 #define VARINTG8IU_H__
-#include <emmintrin.h>
+#if defined(_MSC_VER)
+#include <intrin.h>
+#endif
+#if defined(__i386__) || defined(__x86_64__)
+#include <x86intrin.h>
+#endif
 //#include "codecs.h"
 #ifdef __GNUC__
 #define PREDICT_FALSE(x) (__builtin_expect(x, 0))
