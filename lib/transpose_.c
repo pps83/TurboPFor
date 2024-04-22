@@ -112,7 +112,7 @@ unsigned cpuisa(void) {
 
 unsigned cpuini(unsigned cpuisa) { if(cpuisa) _cpuisa = cpuisa; return _cpuisa; }
 
-char *cpustr(unsigned cpuisa) {
+const char *cpustr(unsigned cpuisa) {
   if(!cpuisa) cpuisa = _cpuisa;
     #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   if(cpuisa >= IS_AVX512) {
