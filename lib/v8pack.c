@@ -135,7 +135,7 @@ size_t v8nxenc256v32( uint32_t *__restrict in, size_t n, unsigned char *__restri
   #endif
 
 #define _V8D(in, n, out, _csize_, _usize_, _bitunpackv_, _bitunpack_) {      if(!n) return 0;\
-  unsigned char *ip = in;\
+  const unsigned char *ip = in;\
   if(*in == 0xff) { \
     memcpy(out, ip+1, n*(_usize_/8)); \
 	ip += 1+n*(_usize_/8); \
@@ -152,7 +152,7 @@ size_t v8nxenc256v32( uint32_t *__restrict in, size_t n, unsigned char *__restri
 }
 
 #define _V8DD(in, n, out, _csize_, _usize_, _v8dec_, _bitunpackv_, _bitunpack_, _delta_) {      if(!n) return 0;\
-  unsigned char *ip = in;\
+  const unsigned char *ip = in;\
   if(*ip == 0xff) { \
     memcpy(out, ip+1, n*(_usize_/8)); \
 	ip += 1+n*(_usize_/8);\

@@ -80,10 +80,10 @@ static unsigned availableLzs[] = {
   ICC_LAST
 };
 
-char *_codstr[] = { "none", "lzturbo", "lz4", "zlib", "deflate", "zstd", "fse", "fsehuf", "turboanx", "turborc", "memcpy", NULL };
-char *codstr(unsigned cid) { return (cid < ICC_LAST)?_codstr[cid]:""; }
+const char *_codstr[] = { "none", "lzturbo", "lz4", "zlib", "deflate", "zstd", "fse", "fsehuf", "turboanx", "turborc", "memcpy", NULL };
+const char *codstr(unsigned cid) { return (cid < ICC_LAST)?_codstr[cid]:""; }
 
-int lzidget(char *scmd) {
+int lzidget(const char *scmd) {
   int i;
   for(i = 0; _codstr[i]; i++)
     if(!strcasecmp(scmd, _codstr[i])) break;
@@ -847,7 +847,7 @@ unsigned lztp1zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 #include "include_/bitiobe.h"
 #include "include_/vlcbit.h"
 // store the last bytes without encoding, when inlen is not multiple of array element size
-#define INDEC  size_t inlen  = _inlen /sizeof( in[0]); { unsigned char *p_=_in+_inlen,  *_p = _in +(_inlen & ~(sizeof(in[0] )-1)); while(_p < p_) { *op++  = *_p++; } }
+#define INDEC  size_t inlen  = _inlen /sizeof( in[0]); { const unsigned char *p_=_in+_inlen,  *_p = _in +(_inlen & ~(sizeof(in[0] )-1)); while(_p < p_) { *op++  = *_p++; } }
 #define OUTDEC size_t outlen = _outlen/sizeof(out[0]); { unsigned char *p_=_out+_outlen,*_p = _out+(_outlen& ~(sizeof(out[0])-1)); while(_p < p_) *_p++  = *ip++; }
 
 size_t vlccomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
@@ -949,7 +949,7 @@ size_t vlccomp32x(const unsigned char *_in, size_t _inlen, unsigned char *out, s
 }
 
 size_t vlcdecomp32x(const unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, codec_func dec) {
-  unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
+  const unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
   uint32_t      *out = (uint32_t *)_out, *op = out, x=0;
   if(inlen >= _outlen){ memcpy(_out, in, _outlen); return inlen; }
   OUTDEC;
@@ -988,7 +988,7 @@ size_t vhicomp32x(const unsigned char *_in, size_t _inlen, unsigned char *out, s
 }
 
 size_t vhidecomp32x(const unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, codec_func dec) {
-  unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
+  const unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
   uint32_t      *out = (uint32_t *)_out, *op = out, x=0;
   if(inlen >= _outlen){ memcpy(_out, in, _outlen); return inlen; }
   OUTDEC;
