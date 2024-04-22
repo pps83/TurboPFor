@@ -118,101 +118,101 @@ size_t bitnfpack128v16(   uint16_t *__restrict in, size_t n, unsigned char *__re
 size_t bitnfpack128v32(   uint32_t *__restrict in, size_t n, unsigned char *__restrict out);
 size_t bitnfpack256v32(   uint32_t *__restrict in, size_t n, unsigned char *__restrict out);
 
-size_t bitnunpack8(       unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t bitnunpack16(      unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnunpack32(      unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnunpack64(      unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t bitnunpack128v16(  unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnunpack128v32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnunpack128v64(  unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t bitnunpack256v32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnunpack8(       const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t bitnunpack16(      const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnunpack32(      const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnunpack64(      const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t bitnunpack128v16(  const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnunpack128v32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnunpack128v64(  const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t bitnunpack256v32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
-size_t bitndunpack8(      unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t bitndunpack16(     unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitndunpack32(     unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitndunpack64(     unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t bitndunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitndunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitndunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitndunpack8(      const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t bitndunpack16(     const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitndunpack32(     const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitndunpack64(     const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t bitndunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitndunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitndunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
-size_t bitnd1unpack8(     unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t bitnd1unpack16(    unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnd1unpack32(    unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnd1unpack64(    unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t bitnd1unpack128v16(unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnd1unpack128v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnd1unpack256v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnd1unpack8(     const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t bitnd1unpack16(    const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnd1unpack32(    const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnd1unpack64(    const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t bitnd1unpack128v16(const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnd1unpack128v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnd1unpack256v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
-size_t bitnzunpack8(      unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t bitnzunpack16(     unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnzunpack32(     unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnzunpack64(     unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t bitnzunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnzunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnzunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnzunpack8(      const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t bitnzunpack16(     const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnzunpack32(     const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnzunpack64(     const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t bitnzunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnzunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnzunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
-size_t bitnxunpack8(      unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t bitnxunpack16(     unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnxunpack32(     unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnxunpack64(     unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t bitnxunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnxunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnxunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnxunpack8(      const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t bitnxunpack16(     const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnxunpack32(     const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnxunpack64(     const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t bitnxunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnxunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnxunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
-size_t bitnfunpack8(      unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t bitnfunpack16(     unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnfunpack32(     unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnfunpack64(     unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t bitnfunpack128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitnfunpack128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t bitnfunpack256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnfunpack8(      const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t bitnfunpack16(     const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnfunpack32(     const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnfunpack64(     const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t bitnfunpack128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitnfunpack128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitnfunpack256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
 size_t bitns1pack128v16(  uint16_t *__restrict in, size_t n, unsigned char *__restrict out);
 size_t bitns1pack128v32(  uint32_t *__restrict in, size_t n, unsigned char *__restrict out);
-size_t bitns1unpack128v16(unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t bitns1unpack128v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t bitns1unpack128v16(const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t bitns1unpack128v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
 
 //******** Bit Packing Low level API ****************************************************************
 // bipackNN: Pack array with n unsigned (NN bits in[n]) values to the buffer out using nbits per value. Return value = end of compressed buffer out
-unsigned char *bitpack8(    uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out , unsigned b);
-unsigned char *bitpack16(   uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out , unsigned b);
-unsigned char *bitpack32(   uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out , unsigned b);
-unsigned char *bitpack64(   uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out , unsigned b);
+unsigned char *bitpack8(    uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out , unsigned b);
+unsigned char *bitpack16(   uint16_t *__restrict in, unsigned n, unsigned char *__restrict out , unsigned b);
+unsigned char *bitpack32(   uint32_t *__restrict in, unsigned n, unsigned char *__restrict out , unsigned b);
+unsigned char *bitpack64(   uint64_t *__restrict in, unsigned n, unsigned char *__restrict out , unsigned b);
 
 // delta bit packing
-unsigned char *bitdpack8(   uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitdpack16(  uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitdpack32(  uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitdpack64(  uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint64_t start, unsigned b);
+unsigned char *bitdpack8(   uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out, uint8_t  start, unsigned b);
+unsigned char *bitdpack16(  uint16_t *__restrict in, unsigned n, unsigned char *__restrict out, uint16_t start, unsigned b);
+unsigned char *bitdpack32(  uint32_t *__restrict in, unsigned n, unsigned char *__restrict out, uint32_t start, unsigned b);
+unsigned char *bitdpack64(  uint64_t *__restrict in, unsigned n, unsigned char *__restrict out, uint64_t start, unsigned b);
 
-unsigned char *bitd1pack8(  uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitd1pack16( uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitd1pack32( uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitd1pack64( uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint64_t start, unsigned b);
+unsigned char *bitd1pack8(  uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out, uint8_t  start, unsigned b);
+unsigned char *bitd1pack16( uint16_t *__restrict in, unsigned n, unsigned char *__restrict out, uint16_t start, unsigned b);
+unsigned char *bitd1pack32( uint32_t *__restrict in, unsigned n, unsigned char *__restrict out, uint32_t start, unsigned b);
+unsigned char *bitd1pack64( uint64_t *__restrict in, unsigned n, unsigned char *__restrict out, uint64_t start, unsigned b);
 
 // FOR bit packing : sorted integer array
-unsigned char *bitfpack8(   uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitfpack16(  uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitfpack32(  uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitfpack64(  uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint64_t start, unsigned b);
+unsigned char *bitfpack8(   uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out, uint8_t  start, unsigned b);
+unsigned char *bitfpack16(  uint16_t *__restrict in, unsigned n, unsigned char *__restrict out, uint16_t start, unsigned b);
+unsigned char *bitfpack32(  uint32_t *__restrict in, unsigned n, unsigned char *__restrict out, uint32_t start, unsigned b);
+unsigned char *bitfpack64(  uint64_t *__restrict in, unsigned n, unsigned char *__restrict out, uint64_t start, unsigned b);
 
-unsigned char *bitf1pack8(  uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitf1pack16( uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitf1pack32( uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitf1pack64( uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint64_t start, unsigned b);
+unsigned char *bitf1pack8(  uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out, uint8_t  start, unsigned b);
+unsigned char *bitf1pack16( uint16_t *__restrict in, unsigned n, unsigned char *__restrict out, uint16_t start, unsigned b);
+unsigned char *bitf1pack32( uint32_t *__restrict in, unsigned n, unsigned char *__restrict out, uint32_t start, unsigned b);
+unsigned char *bitf1pack64( uint64_t *__restrict in, unsigned n, unsigned char *__restrict out, uint64_t start, unsigned b);
 
 // zigzag : unsorted integer array
-unsigned char *bitzpack8(   uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitzpack16(  uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitzpack32(  uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitzpack64(  uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint64_t start, unsigned b);
+unsigned char *bitzpack8(   uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out, uint8_t  start, unsigned b);
+unsigned char *bitzpack16(  uint16_t *__restrict in, unsigned n, unsigned char *__restrict out, uint16_t start, unsigned b);
+unsigned char *bitzpack32(  uint32_t *__restrict in, unsigned n, unsigned char *__restrict out, uint32_t start, unsigned b);
+unsigned char *bitzpack64(  uint64_t *__restrict in, unsigned n, unsigned char *__restrict out, uint64_t start, unsigned b);
 
 // xor : unsorted integer array
-unsigned char *bitxpack8(   uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitxpack16(  uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitxpack32(  uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitxpack64(  uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint64_t start, unsigned b);
+unsigned char *bitxpack8(   uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out, uint8_t  start, unsigned b);
+unsigned char *bitxpack16(  uint16_t *__restrict in, unsigned n, unsigned char *__restrict out, uint16_t start, unsigned b);
+unsigned char *bitxpack32(  uint32_t *__restrict in, unsigned n, unsigned char *__restrict out, uint32_t start, unsigned b);
+unsigned char *bitxpack64(  uint64_t *__restrict in, unsigned n, unsigned char *__restrict out, uint64_t start, unsigned b);
 
 //-------------------------------------- SIMD ------------------------------------------------------------------------------------------
 // Pack array with 128 unsigned (32 bits in[n]) values to the buffer out using nbits per value. Return value = end of compressed buffer out
@@ -245,90 +245,90 @@ unsigned char *bitxpack256v32( unsigned          *__restrict in, unsigned n, uns
 
 unsigned char *bits1pack128v16(unsigned short *__restrict in, unsigned n, unsigned char *__restrict out, unsigned short start, unsigned b);
 unsigned char *bits1pack128v32(unsigned       *__restrict in, unsigned n, unsigned char *__restrict out, unsigned start, unsigned b);
-unsigned char *bits1unpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
-unsigned char *bits1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bits1unpack128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
+const unsigned char *bits1unpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
 //********************************** Bit Packing : Unpack ****************************************************************
 
 // ---------------- Unpack a b-bits packed integer array -------------------------------------------------------------------------------
 // unpack a bitpacked integer array. Return value = end of packed buffer in
-unsigned char *bitunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, unsigned b);
-unsigned char *bitunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, unsigned b);
-unsigned char *bitunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, unsigned b);
-unsigned char *bitunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, unsigned b);
+const unsigned char *bitunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, unsigned b);
+const unsigned char *bitunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, unsigned b);
+const unsigned char *bitunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, unsigned b);
+const unsigned char *bitunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, unsigned b);
 
 // ---------------- DFOR : integrated bitpacking, for delta packed SORTED array (Ex. DocId in inverted index) -------------------------------
 // start <= out[0] <= out[1] <= ... <= out[n-2] <= out[n-1] <= (1<<N)-1  N=8,16,32 or 64
 // out[0] = start + in[0];  out[1] = out[0] + in[1]; ... ;  out[i] = out[i-1] + in[i]
-unsigned char *bitdunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitdunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitdunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitdunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
+const unsigned char *bitdunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
+const unsigned char *bitdunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
+const unsigned char *bitdunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
+const unsigned char *bitdunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
 
 // start < out[0] < out[1] < ... < out[n-2] < out[n-1] < (1<<N)-1,    N=8,16,32 or 64
 // out[0] = start + in[0] + 1;  out[1] = out[0] + in[1] + 1; ... ;  out[i] = out[i-1] + in[i] +  1
-unsigned char *bitd1unpack8( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitd1unpack16(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitd1unpack32(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitd1unpack64(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
+const unsigned char *bitd1unpack8( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
+const unsigned char *bitd1unpack16(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
+const unsigned char *bitd1unpack32(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
+const unsigned char *bitd1unpack64(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
 
 // ---------------- ZigZag : integrated bitpacking, for zigzag packed unsorted
-unsigned char *bitzunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitzunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitzunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitzunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
+const unsigned char *bitzunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
+const unsigned char *bitzunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
+const unsigned char *bitzunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
+const unsigned char *bitzunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
 
 // ---------------- Xor : integrated bitpacking, for xor packed unsorted
-unsigned char *bitxunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitxunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitxunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitxunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
+const unsigned char *bitxunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
+const unsigned char *bitxunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
+const unsigned char *bitxunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
+const unsigned char *bitxunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
 
 // ---------------- For : Direct Access for packed SORTED array  --------------------------------------------
 // out[i] = start + in[i] + i
-unsigned char *bitfunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitfunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitfunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitfunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
+const unsigned char *bitfunpack8(  const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
+const unsigned char *bitfunpack16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
+const unsigned char *bitfunpack32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
+const unsigned char *bitfunpack64( const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
 
 // out[i] = start + in[i] + i + 1
-unsigned char *bitf1unpack8( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
-unsigned char *bitf1unpack16(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
-unsigned char *bitf1unpack32(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
-unsigned char *bitf1unpack64(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
+const unsigned char *bitf1unpack8( const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b);
+const unsigned char *bitf1unpack16(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b);
+const unsigned char *bitf1unpack32(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b);
+const unsigned char *bitf1unpack64(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b);
 
 // ---------------- SIMD : unpack a SIMD bit packed integer array -------------------------------------------------------------------------------
 // SIMD unpack a 128/256 bitpacked integer array. Return value = end of packed buffer in
-unsigned char *bitunpack128v16(  const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out,                       unsigned b);
-unsigned char *bitzunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
-unsigned char *bitxunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
-unsigned char *bitdunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
-unsigned char *bitd1unpack128v16(const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
-unsigned char *bitfunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
-unsigned char *bitf1unpack128v16(const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
+const unsigned char *bitunpack128v16(  const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out,                       unsigned b);
+const unsigned char *bitzunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
+const unsigned char *bitxunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
+const unsigned char *bitdunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
+const unsigned char *bitd1unpack128v16(const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
+const unsigned char *bitfunpack128v16( const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
+const unsigned char *bitf1unpack128v16(const unsigned char *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start, unsigned b);
 
-unsigned char *bitunpack128v32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
-unsigned char *bitzunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitxunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitdunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitd1unpack128v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitfunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitf1unpack128v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitunpack128v32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
+const unsigned char *bitzunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitxunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitdunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitd1unpack128v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitfunpack128v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitf1unpack128v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
 
-unsigned char *bitunpack256w32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
-unsigned char *bitunpack128v64(  const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out,                 unsigned b);
+const unsigned char *bitunpack256w32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
+const unsigned char *bitunpack128v64(  const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out,                 unsigned b);
 
-unsigned char *bitunpack256v32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
-unsigned char *bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitxunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitd1unpack256v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitfunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitf1unpack256v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitunpack256v32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
+const unsigned char *bitzunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitxunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitdunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitd1unpack256v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitfunpack256v32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitf1unpack256v32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
 
-unsigned char *bitunpack128h32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
-unsigned char *bitzunpack128h32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitdunpack128h32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
-unsigned char *bitd1unpack128h32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitunpack128h32(  const unsigned char *__restrict in, unsigned n, unsigned *__restrict out,                 unsigned b);
+const unsigned char *bitzunpack128h32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitdunpack128h32( const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
+const unsigned char *bitd1unpack128h32(const unsigned char *__restrict in, unsigned n, unsigned *__restrict out, unsigned start, unsigned b);
 
 //-- "Integer Compression: max.bits, delta, zigzag, xor" -----------------------------------------------------------------------
 //---------- max. bit length + transform for sorted/unsorted arrays, delta,delta 1, delta > 1, zigzag, zigzag of delta, xor, FOR,----------------
@@ -527,48 +527,48 @@ void   fprazor64(double  *in, unsigned n, double *out, double e);
 unsigned char *efanoenc32(     unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
 unsigned char *efanoenc64(     uint64_t      *__restrict in, unsigned n, unsigned char  *__restrict out, uint64_t start);
 
-unsigned char *efanodec32(     unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
-unsigned char *efanodec64(     unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, uint64_t start);
+const unsigned char *efanodec32(     const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
+const unsigned char *efanodec64(     const unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, uint64_t start);
 
 unsigned char *efano1enc32(    unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
 unsigned char *efano1enc64(    uint64_t      *__restrict in, unsigned n, unsigned char  *__restrict out, uint64_t start);
 
-unsigned char *efano1dec32(    unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
-unsigned char *efano1dec64(    unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, uint64_t start);
+const unsigned char *efano1dec32(    const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
+const unsigned char *efano1dec64(    const unsigned char *__restrict in, unsigned n, uint64_t       *__restrict out, uint64_t start);
 
 unsigned char *efanoenc128v32( unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
-unsigned char *efanodec128v32( unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
+const unsigned char *efanodec128v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
 
 unsigned char *efano1enc128v32(unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
-unsigned char *efano1dec128v32(unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
+const unsigned char *efano1dec128v32(const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
 
 unsigned char *efanoenc256v32( unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
-unsigned char *efanodec256v32( unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
+const unsigned char *efanodec256v32( const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
 
 unsigned char *efano1enc256v32(unsigned      *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned start);
-unsigned char *efano1dec256v32(unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
+const unsigned char *efano1dec256v32(const unsigned char *__restrict in, unsigned n, unsigned       *__restrict out, unsigned start);
 
 //---------- "Floating Point + Integer Compression" -----------------------------------------
 
 // ---------- TurboPFor Zigzag of delta (=delta of delta + zigzag encoding) (TurboPFor)
 size_t p4nzzenc128v8(    uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
-size_t p4nzzdec128v8(    unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
+size_t p4nzzdec128v8(    const unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
 size_t p4nzzenc128v16(   uint16_t      *in, size_t n, unsigned char *out, uint16_t start);
-size_t p4nzzdec128v16(   unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
+size_t p4nzzdec128v16(   const unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
 size_t p4nzzenc128v32(   uint32_t      *in, size_t n, unsigned char *out, uint32_t start);
-size_t p4nzzdec128v32(   unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
+size_t p4nzzdec128v32(   const unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
 size_t p4nzzenc128v64(   uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
-size_t p4nzzdec128v64(   unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
+size_t p4nzzdec128v64(   const unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 
 //----------- Zigzag (bit/io) -------------------------------------------------------
 size_t bvzenc8(     uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
-size_t bvzdec8(     unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
+size_t bvzdec8(     const unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
 size_t bvzenc16(    uint16_t      *in, size_t n, unsigned char *out, uint16_t start);
-size_t bvzdec16(    unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
+size_t bvzdec16(    const unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
 size_t bvzenc32(    uint32_t      *in, size_t n, unsigned char *out, uint32_t start);
-size_t bvzdec32(    unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
+size_t bvzdec32(    const unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
 size_t bvzenc64(    uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
-size_t bvzdec64(    unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
+size_t bvzdec64(    const unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 //----------- Zigzag of delta (bit/io) ---------------------------------------------
 size_t bvzzenc8(    uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
 size_t bvzzdec8(    unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
@@ -616,43 +616,43 @@ size_t fpcdec64(    unsigned char *in, size_t n, uint64_t      *out, uint64_t st
 
 //----------- TurboFloat XOR : Last value predictor (TurboPFor) ---------------------
 size_t fpxenc8(     uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
-size_t fpxdec8(     unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
+size_t fpxdec8(     const unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
 size_t fpxenc16(    uint16_t      *in, size_t n, unsigned char *out, uint16_t start);
-size_t fpxdec16(    unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
+size_t fpxdec16(    const unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
 size_t fpxenc32(    uint32_t      *in, size_t n, unsigned char *out, uint32_t start);
-size_t fpxdec32(    unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
+size_t fpxdec32(    const unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
 size_t fpxenc64(    uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
-size_t fpxdec64(    unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
+size_t fpxdec64(    const unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 
 //----------- TurboFloat FCM: Finite Context Method Predictor (TurboPFor) -----------
 size_t fpfcmenc8(   uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
-size_t fpfcmdec8(   unsigned char *in, size_t n, uint8_t      *out,  uint8_t  start);
+size_t fpfcmdec8(   const unsigned char *in, size_t n, uint8_t      *out,  uint8_t  start);
 size_t fpfcmenc16(  uint16_t      *in, size_t n, unsigned char *out, uint16_t start);
-size_t fpfcmdec16(  unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
+size_t fpfcmdec16(  const unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
 size_t fpfcmenc32(  uint32_t      *in, size_t n, unsigned char *out, uint32_t start);
-size_t fpfcmdec32(  unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
+size_t fpfcmdec32(  const unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
 size_t fpfcmenc64(  uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
-size_t fpfcmdec64(  unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
+size_t fpfcmdec64(  const unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 
 //----------- TurboFloat DFCM: Differential Finite Context Method Predictor (TurboPFor)
 size_t fpdfcmenc8(  uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
-size_t fpdfcmdec8(  unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
+size_t fpdfcmdec8(  const unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
 size_t fpdfcmenc16( uint16_t      *in, size_t n, unsigned char *out, uint16_t start);
-size_t fpdfcmdec16( unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
+size_t fpdfcmdec16( const unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
 size_t fpdfcmenc32( uint32_t      *in, size_t n, unsigned char *out, uint32_t start);
-size_t fpdfcmdec32( unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
+size_t fpdfcmdec32( const unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
 size_t fpdfcmenc64( uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
-size_t fpdfcmdec64( unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
+size_t fpdfcmdec64( const unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 
 //----------- TurboFloat 2D DFCM: Differential Finite Context Method Predictor -----
 size_t fp2dfcmenc8( uint8_t       *in, size_t n, unsigned char *out, uint8_t  start);
-size_t fp2dfcmdec8( unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
+size_t fp2dfcmdec8( const unsigned char *in, size_t n, uint8_t       *out, uint8_t  start);
 size_t fp2dfcmenc16(uint16_t      *in, size_t n, unsigned char *out, uint16_t start);
-size_t fp2dfcmdec16(unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
+size_t fp2dfcmdec16(const unsigned char *in, size_t n, uint16_t      *out, uint16_t start);
 size_t fp2dfcmenc32(uint32_t      *in, size_t n, unsigned char *out, uint32_t start);
-size_t fp2dfcmdec32(unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
+size_t fp2dfcmdec32(const unsigned char *in, size_t n, uint32_t      *out, uint32_t start);
 size_t fp2dfcmenc64(uint64_t      *in, size_t n, unsigned char *out, uint64_t start);
-size_t fp2dfcmdec64(unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
+size_t fp2dfcmdec64(const unsigned char *in, size_t n, uint64_t      *out, uint64_t start);
 
 //--  transpose.h - Byte/Nibble transpose for further compressing with lz77 or other compressors -------------------------------------
 
@@ -875,7 +875,7 @@ unsigned cpuini(unsigned cpuiset);
 
 // convert simd set to string "sse3", "sse3", "sse4.1" or "avx2"
 // Ex.: printf("current cpu set=%s\n", cpustr(cpuini(0)) );
-char *cpustr(unsigned cpuisa);
+const char *cpustr(unsigned cpuisa);
 
 unsigned cpuisa(void);
 
@@ -951,13 +951,13 @@ size_t vbbound64(size_t n);
 
 //----------------------- Encoding/Decoding unsorted array with n integer values --------------------------
 unsigned char *vbenc16(  unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out); //TurboVByte
-unsigned char *vbdec16(  unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
+const unsigned char *vbdec16(  const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
 
 unsigned char *vbenc32(  unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out);
-unsigned char *vbdec32(  unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
+const unsigned char *vbdec32(  const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
 
 unsigned char *vbenc64(  uint64_t       *__restrict in, unsigned n, unsigned char  *__restrict out);
-unsigned char *vbdec64(  unsigned char  *__restrict in, unsigned n, uint64_t       *__restrict out);
+const unsigned char *vbdec64(  const unsigned char  *__restrict in, unsigned n, uint64_t       *__restrict out);
 
 //-- Get value stored at index idx (idx:0...n-1)
 unsigned short vbgetx16( unsigned char *__restrict in, unsigned idx);
@@ -1069,38 +1069,38 @@ size_t v8len32(const uint32_t *in, size_t n);
 size_t v8len16(const uint16_t *in, size_t n);
 
 unsigned char *v8enc16(  unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out); //TurboByte
-unsigned char *v8dec16(  unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
+const unsigned char *v8dec16(  const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out);
 
 unsigned char *v8enc32(  unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out);
-unsigned char *v8dec32(  unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
+const unsigned char *v8dec32(  const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out);
 
 //------ delta ---------
 unsigned char *v8denc16( unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
-unsigned char *v8ddec16( unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8ddec16( const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
 
 unsigned char *v8denc32( unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
-unsigned char *v8ddec32( unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8ddec32( const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //------ delta 1 -------
 unsigned char *v8d1enc16(unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
-unsigned char *v8d1dec16(unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8d1dec16(const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
 
 unsigned char *v8d1enc32(unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
-unsigned char *v8d1dec32(unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8d1dec32(const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //------- zigzag -------
 unsigned char *v8zenc16( unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
-unsigned char *v8zdec16( unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8zdec16( const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
 
 unsigned char *v8zenc32( unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
-unsigned char *v8zdec32( unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8zdec32( const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //------- xor ----------
 unsigned char *v8xenc16( unsigned short *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned short start);
 unsigned char *v8xenc32( unsigned       *__restrict in, unsigned n, unsigned char  *__restrict out, unsigned       start);
 
-unsigned char *v8xdec16( unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
-unsigned char *v8xdec32( unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
+const unsigned char *v8xdec16( const unsigned char  *__restrict in, unsigned n, unsigned short *__restrict out, unsigned short start);
+const unsigned char *v8xdec32( const unsigned char  *__restrict in, unsigned n, unsigned       *__restrict out, unsigned       start);
 
 //-------------------------- TurboByte Hybrid (SIMD Group varint) + Bitpacking -------------------------------------------
 size_t v8nenc16(  uint16_t      *__restrict in, size_t n, unsigned char *__restrict out);
@@ -1238,40 +1238,40 @@ size_t p4nzenc64(     uint64_t *__restrict in, size_t n, unsigned char *__restri
 
 // Decompress the compressed n values in input buffer in to the integer array out.
 // Return value = number of bytes read from the compressed buffer in
-size_t p4ndec8(       unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t p4ndec16(      unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4ndec32(      unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4ndec64(      unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t p4ndec128v16(  unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4ndec128v32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4ndec128v64(  unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
-size_t p4ndec256v32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4ndec8(       const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t p4ndec16(      const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4ndec32(      const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4ndec64(      const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t p4ndec128v16(  const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4ndec128v32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4ndec128v64(  const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t p4ndec256v32(  const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
 
 // Delta minimum = 0
-size_t p4nddec8(      unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t p4nddec16(     unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4nddec32(     unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nddec128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4nddec128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nddec256w32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nddec256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nddec64(     unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t p4nddec8(      const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t p4nddec16(     const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4nddec32(     const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nddec128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4nddec128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nddec256w32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nddec256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nddec64(     const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
 // Delta minimum = 1
-size_t p4nd1dec8(     unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t p4nd1dec16(    unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4nd1dec32(    unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nd1dec128v16(unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4nd1dec128v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nd1dec256v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nd1dec64(    unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t p4nd1dec8(     const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t p4nd1dec16(    const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4nd1dec32(    const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nd1dec128v16(const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4nd1dec128v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nd1dec256v32(const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nd1dec64(    const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
 //Zigzag
-size_t p4nzdec8(      unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
-size_t p4nzdec16(     unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4nzdec32(     unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nzdec128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
-size_t p4nzdec128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nzdec256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
-size_t p4nzdec64(     unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
+size_t p4nzdec8(      const unsigned char *__restrict in, size_t n, uint8_t  *__restrict out);
+size_t p4nzdec16(     const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4nzdec32(     const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nzdec128v16( const unsigned char *__restrict in, size_t n, uint16_t *__restrict out);
+size_t p4nzdec128v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nzdec256v32( const unsigned char *__restrict in, size_t n, uint32_t *__restrict out);
+size_t p4nzdec64(     const unsigned char *__restrict in, size_t n, uint64_t *__restrict out);
 
 //************** Low level API - n limited to 128/256 ***************************************
 #define P4D_MAX 256
@@ -1377,75 +1377,75 @@ unsigned _p4bitsx64(         uint64_t *__restrict in, unsigned n, unsigned *pbx)
 // decompress a previously (with p4enc32) bit packed array. Return value = end of packed buffer in
 //-- scalar. (see p4getx32 for direct access)
 // b and bx specified (not stored within the compressed stream header)
-unsigned char *_p4dec8(       unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, unsigned b, unsigned bx);
-unsigned char *_p4dec16(      unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, unsigned b, unsigned bx);
-unsigned char *_p4dec32(      unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, unsigned b, unsigned bx);
-unsigned char *_p4dec128v16(  unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, unsigned b, unsigned bx); // SIMD (Vertical BitPacking)
-unsigned char *_p4dec128v32(  unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, unsigned b, unsigned bx);
-unsigned char *_p4dec128v64(  unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, unsigned b, unsigned bx);
-unsigned char *_p4dec64(      unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, unsigned b, unsigned bx);
+const unsigned char *_p4dec8(       const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, unsigned b, unsigned bx);
+const unsigned char *_p4dec16(      const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, unsigned b, unsigned bx);
+const unsigned char *_p4dec32(      const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, unsigned b, unsigned bx);
+const unsigned char *_p4dec128v16(  const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, unsigned b, unsigned bx); // SIMD (Vertical BitPacking)
+const unsigned char *_p4dec128v32(  const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, unsigned b, unsigned bx);
+const unsigned char *_p4dec128v64(  const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, unsigned b, unsigned bx);
+const unsigned char *_p4dec64(      const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, unsigned b, unsigned bx);
 
-unsigned char *p4dec8(        unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out);
-unsigned char *p4dec16(       unsigned char *__restrict in, unsigned n, uint16_t *__restrict out);
-unsigned char *p4dec32(       unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
-unsigned char *p4dec128v16(   unsigned char *__restrict in, unsigned n, uint16_t *__restrict out);  // SIMD (Vertical BitPacking)
-unsigned char *p4dec128v32(   unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
-unsigned char *p4dec128v64(   unsigned char *__restrict in, unsigned n, uint64_t *__restrict out);
-unsigned char *p4dec256v32(   unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
-unsigned char *p4dec64(       unsigned char *__restrict in, unsigned n, uint64_t *__restrict out);
+const unsigned char *p4dec8(        const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out);
+const unsigned char *p4dec16(       const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out);
+const unsigned char *p4dec32(       const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
+const unsigned char *p4dec128v16(   const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out);  // SIMD (Vertical BitPacking)
+const unsigned char *p4dec128v32(   const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
+const unsigned char *p4dec128v64(   const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out);
+const unsigned char *p4dec256v32(   const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out);
+const unsigned char *p4dec64(       const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out);
 //------ Delta decoding --------------------------- Return value = end of packed input buffer in ---------------------------
 //-- Increasing integer lists. out[i] = out[i-1] + in[i]
 // b and bx specified
-unsigned char *_p4ddec8(      unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b, unsigned bx);
-unsigned char *_p4ddec16(     unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
-unsigned char *_p4ddec32(     unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4ddec128v16( unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
-unsigned char *_p4ddec128v32( unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4ddec256v32( unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4ddec64(     unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b, unsigned bx);
+const unsigned char *_p4ddec8(      const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b, unsigned bx);
+const unsigned char *_p4ddec16(     const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
+const unsigned char *_p4ddec32(     const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4ddec128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
+const unsigned char *_p4ddec128v32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4ddec256v32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4ddec64(     const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b, unsigned bx);
 
-unsigned char *p4ddec8(       unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start);
-unsigned char *p4ddec16(      unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
-unsigned char *p4ddec32(      unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4ddec128v16(  unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start); // SIMD (Vertical BitPacking)
-unsigned char *p4ddec128v32(  unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4ddec256v32(  unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4ddec64(      unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
+const unsigned char *p4ddec8(       const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start);
+const unsigned char *p4ddec16(      const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
+const unsigned char *p4ddec32(      const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4ddec128v16(  const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start); // SIMD (Vertical BitPacking)
+const unsigned char *p4ddec128v32(  const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4ddec256v32(  const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4ddec64(      const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
 
 //-- Strictly increasing (never remaining constant or decreasing) integer lists. out[i] = out[i-1] + in[i] +  1
 // b and bx specified (see idxcr.c/idxqry.c for an example)
-unsigned char *_p4d1dec8(     unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b, unsigned bx);
-unsigned char *_p4d1dec16(    unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
-unsigned char *_p4d1dec32(    unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4d1dec128v16(unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx); // SIMD (Vertical BitPacking)
-unsigned char *_p4d1dec128v32(unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4d1dec256v32(unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4d1dec64(    unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b, unsigned bx);
+const unsigned char *_p4d1dec8(     const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b, unsigned bx);
+const unsigned char *_p4d1dec16(    const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
+const unsigned char *_p4d1dec32(    const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4d1dec128v16(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx); // SIMD (Vertical BitPacking)
+const unsigned char *_p4d1dec128v32(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4d1dec256v32(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4d1dec64(    const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b, unsigned bx);
 
-unsigned char *p4d1dec8(      unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start);
-unsigned char *p4d1dec16(     unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
-unsigned char *p4d1dec32(     unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4d1dec128v16( unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start); // SIMD (Vertical BitPacking)
-unsigned char *p4d1dec128v32( unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4d1dec256v32( unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4d1dec64(     unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
+const unsigned char *p4d1dec8(      const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start);
+const unsigned char *p4d1dec16(     const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
+const unsigned char *p4d1dec32(     const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4d1dec128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start); // SIMD (Vertical BitPacking)
+const unsigned char *p4d1dec128v32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4d1dec256v32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4d1dec64(     const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
 
 // ZigZag encoding
-unsigned char *_p4zdec8(      unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b, unsigned bx);
-unsigned char *_p4zdec16(     unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
-unsigned char *_p4zdec32(     unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4zdec128v16( unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
-unsigned char *_p4zdec128v32( unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4zdec256v32( unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
-unsigned char *_p4zdec64(     unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b, unsigned bx);
+const unsigned char *_p4zdec8(      const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start, unsigned b, unsigned bx);
+const unsigned char *_p4zdec16(     const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
+const unsigned char *_p4zdec32(     const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4zdec128v16( const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start, unsigned b, unsigned bx);
+const unsigned char *_p4zdec128v32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4zdec256v32( const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start, unsigned b, unsigned bx);
+const unsigned char *_p4zdec64(     const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start, unsigned b, unsigned bx);
 
-unsigned char *p4zdec8(       unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start);
-unsigned char *p4zdec16(      unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
-unsigned char *p4zdec32(      unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4zdec128v16(  unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start); // SIMD (Vertical BitPacking)
-unsigned char *p4zdec128v32(  unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4zdec256v32(  unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
-unsigned char *p4zdec64(      unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
+const unsigned char *p4zdec8(       const unsigned char *__restrict in, unsigned n, uint8_t  *__restrict out, uint8_t  start);
+const unsigned char *p4zdec16(      const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start);
+const unsigned char *p4zdec32(      const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4zdec128v16(  const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out, uint16_t start); // SIMD (Vertical BitPacking)
+const unsigned char *p4zdec128v32(  const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4zdec256v32(  const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out, uint32_t start);
+const unsigned char *p4zdec64(      const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out, uint64_t start);
 
 // -- "Integer Compression" variable simple "SimpleV" -----------------------------------------------------------
 //  this belongs to the integer compression known as "simple family", like simple-9,simple-16

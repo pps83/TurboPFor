@@ -40,7 +40,7 @@ size_t v8bound32(size_t n) { return V8BOUND(n, 32); }
 
 size_t v8len16(const uint16_t *in, size_t n) {
   size_t   c = 0;
-  uint16_t *ip;
+  const uint16_t *ip;
   for(ip = in; ip < in + n; ip++)
     c += ip[0]?(bsr16(ip[0]) + 7)/8:1;
   return c + V8PAYLOAD(n, 16);
@@ -48,7 +48,7 @@ size_t v8len16(const uint16_t *in, size_t n) {
 
 size_t v8len32(const uint32_t *in, size_t n) {
   size_t   c = 0;
-  uint32_t *ip;
+  const uint32_t *ip;
   for(ip = in; ip < in+n; ip++)
     c += ip[0]?(bsr32(ip[0]) + 7)/8:1;
   return c + V8PAYLOAD(n, 32);
@@ -1171,9 +1171,9 @@ unsigned char *T2(V8ENC,32)(uint32_t *__restrict in, unsigned n, unsigned char *
   _b = ((m>>6)& 3)+1; v = ctou32(ip) & ((1ull<<(_b*8))-1); op[_i_+3] = VD32(v); ip+=_b;\
 }
 
-unsigned char *T2(V8DEC,32)(unsigned char  *__restrict in, unsigned n, uint32_t *__restrict out V8DELTA32) {
+const unsigned char *T2(V8DEC,32)(const unsigned char  *__restrict in, unsigned n, uint32_t *__restrict out V8DELTA32) {
   uint32_t      *op=out, v;
-  unsigned char *ip = DATABEG(in,n,32);
+  const unsigned char *ip = DATABEG(in,n,32);
   if(!n) return in;
     #ifdef __AVX2__ //slightly faster than SSE ------------------------------------------------------------------------------------------
   VDINI256v32;
@@ -1393,9 +1393,9 @@ unsigned char *T2(V8ENC,16)(uint16_t *__restrict in, unsigned n, unsigned char *
     _b = ((m>>7)& 1)+1; v = ctou16(ip) & ((1<<(_b*8))-1); op[_i_+7] = VD16(v); ip+=_b;\
   }
 
-unsigned char *T2(V8DEC,16)(unsigned char  *__restrict in, unsigned n, uint16_t *__restrict out V8DELTA16) {
+const unsigned char *T2(V8DEC,16)(const unsigned char  *__restrict in, unsigned n, uint16_t *__restrict out V8DELTA16) {
   uint16_t      *op;
-  unsigned char *ip = DATABEG(in,n,16);
+  const unsigned char *ip = DATABEG(in,n,16);
   uint16_t v;
 
     #if defined(__SSSE3__) || defined(__ARM_NEON)//-----------------------

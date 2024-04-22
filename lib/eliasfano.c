@@ -194,8 +194,8 @@ unsigned char *T2(EFANOENC, USIZE)(uint_t *__restrict in, unsigned n, unsigned c
   return op+hl;
 }
 
-unsigned char *T2(EFANODEC, USIZE)(unsigned char *__restrict in, unsigned n, uint_t *__restrict out, uint_t start) {
-  unsigned char *ip = in;
+const unsigned char *T2(EFANODEC, USIZE)(const unsigned char *__restrict in, unsigned n, uint_t *__restrict out, uint_t start) {
+  const unsigned char *ip = in;
   uint_t        i,j,lb = *ip++;
   uint64_t      b,x;
   if(!n)

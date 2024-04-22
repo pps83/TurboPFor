@@ -56,7 +56,7 @@
 static unsigned cntcalc32(const unsigned char *__restrict in, unsigned inlen, cnt_t *__restrict cnt) {
   cnt_t c[4][CSIZE] = {0},i;
 
-  unsigned char *ip = in;
+  const unsigned char *ip = in;
   if(inlen >= 64) {
     unsigned ux = ctou32(ip), vx = ctou32(ip+4);
     for(; ip != in+(inlen&~(64-1))-64; ip += 64) { INC4_32(0); INC4_32(16); INC4_32(32); INC4_32(48); __builtin_prefetch(ip+512, 0); }
@@ -92,7 +92,7 @@ static unsigned cntcalc32(const unsigned char *__restrict in, unsigned inlen, cn
 } while(0)
 
 unsigned _srlec8(const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint8_t e) {
-  uint8_t *ip = in, *pp = in, *ie = in+inlen, *op = out;
+  const uint8_t *ip = in, *pp = in, *ie = in+inlen; uint8_t *op = out;
 
   if(inlen > SRLE8+1)
     while(ip < ie-1-SRLE8) {
@@ -130,7 +130,7 @@ unsigned _srlec8(const unsigned char *__restrict in, unsigned inlen, unsigned ch
 } while(0)
 
 static inline unsigned _srlec8x(const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint8_t e, uint8_t ix) {
-  uint8_t *ip = in, *pp = in, *ie = in+inlen, *op = out;
+  const uint8_t *ip = in, *pp = in, *ie = in+inlen; uint8_t *op = out;
 
   if(inlen > SRLE8+1)
     while(ip < ie-1-SRLE8) {
@@ -198,7 +198,7 @@ unsigned srlec(const unsigned char *__restrict in, unsigned inlen, unsigned char
 
 unsigned trlec(const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out) {
   unsigned      cnt[256] = {0}, m=-1, x=0, im, i, a, c;
-  unsigned char rmap[256], *op=out, *ie = in+inlen, *ip = in,*pp = in, ix;
+  unsigned char rmap[256], *op=out, ix; const unsigned char*ie = in+inlen, *ip = in,*pp = in;
   if(!inlen) return 0;                                          // RETURN 0 = zero length
 
   a = cntcalc32(in, inlen, cnt);
