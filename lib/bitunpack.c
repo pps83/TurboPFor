@@ -181,8 +181,6 @@ size_t bitnfunpack64( const unsigned char *__restrict in, size_t n, uint64_t *__
   return ip - in;\
 }
   #ifdef __AVX2__ //-------------------------------- AVX2 ----------------------------------------------------------------------------
-#include <immintrin.h>
-
     #ifdef __AVX512F__
 #define mm256_maskz_expand_epi32(_m_,_v_) _mm256_maskz_expand_epi32(_m_,_v_)
 #define mm256_maskz_loadu_epi32( _m_,_v_) _mm256_maskz_loadu_epi32( _m_,_v_)
