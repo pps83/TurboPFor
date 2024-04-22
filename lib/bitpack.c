@@ -66,14 +66,14 @@ size_t bitnbound256v32(size_t n){ return BITNBOUND(n, 4, 256); }
 size_t bitnbound256v64(size_t n){ return BITNBOUND(n, 8, 128); }
 
 //---------------------------------------------- Plain -----------------------------------------------------------------------
-typedef unsigned char *(*BITPACK_F8)( uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out);
-typedef unsigned char *(*BITPACK_D8)( uint8_t  *__restrict in, unsigned n, const unsigned char *__restrict out, uint8_t start);
-typedef unsigned char *(*BITPACK_F16)(uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out);
-typedef unsigned char *(*BITPACK_D16)(uint16_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint16_t start);
-typedef unsigned char *(*BITPACK_F32)(uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out);
-typedef unsigned char *(*BITPACK_D32)(uint32_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint32_t start);
-typedef unsigned char *(*BITPACK_F64)(uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out);
-typedef unsigned char *(*BITPACK_D64)(uint64_t *__restrict in, unsigned n, const unsigned char *__restrict out, uint64_t start);
+typedef unsigned char *(*BITPACK_F8)( uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out);
+typedef unsigned char *(*BITPACK_D8)( uint8_t  *__restrict in, unsigned n, unsigned char *__restrict out, uint8_t start);
+typedef unsigned char *(*BITPACK_F16)(uint16_t *__restrict in, unsigned n, unsigned char *__restrict out);
+typedef unsigned char *(*BITPACK_D16)(uint16_t *__restrict in, unsigned n, unsigned char *__restrict out, uint16_t start);
+typedef unsigned char *(*BITPACK_F32)(uint32_t *__restrict in, unsigned n, unsigned char *__restrict out);
+typedef unsigned char *(*BITPACK_D32)(uint32_t *__restrict in, unsigned n, unsigned char *__restrict out, uint32_t start);
+typedef unsigned char *(*BITPACK_F64)(uint64_t *__restrict in, unsigned n, unsigned char *__restrict out);
+typedef unsigned char *(*BITPACK_D64)(uint64_t *__restrict in, unsigned n, unsigned char *__restrict out, uint64_t start);
 
   #if 1 //def _MSC_VER
 #define VX (v=x)
