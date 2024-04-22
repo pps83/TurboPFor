@@ -141,7 +141,7 @@ uint64_t strtots(char *p, char **pq, int type) {  // string to timestamp
 //----------------------------- Zipfian + Timestamps generator --------------------------------------------------------
 static double   a = 1.5;
 
-void stprint(char *s, unsigned *xbits) {
+void stprint(const char *s, unsigned *xbits) {
   int      i;
   uint64_t t = 0;
 
@@ -447,7 +447,7 @@ enum { T_0, T_UINT8, T_UINT16, T_UINT24, T_UINT32, T_UINT40, T_UINT48, T_UINT56,
 }
 
 int    mdelta, elog2[16],nsd = 3, autoraz;
-char   *keysep;
+const char *keysep;
 
 //float  errlimf[] = { 0,   1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15, 1e-16 };
 float  errlimf[] = { 0,   5e-1, 5e-2, 5e-3, 5e-4, 5e-5, 5e-6, 5e-7, 5e-8, 5e-9, 5e-10, 5e-11, 5e-12, 5e-13, 5e-14, 5e-15, 5e-16 };
@@ -782,10 +782,10 @@ void fround64(double *in, unsigned n, double *out, int nsd) {
   #endif
 
   #ifndef _ICCODEC
-char *codstr(unsigned codecid) { return ""; }
+const char *codstr(unsigned codecid) { return ""; }
 void tpsizeset(unsigned _tpbsize) {}
 void tpmodeset(unsigned _tpmode) {}
-int lzidget(char *scmd) { return 0; }
+int lzidget(const char *scmd) { return 0; }
 unsigned* getAvailableLzs(void) { return NULL; }
   #endif
 
@@ -991,8 +991,8 @@ size_t spdpdec(unsigned char *in, size_t n, unsigned char *out, unsigned bsize, 
 //------------------------------------- Benchmark -------------------------------------------------------------------
 
 #define ID_MEMCPY 120
-unsigned char *bestr(unsigned id, unsigned b, unsigned char *s, char *prms, int prmi) {
-  static char *fmt[] = {
+unsigned char *bestr(unsigned id, unsigned b, unsigned char *s, const char *prms, int prmi) {
+  static const char *fmt[] = {
     "%3d:000              ",
     "%3d:p4nenc%d         TurboPFor           ",        //1
     "%3d:p4nenc128v%d     TurboPFor128        ",
@@ -2363,7 +2363,7 @@ int main(int argc, char* argv[]) { //testrazor();
       }
     }
 
-    char *p = icmd?icmd:"1-120";
+    char *p = (char*)(icmd?icmd:"1-120");
     if(verbose>1 || fno == optind) {
       printf("      size   ratio     E MB/s   D MB/s   function %s size=%d bits (lz=%s,%d%s) ", isize>0?"integer":"floating point", abs(isize)*8, codstr(codid), codlev, codprm);
       if(be_mindelta == (uint64_t)-1) printf("unsorted %lld ", be_mindelta);

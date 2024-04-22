@@ -102,7 +102,7 @@ size_t vbbound64(size_t n) { return n*(8+1)+9; }
 
     #if VDELTA == 0
 
-unsigned char *T2(vbdec, USIZE)(unsigned char  *__restrict in, unsigned n, uint_t *__restrict out) {
+const unsigned char *T2(vbdec, USIZE)(const unsigned char  *__restrict in, unsigned n, uint_t *__restrict out) {
   register uint_t x, *op;
   OVERFLOWD(in, n, out);
 

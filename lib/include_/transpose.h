@@ -224,7 +224,7 @@ unsigned cpuini(unsigned cpuiset);
 
 // convert simd set to string "sse3", "sse3", "sse4.1" or "avx2"
 // Ex.: printf("current cpu set=%s\n", cpustr(cpuini(0)) );
-char *cpustr(unsigned cpuisa);
+const char *cpustr(unsigned cpuisa);
 
 unsigned cpuisa(void);
 

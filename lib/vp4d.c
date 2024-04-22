@@ -268,7 +268,7 @@ extern char _shuffle_16[256][16];
 #pragma GCC optimize ("align-functions=16")
 #endif
 
-ALWAYS_INLINE unsigned char *T2(_P4DEC, USIZE)(unsigned char *__restrict in, unsigned n, uint_t *__restrict out P4DELTA(uint_t start), unsigned b, unsigned bx ) {
+ALWAYS_INLINE const unsigned char *T2(_P4DEC, USIZE)(const unsigned char *__restrict in, unsigned n, uint_t *__restrict out P4DELTA(uint_t start), unsigned b, unsigned bx ) {
   if(!(b & 0x80)) {
       #if USIZE == 64
     b = (b == 63)?64:b;  // 63,64 are both encoded w. same bitsize 64 (permits using only 6 bits for b)
@@ -280,7 +280,7 @@ ALWAYS_INLINE unsigned char *T2(_P4DEC, USIZE)(unsigned char *__restrict in, uns
       #if USIZE == 64
   if(b+bx <= 32)          // use SIMD when bitsize <= 32 (scalar horizontal bitunpack64 is used when 32 < bitsize <=64 )
       #endif
-  { unsigned char *pb = in;
+  { const unsigned char *pb = in;
       #if VSIZE == 128
         #if USIZE == 64
     uint32_t ex[P4D_MAX+64];
@@ -372,7 +372,7 @@ ALWAYS_INLINE unsigned char *T2(_P4DEC, USIZE)(unsigned char *__restrict in, uns
     #endif
 }
 
-unsigned char *T2(P4DEC, USIZE)(unsigned char *__restrict in, unsigned n, uint_t *__restrict out P4DELTA(uint_t start) ) {
+const unsigned char *T2(P4DEC, USIZE)(const unsigned char *__restrict in, unsigned n, uint_t *__restrict out P4DELTA(uint_t start) ) {
   unsigned b, bx = 0, i;
   if(!n) return in;
   b = *in++;
@@ -422,8 +422,8 @@ unsigned char *T2(P4DEC, USIZE)(unsigned char *__restrict in, unsigned n, uint_t
   #define CSIZE 128
 #endif
 
-size_t T2(P4NDEC, USIZE)(unsigned char *__restrict in, size_t n, uint_t *__restrict out) {
-  unsigned char *ip = in;
+size_t T2(P4NDEC, USIZE)(const unsigned char *__restrict in, size_t n, uint_t *__restrict out) {
+  const unsigned char *ip = in;
   uint_t        *op;
   if(!n) return 0;
   {
@@ -484,7 +484,7 @@ size_t T2(P4NDEC, USIZE)(unsigned char *__restrict in, size_t n, uint_t *__restr
 }
 
     #ifdef P4DECX
-unsigned char *T2(p4decx, USIZE)(unsigned char *in, unsigned n, uint_t *__restrict out) {
+const unsigned char *T2(p4decx, USIZE)(const unsigned char *in, unsigned n, uint_t *__restrict out) {
   unsigned b,i;
   struct p4 p4;
 
@@ -502,7 +502,7 @@ unsigned char *T2(p4decx, USIZE)(unsigned char *in, unsigned n, uint_t *__restri
   return in + PAD8(n*b);
 }
 
-unsigned char *T2(p4f1decx, USIZE)(unsigned char *in, unsigned n, uint_t *__restrict out, uint_t start) {
+const unsigned char *T2(p4f1decx, USIZE)(const unsigned char *in, unsigned n, uint_t *__restrict out, uint_t start) {
   unsigned b,i;
   struct p4 p4;
 
@@ -519,7 +519,7 @@ unsigned char *T2(p4f1decx, USIZE)(unsigned char *in, unsigned n, uint_t *__rest
   return in + PAD8(n*b);
 }
 
-unsigned char *T2(p4fdecx, USIZE)(unsigned char *in, unsigned n, uint_t *__restrict out, uint_t start) {
+const unsigned char *T2(p4fdecx, USIZE)(const unsigned char *in, unsigned n, uint_t *__restrict out, uint_t start) {
   unsigned b,i;
   struct p4 p4;
   p4ini(&p4, &in, n, &b);

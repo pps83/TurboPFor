@@ -64,7 +64,7 @@
   #if SRLE8
 #define rmemset8(_op_, _c_, _i_) while(_i_--) *_op_++ = _c_
 unsigned _srled8(const unsigned char *__restrict in, unsigned char *__restrict out, unsigned outlen, unsigned char e) {
-  uint8_t *ip = in, *op = out, c, *oe = out+outlen;
+  const uint8_t *ip = in; uint8_t *op = out, c, *oe = out+outlen;
   uint32_t r;
 
     #ifdef __AVX2__
@@ -118,7 +118,7 @@ unsigned _srled8(const unsigned char *__restrict in, unsigned char *__restrict o
 }
 
 static inline unsigned _srled8x(const unsigned char *__restrict in, unsigned char *__restrict out, unsigned outlen, unsigned char e, unsigned char ix) {
-  uint8_t *ip = in, *op = out, c, *oe = out+outlen;
+  const uint8_t *ip = in; uint8_t *op = out, c, *oe = out+outlen;
   uint32_t r;
 
     #ifdef __AVX2__
@@ -196,7 +196,7 @@ unsigned srled(const unsigned char *__restrict in, unsigned inlen, unsigned char
 }
 //------------------------------------- TurboRLE ------------------------------------------
 unsigned _trled(const unsigned char *__restrict in, unsigned char *__restrict out, unsigned outlen) {
-  uint8_t rmap[256] = {0}, *op = out, *ip = in;
+  uint8_t rmap[256] = {0}, *op = out; const uint8_t *ip = in;
   unsigned m = 0, i, c;
 
   if(!outlen)
