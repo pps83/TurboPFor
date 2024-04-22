@@ -43,7 +43,6 @@
 #include "include_/bitutil_.h"
 
   #ifdef __SSE42__
-#include <nmmintrin.h>
 #define bslr32(x) _blsr_u32(x)
 #define bslr64(x) _blsr_u64(x)
   #else

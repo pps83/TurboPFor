@@ -5,11 +5,6 @@
 static unsigned _cpuisa;
 //--------------------- CPU detection -------------------------------------------
     #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
-      #if _MSC_VER >=1300
-#include <intrin.h>
-      #elif defined (__INTEL_COMPILER)
-#include <x86intrin.h>
-      #endif
 
 static inline void cpuid(int reg[4], int id) {
       #if defined (_MSC_VER) //|| defined (__INTEL_COMPILER)
