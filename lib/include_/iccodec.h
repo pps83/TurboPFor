@@ -111,8 +111,8 @@ size_t vhidecomp32x(const unsigned char* in, size_t inlen, unsigned char* out, s
 void tpmodeset(unsigned _tpmode);
 
 void tpsizeset(unsigned _tpsize);
-int  lzidget(char *scmd);
-char *codstr(unsigned cid);
+int  lzidget(const char *scmd);
+const char *codstr(unsigned cid);
 unsigned* getAvailableLzs(void); // ICC_LAST will be the last entry
 
 IC_EXTERN_C_END
