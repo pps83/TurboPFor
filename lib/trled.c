@@ -108,7 +108,7 @@ unsigned _srled8(const unsigned char *__restrict in, unsigned char *__restrict o
   return ip - in;
 }
 
-static inline unsigned _srled8x(const unsigned char *__restrict in, unsigned char *__restrict out, unsigned outlen, unsigned char e, unsigned char ix) {
+static ALWAYS_INLINE unsigned _srled8x(const unsigned char *__restrict in, unsigned char *__restrict out, unsigned outlen, unsigned char e, unsigned char ix) {
   const uint8_t *ip = in; uint8_t *op = out, c, *oe = out+outlen;
   uint32_t r;
 
