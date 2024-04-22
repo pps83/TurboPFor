@@ -127,15 +127,15 @@ static ALWAYS_INLINE unsigned char _BitScanForward64(unsigned long* ret, uint64_
   unsigned long x0 = (unsigned long)x, top, bottom;         _BitScanForward(&top, (unsigned long)(x >> 32)); _BitScanForward(&bottom, x0);
   *ret = x0 ? bottom : 32 + top;  return x != 0;
 }
-static unsigned char _BitScanReverse64(unsigned long* ret, uint64_t x) {
+static ALWAYS_INLINE unsigned char _BitScanReverse64(unsigned long* ret, uint64_t x) {
   unsigned long x1 = (unsigned long)(x >> 32), top, bottom; _BitScanReverse(&top, x1);                       _BitScanReverse(&bottom, (unsigned long)x);
   *ret = x1 ? top + 32 : bottom;  return x != 0;
 }
   #endif
-static ALWAYS_INLINE int __bsr64(uint64_t x) { unsigned long z = 0; _BitScanReverse64(&z, x); return z; }
-static ALWAYS_INLINE int bsr64(uint64_t x) { unsigned long z=0; _BitScanReverse64(&z, x); return x?z+1:0; }
-static ALWAYS_INLINE int ctz64(uint64_t x) { unsigned long z;   _BitScanForward64(&z, x); return x?z:64; }
-static ALWAYS_INLINE int clz64(uint64_t x) { unsigned long z;   _BitScanReverse64(&z, x); return x?63-z:64; }
+static ALWAYS_INLINE int __bsr64(uint64_t x) { unsigned long z=0; _BitScanReverse64(&z, x); return z; }
+static ALWAYS_INLINE int bsr64(  uint64_t x) { unsigned long z=0; _BitScanReverse64(&z, x); return x?z+1:0; }
+static ALWAYS_INLINE int ctz64(  uint64_t x) { unsigned long z;   _BitScanForward64(&z, x); return x?z:64; }
+static ALWAYS_INLINE int clz64(  uint64_t x) { unsigned long z;   _BitScanReverse64(&z, x); return x?63-z:64; }
 
 #define rol32(x,s) _lrotl(x, s)
 #define ror32(x,s) _lrotr(x, s)

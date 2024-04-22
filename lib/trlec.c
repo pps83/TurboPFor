@@ -128,7 +128,7 @@ unsigned _srlec8(const unsigned char *__restrict in, unsigned inlen, unsigned ch
   else while(_r--) PUTC(_op_, _cr);\
 } while(0)
 
-static inline unsigned _srlec8x(const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint8_t e, uint8_t ix) {
+static ALWAYS_INLINE unsigned _srlec8x(const unsigned char *__restrict in, unsigned inlen, unsigned char *__restrict out, uint8_t e, uint8_t ix) {
   const uint8_t *ip = in, *pp = in, *ie = in+inlen; uint8_t *op = out;
 
   if(inlen > SRLE8+1)
