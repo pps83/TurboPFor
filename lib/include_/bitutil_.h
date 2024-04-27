@@ -40,7 +40,7 @@
 #include <arm_neon.h>
 #endif
 #include <stdint.h>
-#include "include_/sse_neon.h"
+#include "sse_neon.h"
 
   #ifdef __ARM_NEON
 #define PREFETCH(_ip_,_rw_)
