@@ -115,7 +115,7 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
 #define clz64(_x_) __builtin_clzll(_x_)
 #define clz32(_x_) __builtin_clz(_x_)    // 00000000 00000000 00000000 01000000 = 25
 
-  #elif _MSC_VER //----------------------------------------------------
+  #elif defined(_MSC_VER) //----------------------------------------------------
 #include <intrin.h>
 #include <stdint.h>
 #include <math.h>
