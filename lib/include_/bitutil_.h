@@ -255,7 +255,7 @@ static ALWAYS_INLINE __m128i mm_xore_epi32( __m128i v, __m128i sv) { return _mm_
 #define DELTRB(_in_, _n_, _start_, _mindelta_, _b_, _out_) { unsigned _v; for(_b_=0,_v = 0; _v < _n_; _v++) _out_[_v] = _in_[_v] - (_start_) - _v*(_mindelta_) - (_mindelta_), _b_ |= _out_[_v]; _b_ = bsr32(_b_); }
 
 //----------------------------------------- bitreverse scalar + SIMD -------------------------------------------
-  #if __clang__ && defined __has_builtin
+  #if defined(__clang__) && defined(__has_builtin)
     #if __has_builtin(__builtin_bitreverse64)
 #define BUILTIN_BITREVERSE
     #else
@@ -269,11 +269,11 @@ static ALWAYS_INLINE __m128i mm_xore_epi32( __m128i v, __m128i sv) { return _mm_
 #define rbit64(x) __builtin_bitreverse64(x)
   #else
 
-    #if (__CORTEX_M >= 0x03u) || (__CORTEX_SC >= 300u)
+    #if (defined(__CORTEX_M) && (__CORTEX_M >= 0x03u)) || (defined(__CORTEX_SC) && (__CORTEX_SC >= 300u))
 static ALWAYS_INLINE uint32_t _rbit_(uint32_t x) { uint32_t rc; __asm volatile ("rbit %0, %1" : "=r" (rc) : "r" (x) ); }
     #endif
 static ALWAYS_INLINE uint8_t rbit8(uint8_t x) {
-    #if (__CORTEX_M >= 0x03u) || (__CORTEX_SC >= 300u)
+    #if (defined(__CORTEX_M) && (__CORTEX_M >= 0x03u)) || (defined(__CORTEX_SC) && (__CORTEX_SC >= 300u))
   return _rbit_(x) >> 24;
     #elif 0
   x = (x & 0xaa) >> 1 | (x & 0x55) << 1;
@@ -285,7 +285,7 @@ static ALWAYS_INLINE uint8_t rbit8(uint8_t x) {
 }
 
 static ALWAYS_INLINE uint16_t rbit16(uint16_t x) {
-    #if (__CORTEX_M >= 0x03u) || (__CORTEX_SC >= 300u)
+    #if (defined(__CORTEX_M) && (__CORTEX_M >= 0x03u)) || (defined(__CORTEX_SC) && (__CORTEX_SC >= 300u))
   return _rbit_(x) >> 16;
     #else
   x = (x & 0xaaaa) >> 1 | (x & 0x5555) << 1;
@@ -296,7 +296,7 @@ static ALWAYS_INLINE uint16_t rbit16(uint16_t x) {
 }
 
 static ALWAYS_INLINE uint32_t rbit32(uint32_t x) {
-    #if (__CORTEX_M >= 0x03u) || (__CORTEX_SC >= 300u)
+    #if (defined(__CORTEX_M) && (__CORTEX_M >= 0x03u)) || (defined(__CORTEX_SC) && (__CORTEX_SC >= 300u))
   return _rbit_(x);
     #else
   x = ((x & 0xaaaaaaaa) >> 1 | (x & 0x55555555) << 1);
@@ -307,7 +307,7 @@ static ALWAYS_INLINE uint32_t rbit32(uint32_t x) {
     #endif
 }
 static ALWAYS_INLINE uint64_t rbit64(uint64_t x) {
-    #if (__CORTEX_M >= 0x03u) || (__CORTEX_SC >= 300u)
+    #if (defined(__CORTEX_M) && (__CORTEX_M >= 0x03u)) || (defined(__CORTEX_SC) && (__CORTEX_SC >= 300u))
   return (uint64_t)_rbit_(x) << 32 | _rbit_(x >> 32);
     #else
   x = (x & 0xaaaaaaaaaaaaaaaa) >>  1 | (x & 0x5555555555555555) <<  1;
