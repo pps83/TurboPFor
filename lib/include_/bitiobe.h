@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "../include_/conf.h"
+#include "conf.h"
 
 #define bitput_t  					     T3(uint, __WORDSIZE, _t)
 #define bitebr_t                         unsigned char
