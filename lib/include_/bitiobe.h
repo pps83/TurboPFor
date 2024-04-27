@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "../include_/conf.h"
+#include "conf.h"
 
 // different defines in bitutil_.h
 #undef bitbw
