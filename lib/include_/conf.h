@@ -87,7 +87,7 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
 #define clz64(_x_) __builtin_clzll(_x_)
 #define clz32(_x_) __builtin_clz(_x_)    // 00000000 00000000 00000000 01000000 = 25
 
-  #elif _MSC_VER //----------------------------------------------------
+  #elif defined(_MSC_VER) //----------------------------------------------------
 #include <intrin.h>
 #include <stdint.h>
 #include <math.h>
@@ -182,7 +182,7 @@ static ALWAYS_INLINE void               ltou32(unsigned           *x, const void
 static ALWAYS_INLINE void               ltou64(unsigned long long *x, const void *cp) { memcpy(x, cp, sizeof(*x)); }
 
   #elif defined(__i386__) || defined(__x86_64__) || \
-    defined(_M_IX86) || defined(_M_X64) || _MSC_VER ||\
+    defined(_M_IX86) || defined(_M_X64) || defined(_MSC_VER) ||\
     defined(__powerpc__) || defined(__s390__) ||\
     defined(__ARM_FEATURE_UNALIGNED) || defined(__aarch64__) || defined(__arm__) ||\
     defined(__ARM_ARCH_4__) || defined(__ARM_ARCH_4T__) || \

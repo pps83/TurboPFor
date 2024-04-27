@@ -20,7 +20,7 @@ static inline void cpuid(int reg[4], int id) {
 }
 
 static inline uint64_t xgetbv (int ctr) {
-      #if(defined _MSC_VER && (_MSC_FULL_VER >= 160040219) || defined __INTEL_COMPILER)
+      #if (defined(_MSC_VER) && _MSC_FULL_VER >= 160040219) || defined(__INTEL_COMPILER)
   return _xgetbv(ctr);
       #elif defined(__i386__) || defined(__x86_64__)
   unsigned a, d;
@@ -207,7 +207,7 @@ void tpini(int id) {
       #endif
   } else
     #endif
-      #if defined(__i386__) || defined(__x86_64__) || defined(__ARM_NEON) || defined(__powerpc64__) || defined(_M_X64) || defined(_M_IX86)
+#if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86) || defined(__ARM_NEON) || defined(__powerpc64__) 
     if(i >= IS_SSE2) {
       _tpe[ 2] = tpenc128v2;  _tpd[ 2] = tpdec128v2;  _tp4e[ 2] = tp4enc128v2;  _tp4d[ 2] = tp4dec128v2;
       _tpe[ 4] = tpenc128v4;  _tpd[ 4] = tpdec128v4;  _tp4e[ 4] = tp4enc128v4;  _tp4d[ 4] = tp4dec128v4;
@@ -229,7 +229,6 @@ void tpini(int id) {
         #endif
 }
       #endif
-  ;
 }
 
 void tpenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {

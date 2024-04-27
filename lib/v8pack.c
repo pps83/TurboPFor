@@ -194,7 +194,7 @@ size_t v8nzdec128v32( unsigned char *__restrict in, size_t n, uint32_t *__restri
 size_t v8nxdec128v16( unsigned char *__restrict in, size_t n, uint16_t *__restrict out) { uint16_t *op,start; _V8DD(in, n, out, 128, 16, v8xdec, bitxunpack128v, bitxunpack, 2); }
 size_t v8nxdec128v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _V8DD(in, n, out, 128, 32, v8xdec, bitxunpack128v, bitxunpack, 2); }
 //---------
-    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64)  || defined(_M_IX86)
+    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
 size_t v8ndec256v32(  unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op;       _V8D( in, n, out, 256, 32,         bitunpack256v,  bitunpack); }
 size_t v8nddec256v32( unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _V8DD(in, n, out, 256, 32, v8ddec, bitdunpack256v, bitdunpack, 0); }
 size_t v8nd1dec256v32(unsigned char *__restrict in, size_t n, uint32_t *__restrict out) { uint32_t *op,start; _V8DD(in, n, out, 256, 32, v8d1dec,bitd1unpack256v,bitd1unpack,1); }
