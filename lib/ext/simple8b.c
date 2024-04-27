@@ -3,7 +3,7 @@
 // Softw., Pract. Exper. 40(2): 131-147 (2010)
 // http://ww2.cs.mu.oz.au/~alistair/coders-64bit/
 #include "simple8b.h"
-  #if defined(__x86_64__) || defined(__x86_32__)
+  #if defined(__x86_64__) || defined(__i386__)
 static inline int bsr32(int x) {
   int b = -1;
   asm("bsrl %1,%0" : "+r" (b): "rm" (x) );

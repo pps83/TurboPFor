@@ -290,12 +290,12 @@ unsigned trled(const unsigned char *__restrict in, unsigned inlen, unsigned char
  #else // ---------------------------- include 16, 32, 64----------------------------------------------
   #ifdef MEMSAFE
 #define rmemset(_op_, _c_, _i_) while(_i_--) *_op_++ = _c_
-  #elif (__AVX2__ != 0) && USIZE < 64
+  #elif defined(__AVX2__) && USIZE < 64
 #define rmemset(_op_, _c_, _i_) do {\
   __m256i cv = T2(_mm256_set1_epi, USIZE)(_c_); unsigned char *_p = _op_; _op_ += _i_;\
   do _mm256_storeu_si256((__m256i *)_p, cv),_p+=32; while(_p < _op_);\
 } while(0)
-  #elif (__SSE__ != 0 || __ARM_NEON != 0) && USIZE < 64
+  #elif (defined(__SSE__) || defined(__ARM_NEON)) && USIZE < 64
 #define rmemset(_op_, _c_, _i_) do { \
   __m128i *_up = (__m128i *)_op_, cv = T2(_mm_set1_epi, USIZE)(_c_);\
   _op_ += _i_;\
@@ -335,7 +335,7 @@ unsigned T2(_srled, USIZE)(const unsigned char *__restrict in, unsigned char *__
 
   if(outlen >= sizeof(uint_t)*8)
     while(op < out+outlen/sizeof(uint_t)-sizeof(uint_t)*8) { int r;
-        #if __AVX2__ != 0 && USIZE != 64
+        #if defined(__AVX2__) && USIZE != 64
       uint32_t mask;
       __m256i v = _mm256_loadu_si256((__m256i*)ip); _mm256_storeu_si256((__m256i *)op, v); mask = _mm256_movemask_epi8(T2(_mm256_cmpeq_epi,USIZE)(v, ev)); if(mask) goto a; ip += 32; op += 256/USIZE;
               v = _mm256_loadu_si256((__m256i*)ip); _mm256_storeu_si256((__m256i *)op, v); mask = _mm256_movemask_epi8(T2(_mm256_cmpeq_epi,USIZE)(v, ev)); if(mask) goto a; ip += 32; op += 256/USIZE;
