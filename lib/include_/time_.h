@@ -109,7 +109,7 @@ static double TMBS(unsigned l, double t) { return (l/t)/1000000.0; }
 static LARGE_INTEGER tps;
 
 typedef unsigned __int64 tm_t;
-static tm_t   tmtime()                      { LARGE_INTEGER tm; tm_t t; QueryPerformanceCounter(&tm); return tm.QuadPart; }
+static tm_t   tmtime()                      { LARGE_INTEGER tm; QueryPerformanceCounter(&tm); return tm.QuadPart; }
 static tm_t   tminit()                      { tm_t t0,ts; QueryPerformanceFrequency(&tps); t0 = tmtime(); while((ts = tmtime())==t0) {}; return ts; }
 static double tmdiff(tm_t start, tm_t stop) { return (double)(stop - start)/tps.QuadPart; }
 static int    tmiszero(tm_t t)              { return !t; }
