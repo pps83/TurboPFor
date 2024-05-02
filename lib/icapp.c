@@ -100,7 +100,6 @@ unsigned histx32(uint32_t *in, unsigned n) { unsigned i,l; uint64_t s=0; uint32_
 uint64_t strtots(char *p, char **pq, int type) {  // string to timestamp
   struct   tm tm;
   uint64_t u;
-  char     *s = p;
   int      frac = 0, c;
 
   memset(&tm, 0, sizeof(tm)); tm.tm_mday = 1;
