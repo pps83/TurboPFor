@@ -131,7 +131,7 @@ HUF_PUBLIC_API size_t HUF_decompress(void* dst,  size_t originalSize, const void
 #include "ext/zlib/zlib.h" //#include <zlib.h>
   #endif
 
-size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned outsize, int codid, int codlev, unsigned char *codprm) {
+NOINLINE size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned outsize, int codid, int codlev, unsigned char *codprm) {
   if(!inlen) return 0;
   switch(codid) {
       #ifdef _LZTURBO
@@ -245,7 +245,7 @@ size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned ou
   }
 }
 
-size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, unsigned outlen, int codid, int codlev, unsigned char *codprm) {
+NOINLINE size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, unsigned outlen, int codid, int codlev, unsigned char *codprm) {
   if(!outlen) return 0;
   switch(codid) {
       #ifdef _LZTURBO
