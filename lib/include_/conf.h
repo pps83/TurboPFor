@@ -60,7 +60,7 @@
 #endif
 
 //------------------------- Compiler ------------------------------------------
-  #if defined(__GNUC__)
+  #if defined(__GNUC__) || defined(__clang__)
 #define ALIGNED(t,v,n)  t v __attribute__ ((aligned (n)))
 #define ALWAYS_INLINE   inline __attribute__((always_inline))
 #define NOINLINE        __attribute__((noinline))
@@ -69,11 +69,7 @@
 #define unlikely(x)     __builtin_expect((x),0)
 
 //#define bswap8(x)    (x)
-    #if __GNUC__ > 4 || __GNUC__ == 4 && __GNUC_MINOR__ >= 8
 #define bswap16(x) __builtin_bswap16(x)
-    #else
-static ALWAYS_INLINE unsigned short bswap16(unsigned short x) { return __builtin_bswap32(x << 16); }
-    #endif
 #define bswap32(x) __builtin_bswap32(x)
 #define bswap64(x) __builtin_bswap64(x)
 
@@ -83,27 +79,23 @@ static ALWAYS_INLINE unsigned short bswap16(unsigned short x) { return __builtin
     #if defined(__i386__) || defined(__x86_64__)
 //x,__bsr32:     1:0,2:1,3:1,4:2,5:2,6:2,7:2,8:3,9:3,10:3,11:3,12:3,13:3,14:3,15:3,16:4,17:4,18:4,19:4,20:4,21:4,22:4,23:4,24:4,25:4,26:4,27:4,28:4,29:4,30:4,31:4,32:5,...
 //x,  bsr32: 0:0,1:1,2:2,3:2,4:3,5:3,6:3,7:3,8:4,9:4,10:4,11:4,12:4,13:4,14:4,15:4,16:5,17:5,18:5,19:5,20:5,21:5,22:5,23:5,24:5,25:5,26:5,27:5,28:5,29:5,30:5,31:5,32:6,...
-static ALWAYS_INLINE int    __bsr32(               int x) {             asm("bsr  %1,%0" : "=r" (x) : "rm" (x) ); return x; }
-static ALWAYS_INLINE int      bsr32(               int x) { int b = -1; asm("bsrl %1,%0" : "+r" (b) : "rm" (x) ); return b + 1; }
-static ALWAYS_INLINE int      bsr64(uint64_t x          ) { return x?64 - __builtin_clzll(x):0; }
-static ALWAYS_INLINE int    __bsr64(uint64_t x          ) { return   63 - __builtin_clzll(x);   }
+static ALWAYS_INLINE int    __bsr32(unsigned x       ) {             asm("bsr  %1,%0" : "=r" (x) : "rm" (x) ); return x; }
+static ALWAYS_INLINE int      bsr32(unsigned x       ) { int b = -1; asm("bsrl %1,%0" : "+r" (b) : "rm" (x) ); return b + 1; }
+static ALWAYS_INLINE int      bsr64(uint64_t x       ) { return x?64 - __builtin_clzll(x):0; }
+static ALWAYS_INLINE int    __bsr64(uint64_t x       ) { return   63 ^ __builtin_clzll(x);   }
 
 static ALWAYS_INLINE unsigned rol32(unsigned x, int s) { asm ("roll %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
 static ALWAYS_INLINE unsigned ror32(unsigned x, int s) { asm ("rorl %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
-static ALWAYS_INLINE uint64_t rol64(uint64_t x, int s) { asm ("rolq %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
-static ALWAYS_INLINE uint64_t ror64(uint64_t x, int s) { asm ("rorq %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
     #else
-static ALWAYS_INLINE int    __bsr32(unsigned x          ) { return   31 - __builtin_clz(  x); }
-static ALWAYS_INLINE int      bsr32(int x               ) { return x?32 - __builtin_clz(  x):0; }
-static ALWAYS_INLINE int      bsr64(uint64_t x) { return x?64 - __builtin_clzll(x):0; }
-static ALWAYS_INLINE int    __bsr64(uint64_t x          ) { return   63 - __builtin_clzll(x);   }
+static ALWAYS_INLINE int    __bsr32(unsigned x       ) { return   31 ^ __builtin_clz(  x); }
+static ALWAYS_INLINE int      bsr32(unsigned x       ) { return x?32 - __builtin_clz(  x):0; }
+static ALWAYS_INLINE int      bsr64(uint64_t x       ) { return x?64 - __builtin_clzll(x):0; }
+static ALWAYS_INLINE int    __bsr64(uint64_t x       ) { return   63 ^ __builtin_clzll(x);   }
 
 static ALWAYS_INLINE unsigned rol32(unsigned x, int s) { return x << s | x >> (32 - s); }
 static ALWAYS_INLINE unsigned ror32(unsigned x, int s) { return x >> s | x << (32 - s); }
-static ALWAYS_INLINE unsigned rol64(unsigned x, int s) { return x << s | x >> (64 - s); }
-static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (64 - s); }
     #endif
-
+// Note, these expect that _x_ is not 0
 #define ctz64(_x_) __builtin_ctzll(_x_)
 #define ctz32(_x_) __builtin_ctz(_x_)    // 0:32  ctz32(1<<a) = a (a=1..31)
 #define clz64(_x_) __builtin_clzll(_x_)
@@ -116,28 +108,46 @@ static ALWAYS_INLINE unsigned ror64(unsigned x, int s) { return x >> s | x << (6
 #define ALWAYS_INLINE   __forceinline
 #define NOINLINE        __declspec(noinline)
 #define _PACKED         //__attribute__ ((packed))
-#define THREADLOCAL     __declspec(thread)
 #define likely(x)       (x)
 #define unlikely(x)     (x)
 
-static ALWAYS_INLINE int __bsr32(unsigned x) { unsigned long z=0; _BitScanReverse(&z, x); return z; }
-static ALWAYS_INLINE int bsr32(  unsigned x) { unsigned long z;   _BitScanReverse(&z, x); return x?z+1:0; }
-static ALWAYS_INLINE int ctz32(  unsigned x) { unsigned long z;   _BitScanForward(&z, x); return x?z:32; }
-static ALWAYS_INLINE int clz32(  unsigned x) { unsigned long z;   _BitScanReverse(&z, x); return x?31-z:32; }
-  #if !defined(_M_ARM64) && !defined(_M_X64)
+  #if !defined(_WIN64)
 static ALWAYS_INLINE unsigned char _BitScanForward64(unsigned long* ret, uint64_t x) {
-  unsigned long x0 = (unsigned long)x, top, bottom;         _BitScanForward(&top, (unsigned long)(x >> 32)); _BitScanForward(&bottom, x0);
-  *ret = x0 ? bottom : 32 + top;  return x != 0;
+  unsigned long top, bottom;
+  unsigned char r0 = _BitScanForward(&bottom, (unsigned long)x);
+  unsigned char r1 = _BitScanForward(&top, (unsigned long)(x >> 32));
+  *ret = r0 ? bottom : top + 32;
+  return r0 | r1;
 }
 static ALWAYS_INLINE unsigned char _BitScanReverse64(unsigned long* ret, uint64_t x) {
-  unsigned long x1 = (unsigned long)(x >> 32), top, bottom; _BitScanReverse(&top, x1);                       _BitScanReverse(&bottom, (unsigned long)x);
-  *ret = x1 ? top + 32 : bottom;  return x != 0;
+  unsigned long top, bottom;
+  unsigned char r0 = _BitScanReverse(&top, (unsigned long)(x >> 32));
+  unsigned char r1 = _BitScanReverse(&bottom, (unsigned long)x);
+  *ret = r0 ? top + 32 : bottom;
+  return r0 | r1;
 }
   #endif
-static ALWAYS_INLINE int __bsr64(uint64_t x) { unsigned long z=0; _BitScanReverse64(&z, x); return z; }
-static ALWAYS_INLINE int bsr64(  uint64_t x) { unsigned long z=0; _BitScanReverse64(&z, x); return x?z+1:0; }
-static ALWAYS_INLINE int ctz64(  uint64_t x) { unsigned long z;   _BitScanForward64(&z, x); return x?z:64; }
-static ALWAYS_INLINE int clz64(  uint64_t x) { unsigned long z;   _BitScanReverse64(&z, x); return x?63-z:64; }
+static ALWAYS_INLINE int __bsr32(unsigned x) { unsigned long z; _BitScanReverse(&z, x);   return z; }
+static ALWAYS_INLINE int __bsr64(uint64_t x) { unsigned long z; _BitScanReverse64(&z, x); return z; }
+static ALWAYS_INLINE int bsr32(  unsigned x) { unsigned long z; return _BitScanReverse(&z, x)   ? z+1:0; }
+static ALWAYS_INLINE int bsr64(  uint64_t x) { unsigned long z; return _BitScanReverse64(&z, x) ? z+1:0; }
+
+#ifdef __AVX2__
+static ALWAYS_INLINE int ctz32(  unsigned x) { return (int)_tzcnt_u32(x); }
+static ALWAYS_INLINE int clz32(  unsigned x) { return (int)_lzcnt_u32(x); }
+#ifdef _WIN64
+static ALWAYS_INLINE int ctz64(  uint64_t x) { return (int)_tzcnt_u64(x); }
+static ALWAYS_INLINE int clz64(  uint64_t x) { return (int)_lzcnt_u64(x); }
+#else
+static ALWAYS_INLINE int ctz64(  uint64_t x) { int l = ctz32((unsigned)x); int h = ctz32((unsigned)(x >> 32)) + 32; return !!((unsigned)x) ? l : h; }
+static ALWAYS_INLINE int clz64(  uint64_t x) { int l = clz32((unsigned)x) + 32; int h = clz32((unsigned)(x >> 32)); return !!(unsigned)(x >> 32) ? h : l; }
+#endif
+#else
+static ALWAYS_INLINE int ctz32(  unsigned x) { unsigned long z; return _BitScanForward(&z, x)   ? z:32; }
+static ALWAYS_INLINE int clz32(  unsigned x) { unsigned long z; return _BitScanReverse(&z, x)   ? 31^z:32; }
+static ALWAYS_INLINE int ctz64(  uint64_t x) { unsigned long z; return _BitScanForward64(&z, x) ? z:64; }
+static ALWAYS_INLINE int clz64(  uint64_t x) { unsigned long z; return _BitScanReverse64(&z, x) ? 63^z:64; }
+#endif
 
 #define rol32(x,s) _lrotl(x, s)
 #define ror32(x,s) _lrotr(x, s)
