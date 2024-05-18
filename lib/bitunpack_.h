@@ -3109,16 +3109,16 @@
 
 #ifndef DELTA
 #define USIZE 8
-const unsigned char *T2(_BITUNPACK_,8_0)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(0,8); }
-const unsigned char *T2(_BITUNPACK_,8_1)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(1,8); }
-const unsigned char *T2(_BITUNPACK_,8_2)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(2,8); }
-const unsigned char *T2(_BITUNPACK_,8_3)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(3,8); }
-const unsigned char *T2(_BITUNPACK_,8_4)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(4,8); }
-const unsigned char *T2(_BITUNPACK_,8_5)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(5,8); }
-const unsigned char *T2(_BITUNPACK_,8_6)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(6,8); }
-const unsigned char *T2(_BITUNPACK_,8_7)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(7,8); }
-const unsigned char *T2(_BITUNPACK_,8_8)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(8,8); }
-BITUNPACK_F8 T2(_BITUNPACK_,a8)[] = {
+static const unsigned char *T2(_BITUNPACK_,8_0)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(0,8); }
+static const unsigned char *T2(_BITUNPACK_,8_1)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(1,8); }
+static const unsigned char *T2(_BITUNPACK_,8_2)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(2,8); }
+static const unsigned char *T2(_BITUNPACK_,8_3)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(3,8); }
+static const unsigned char *T2(_BITUNPACK_,8_4)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(4,8); }
+static const unsigned char *T2(_BITUNPACK_,8_5)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(5,8); }
+static const unsigned char *T2(_BITUNPACK_,8_6)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(6,8); }
+static const unsigned char *T2(_BITUNPACK_,8_7)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(7,8); }
+static const unsigned char *T2(_BITUNPACK_,8_8)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out  ) { BU(8,8); }
+static const BITUNPACK_F8 T2(_BITUNPACK_,a8)[] = {
   &T2(_BITUNPACK_,8_0),
   &T2(_BITUNPACK_,8_1),
   &T2(_BITUNPACK_,8_2),
@@ -3133,24 +3133,24 @@ const unsigned char *T2(_BITUNPACK_,8)( const unsigned char *__restrict in, unsi
 #undef USIZE
 
 #define USIZE 16
-const unsigned char *T2(_BITUNPACK_,16_0 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 0,16); }
-const unsigned char *T2(_BITUNPACK_,16_1 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 1,16); }
-const unsigned char *T2(_BITUNPACK_,16_2 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 2,16); }
-const unsigned char *T2(_BITUNPACK_,16_3 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 3,16); }
-const unsigned char *T2(_BITUNPACK_,16_4 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 4,16); }
-const unsigned char *T2(_BITUNPACK_,16_5 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 5,16); }
-const unsigned char *T2(_BITUNPACK_,16_6 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 6,16); }
-const unsigned char *T2(_BITUNPACK_,16_7 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 7,16); }
-const unsigned char *T2(_BITUNPACK_,16_8 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 8,16); }
-const unsigned char *T2(_BITUNPACK_,16_9 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 9,16); }
-const unsigned char *T2(_BITUNPACK_,16_10)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(10,16); }
-const unsigned char *T2(_BITUNPACK_,16_11)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(11,16); }
-const unsigned char *T2(_BITUNPACK_,16_12)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(12,16); }
-const unsigned char *T2(_BITUNPACK_,16_13)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(13,16); }
-const unsigned char *T2(_BITUNPACK_,16_14)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(14,16); }
-const unsigned char *T2(_BITUNPACK_,16_15)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(15,16); }
-const unsigned char *T2(_BITUNPACK_,16_16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(16,16); }
-BITUNPACK_F16 T2(_BITUNPACK_,a16)[] = {
+static const unsigned char *T2(_BITUNPACK_,16_0 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 0,16); }
+static const unsigned char *T2(_BITUNPACK_,16_1 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 1,16); }
+static const unsigned char *T2(_BITUNPACK_,16_2 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 2,16); }
+static const unsigned char *T2(_BITUNPACK_,16_3 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 3,16); }
+static const unsigned char *T2(_BITUNPACK_,16_4 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 4,16); }
+static const unsigned char *T2(_BITUNPACK_,16_5 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 5,16); }
+static const unsigned char *T2(_BITUNPACK_,16_6 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 6,16); }
+static const unsigned char *T2(_BITUNPACK_,16_7 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 7,16); }
+static const unsigned char *T2(_BITUNPACK_,16_8 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 8,16); }
+static const unsigned char *T2(_BITUNPACK_,16_9 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU( 9,16); }
+static const unsigned char *T2(_BITUNPACK_,16_10)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(10,16); }
+static const unsigned char *T2(_BITUNPACK_,16_11)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(11,16); }
+static const unsigned char *T2(_BITUNPACK_,16_12)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(12,16); }
+static const unsigned char *T2(_BITUNPACK_,16_13)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(13,16); }
+static const unsigned char *T2(_BITUNPACK_,16_14)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(14,16); }
+static const unsigned char *T2(_BITUNPACK_,16_15)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(15,16); }
+static const unsigned char *T2(_BITUNPACK_,16_16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out  ) { BU(16,16); }
+static const BITUNPACK_F16 T2(_BITUNPACK_,a16)[] = {
   &T2(_BITUNPACK_,16_0),
   &T2(_BITUNPACK_,16_1),
   &T2(_BITUNPACK_,16_2),
@@ -3173,40 +3173,40 @@ const unsigned char *T2(_BITUNPACK_,16)( const unsigned char *__restrict in, uns
 #undef USIZE
 
 #define USIZE 32
-const unsigned char *T2(_BITUNPACK_,32_0 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 0,32); }
-const unsigned char *T2(_BITUNPACK_,32_1 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 1,32); }
-const unsigned char *T2(_BITUNPACK_,32_2 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 2,32); }
-const unsigned char *T2(_BITUNPACK_,32_3 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 3,32); }
-const unsigned char *T2(_BITUNPACK_,32_4 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 4,32); }
-const unsigned char *T2(_BITUNPACK_,32_5 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 5,32); }
-const unsigned char *T2(_BITUNPACK_,32_6 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 6,32); }
-const unsigned char *T2(_BITUNPACK_,32_7 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 7,32); }
-const unsigned char *T2(_BITUNPACK_,32_8 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 8,32); }
-const unsigned char *T2(_BITUNPACK_,32_9 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 9,32); }
-const unsigned char *T2(_BITUNPACK_,32_10)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(10,32); }
-const unsigned char *T2(_BITUNPACK_,32_11)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(11,32); }
-const unsigned char *T2(_BITUNPACK_,32_12)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(12,32); }
-const unsigned char *T2(_BITUNPACK_,32_13)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(13,32); }
-const unsigned char *T2(_BITUNPACK_,32_14)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(14,32); }
-const unsigned char *T2(_BITUNPACK_,32_15)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(15,32); }
-const unsigned char *T2(_BITUNPACK_,32_16)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(16,32); }
-const unsigned char *T2(_BITUNPACK_,32_17)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(17,32); }
-const unsigned char *T2(_BITUNPACK_,32_18)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(18,32); }
-const unsigned char *T2(_BITUNPACK_,32_19)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(19,32); }
-const unsigned char *T2(_BITUNPACK_,32_20)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(20,32); }
-const unsigned char *T2(_BITUNPACK_,32_21)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(21,32); }
-const unsigned char *T2(_BITUNPACK_,32_22)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(22,32); }
-const unsigned char *T2(_BITUNPACK_,32_23)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(23,32); }
-const unsigned char *T2(_BITUNPACK_,32_24)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(24,32); }
-const unsigned char *T2(_BITUNPACK_,32_25)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(25,32); }
-const unsigned char *T2(_BITUNPACK_,32_26)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(26,32); }
-const unsigned char *T2(_BITUNPACK_,32_27)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(27,32); }
-const unsigned char *T2(_BITUNPACK_,32_28)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(28,32); }
-const unsigned char *T2(_BITUNPACK_,32_29)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(29,32); }
-const unsigned char *T2(_BITUNPACK_,32_30)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(30,32); }
-const unsigned char *T2(_BITUNPACK_,32_31)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(31,32); }
-const unsigned char *T2(_BITUNPACK_,32_32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(32,32); }
-BITUNPACK_F32 T2(_BITUNPACK_,a32)[] = {
+static const unsigned char *T2(_BITUNPACK_,32_0 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 0,32); }
+static const unsigned char *T2(_BITUNPACK_,32_1 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 1,32); }
+static const unsigned char *T2(_BITUNPACK_,32_2 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 2,32); }
+static const unsigned char *T2(_BITUNPACK_,32_3 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 3,32); }
+static const unsigned char *T2(_BITUNPACK_,32_4 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 4,32); }
+static const unsigned char *T2(_BITUNPACK_,32_5 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 5,32); }
+static const unsigned char *T2(_BITUNPACK_,32_6 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 6,32); }
+static const unsigned char *T2(_BITUNPACK_,32_7 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 7,32); }
+static const unsigned char *T2(_BITUNPACK_,32_8 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 8,32); }
+static const unsigned char *T2(_BITUNPACK_,32_9 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU( 9,32); }
+static const unsigned char *T2(_BITUNPACK_,32_10)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(10,32); }
+static const unsigned char *T2(_BITUNPACK_,32_11)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(11,32); }
+static const unsigned char *T2(_BITUNPACK_,32_12)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(12,32); }
+static const unsigned char *T2(_BITUNPACK_,32_13)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(13,32); }
+static const unsigned char *T2(_BITUNPACK_,32_14)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(14,32); }
+static const unsigned char *T2(_BITUNPACK_,32_15)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(15,32); }
+static const unsigned char *T2(_BITUNPACK_,32_16)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(16,32); }
+static const unsigned char *T2(_BITUNPACK_,32_17)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(17,32); }
+static const unsigned char *T2(_BITUNPACK_,32_18)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(18,32); }
+static const unsigned char *T2(_BITUNPACK_,32_19)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(19,32); }
+static const unsigned char *T2(_BITUNPACK_,32_20)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(20,32); }
+static const unsigned char *T2(_BITUNPACK_,32_21)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(21,32); }
+static const unsigned char *T2(_BITUNPACK_,32_22)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(22,32); }
+static const unsigned char *T2(_BITUNPACK_,32_23)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(23,32); }
+static const unsigned char *T2(_BITUNPACK_,32_24)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(24,32); }
+static const unsigned char *T2(_BITUNPACK_,32_25)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(25,32); }
+static const unsigned char *T2(_BITUNPACK_,32_26)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(26,32); }
+static const unsigned char *T2(_BITUNPACK_,32_27)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(27,32); }
+static const unsigned char *T2(_BITUNPACK_,32_28)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(28,32); }
+static const unsigned char *T2(_BITUNPACK_,32_29)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(29,32); }
+static const unsigned char *T2(_BITUNPACK_,32_30)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(30,32); }
+static const unsigned char *T2(_BITUNPACK_,32_31)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(31,32); }
+static const unsigned char *T2(_BITUNPACK_,32_32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out  ) { BU(32,32); }
+static const BITUNPACK_F32 T2(_BITUNPACK_,a32)[] = {
   &T2(_BITUNPACK_,32_0),
   &T2(_BITUNPACK_,32_1),
   &T2(_BITUNPACK_,32_2),
@@ -3245,72 +3245,72 @@ const unsigned char *T2(_BITUNPACK_,32)( const unsigned char *__restrict in, uns
 #undef USIZE
 
 #define USIZE 64
-const unsigned char *T2(_BITUNPACK_,64_0 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 0,64); }
-const unsigned char *T2(_BITUNPACK_,64_1 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 1,64); }
-const unsigned char *T2(_BITUNPACK_,64_2 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 2,64); }
-const unsigned char *T2(_BITUNPACK_,64_3 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 3,64); }
-const unsigned char *T2(_BITUNPACK_,64_4 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 4,64); }
-const unsigned char *T2(_BITUNPACK_,64_5 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 5,64); }
-const unsigned char *T2(_BITUNPACK_,64_6 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 6,64); }
-const unsigned char *T2(_BITUNPACK_,64_7 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 7,64); }
-const unsigned char *T2(_BITUNPACK_,64_8 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 8,64); }
-const unsigned char *T2(_BITUNPACK_,64_9 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 9,64); }
-const unsigned char *T2(_BITUNPACK_,64_10)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(10,64); }
-const unsigned char *T2(_BITUNPACK_,64_11)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(11,64); }
-const unsigned char *T2(_BITUNPACK_,64_12)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(12,64); }
-const unsigned char *T2(_BITUNPACK_,64_13)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(13,64); }
-const unsigned char *T2(_BITUNPACK_,64_14)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(14,64); }
-const unsigned char *T2(_BITUNPACK_,64_15)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(15,64); }
-const unsigned char *T2(_BITUNPACK_,64_16)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(16,64); }
-const unsigned char *T2(_BITUNPACK_,64_17)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(17,64); }
-const unsigned char *T2(_BITUNPACK_,64_18)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(18,64); }
-const unsigned char *T2(_BITUNPACK_,64_19)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(19,64); }
-const unsigned char *T2(_BITUNPACK_,64_20)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(20,64); }
-const unsigned char *T2(_BITUNPACK_,64_21)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(21,64); }
-const unsigned char *T2(_BITUNPACK_,64_22)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(22,64); }
-const unsigned char *T2(_BITUNPACK_,64_23)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(23,64); }
-const unsigned char *T2(_BITUNPACK_,64_24)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(24,64); }
-const unsigned char *T2(_BITUNPACK_,64_25)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(25,64); }
-const unsigned char *T2(_BITUNPACK_,64_26)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(26,64); }
-const unsigned char *T2(_BITUNPACK_,64_27)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(27,64); }
-const unsigned char *T2(_BITUNPACK_,64_28)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(28,64); }
-const unsigned char *T2(_BITUNPACK_,64_29)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(29,64); }
-const unsigned char *T2(_BITUNPACK_,64_30)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(30,64); }
-const unsigned char *T2(_BITUNPACK_,64_31)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(31,64); }
-const unsigned char *T2(_BITUNPACK_,64_32)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(32,64); }
-const unsigned char *T2(_BITUNPACK_,64_33)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(33,64); }
-const unsigned char *T2(_BITUNPACK_,64_34)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(34,64); }
-const unsigned char *T2(_BITUNPACK_,64_35)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(35,64); }
-const unsigned char *T2(_BITUNPACK_,64_36)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(36,64); }
-const unsigned char *T2(_BITUNPACK_,64_37)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(37,64); }
-const unsigned char *T2(_BITUNPACK_,64_38)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(38,64); }
-const unsigned char *T2(_BITUNPACK_,64_39)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(39,64); }
-const unsigned char *T2(_BITUNPACK_,64_40)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(40,64); }
-const unsigned char *T2(_BITUNPACK_,64_41)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(41,64); }
-const unsigned char *T2(_BITUNPACK_,64_42)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(42,64); }
-const unsigned char *T2(_BITUNPACK_,64_43)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(43,64); }
-const unsigned char *T2(_BITUNPACK_,64_44)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(44,64); }
-const unsigned char *T2(_BITUNPACK_,64_45)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(45,64); }
-const unsigned char *T2(_BITUNPACK_,64_46)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(46,64); }
-const unsigned char *T2(_BITUNPACK_,64_47)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(47,64); }
-const unsigned char *T2(_BITUNPACK_,64_48)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(48,64); }
-const unsigned char *T2(_BITUNPACK_,64_49)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(49,64); }
-const unsigned char *T2(_BITUNPACK_,64_50)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(50,64); }
-const unsigned char *T2(_BITUNPACK_,64_51)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(51,64); }
-const unsigned char *T2(_BITUNPACK_,64_52)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(52,64); }
-const unsigned char *T2(_BITUNPACK_,64_53)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(53,64); }
-const unsigned char *T2(_BITUNPACK_,64_54)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(54,64); }
-const unsigned char *T2(_BITUNPACK_,64_55)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(55,64); }
-const unsigned char *T2(_BITUNPACK_,64_56)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(56,64); }
-const unsigned char *T2(_BITUNPACK_,64_57)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(57,64); }
-const unsigned char *T2(_BITUNPACK_,64_58)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(58,64); }
-const unsigned char *T2(_BITUNPACK_,64_59)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(59,64); }
-const unsigned char *T2(_BITUNPACK_,64_60)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(60,64); }
-const unsigned char *T2(_BITUNPACK_,64_61)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(61,64); }
-const unsigned char *T2(_BITUNPACK_,64_62)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(62,64); }
-const unsigned char *T2(_BITUNPACK_,64_63)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(63,64); }
-const unsigned char *T2(_BITUNPACK_,64_64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(64,64); }
-BITUNPACK_F64 T2(_BITUNPACK_,a64)[] = {
+static const unsigned char *T2(_BITUNPACK_,64_0 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 0,64); }
+static const unsigned char *T2(_BITUNPACK_,64_1 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 1,64); }
+static const unsigned char *T2(_BITUNPACK_,64_2 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 2,64); }
+static const unsigned char *T2(_BITUNPACK_,64_3 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 3,64); }
+static const unsigned char *T2(_BITUNPACK_,64_4 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 4,64); }
+static const unsigned char *T2(_BITUNPACK_,64_5 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 5,64); }
+static const unsigned char *T2(_BITUNPACK_,64_6 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 6,64); }
+static const unsigned char *T2(_BITUNPACK_,64_7 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 7,64); }
+static const unsigned char *T2(_BITUNPACK_,64_8 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 8,64); }
+static const unsigned char *T2(_BITUNPACK_,64_9 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU( 9,64); }
+static const unsigned char *T2(_BITUNPACK_,64_10)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(10,64); }
+static const unsigned char *T2(_BITUNPACK_,64_11)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(11,64); }
+static const unsigned char *T2(_BITUNPACK_,64_12)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(12,64); }
+static const unsigned char *T2(_BITUNPACK_,64_13)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(13,64); }
+static const unsigned char *T2(_BITUNPACK_,64_14)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(14,64); }
+static const unsigned char *T2(_BITUNPACK_,64_15)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(15,64); }
+static const unsigned char *T2(_BITUNPACK_,64_16)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(16,64); }
+static const unsigned char *T2(_BITUNPACK_,64_17)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(17,64); }
+static const unsigned char *T2(_BITUNPACK_,64_18)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(18,64); }
+static const unsigned char *T2(_BITUNPACK_,64_19)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(19,64); }
+static const unsigned char *T2(_BITUNPACK_,64_20)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(20,64); }
+static const unsigned char *T2(_BITUNPACK_,64_21)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(21,64); }
+static const unsigned char *T2(_BITUNPACK_,64_22)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(22,64); }
+static const unsigned char *T2(_BITUNPACK_,64_23)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(23,64); }
+static const unsigned char *T2(_BITUNPACK_,64_24)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(24,64); }
+static const unsigned char *T2(_BITUNPACK_,64_25)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(25,64); }
+static const unsigned char *T2(_BITUNPACK_,64_26)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(26,64); }
+static const unsigned char *T2(_BITUNPACK_,64_27)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(27,64); }
+static const unsigned char *T2(_BITUNPACK_,64_28)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(28,64); }
+static const unsigned char *T2(_BITUNPACK_,64_29)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(29,64); }
+static const unsigned char *T2(_BITUNPACK_,64_30)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(30,64); }
+static const unsigned char *T2(_BITUNPACK_,64_31)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(31,64); }
+static const unsigned char *T2(_BITUNPACK_,64_32)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(32,64); }
+static const unsigned char *T2(_BITUNPACK_,64_33)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(33,64); }
+static const unsigned char *T2(_BITUNPACK_,64_34)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(34,64); }
+static const unsigned char *T2(_BITUNPACK_,64_35)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(35,64); }
+static const unsigned char *T2(_BITUNPACK_,64_36)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(36,64); }
+static const unsigned char *T2(_BITUNPACK_,64_37)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(37,64); }
+static const unsigned char *T2(_BITUNPACK_,64_38)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(38,64); }
+static const unsigned char *T2(_BITUNPACK_,64_39)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(39,64); }
+static const unsigned char *T2(_BITUNPACK_,64_40)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(40,64); }
+static const unsigned char *T2(_BITUNPACK_,64_41)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(41,64); }
+static const unsigned char *T2(_BITUNPACK_,64_42)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(42,64); }
+static const unsigned char *T2(_BITUNPACK_,64_43)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(43,64); }
+static const unsigned char *T2(_BITUNPACK_,64_44)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(44,64); }
+static const unsigned char *T2(_BITUNPACK_,64_45)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(45,64); }
+static const unsigned char *T2(_BITUNPACK_,64_46)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(46,64); }
+static const unsigned char *T2(_BITUNPACK_,64_47)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(47,64); }
+static const unsigned char *T2(_BITUNPACK_,64_48)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(48,64); }
+static const unsigned char *T2(_BITUNPACK_,64_49)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(49,64); }
+static const unsigned char *T2(_BITUNPACK_,64_50)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(50,64); }
+static const unsigned char *T2(_BITUNPACK_,64_51)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(51,64); }
+static const unsigned char *T2(_BITUNPACK_,64_52)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(52,64); }
+static const unsigned char *T2(_BITUNPACK_,64_53)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(53,64); }
+static const unsigned char *T2(_BITUNPACK_,64_54)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(54,64); }
+static const unsigned char *T2(_BITUNPACK_,64_55)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(55,64); }
+static const unsigned char *T2(_BITUNPACK_,64_56)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(56,64); }
+static const unsigned char *T2(_BITUNPACK_,64_57)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(57,64); }
+static const unsigned char *T2(_BITUNPACK_,64_58)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(58,64); }
+static const unsigned char *T2(_BITUNPACK_,64_59)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(59,64); }
+static const unsigned char *T2(_BITUNPACK_,64_60)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(60,64); }
+static const unsigned char *T2(_BITUNPACK_,64_61)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(61,64); }
+static const unsigned char *T2(_BITUNPACK_,64_62)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(62,64); }
+static const unsigned char *T2(_BITUNPACK_,64_63)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(63,64); }
+static const unsigned char *T2(_BITUNPACK_,64_64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out  ) { BU(64,64); }
+static const BITUNPACK_F64 T2(_BITUNPACK_,a64)[] = {
   &T2(_BITUNPACK_,64_0),
   &T2(_BITUNPACK_,64_1),
   &T2(_BITUNPACK_,64_2),
@@ -3382,16 +3382,16 @@ const unsigned char *T2(_BITUNPACK_,64)( const unsigned char *__restrict in, uns
 
 #else
 #define USIZE 8
-const unsigned char *T2(_BITUNPACK_,8_0)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(0,8); }
-const unsigned char *T2(_BITUNPACK_,8_1)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(1,8); }
-const unsigned char *T2(_BITUNPACK_,8_2)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(2,8); }
-const unsigned char *T2(_BITUNPACK_,8_3)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(3,8); }
-const unsigned char *T2(_BITUNPACK_,8_4)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(4,8); }
-const unsigned char *T2(_BITUNPACK_,8_5)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(5,8); }
-const unsigned char *T2(_BITUNPACK_,8_6)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(6,8); }
-const unsigned char *T2(_BITUNPACK_,8_7)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(7,8); }
-const unsigned char *T2(_BITUNPACK_,8_8)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(8,8); }
-BITUNPACK_D8 T2(_BITUNPACK_,a8)[] = {
+static const unsigned char *T2(_BITUNPACK_,8_0)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(0,8); }
+static const unsigned char *T2(_BITUNPACK_,8_1)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(1,8); }
+static const unsigned char *T2(_BITUNPACK_,8_2)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(2,8); }
+static const unsigned char *T2(_BITUNPACK_,8_3)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(3,8); }
+static const unsigned char *T2(_BITUNPACK_,8_4)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(4,8); }
+static const unsigned char *T2(_BITUNPACK_,8_5)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(5,8); }
+static const unsigned char *T2(_BITUNPACK_,8_6)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(6,8); }
+static const unsigned char *T2(_BITUNPACK_,8_7)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(7,8); }
+static const unsigned char *T2(_BITUNPACK_,8_8)(const unsigned char *__restrict in, unsigned n, uint8_t *__restrict out , uint8_t start ) { BU(8,8); }
+static const BITUNPACK_D8 T2(_BITUNPACK_,a8)[] = {
   &T2(_BITUNPACK_,8_0),
   &T2(_BITUNPACK_,8_1),
   &T2(_BITUNPACK_,8_2),
@@ -3406,24 +3406,24 @@ const unsigned char *T2(_BITUNPACK_,8)( const unsigned char *__restrict in, unsi
 #undef USIZE
 
 #define USIZE 16
-const unsigned char *T2(_BITUNPACK_,16_0 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 0,16); }
-const unsigned char *T2(_BITUNPACK_,16_1 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 1,16); }
-const unsigned char *T2(_BITUNPACK_,16_2 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 2,16); }
-const unsigned char *T2(_BITUNPACK_,16_3 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 3,16); }
-const unsigned char *T2(_BITUNPACK_,16_4 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 4,16); }
-const unsigned char *T2(_BITUNPACK_,16_5 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 5,16); }
-const unsigned char *T2(_BITUNPACK_,16_6 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 6,16); }
-const unsigned char *T2(_BITUNPACK_,16_7 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 7,16); }
-const unsigned char *T2(_BITUNPACK_,16_8 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 8,16); }
-const unsigned char *T2(_BITUNPACK_,16_9 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 9,16); }
-const unsigned char *T2(_BITUNPACK_,16_10)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(10,16); }
-const unsigned char *T2(_BITUNPACK_,16_11)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(11,16); }
-const unsigned char *T2(_BITUNPACK_,16_12)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(12,16); }
-const unsigned char *T2(_BITUNPACK_,16_13)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(13,16); }
-const unsigned char *T2(_BITUNPACK_,16_14)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(14,16); }
-const unsigned char *T2(_BITUNPACK_,16_15)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(15,16); }
-const unsigned char *T2(_BITUNPACK_,16_16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(16,16); }
-BITUNPACK_D16 T2(_BITUNPACK_,a16)[] = {
+static const unsigned char *T2(_BITUNPACK_,16_0 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 0,16); }
+static const unsigned char *T2(_BITUNPACK_,16_1 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 1,16); }
+static const unsigned char *T2(_BITUNPACK_,16_2 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 2,16); }
+static const unsigned char *T2(_BITUNPACK_,16_3 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 3,16); }
+static const unsigned char *T2(_BITUNPACK_,16_4 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 4,16); }
+static const unsigned char *T2(_BITUNPACK_,16_5 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 5,16); }
+static const unsigned char *T2(_BITUNPACK_,16_6 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 6,16); }
+static const unsigned char *T2(_BITUNPACK_,16_7 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 7,16); }
+static const unsigned char *T2(_BITUNPACK_,16_8 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 8,16); }
+static const unsigned char *T2(_BITUNPACK_,16_9 )(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU( 9,16); }
+static const unsigned char *T2(_BITUNPACK_,16_10)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(10,16); }
+static const unsigned char *T2(_BITUNPACK_,16_11)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(11,16); }
+static const unsigned char *T2(_BITUNPACK_,16_12)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(12,16); }
+static const unsigned char *T2(_BITUNPACK_,16_13)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(13,16); }
+static const unsigned char *T2(_BITUNPACK_,16_14)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(14,16); }
+static const unsigned char *T2(_BITUNPACK_,16_15)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(15,16); }
+static const unsigned char *T2(_BITUNPACK_,16_16)(const unsigned char *__restrict in, unsigned n, uint16_t *__restrict out , uint16_t start ) { BU(16,16); }
+static const BITUNPACK_D16 T2(_BITUNPACK_,a16)[] = {
   &T2(_BITUNPACK_,16_0),
   &T2(_BITUNPACK_,16_1),
   &T2(_BITUNPACK_,16_2),
@@ -3446,40 +3446,40 @@ const unsigned char *T2(_BITUNPACK_,16)( const unsigned char *__restrict in, uns
 #undef USIZE
 
 #define USIZE 32
-const unsigned char *T2(_BITUNPACK_,32_0 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 0,32); }
-const unsigned char *T2(_BITUNPACK_,32_1 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 1,32); }
-const unsigned char *T2(_BITUNPACK_,32_2 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 2,32); }
-const unsigned char *T2(_BITUNPACK_,32_3 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 3,32); }
-const unsigned char *T2(_BITUNPACK_,32_4 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 4,32); }
-const unsigned char *T2(_BITUNPACK_,32_5 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 5,32); }
-const unsigned char *T2(_BITUNPACK_,32_6 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 6,32); }
-const unsigned char *T2(_BITUNPACK_,32_7 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 7,32); }
-const unsigned char *T2(_BITUNPACK_,32_8 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 8,32); }
-const unsigned char *T2(_BITUNPACK_,32_9 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 9,32); }
-const unsigned char *T2(_BITUNPACK_,32_10)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(10,32); }
-const unsigned char *T2(_BITUNPACK_,32_11)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(11,32); }
-const unsigned char *T2(_BITUNPACK_,32_12)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(12,32); }
-const unsigned char *T2(_BITUNPACK_,32_13)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(13,32); }
-const unsigned char *T2(_BITUNPACK_,32_14)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(14,32); }
-const unsigned char *T2(_BITUNPACK_,32_15)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(15,32); }
-const unsigned char *T2(_BITUNPACK_,32_16)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(16,32); }
-const unsigned char *T2(_BITUNPACK_,32_17)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(17,32); }
-const unsigned char *T2(_BITUNPACK_,32_18)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(18,32); }
-const unsigned char *T2(_BITUNPACK_,32_19)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(19,32); }
-const unsigned char *T2(_BITUNPACK_,32_20)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(20,32); }
-const unsigned char *T2(_BITUNPACK_,32_21)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(21,32); }
-const unsigned char *T2(_BITUNPACK_,32_22)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(22,32); }
-const unsigned char *T2(_BITUNPACK_,32_23)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(23,32); }
-const unsigned char *T2(_BITUNPACK_,32_24)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(24,32); }
-const unsigned char *T2(_BITUNPACK_,32_25)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(25,32); }
-const unsigned char *T2(_BITUNPACK_,32_26)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(26,32); }
-const unsigned char *T2(_BITUNPACK_,32_27)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(27,32); }
-const unsigned char *T2(_BITUNPACK_,32_28)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(28,32); }
-const unsigned char *T2(_BITUNPACK_,32_29)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(29,32); }
-const unsigned char *T2(_BITUNPACK_,32_30)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(30,32); }
-const unsigned char *T2(_BITUNPACK_,32_31)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(31,32); }
-const unsigned char *T2(_BITUNPACK_,32_32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(32,32); }
-BITUNPACK_D32 T2(_BITUNPACK_,a32)[] = {
+static const unsigned char *T2(_BITUNPACK_,32_0 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 0,32); }
+static const unsigned char *T2(_BITUNPACK_,32_1 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 1,32); }
+static const unsigned char *T2(_BITUNPACK_,32_2 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 2,32); }
+static const unsigned char *T2(_BITUNPACK_,32_3 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 3,32); }
+static const unsigned char *T2(_BITUNPACK_,32_4 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 4,32); }
+static const unsigned char *T2(_BITUNPACK_,32_5 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 5,32); }
+static const unsigned char *T2(_BITUNPACK_,32_6 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 6,32); }
+static const unsigned char *T2(_BITUNPACK_,32_7 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 7,32); }
+static const unsigned char *T2(_BITUNPACK_,32_8 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 8,32); }
+static const unsigned char *T2(_BITUNPACK_,32_9 )(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU( 9,32); }
+static const unsigned char *T2(_BITUNPACK_,32_10)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(10,32); }
+static const unsigned char *T2(_BITUNPACK_,32_11)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(11,32); }
+static const unsigned char *T2(_BITUNPACK_,32_12)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(12,32); }
+static const unsigned char *T2(_BITUNPACK_,32_13)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(13,32); }
+static const unsigned char *T2(_BITUNPACK_,32_14)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(14,32); }
+static const unsigned char *T2(_BITUNPACK_,32_15)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(15,32); }
+static const unsigned char *T2(_BITUNPACK_,32_16)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(16,32); }
+static const unsigned char *T2(_BITUNPACK_,32_17)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(17,32); }
+static const unsigned char *T2(_BITUNPACK_,32_18)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(18,32); }
+static const unsigned char *T2(_BITUNPACK_,32_19)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(19,32); }
+static const unsigned char *T2(_BITUNPACK_,32_20)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(20,32); }
+static const unsigned char *T2(_BITUNPACK_,32_21)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(21,32); }
+static const unsigned char *T2(_BITUNPACK_,32_22)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(22,32); }
+static const unsigned char *T2(_BITUNPACK_,32_23)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(23,32); }
+static const unsigned char *T2(_BITUNPACK_,32_24)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(24,32); }
+static const unsigned char *T2(_BITUNPACK_,32_25)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(25,32); }
+static const unsigned char *T2(_BITUNPACK_,32_26)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(26,32); }
+static const unsigned char *T2(_BITUNPACK_,32_27)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(27,32); }
+static const unsigned char *T2(_BITUNPACK_,32_28)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(28,32); }
+static const unsigned char *T2(_BITUNPACK_,32_29)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(29,32); }
+static const unsigned char *T2(_BITUNPACK_,32_30)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(30,32); }
+static const unsigned char *T2(_BITUNPACK_,32_31)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(31,32); }
+static const unsigned char *T2(_BITUNPACK_,32_32)(const unsigned char *__restrict in, unsigned n, uint32_t *__restrict out , uint32_t start ) { BU(32,32); }
+static const BITUNPACK_D32 T2(_BITUNPACK_,a32)[] = {
   &T2(_BITUNPACK_,32_0),
   &T2(_BITUNPACK_,32_1),
   &T2(_BITUNPACK_,32_2),
@@ -3518,72 +3518,72 @@ const unsigned char *T2(_BITUNPACK_,32)( const unsigned char *__restrict in, uns
 #undef USIZE
 
 #define USIZE 64
-const unsigned char *T2(_BITUNPACK_,64_0 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 0,64); }
-const unsigned char *T2(_BITUNPACK_,64_1 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 1,64); }
-const unsigned char *T2(_BITUNPACK_,64_2 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 2,64); }
-const unsigned char *T2(_BITUNPACK_,64_3 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 3,64); }
-const unsigned char *T2(_BITUNPACK_,64_4 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 4,64); }
-const unsigned char *T2(_BITUNPACK_,64_5 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 5,64); }
-const unsigned char *T2(_BITUNPACK_,64_6 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 6,64); }
-const unsigned char *T2(_BITUNPACK_,64_7 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 7,64); }
-const unsigned char *T2(_BITUNPACK_,64_8 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 8,64); }
-const unsigned char *T2(_BITUNPACK_,64_9 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 9,64); }
-const unsigned char *T2(_BITUNPACK_,64_10)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(10,64); }
-const unsigned char *T2(_BITUNPACK_,64_11)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(11,64); }
-const unsigned char *T2(_BITUNPACK_,64_12)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(12,64); }
-const unsigned char *T2(_BITUNPACK_,64_13)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(13,64); }
-const unsigned char *T2(_BITUNPACK_,64_14)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(14,64); }
-const unsigned char *T2(_BITUNPACK_,64_15)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(15,64); }
-const unsigned char *T2(_BITUNPACK_,64_16)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(16,64); }
-const unsigned char *T2(_BITUNPACK_,64_17)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(17,64); }
-const unsigned char *T2(_BITUNPACK_,64_18)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(18,64); }
-const unsigned char *T2(_BITUNPACK_,64_19)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(19,64); }
-const unsigned char *T2(_BITUNPACK_,64_20)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(20,64); }
-const unsigned char *T2(_BITUNPACK_,64_21)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(21,64); }
-const unsigned char *T2(_BITUNPACK_,64_22)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(22,64); }
-const unsigned char *T2(_BITUNPACK_,64_23)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(23,64); }
-const unsigned char *T2(_BITUNPACK_,64_24)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(24,64); }
-const unsigned char *T2(_BITUNPACK_,64_25)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(25,64); }
-const unsigned char *T2(_BITUNPACK_,64_26)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(26,64); }
-const unsigned char *T2(_BITUNPACK_,64_27)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(27,64); }
-const unsigned char *T2(_BITUNPACK_,64_28)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(28,64); }
-const unsigned char *T2(_BITUNPACK_,64_29)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(29,64); }
-const unsigned char *T2(_BITUNPACK_,64_30)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(30,64); }
-const unsigned char *T2(_BITUNPACK_,64_31)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(31,64); }
-const unsigned char *T2(_BITUNPACK_,64_32)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(32,64); }
-const unsigned char *T2(_BITUNPACK_,64_33)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(33,64); }
-const unsigned char *T2(_BITUNPACK_,64_34)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(34,64); }
-const unsigned char *T2(_BITUNPACK_,64_35)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(35,64); }
-const unsigned char *T2(_BITUNPACK_,64_36)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(36,64); }
-const unsigned char *T2(_BITUNPACK_,64_37)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(37,64); }
-const unsigned char *T2(_BITUNPACK_,64_38)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(38,64); }
-const unsigned char *T2(_BITUNPACK_,64_39)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(39,64); }
-const unsigned char *T2(_BITUNPACK_,64_40)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(40,64); }
-const unsigned char *T2(_BITUNPACK_,64_41)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(41,64); }
-const unsigned char *T2(_BITUNPACK_,64_42)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(42,64); }
-const unsigned char *T2(_BITUNPACK_,64_43)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(43,64); }
-const unsigned char *T2(_BITUNPACK_,64_44)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(44,64); }
-const unsigned char *T2(_BITUNPACK_,64_45)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(45,64); }
-const unsigned char *T2(_BITUNPACK_,64_46)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(46,64); }
-const unsigned char *T2(_BITUNPACK_,64_47)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(47,64); }
-const unsigned char *T2(_BITUNPACK_,64_48)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(48,64); }
-const unsigned char *T2(_BITUNPACK_,64_49)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(49,64); }
-const unsigned char *T2(_BITUNPACK_,64_50)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(50,64); }
-const unsigned char *T2(_BITUNPACK_,64_51)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(51,64); }
-const unsigned char *T2(_BITUNPACK_,64_52)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(52,64); }
-const unsigned char *T2(_BITUNPACK_,64_53)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(53,64); }
-const unsigned char *T2(_BITUNPACK_,64_54)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(54,64); }
-const unsigned char *T2(_BITUNPACK_,64_55)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(55,64); }
-const unsigned char *T2(_BITUNPACK_,64_56)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(56,64); }
-const unsigned char *T2(_BITUNPACK_,64_57)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(57,64); }
-const unsigned char *T2(_BITUNPACK_,64_58)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(58,64); }
-const unsigned char *T2(_BITUNPACK_,64_59)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(59,64); }
-const unsigned char *T2(_BITUNPACK_,64_60)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(60,64); }
-const unsigned char *T2(_BITUNPACK_,64_61)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(61,64); }
-const unsigned char *T2(_BITUNPACK_,64_62)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(62,64); }
-const unsigned char *T2(_BITUNPACK_,64_63)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(63,64); }
-const unsigned char *T2(_BITUNPACK_,64_64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(64,64); }
-BITUNPACK_D64 T2(_BITUNPACK_,a64)[] = {
+static const unsigned char *T2(_BITUNPACK_,64_0 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 0,64); }
+static const unsigned char *T2(_BITUNPACK_,64_1 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 1,64); }
+static const unsigned char *T2(_BITUNPACK_,64_2 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 2,64); }
+static const unsigned char *T2(_BITUNPACK_,64_3 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 3,64); }
+static const unsigned char *T2(_BITUNPACK_,64_4 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 4,64); }
+static const unsigned char *T2(_BITUNPACK_,64_5 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 5,64); }
+static const unsigned char *T2(_BITUNPACK_,64_6 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 6,64); }
+static const unsigned char *T2(_BITUNPACK_,64_7 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 7,64); }
+static const unsigned char *T2(_BITUNPACK_,64_8 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 8,64); }
+static const unsigned char *T2(_BITUNPACK_,64_9 )(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU( 9,64); }
+static const unsigned char *T2(_BITUNPACK_,64_10)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(10,64); }
+static const unsigned char *T2(_BITUNPACK_,64_11)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(11,64); }
+static const unsigned char *T2(_BITUNPACK_,64_12)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(12,64); }
+static const unsigned char *T2(_BITUNPACK_,64_13)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(13,64); }
+static const unsigned char *T2(_BITUNPACK_,64_14)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(14,64); }
+static const unsigned char *T2(_BITUNPACK_,64_15)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(15,64); }
+static const unsigned char *T2(_BITUNPACK_,64_16)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(16,64); }
+static const unsigned char *T2(_BITUNPACK_,64_17)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(17,64); }
+static const unsigned char *T2(_BITUNPACK_,64_18)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(18,64); }
+static const unsigned char *T2(_BITUNPACK_,64_19)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(19,64); }
+static const unsigned char *T2(_BITUNPACK_,64_20)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(20,64); }
+static const unsigned char *T2(_BITUNPACK_,64_21)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(21,64); }
+static const unsigned char *T2(_BITUNPACK_,64_22)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(22,64); }
+static const unsigned char *T2(_BITUNPACK_,64_23)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(23,64); }
+static const unsigned char *T2(_BITUNPACK_,64_24)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(24,64); }
+static const unsigned char *T2(_BITUNPACK_,64_25)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(25,64); }
+static const unsigned char *T2(_BITUNPACK_,64_26)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(26,64); }
+static const unsigned char *T2(_BITUNPACK_,64_27)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(27,64); }
+static const unsigned char *T2(_BITUNPACK_,64_28)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(28,64); }
+static const unsigned char *T2(_BITUNPACK_,64_29)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(29,64); }
+static const unsigned char *T2(_BITUNPACK_,64_30)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(30,64); }
+static const unsigned char *T2(_BITUNPACK_,64_31)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(31,64); }
+static const unsigned char *T2(_BITUNPACK_,64_32)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(32,64); }
+static const unsigned char *T2(_BITUNPACK_,64_33)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(33,64); }
+static const unsigned char *T2(_BITUNPACK_,64_34)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(34,64); }
+static const unsigned char *T2(_BITUNPACK_,64_35)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(35,64); }
+static const unsigned char *T2(_BITUNPACK_,64_36)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(36,64); }
+static const unsigned char *T2(_BITUNPACK_,64_37)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(37,64); }
+static const unsigned char *T2(_BITUNPACK_,64_38)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(38,64); }
+static const unsigned char *T2(_BITUNPACK_,64_39)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(39,64); }
+static const unsigned char *T2(_BITUNPACK_,64_40)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(40,64); }
+static const unsigned char *T2(_BITUNPACK_,64_41)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(41,64); }
+static const unsigned char *T2(_BITUNPACK_,64_42)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(42,64); }
+static const unsigned char *T2(_BITUNPACK_,64_43)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(43,64); }
+static const unsigned char *T2(_BITUNPACK_,64_44)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(44,64); }
+static const unsigned char *T2(_BITUNPACK_,64_45)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(45,64); }
+static const unsigned char *T2(_BITUNPACK_,64_46)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(46,64); }
+static const unsigned char *T2(_BITUNPACK_,64_47)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(47,64); }
+static const unsigned char *T2(_BITUNPACK_,64_48)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(48,64); }
+static const unsigned char *T2(_BITUNPACK_,64_49)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(49,64); }
+static const unsigned char *T2(_BITUNPACK_,64_50)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(50,64); }
+static const unsigned char *T2(_BITUNPACK_,64_51)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(51,64); }
+static const unsigned char *T2(_BITUNPACK_,64_52)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(52,64); }
+static const unsigned char *T2(_BITUNPACK_,64_53)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(53,64); }
+static const unsigned char *T2(_BITUNPACK_,64_54)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(54,64); }
+static const unsigned char *T2(_BITUNPACK_,64_55)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(55,64); }
+static const unsigned char *T2(_BITUNPACK_,64_56)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(56,64); }
+static const unsigned char *T2(_BITUNPACK_,64_57)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(57,64); }
+static const unsigned char *T2(_BITUNPACK_,64_58)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(58,64); }
+static const unsigned char *T2(_BITUNPACK_,64_59)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(59,64); }
+static const unsigned char *T2(_BITUNPACK_,64_60)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(60,64); }
+static const unsigned char *T2(_BITUNPACK_,64_61)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(61,64); }
+static const unsigned char *T2(_BITUNPACK_,64_62)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(62,64); }
+static const unsigned char *T2(_BITUNPACK_,64_63)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(63,64); }
+static const unsigned char *T2(_BITUNPACK_,64_64)(const unsigned char *__restrict in, unsigned n, uint64_t *__restrict out , uint64_t start ) { BU(64,64); }
+static const BITUNPACK_D64 T2(_BITUNPACK_,a64)[] = {
   &T2(_BITUNPACK_,64_0),
   &T2(_BITUNPACK_,64_1),
   &T2(_BITUNPACK_,64_2),
@@ -6022,17 +6022,17 @@ const unsigned char *T2(_BITUNPACK_,64)( const unsigned char *__restrict in, uns
 
 #define BITUNPACK256V32(__ip, __nbits, __op, _parm_) { __m256i mv,*_ov=(__m256i *)__op,*_iv=(__m256i *)__ip; \
   switch(__nbits&0x3f) {\
-    case  0: BITUNPACK0(_parm_);                  BITUNPACK256V32_0( _iv, _ov,  0,_parm_); break;\
-    case  1: mv = _mm256_set1_epi32((1u<< 1)-1);  BITUNPACK256V32_1( _iv, _ov,  1,_parm_); break;\
-    case  2: mv = _mm256_set1_epi32((1u<< 2)-1);  BITUNPACK256V32_2( _iv, _ov,  2,_parm_); break;\
-    case  3: mv = _mm256_set1_epi32((1u<< 3)-1);  BITUNPACK256V32_3( _iv, _ov,  3,_parm_); break;\
-    case  4: mv = _mm256_set1_epi32((1u<< 4)-1);  BITUNPACK256V32_4( _iv, _ov,  4,_parm_); break;\
-    case  5: mv = _mm256_set1_epi32((1u<< 5)-1);  BITUNPACK256V32_5( _iv, _ov,  5,_parm_); break;\
-    case  6: mv = _mm256_set1_epi32((1u<< 6)-1);  BITUNPACK256V32_6( _iv, _ov,  6,_parm_); break;\
-    case  7: mv = _mm256_set1_epi32((1u<< 7)-1);  BITUNPACK256V32_7( _iv, _ov,  7,_parm_); break;\
-    case  8: mv = _mm256_set1_epi32((1u<< 8)-1);  BITUNPACK256V32_8( _iv, _ov,  8,_parm_); break;\
-    case  9: mv = _mm256_set1_epi32((1u<< 9)-1);  BITUNPACK256V32_9( _iv, _ov,  9,_parm_); break;\
-    case 10: mv = _mm256_set1_epi32((1u<<10)-1);  BITUNPACK256V32_10(_iv, _ov, 10,_parm_); break;\
+    case  0: BITUNPACK0(_parm_);                  BITUNPACK256V32_0( _iv, _ov,  0, _parm_); break;\
+    case  1: mv = _mm256_set1_epi32((1u<< 1)-1);  BITUNPACK256V32_1( _iv, _ov,  1, _parm_); break;\
+    case  2: mv = _mm256_set1_epi32((1u<< 2)-1);  BITUNPACK256V32_2( _iv, _ov,  2, _parm_); break;\
+    case  3: mv = _mm256_set1_epi32((1u<< 3)-1);  BITUNPACK256V32_3( _iv, _ov,  3, _parm_); break;\
+    case  4: mv = _mm256_set1_epi32((1u<< 4)-1);  BITUNPACK256V32_4( _iv, _ov,  4, _parm_); break;\
+    case  5: mv = _mm256_set1_epi32((1u<< 5)-1);  BITUNPACK256V32_5( _iv, _ov,  5, _parm_); break;\
+    case  6: mv = _mm256_set1_epi32((1u<< 6)-1);  BITUNPACK256V32_6( _iv, _ov,  6, _parm_); break;\
+    case  7: mv = _mm256_set1_epi32((1u<< 7)-1);  BITUNPACK256V32_7( _iv, _ov,  7, _parm_); break;\
+    case  8: mv = _mm256_set1_epi32((1u<< 8)-1);  BITUNPACK256V32_8( _iv, _ov,  8, _parm_); break;\
+    case  9: mv = _mm256_set1_epi32((1u<< 9)-1);  BITUNPACK256V32_9( _iv, _ov,  9, _parm_); break;\
+    case 10: mv = _mm256_set1_epi32((1u<<10)-1);  BITUNPACK256V32_10(_iv, _ov, 10, _parm_); break;\
     case 11: mv = _mm256_set1_epi32((1u<<11)-1);  BITUNPACK256V32_11(_iv, _ov, 11, _parm_); break;\
     case 12: mv = _mm256_set1_epi32((1u<<12)-1);  BITUNPACK256V32_12(_iv, _ov, 12, _parm_); break;\
     case 13: mv = _mm256_set1_epi32((1u<<13)-1);  BITUNPACK256V32_13(_iv, _ov, 13, _parm_); break;\
