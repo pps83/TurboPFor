@@ -44,6 +44,7 @@
 #include <float.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #if defined(_MSC_VER)
 #include <intrin.h>
 #endif
@@ -162,14 +163,6 @@ static ALWAYS_INLINE int clz64(  uint64_t x) { unsigned long z; return _BitScanR
   #else
 #define popcnt64(x) (popcnt32(x) + popcnt32(x>>32))
   #endif
-
-#define sleep(x)     Sleep(x/1000)
-#define fseeko       _fseeki64
-#define ftello       _ftelli64
-#define strcasecmp   _stricmp
-#define strncasecmp  _strnicmp
-#define strtoull     _strtoui64
-static ALWAYS_INLINE double round(double num) { return (num > 0.0) ? floor(num + 0.5) : ceil(num - 0.5); }
   #endif
 
 #define PAD8(_x_) (((_x_)+7)/8)
@@ -341,26 +334,14 @@ struct _PACKED doubleu   { double             d; };
 #define CLAMP(_x_, _low_, _high_)  (((_x_) > (_high_)) ? (_high_) : (((_x_) < (_low_)) ? (_low_) : (_x_)))
 
 //--- NDEBUG -------
-  #ifdef _MSC_VER
-    #ifdef NDEBUG
-#define AS(expr, fmt, ...)
-#define AC(expr, fmt, ...) do { if(!(expr)) { fprintf(stderr, fmt, ##__VA_ARGS__ ); fflush(stderr); exit(-1); } } while(0)
-#define die(fmt, ...) do { fprintf(stderr, fmt, ##__VA_ARGS__ ); fflush(stderr); exit(-1); } while(0)
-    #else
-#define AS(expr, fmt, ...) do { if(!(expr)) { fflush(stdout);fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, fmt, ##__VA_ARGS__ ); fflush(stderr); exit(-1); } } while(0)
-#define AC(expr, fmt, ...) do { if(!(expr)) { fflush(stdout);fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, fmt, ##__VA_ARGS__ ); fflush(stderr); exit(-1); } } while(0)
-#define die(fmt, ...) do { fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, fmt, ##__VA_ARGS__ ); fflush(stderr); exit(-1); } while(0)
-    #endif
+  #ifdef NDEBUG
+#define AS(expr, ...)
+#define AC(expr, ...) do { if(!(expr)) { fprintf(stderr, __VA_ARGS__ ); fflush(stderr); exit(-1); } } while(0)
+#define die(...) do { fprintf(stderr, __VA_ARGS__ ); fflush(stderr); exit(-1); } while(0)
   #else
-    #ifdef NDEBUG
-#define AS(expr, fmt,args...)
-#define AC(expr, fmt,args...) do { if(!(expr)) { fprintf(stderr, fmt, ## args ); fflush(stderr); exit(-1); } } while(0)
-#define die(fmt,args...) do { fprintf(stderr, fmt, ## args ); fflush(stderr); exit(-1); } while(0)
-    #else
-#define AS(expr, fmt,args...) do { if(!(expr)) { fflush(stdout);fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, fmt, ## args ); fflush(stderr); exit(-1); } } while(0)
-#define AC(expr, fmt,args...) do { if(!(expr)) { fflush(stdout);fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, fmt, ## args ); fflush(stderr); exit(-1); } } while(0)
-#define die(fmt,args...) do { fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, fmt, ## args ); fflush(stderr); exit(-1); } while(0)
-    #endif
+#define AS(expr, ...) do { if(!(expr)) { fflush(stdout);fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, __VA_ARGS__ ); fflush(stderr); exit(-1); } } while(0)
+#define AC(expr, ...) do { if(!(expr)) { fflush(stdout);fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, __VA_ARGS__ ); fflush(stderr); exit(-1); } } while(0)
+#define die(...) do { fprintf(stderr, "%s:%s:%u:", __FILE__, __FUNCTION__, (unsigned)__LINE__); fprintf(stderr, __VA_ARGS__ ); fflush(stderr); exit(-1); } while(0)
   #endif
 
 #endif // CONF_H
