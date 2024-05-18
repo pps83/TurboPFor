@@ -570,23 +570,8 @@ const unsigned char *_bitdunpack256v32( const unsigned char *__restrict in, unsi
 #define VX32(_i_, _nb_,_ov_)  xm = *bb++; _ov_ = _mm256_add_epi32(_ov_, _mm256_slli_epi32(mm256_maskz_loadu_epi32(xm,(__m256i*)pex), _nb_) ); pex += popcnt32(xm)
 #define VXZ32(_i_, _nb_,_ov_) xm = *bb++; _ov_ =                                          mm256_maskz_loadu_epi32(xm,(__m256i*)pex);          pex += popcnt32(xm)
 
-  #ifdef _MSC_VER
-#define SCAN32x8( _v_, _sv_) {\
-  _v_  = _mm256_add_epi32(_v_, _mm256_slli_si256(_v_, 4));\
-  _v_  = _mm256_add_epi32(_v_, _mm256_slli_si256(_v_, 8));\
-  _sv_ = _mm256_add_epi32(     _mm256_permute2x128_si256(   _mm256_shuffle_epi32(_sv_,_MM_SHUFFLE(3, 3, 3, 3)), _sv_, 0x11), \
-         _mm256_add_epi32(_v_, _mm256_permute2x128_si256(zv,_mm256_shuffle_epi32(_v_, _MM_SHUFFLE(3, 3, 3, 3)),       0x20)));\
-}
-#define SCANI32x8(_v_, _sv_, _vi_) SCAN32x8(_v_, _sv_); _sv_ = _mm256_add_epi32(_sv_, _vi_)
-#define   ZIGZAG32x8(_v_) _mm256_xor_si256(_mm256_slli_epi32(_v_,1), _mm256_srai_epi32(_v_,31))
-#define UNZIGZAG32x8(_v_) _mm256_xor_si256(_mm256_srli_epi32(_v_,1), _mm256_srai_epi32(_mm256_slli_epi32(_v_,31),31) )
-
-#define VO32( _op_, _i_, _ov_, _nb_,_sv_) VX32( _i_, _nb_,_ov_); _ov_ = UNZIGZAG32x8(_ov_); SCAN32x8(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_);
-#define VOZ32(_op_, _i_, _ov_, _nb_,_sv_) VXZ32(_i_, _nb_,_ov_); _ov_ = UNZIGZAG32x8(_ov_); SCAN32x8(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_);
-  #else
 #define VO32( _op_, _i_, _ov_, _nb_,_sv_) VX32( _i_, _nb_,_ov_); _ov_ = mm256_zzagd_epi32(_ov_); _sv_ = mm256_scan_epi32(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_);
 #define VOZ32(_op_, _i_, _ov_, _nb_,_sv_) VXZ32(_i_, _nb_,_ov_); _ov_ = mm256_zzagd_epi32(_ov_); _sv_ = mm256_scan_epi32(_ov_,_sv_); _mm256_storeu_si256(_op_++, _sv_);
-  #endif
 
 #include "bitunpack_.h"
 #define BITUNPACK0(_parm_)
