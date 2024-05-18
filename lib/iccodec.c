@@ -83,6 +83,10 @@ static unsigned availableLzs[] = {
 const char *_codstr[] = { "none", "lzturbo", "lz4", "zlib", "deflate", "zstd", "fse", "fsehuf", "turboanx", "turborc", "memcpy", NULL };
 const char *codstr(unsigned cid) { return (cid < ICC_LAST)?_codstr[cid]:""; }
 
+#ifdef _MSC_VER
+#define strcasecmp _stricmp
+#endif
+
 int lzidget(const char *scmd) {
   int i;
   for(i = 0; _codstr[i]; i++)

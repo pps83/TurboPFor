@@ -42,6 +42,7 @@
 #include <float.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #if defined(_MSC_VER)
 #include <intrin.h>
 #endif
@@ -160,14 +161,6 @@ static ALWAYS_INLINE int clz64(  uint64_t x) { unsigned long z; return _BitScanR
   #else
 #define popcnt64(x) (popcnt32(x) + popcnt32(x>>32))
   #endif
-
-#define sleep(x)     Sleep(x/1000)
-#define fseeko       _fseeki64
-#define ftello       _ftelli64
-#define strcasecmp   _stricmp
-#define strncasecmp  _strnicmp
-#define strtoull     _strtoui64
-static ALWAYS_INLINE double round(double num) { return (num > 0.0) ? floor(num + 0.5) : ceil(num - 0.5); }
   #endif
 
 #define __bsr8(_x_)  __bsr32(_x_)
