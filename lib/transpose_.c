@@ -158,85 +158,64 @@ const char *cpustr(unsigned cpuisa) {
 //----------------------------------------------------------------------------------------------------------------------
 typedef void (*TPFUNC)( unsigned char *in, unsigned n, unsigned char *out);
 
-                        // 0  1       2       3       4      5  6  7       8   9                    16
-static TPFUNC _tpe[]   = { 0, 0, tpenc2,  tpenc3,  tpenc4,   0, 0, 0, tpenc8,  0, 0, 0, 0, 0, 0, 0, tpenc16 }; //  byte
-static TPFUNC _tpd[]   = { 0, 0, tpdec2,  tpdec3,  tpdec4,   0, 0, 0, tpdec8,  0, 0, 0, 0, 0, 0, 0, tpdec16 };
-
-static TPFUNC _tp4e[]  = { 0, 0, tpenc2,  tpenc3,  tpenc4,   0, 0, 0, tpenc8,  0, 0, 0, 0, 0, 0, 0, tpenc16 }; // Nibble
-static TPFUNC _tp4d[]  = { 0, 0, tpdec2,  tpdec3,  tpdec4,   0, 0, 0, tpdec8,  0, 0, 0, 0, 0, 0, 0, tpdec16 };
-
-//-- zigzag delta
-  #ifndef NTP_ZZAG
-static TPFUNC _tpze[]  = { 0, 0, tpzenc2, tpzenc3, tpzenc4,  0, 0, 0, tpzenc8, 0, 0, 0, 0, 0, 0, 0, tpzenc16 }; // byte
-static TPFUNC _tpzd[]  = { 0, 0, tpzdec2, tpzdec3, tpzdec4,  0, 0, 0, tpzdec8, 0, 0, 0, 0, 0, 0, 0, tpzdec16 };
-
-static TPFUNC _tp4ze[] = { 0, 0, tpzenc2, tpzenc3, tpzenc4,  0, 0, 0, tpzenc8, 0, 0, 0, 0, 0, 0, 0, tpzenc16 }; // Nibble
-static TPFUNC _tp4zd[] = { 0, 0, tpzdec2, tpzdec3, tpzdec4,  0, 0, 0, tpzdec8, 0, 0, 0, 0, 0, 0, 0, tpzdec16 };
-  #endif
-
-//-- xor
-  #ifndef NTP_XOR
-static TPFUNC _tpxe[]  = { 0, 0, tpxenc2, tpxenc3, tpxenc4,  0, 0, 0, tpxenc8, 0, 0, 0, 0, 0, 0, 0, tpxenc16 }; // byte
-static TPFUNC _tpxd[]  = { 0, 0, tpxdec2, tpxdec3, tpxdec4,  0, 0, 0, tpxdec8, 0, 0, 0, 0, 0, 0, 0, tpxdec16 };
-
-static TPFUNC _tp4xe[] = { 0, 0, tpxenc2, tpxenc3, tpxenc4,  0, 0, 0, tpxenc8, 0, 0, 0, 0, 0, 0, 0, tpxenc16 }; // Nibble
-static TPFUNC _tp4xd[] = { 0, 0, tpxdec2, tpxdec3, tpxdec4,  0, 0, 0, tpxdec8, 0, 0, 0, 0, 0, 0, 0, tpxdec16 };
-  #endif
-
-static int tpset;
-
-void tpini(int id) {
-  int i;
-  if(tpset) return;
-  tpset++;
-  i = id?id:cpuisa();
-    #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
-  if(i >= IS_AVX2) {
-    _tpe[ 2] = tpenc256v2;  _tpd[ 2] = tpdec256v2;  _tp4e[ 2] = tp4enc256v2;  _tp4d[ 2] = tp4dec256v2;
-    _tpe[ 4] = tpenc256v4;  _tpd[ 4] = tpdec256v4;  _tp4e[ 4] = tp4enc256v4;  _tp4d[ 4] = tp4dec256v4;
-    _tpe[ 8] = tpenc256v8;  _tpd[ 8] = tpdec256v8;  _tp4e[ 8] = tp4enc256v8;  _tp4d[ 8] = tp4dec256v8;
-
-      #ifndef NTP_ZZAG
-    _tpze[2] = tpzenc128v2; _tpzd[2] = tpzdec128v2; _tp4ze[2] = tp4zenc128v2; _tp4zd[2] = tp4zdec128v2; // 16 bits: only sse
-    _tpze[4] = tpzenc256v4; _tpzd[4] = tpzdec256v4; _tp4ze[4] = tp4zenc256v4; _tp4zd[4] = tp4zdec256v4;
-    _tpze[8] = tpzenc256v8; _tpzd[8] = tpzdec256v8; _tp4ze[8] = tp4zenc256v8; _tp4zd[8] = tp4zdec256v8;
-      #endif
-
-      #ifndef NTP_XOR
-    _tpxe[2] = tpxenc128v2; _tpxd[2] = tpxdec128v2; _tp4xe[2] = tp4xenc128v2; _tp4xd[2] = tp4xdec128v2; // 16 bits: only sse
-    _tpxe[4] = tpxenc256v4; _tpxd[4] = tpxdec256v4; _tp4xe[4] = tp4xenc256v4; _tp4xd[4] = tp4xdec256v4;
-    _tpxe[8] = tpxenc256v8; _tpxd[8] = tpxdec256v8; _tp4xe[8] = tp4xenc256v8; _tp4xd[8] = tp4xdec256v8;
-      #endif
-  } else
-    #endif
-#if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86) || defined(__ARM_NEON) || defined(__powerpc64__) 
-    if(i >= IS_SSE2) {
-      _tpe[ 2] = tpenc128v2;  _tpd[ 2] = tpdec128v2;  _tp4e[ 2] = tp4enc128v2;  _tp4d[ 2] = tp4dec128v2;
-      _tpe[ 4] = tpenc128v4;  _tpd[ 4] = tpdec128v4;  _tp4e[ 4] = tp4enc128v4;  _tp4d[ 4] = tp4dec128v4;
-      _tpe[ 8] = tpenc128v8;  _tpd[ 8] = tpdec128v8;  _tp4e[ 8] = tp4enc128v8;  _tp4d[ 8] = tp4dec128v8;
-      if(i == 35) _tpd[8] = tpdec8; // ARM NEON scalar is faster!, TODO:retest on Apple M1
-
-       #ifndef NTP_ZZAG
-      _tpze[2] = tpzenc128v2; _tpzd[2] = tpzdec128v2; _tp4ze[2] = tp4zenc128v2; _tp4zd[2] = tp4zdec128v2;
-      _tpze[4] = tpzenc128v4; _tpzd[4] = tpzdec128v4; _tp4ze[4] = tp4zenc128v4; _tp4zd[4] = tp4zdec128v4;
-      _tpze[8] = tpzenc128v8; _tpzd[8] = tpzdec128v8; _tp4ze[8] = tp4zenc128v8; _tp4zd[8] = tp4zdec128v8;
-      if(i == 35) _tpzd[8] = tpzdec8;
-        #endif
-
-        #ifndef NTP_XOR
-      _tpxe[2] = tpxenc128v2; _tpxd[2] = tpxdec128v2; _tp4xe[2] = tp4xenc128v2; _tp4xd[2] = tp4xdec128v2;
-      _tpxe[4] = tpxenc128v4; _tpxd[4] = tpxdec128v4; _tp4xe[4] = tp4xenc128v4; _tp4xd[4] = tp4xdec128v4;
-      _tpxe[8] = tpxenc128v8; _tpxd[8] = tpxdec128v8; _tp4xe[8] = tp4xenc128v8; _tp4xd[8] = tp4xdec128v8;
-      if(i == 35) _tpxd[8] = tpxdec8;
-        #endif
+#if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
+#define DEFINE_FUN(name, f8, f128, f256, C_AVX2, C_SSE2, C_NEON) \
+static TPFUNC T2(get_, name)(unsigned esize)                     \
+{                                                                \
+    unsigned cpu = cpuisa();                                     \
+    if (cpu >= IS_AVX2) { C_AVX2(f256, esize); }                 \
+    if (cpu >= IS_SSE2) { C_SSE2(f128, esize); }                 \
+    _C16(f8, esize);                                             \
 }
-      #endif
+#elif defined(__ARM_NEON) || defined(__powerpc64__)
+#define DEFINE_FUN(name, f8, f128, f256, C_AVX2, C_SSE2, C_NEON) \
+static TPFUNC T2(get_, name)(unsigned esize)                     \
+{                                                                \
+    unsigned cpu = cpuisa();                                     \
+    if (cpu >= IS_SSE2) { C_NEON(f128, esize); }                 \
+    _C16(f8, esize);                                             \
 }
+#else
+#define DEFINE_FUN(name, f8, f128, f256, C_AVX, C_SSE, C_NEON)   \
+static TPFUNC T2(get_, name)(unsigned esize)                     \
+{                                                                \
+    _C16(f8, esize);                                             \
+}
+#endif
+
+#define _C8_AVX2(FUN, esize) switch(esize){                           case 4: return T2(FUN,4); case 8: return T2(FUN,8);}
+#define _C8_NEON(FUN, esize) switch(esize){ case 2: return T2(FUN,2); case 4: return T2(FUN,4); case 8: if (cpu != IS_NEON) return T2(FUN,8);}
+#define _C8(FUN,      esize) switch(esize){ case 2: return T2(FUN,2); case 4: return T2(FUN,4); case 8: return T2(FUN,8);}
+#define _C16(FUN,     esize) switch(esize){ case 2: return T2(FUN,2); case 3: return T2(FUN,3); case 4: return T2(FUN,4); \
+                                            case 8: return T2(FUN,8); case 16: return T2(FUN,16); default: return 0;}
+
+// _C8_AVX2 is used by: tpze tpzd tp4ze tp4zd tpxe tpxd tp4xe tp4xd (uses f128 for esize=2)
+// _C8_NEON is used by: tpd tpzd tpxd (uses f8 for esize=8 if cpu == IS_NEON. arm/powerpc64 block only)
+
+DEFINE_FUN(tpe,  tpenc, tpenc128v,  tpenc256v,  _C8, _C8, _C8);
+DEFINE_FUN(tpd,  tpdec, tpdec128v,  tpdec256v,  _C8, _C8, _C8_NEON);
+DEFINE_FUN(tp4e, tpenc, tp4enc128v, tp4enc256v, _C8, _C8, _C8);
+DEFINE_FUN(tp4d, tpdec, tp4dec128v, tp4dec256v, _C8, _C8, _C8);
+
+#ifndef NTP_ZZAG //-- zigzag delta
+DEFINE_FUN(tpze,  tpzenc, tpzenc128v,  tpzenc256v,  _C8_AVX2, _C8, _C8);
+DEFINE_FUN(tpzd,  tpzdec, tpzdec128v,  tpzdec256v,  _C8_AVX2, _C8, _C8_NEON);
+DEFINE_FUN(tp4ze, tpzenc, tp4zenc128v, tp4zenc256v, _C8_AVX2, _C8, _C8);
+DEFINE_FUN(tp4zd, tpzdec, tp4zdec128v, tp4zdec256v, _C8_AVX2, _C8, _C8);
+#endif
+
+#ifndef NTP_XOR //-- xor
+DEFINE_FUN(tpxe,  tpxenc, tpxenc128v,  tpxenc256v,  _C8_AVX2, _C8, _C8);
+DEFINE_FUN(tpxd,  tpxdec, tpxdec128v,  tpxdec256v,  _C8_AVX2, _C8, _C8_NEON);
+DEFINE_FUN(tp4xe, tpxenc, tp4xenc128v, tp4xenc256v, _C8_AVX2, _C8, _C8);
+DEFINE_FUN(tp4xd, tpxdec, tp4xdec128v, tp4xdec256v, _C8_AVX2, _C8, _C8);
+#endif
+
 
 void tpenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tpe[esize])) f(in,n,out);
+  TPFUNC f = get_tpe(esize);
+  if(f)
+    f(in,n,out);
   else {
     unsigned i, stride=n/esize;
     unsigned char *op,*ip;
@@ -249,9 +228,9 @@ void tpenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
 }
 
 void tpdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tpd[esize])) f(in,n,out);
+  TPFUNC f = get_tpd(esize);
+  if(f)
+    f(in,n,out);
   else {
     unsigned i, stride = n/esize;
     unsigned char *op,*ip;
@@ -264,24 +243,24 @@ void tpdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
 }
 
 void tp4enc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tp4e[esize])) f(in,n,out);
+  TPFUNC f = get_tp4e(esize);
+  if(f)
+    f(in,n,out);
   else tpenc(in,n,out,esize);
 }
 
 void tp4dec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tp4d[esize])) f(in,n,out);
+  TPFUNC f = get_tp4d(esize);
+  if(f)
+    f(in,n,out);
   else tpdec(in,n,out,esize);
 }
 
 //-- zigzag
 void tpzenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tpze[esize])) f(in,n,out);
+  TPFUNC f = get_tpze(esize);
+  if(f)
+    f(in,n,out);
   else {
     unsigned i, stride = n/esize;
     unsigned char *op, *ip;
@@ -294,9 +273,9 @@ void tpzenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
 }
 
 void tpzdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tpzd[esize])) f(in,n,out);
+  TPFUNC f = get_tpzd(esize);
+  if(f)
+    f(in,n,out);
   else {
     unsigned i, stride = n/esize;
     unsigned char *op,*ip;
@@ -309,24 +288,24 @@ void tpzdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
 }
 
 void tp4zenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tp4ze[esize])) f(in,n,out);
+  TPFUNC f = get_tp4ze(esize);
+  if(f)
+    f(in,n,out);
   else tpzenc(in,n,out,esize);
 }
 
 void tp4zdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tp4zd[esize])) f(in,n,out);
+  TPFUNC f = get_tp4zd(esize);
+  if(f)
+    f(in,n,out);
   else tpzdec(in,n,out,esize);
 }
 
 //-- xor
 void tpxenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tpxe[esize])) f(in,n,out);
+  TPFUNC f = get_tpxe(esize);
+  if(f)
+    f(in,n,out);
   else {
     unsigned i, stride = n/esize;
     unsigned char *op, *ip;
@@ -339,9 +318,9 @@ void tpxenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
 }
 
 void tpxdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tpxd[esize])) f(in,n,out);
+  TPFUNC f = get_tpxd(esize);
+  if(f)
+    f(in,n,out);
   else {
     unsigned i, stride = n/esize;
     unsigned char *op,*ip;
@@ -354,16 +333,16 @@ void tpxdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
 }
 
 void tp4xenc(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tp4xe[esize])) f(in,n,out);
+  TPFUNC f = get_tp4xe(esize);
+  if(f)
+    f(in,n,out);
   else tpxenc(in,n,out,esize);
 }
 
 void tp4xdec(unsigned char *in, unsigned n, unsigned char *out, unsigned esize) {
-  TPFUNC f;
-  if(!tpset) tpini(0);
-  if(esize <= 16 && (f = _tp4xd[esize])) f(in,n,out);
+  TPFUNC f = get_tp4xd(esize);
+  if(f)
+    f(in,n,out);
   else tpxdec(in,n,out,esize);
 }
 
