@@ -2,7 +2,6 @@
 #include "include_/conf.h"
 #include "include_/transpose.h"
 
-static unsigned _cpuisa;
 //--------------------- CPU detection -------------------------------------------
     #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
 
@@ -53,9 +52,9 @@ static inline uint64_t xgetbv (int ctr) {
 #define IS_AVX2      0x60
 #define IS_AVX512    0x800
 
-unsigned cpuisa(void) {
+static unsigned NOINLINE cpuisa_impl(void) {
   int c[4] = {0};
-  if(_cpuisa) return _cpuisa;
+  unsigned _cpuisa = 0;
   _cpuisa++;
     #if defined(__i386__) || defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86)
   cpuid(c, 0);
@@ -102,6 +101,14 @@ unsigned cpuisa(void) {
     #elif defined(__ARM_NEON)
   _cpuisa = IS_NEON; // ARM_NEON
     #endif
+  return _cpuisa;
+}
+
+static unsigned _cpuisa = 0;
+
+unsigned cpuisa(void) {
+  if (_cpuisa == 0)
+    _cpuisa = cpuisa_impl();
   return _cpuisa;
 }
 
