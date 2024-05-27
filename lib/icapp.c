@@ -2412,7 +2412,7 @@ int main(int argc, char* argv[]) { //testrazor();
   scmd = q?(q+1):"";
   icodlev = strtoul(scmd, &scmd, 10);
 
-  if(scmd) strcpy((char *)codprm,scmd);
+  if(scmd) strcpy(codprm,scmd);
   unsigned fcnt = 0;                                                                                  if(verbose>1) printf("dfmt=%d,size=%d\n", dfmt, isize);
   for(fno = optind; fno < argc; fno++) {
     char *inname = argv[fno];
