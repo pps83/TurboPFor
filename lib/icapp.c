@@ -781,14 +781,6 @@ void fround64(double *in, unsigned n, double *out, int nsd) {
 #include "ext/bg/bg.c"
   #endif
 
-  #ifndef _ICCODEC
-const char *codstr(unsigned codecid) { return ""; }
-void tpsizeset(unsigned _tpbsize) {}
-void tpmodeset(unsigned _tpmode) {}
-int lzidget(const char *scmd) { return 0; }
-unsigned* getAvailableLzs(void) { return NULL; }
-  #endif
-
   #ifdef _QCOMPRESS
 #include "ext/q_compress/q_compress.h"
 typedef FfiVec (*fauto_compress_i32)(int *nums, unsigned len, unsigned level);
