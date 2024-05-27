@@ -135,7 +135,7 @@ HUF_PUBLIC_API size_t HUF_decompress(void* dst,  size_t originalSize, const void
 #include "ext/zlib/zlib.h" //#include <zlib.h>
   #endif
 
-NOINLINE size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned outsize, int codid, int codlev, unsigned char *codprm) {
+NOINLINE size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned outsize, int codid, int codlev, char *codprm) {
   if(!inlen) return 0;
   switch(codid) {
       #ifdef _LZTURBO
@@ -250,7 +250,7 @@ NOINLINE size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, un
   return 0;
 }
 
-NOINLINE size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, unsigned outlen, int codid, int codlev, unsigned char *codprm) {
+NOINLINE size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, unsigned outlen, int codid, int codlev, char *codprm) {
   if(!outlen) return 0;
   switch(codid) {
       #ifdef _LZTURBO
@@ -345,7 +345,7 @@ NOINLINE size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, un
 
 //------------------------------------------------ TurboByte (SIMD Varint) -> codec (lz, entropy coding, bwt...) ----------------------------
 //-- TurboByte -> codec
-unsigned lzv8enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lzv8enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = 0;
   switch(esize) {
     case 1: clen = inlen; memcpy(tmp, in, inlen); break;
@@ -357,7 +357,7 @@ unsigned lzv8enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
 }
 
-unsigned lzv8dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lzv8dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = ctou32(in);
   codecdec(in+4, inlen-4, tmp, clen, codid, codlev, codprm);
   switch(esize) {
@@ -370,7 +370,7 @@ unsigned lzv8dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned
 }
 
 // TurboByte xor -> codec
-unsigned lzv8xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { // TurboVByte
+unsigned lzv8xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) { // TurboVByte
   unsigned clen=0;
     switch(esize) {
     case 1: clen = inlen; memcpy(tmp, in, inlen); break;
@@ -382,7 +382,7 @@ unsigned lzv8xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
 }
 
-unsigned lzv8xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lzv8xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = ctou32(in); codecdec(in+4, inlen-4, tmp, clen, codid, codlev, codprm);
   switch(esize) {
     case 1: memcpy(out, tmp, outlen);   break;
@@ -394,7 +394,7 @@ unsigned lzv8xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
 }
 
 // TurboByte zigzag -> codec
-unsigned lzv8zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lzv8zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = 0;
   switch(esize) {
     case 1: clen = inlen; memcpy(tmp, in, inlen); break;
@@ -406,7 +406,7 @@ unsigned lzv8zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
 }
 
-unsigned lzv8zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lzv8zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = ctou32(in); codecdec(in+4, inlen-4, tmp, clen, codid, codlev, codprm);
   switch(esize) {
     case 1: memcpy( out, tmp, outlen);   break;
@@ -419,7 +419,7 @@ unsigned lzv8zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
 //-------------------------------------------- Byte transpose -> codec (lz, entropy coding, bwt,...) ------------------------------------------------------------------------
 
 //-- transpose -> codec
-unsigned lztpenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztpenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICCBEG;
     tpenc(ip, iplen, tmp, esize);
     unsigned clen = ctou32(op) = codecenc(tmp, iplen, op+4, outsize, codid, codlev, codprm);        //AC(clen > 0 && clen <= iplen, "#lztpenc %u ", clen);
@@ -427,7 +427,7 @@ unsigned lztpenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned
   ICCEND;
   return op - out;
 }
-unsigned lztpdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztpdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICDBEG;
     unsigned iplen = ctou32(ip);
     codecdec(ip+4, iplen, tmp, oplen, codid, codlev, codprm);
@@ -438,7 +438,7 @@ unsigned lztpdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned
 }
 
 //-- xor -> transpose -> codec
-unsigned lztpxenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) { // XOR
+unsigned lztpxenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) { // XOR
   ICCBEG;
     tpxenc(ip, iplen, tmp, esize);
     unsigned clen = ctou32(op) = codecenc(tmp, iplen, op+4, outsize, codid, codlev, codprm);
@@ -447,7 +447,7 @@ unsigned lztpxenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   return op - out;
 }
 
-unsigned lztpxdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztpxdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICDBEG;
     unsigned iplen = ctou32(ip);
     codecdec(ip+4, iplen, tmp, oplen, codid, codlev, codprm);
@@ -458,7 +458,7 @@ unsigned lztpxdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
 }
 
 //-- zigzag -> transpose -> codec
-unsigned lztpzenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) { // Zigzag
+unsigned lztpzenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) { // Zigzag
   ICCBEG;
     tpzenc(ip, iplen, tmp, esize);
     unsigned clen = ctou32(op) = codecenc(tmp, iplen, op+4, outsize, codid, codlev, codprm);
@@ -467,7 +467,7 @@ unsigned lztpzenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   return op - out;
 }
 
-unsigned lztpzdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztpzdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICDBEG;
     unsigned iplen = ctou32(ip);
     codecdec(ip+4, iplen, tmp, oplen, codid, codlev, codprm);
@@ -479,7 +479,7 @@ unsigned lztpzdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
 //----------------------------------------------- tp4 : Nibble transpose -> codec --------------------------------
 
 //-- transpose Nibble -> codec
-unsigned lztp4enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztp4enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICCBEG;
     tp4enc(ip, iplen, tmp, esize);
     unsigned clen = ctou32(op) = codecenc(tmp, iplen, op+4, outsize, codid, codlev, codprm);
@@ -488,7 +488,7 @@ unsigned lztp4enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
   return op - out;
 }
 
-unsigned lztpd4ec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztpd4ec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICDBEG;
     unsigned iplen = ctou32(ip);
     codecdec(ip+4, iplen, tmp, oplen, codid, codlev, codprm);
@@ -499,7 +499,7 @@ unsigned lztpd4ec(unsigned char *in, unsigned inlen, unsigned char *out, unsigne
 }
 
 //-- xor -> transpose Nibble -> codec
-unsigned lztp4xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) { //XOR
+unsigned lztp4xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) { //XOR
   ICCBEG;
     tp4xenc(ip, iplen, tmp, esize);
     unsigned clen = ctou32(op) = codecenc(tmp, iplen, op+4, outsize, codid, codlev, codprm);
@@ -508,7 +508,7 @@ unsigned lztp4xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsign
   return op - out;
 }
 
-unsigned lztp4xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztp4xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICDBEG;
     unsigned iplen = ctou32(ip);
     codecdec(ip+4, iplen, tmp, oplen, codid, codlev, codprm);
@@ -519,7 +519,7 @@ unsigned lztp4xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 }
 
 //-- zigzag delta -> transpose Nibble -> codec
-unsigned lztp4zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztp4zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICCBEG;
     tp4zenc(ip, iplen, tmp, esize);
     unsigned clen = ctou32(op) = codecenc(tmp, iplen, op+4, outsize, codid, codlev, codprm);
@@ -528,7 +528,7 @@ unsigned lztp4zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsign
   return op - out;
 }
 
-unsigned lztp4zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm, unsigned bsize) {
+unsigned lztp4zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm, unsigned bsize) {
   ICDBEG;
     unsigned iplen = ctou32(ip);
     codecdec(ip+4, iplen, tmp, oplen, codid, codlev, codprm);
@@ -616,7 +616,7 @@ unsigned tprlezdec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 }
 
 //-- transpose -> rle -> codec  (usually entropy coder )
-unsigned lztprleenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { // Zigzag rle
+unsigned lztprleenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) { // Zigzag rle
   tpenc(in, inlen, out, esize);
   unsigned clen = trlec(out, inlen, tmp);
   if(clen >= inlen) { clen = inlen; memcpy(tmp,out,inlen); }
@@ -624,7 +624,7 @@ unsigned lztprleenc(unsigned char *in, unsigned inlen, unsigned char *out, unsig
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
 }
 
-unsigned lztprledec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztprledec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = ctou32(in);
   codecdec(in+4, inlen-4, out, clen, codid, codlev, codprm);
   if(clen >= outlen) memcpy(tmp, out, outlen); else trled(out, clen, tmp, outlen);
@@ -633,7 +633,7 @@ unsigned lztprledec(unsigned char *in, unsigned inlen, unsigned char *out, unsig
 }
 
 //-- xor -> transpose -> rle -> codec
-unsigned lztprlexenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { // Zigzag rle
+unsigned lztprlexenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) { // Zigzag rle
   tpxenc(in, inlen, out, esize);
   unsigned clen = trlec(out, inlen, tmp);
   if(clen >= inlen) { clen = inlen; memcpy(tmp,out,inlen); }
@@ -641,7 +641,7 @@ unsigned lztprlexenc(unsigned char *in, unsigned inlen, unsigned char *out, unsi
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
 }
 
-unsigned lztprlexdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztprlexdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = ctou32(in); codecdec(in+4, inlen-4, out, clen, codid, codlev, codprm);
   if(clen >= outlen) memcpy(tmp, out, outlen); else trled(out, clen, tmp, outlen);
   tpxdec(tmp, outlen, out, esize);
@@ -649,7 +649,7 @@ unsigned lztprlexdec(unsigned char *in, unsigned inlen, unsigned char *out, unsi
 }
 
 //-- zigzag delta -> transpose -> rle -> codec
-unsigned lztprlezenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { // Zigzag rle
+unsigned lztprlezenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) { // Zigzag rle
   tpzenc(in, inlen, out, esize);
   unsigned clen = trlec(out, inlen, tmp);
   if(clen >= inlen) { clen = inlen; memcpy(tmp,out,inlen); }
@@ -657,7 +657,7 @@ unsigned lztprlezenc(unsigned char *in, unsigned inlen, unsigned char *out, unsi
   return codecenc(tmp, clen, out+4, outsize, codid, codlev, codprm)+4;
 }
 
-unsigned lztprlezdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztprlezdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned clen = ctou32(in);
   codecdec(in+4, inlen-4, out, clen, codid, codlev, codprm);
   if(clen >= outlen) memcpy(tmp, out, outlen); else trled(out, clen, tmp, outlen);
@@ -667,13 +667,13 @@ unsigned lztprlezdec(unsigned char *in, unsigned inlen, unsigned char *out, unsi
 
 //------------------------------------------------------- 2D -------------------------------------------------
 // transpose 2D -> transpose (byte/Nibble) -> codec
-unsigned lztpd2enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd2enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, char *codprm) {
   tp2denc(     in,  x, y,  out, esize);
   TPENC(       out, inlen, tmp, esize);
   return codecenc(tmp, inlen, out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd2dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen,  unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd2dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen,  unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, char *codprm) {
   codecdec(  in,  inlen,  out, outlen, codid, codlev, codprm);
   TPDEC(  out, outlen, tmp, esize);
   tp2ddec(tmp, x, y,   out, esize);
@@ -681,13 +681,13 @@ unsigned lztpd2dec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 }
 
 // transpose 2D -> xor -> transpose (byte/Nibble) -> codec
-unsigned lztpd2xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd2xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, char *codprm) {
   tp2denc( in,  x, y,  out, esize);
   tpxenc(  out, inlen, tmp, esize);
   return codecenc(tmp, inlen, out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd2xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd2xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, char *codprm) {
   codecdec(  in,  inlen,  out, outlen, codid, codlev, codprm);
   tpxdec(  out, outlen, tmp, esize);
   tp2ddec(tmp, x, y,   out, esize);
@@ -695,14 +695,14 @@ unsigned lztpd2xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsig
 }
 
 // transpose 2D -> zigzag -> transpose (byte/Nibble) -> codec
-unsigned lztpd2zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd2zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, char *codprm) {
 
   tp2denc(      in,  x, y, out, esize);
   tpzenc(       out, inlen, tmp, esize);
   return codecenc(tmp, inlen, out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd2zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd2zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, int codid, int codlev, char *codprm) {
   codecdec( in,  inlen, out, outlen, codid, codlev, codprm);
   tpzdec(  out, outlen, tmp, esize); //  bitzdec(tmp, outlen, esize);
   tp2ddec(tmp, x, y,   out, esize);
@@ -711,13 +711,13 @@ unsigned lztpd2zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsig
 
 //--------------------------------------------------------- 3D ------------------------------------------------------------
 // transpose 3D -> transpose (byte/Nibble) -> codec
-unsigned lztpd3enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd3enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   tp3denc(     in, x, y, z, out, esize);
   TPENC(      out, inlen,  tmp, esize);
   return codecenc(tmp, inlen,  out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd3dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize,  unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd3dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize,  unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   codecdec(  in,  inlen,   out, outlen, codid, codlev, codprm);
   TPDEC(  out, outlen,  tmp, esize);
   tp3ddec(tmp, x, y, z, out, esize);
@@ -725,13 +725,13 @@ unsigned lztpd3dec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 }
 
 // transpose 3D -> xor -> transpose (byte/Nibble) -> codec
-unsigned lztpd3xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd3xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   tp3denc(     in, x, y, z, out, esize);//  bitxenc(     tmp, inlen,  out, esize);
   tpxenc(     out, inlen,  tmp, esize);
   return codecenc(tmp, inlen,  out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd3xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen,  unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd3xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen,  unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   codecdec(  in,  inlen,   out, outlen, codid, codlev, codprm);
   tpxdec( out, outlen,  tmp, esize);//  bitxdec(tmp, outlen,       esize);
   tp3ddec(tmp, x, y, z, out, esize);
@@ -739,13 +739,13 @@ unsigned lztpd3xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsig
 }
 
 // transpose 3D -> zigzag -> transpose (byte/Nibble) -> codec
-unsigned lztpd3zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd3zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   tp3denc(     in,  x, y, z, out, esize);//  bitzenc(     tmp, inlen,   out, esize);
   tpzenc(     out, inlen,   tmp, esize);
   return codecenc(tmp, inlen,   out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd3zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd3zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   codecdec(  in, inlen,  out, outlen, codid, codlev, codprm);
   tpzdec(   out, outlen, tmp, esize);//  bitzdec(tmp, outlen, esize);
   tp3ddec(tmp, x, y, z, out, esize);
@@ -754,13 +754,13 @@ unsigned lztpd3zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsig
 
 //--------------------------------------------------------- 4D ------------------------------------------------------------
 // transpose 4D -> transpose (byte/Nibble) -> codec
-unsigned lztpd4enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd4enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   tp4denc(     in, w, x, y, z, out, esize);
   TPENC(       out, inlen,     tmp, esize);
   return codecenc(tmp, inlen,     out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd4dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize,  unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd4dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize,  unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   codecdec(  in,  inlen,      out, outlen, codid, codlev, codprm);
   TPDEC(  out, outlen,     tmp, esize);
   tp4ddec(tmp, w, x, y, z, out, esize);
@@ -768,13 +768,13 @@ unsigned lztpd4dec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 }
 
 // transpose 4D -> xor -> transpose (byte/Nibble) -> codec
-unsigned lztpd4xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd4xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   tp4denc( in, w, x, y, z, out, esize);
   tpxenc( out, inlen,      tmp, esize);
   return codecenc(tmp, inlen,  out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd4xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd4xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   codecdec(  in,  inlen,      out, outlen, codid, codlev, codprm);
   tpxdec(   out, outlen,     tmp, esize);
   tp4ddec(tmp, w, x, y, z, out, esize);
@@ -782,13 +782,13 @@ unsigned lztpd4xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsig
 }
 
 // transpose 4D -> zigzag -> transpose (byte/Nibble) -> codec
-unsigned lztpd4zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd4zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   tp4denc(     in, w, x, y, z, out, esize);
   tpzenc(     out, inlen,      tmp, esize);
   return codecenc(tmp, inlen,  out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztpd4zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen,  unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, unsigned char *codprm) {
+unsigned lztpd4zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen,  unsigned esize, unsigned char *tmp, unsigned w, unsigned x, unsigned y, unsigned z, int codid, int codlev, char *codprm) {
   codecdec(  in,  inlen,     out, outlen, codid, codlev, codprm);
   tpzdec(   out, outlen,     tmp, esize);
   tp4ddec(tmp, w, x, y, z, out, esize);
@@ -807,25 +807,25 @@ static void bitunshuffle(uint8_t *in, unsigned n, uint8_t *out, unsigned esize) 
 }
 
 //-- bitshuffle -> codec
-unsigned lztp1enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztp1enc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   bitshuffle(in, inlen, tmp, esize);
   return codecenc(tmp, inlen, out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztp1dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztp1dec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   codecdec(in, inlen, tmp, outlen, codid, codlev, codprm);
   bitunshuffle(tmp, outlen, out, esize);
   return inlen;
 }
 
 //-- xor -> bitshuffle -> codec
-unsigned lztp1xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztp1xenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   bitxenc(in, inlen, out, esize);
   bitshuffle(out, inlen, tmp, esize);
   return codecenc(tmp, inlen, out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztp1xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztp1xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   codecdec(in, inlen, tmp, outlen, codid, codlev, codprm);
   bitunshuffle(tmp, outlen, out, esize);
   bitxdec(out, outlen, esize);
@@ -833,13 +833,13 @@ unsigned lztp1xdec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 }
 
 //-- zigzag delta -> bitshuffle -> codec
-unsigned lztp1zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztp1zenc(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outsize, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   bitzenc(in, inlen, out, esize);
   bitshuffle(out, inlen, tmp, esize);
   return codecenc(tmp, inlen, out, outsize, codid, codlev, codprm);
 }
 
-unsigned lztp1zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+unsigned lztp1zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen, unsigned esize, unsigned char *tmp, int codid, int codlev, char *codprm) {
   codecdec(in, inlen, tmp, outlen, codid, codlev, codprm);
   bitunshuffle(tmp, outlen, out, esize);
   bitzdec(out, outlen, esize);
@@ -855,7 +855,7 @@ unsigned lztp1zdec(unsigned char *in, unsigned inlen, unsigned char *out, unsign
 #define INDEC  size_t inlen  = _inlen /sizeof( in[0]); { const unsigned char *p_=_in+_inlen,  *_p = _in +(_inlen & ~(sizeof(in[0] )-1)); while(_p < p_) { *op++  = *_p++; } }
 #define OUTDEC size_t outlen = _outlen/sizeof(out[0]); { unsigned char *p_=_out+_outlen,*_p = _out+(_outlen& ~(sizeof(out[0])-1)); while(_p < p_) *_p++  = *ip++; }
 
-size_t vlccomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
+size_t vlccomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, int codid, int codlev, char *codprm) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
   int clen;
   size_t l;
   unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
@@ -876,7 +876,7 @@ size_t vlccomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t o
   e:return op - out;
 }
 
-size_t vlcdecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+size_t vlcdecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
   uint32_t      *out = (uint32_t *)_out, *op = out, x=0;
   if(inlen >= _outlen){ memcpy(_out, in, _outlen); return inlen; }
@@ -896,7 +896,7 @@ size_t vlcdecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t 
   return inlen;
 }
 
-size_t vhicomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
+size_t vhicomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t outsize, unsigned char *tmp, int codid, int codlev, char *codprm) { //bitgput32(bw,br, x); bitenormr(bw,br,op_);//bitdnormr(bw,br,bp); bitgget32(bw,br, x);
   int clen;
   size_t l;
   unsigned char *op = out+4, *tp = tmp, *tmp_ = tmp+_inlen, *bp = tmp_;
@@ -917,7 +917,7 @@ size_t vhicomp32(unsigned char *_in, size_t _inlen, unsigned char *out, size_t o
   e:return op - out;
 }
 
-size_t vhidecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, int codid, int codlev, unsigned char *codprm) {
+size_t vhidecomp32(unsigned char *in, size_t inlen, unsigned char *_out, size_t _outlen, unsigned char *tmp, int codid, int codlev, char *codprm) {
   unsigned char *ip = in+4, *bp = in+inlen, *tp = tmp;
   uint32_t      *out = (uint32_t *)_out, *op = out, x=0;
   if(inlen >= _outlen){ memcpy(_out, in, _outlen); return inlen; }
