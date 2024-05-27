@@ -1085,7 +1085,7 @@ static void bitunshuffle(uint8_t *in, unsigned n, uint8_t *out, unsigned esize) 
 
 //-- lz --------------------------------------------------------
 unsigned codid = 0, codlev = 1;
-unsigned char codprm[256] = {0};
+char codprm[256] = {0};
 
   #ifdef _SPDP
 //-- SPDP (https://userweb.cs.txstate.edu/~burtscher/research/SPDPcompressor/) -------------
@@ -2400,7 +2400,7 @@ int main(int argc, char* argv[]) { //testrazor();
   scmd = (char*)(q?(q+1):"");
   codlev = strtoul(scmd, &scmd, 10);
 
-  if(scmd) strcpy((char *)codprm,scmd);
+  if(scmd) strcpy(codprm,scmd);
   unsigned fcnt = 0;                                                                                  if(verbose>1) printf("dfmt=%d,size=%d\n", dfmt, isize);
   for(fno = optind; fno < argc; fno++) {
     char *inname = argv[fno];
