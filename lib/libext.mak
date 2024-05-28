@@ -11,7 +11,7 @@ ZSTD=1
 FSE=1
 FSEHUF=1
 #ZLIB=1
-HAVE_LIBDEFLATE=0
+HAVE_LIBDEFLATE=1
 BITSHUFFLE=1
 #LZTURBO=1
 TURBORC=1
@@ -23,8 +23,8 @@ CL=$(CXX)
 BLOSC=1
 FASTPFOR=1
 MASKEDVBYTE=1
-MESHOPT=1
-#SIMDCOMP=1
+MESHOPT=0
+SIMDCOMP=1
 SPDP=1
 STREAMVBYTE=1
 #VTENC=1
@@ -109,7 +109,9 @@ OB+=$(LB)c-blosc2/blosc/blosc2.o $(LB)c-blosc2/blosc/blosclz.o $(LB)c-blosc2/blo
 $(LB)c-blosc2/blosc/bitshuffle-generic.o $(LB)c-blosc2/blosc/stune.o $(LB)c-blosc2/blosc/fastcopy.o $(LB)c-blosc2/blosc/delta.o $(LB)c-blosc2/blosc/blosc2-stdio.o \
    $(LB)c-blosc2/blosc/timestamp.o $(LB)c-blosc2/blosc/trunc-prec.o $(LB)c-blosc2/plugins/filters/bytedelta/bytedelta.o $(LB)c-blosc2/plugins/filters/filters-registry.o \
    $(LB)c-blosc2/plugins/filters/ndcell/ndcell.o $(LB)c-blosc2/plugins/plugin_utils.o $(LB)c-blosc2/plugins/filters/ndmean/ndmean.o $(LB)c-blosc2/plugins/codecs/codecs-registry.o \
-   $(LB)c-blosc2/plugins/codecs/zfp/blosc2-zfp.o $(LB)c-blosc2/plugins/codecs/ndlz/ndlz.o $(LB)c-blosc2/plugins/codecs/ndlz/ndlz8x8.o $(LB)c-blosc2/plugins/codecs/ndlz/ndlz4x4.o
+   $(LB)c-blosc2/plugins/codecs/zfp/blosc2-zfp.o $(LB)c-blosc2/plugins/codecs/ndlz/ndlz.o $(LB)c-blosc2/plugins/codecs/ndlz/ndlz8x8.o $(LB)c-blosc2/plugins/codecs/ndlz/ndlz4x4.o \
+   $(LB)c-blosc2/plugins/tuners/tuners-registry.o $(LB)c-blosc2/blosc/b2nd.o $(LB)c-blosc2/blosc/schunk.o $(LB)c-blosc2/plugins/filters/int_trunc/int_trunc.o \
+   $(LB)c-blosc2/blosc/b2nd_utils.o $(LB)c-blosc2/blosc/frame.o $(LB)c-blosc2/blosc/sframe.o
 
 ifeq ($(AVX2),1)
 CFLAGS+=-DSHUFFLE_AVX2_ENABLED
@@ -152,7 +154,7 @@ endif
 
 ifeq ($(FASTPFOR),1)
 CFLAGS+=-D_FASTPFOR
-OB+=$(LB)FastPFor/src/simdbitpacking.o $(LB)FastPFor/src/simdunalignedbitpacking.o $(LB)fastpfor.o $(LB)FastPFor/src/bitpacking.o
+OB+=$(LB)FastPFor/src/simdbitpacking.o $(LB)FastPFor/src/simdunalignedbitpacking.o $(LB)FastPFor/src/bitpackingaligned.o $(LB)FastPFor/src/bitpackingunaligned.o $(LB)FastPFor/src/bitpacking.o $(LB)fastpfor.o 
 endif
 
 ifeq ($(LIBROUNDFAST),1)
@@ -186,7 +188,7 @@ include lib/lzturbo.mak
 endif
 
 ifeq ($(MASKEDVBYTE),1)
-CFLAGS+=-D_MASKEVBYTE -I$(LB)MaskedVByte/include
+CFLAGS+=-D_MASKEDVBYTE -I$(LB)MaskedVByte/include
 
 $(LB)MaskedVByte/src/varintencode.o: $(LB)MaskedVByte/src/varintencode.c
 	$(CC) -O3 -w $(_SSE) $(CFLAGS) -c $(LB)MaskedVByte/src/varintencode.c -o $(LB)MaskedVByte/src/varintencode.o
@@ -216,7 +218,16 @@ endif
 
 ifeq ($(QMX),1)
 CFLAGS+=-D_QMX
-OB+=$(LB)JASSv2/source/compress_integer_qmx_improved.o $(LB)JASSv2/source/asserts.o
+OB+=$(LB)JASSv2/source/compress_integer_qmx_improved.o $(LB)JASSv2/source/asserts.o $(LB)JASSv2/source/allocator_pool.o
+
+$(LB)JASSv2/source/compress_integer_qmx_improved.o: $(LB)JASSv2/source/compress_integer_qmx_improved.cpp
+	$(CXX) -O3 -w $(_SSE) $(CFLAGS) $(CXXFLAGS) $(_AVX2) -frtti $< -c -o $@
+
+$(LB)JASSv2/source/asserts.o: $(LB)JASSv2/source/asserts.cpp
+	$(CXX) -O3 -w $(_SSE) $(CFLAGS) $(CXXFLAGS) $(_AVX2) -frtti $< -c -o $@
+
+$(LB)JASSv2/source/allocator_pool.o: $(LB)JASSv2/source/allocator_pool.cpp
+	$(CXX) -O3 -w $(_SSE) $(CFLAGS) $(CXXFLAGS) $(_AVX2) -frtti $< -c -o $@
 endif
 
 ifeq ($(RICE),1)
@@ -238,7 +249,7 @@ OB+=$(LB)simple8b.o
 endif
 
 ifeq ($(SPDP),1)
-XDEFS+=-D_SPDP
+CFLAGS+=-D_SPDP
 endif
 
 ifeq ($(STREAMVBYTE),1)
