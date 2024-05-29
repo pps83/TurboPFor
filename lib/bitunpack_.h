@@ -6059,3 +6059,51 @@ const unsigned char *T2(_BITUNPACK_,64)( const unsigned char *__restrict in, uns
   }\
 }
 
+#define USEOLD 0
+
+#define IC_BITUNPACK_REP32(D, A)                                       \
+D( 0,A)D( 1,A)D( 2,A)D( 3,A)D( 4,A)D( 5,A)D( 6,A)D( 7,A)D( 8,A)D( 9,A) \
+D(10,A)D(11,A)D(12,A)D(13,A)D(14,A)D(15,A)D(16,A)D(17,A)D(18,A)D(19,A) \
+D(20,A)D(21,A)D(22,A)D(23,A)D(24,A)D(25,A)D(26,A)D(27,A)D(28,A)D(29,A) \
+D(30,A)D(31,A)D(32,A)
+
+// Inline only when optimizations enabled, or, when building with ms compiler.
+#if defined(__OPTIMIZE__) || (defined(_MSC_VER) && !defined(__clang__))
+#define IC_BITUNPACK_INLINE ALWAYS_INLINE
+#else
+#define IC_BITUNPACK_INLINE
+#endif
+
+#define IC_BITUNPACK256V32_FUNC(N, name, sign, ...)                    \
+static void IC_BITUNPACK_INLINE T2(T2(name,_),N)sign                   \
+{                                                                      \
+    __VA_ARGS__;                                                       \
+    __m256i mv, *_ov = (__m256i*)out, *_iv = (__m256i*)in;             \
+    if (N == 0) { BITUNPACK0(sv); }                                    \
+    else { mv = _mm256_set1_epi32((1ull<<N)-1); }                      \
+    T2(BITUNPACK256V32_, N)(_iv, _ov, N, sv);                          \
+}
+
+#define IC_BITUNPACK128V32_FUNC(N, name, sign, ...)                    \
+static void IC_BITUNPACK_INLINE T2(T2(name,_),N)sign                   \
+{                                                                      \
+    __VA_ARGS__;                                                       \
+    __m128i mv, *_ov = (__m128i*)out, *_iv = (__m128i*)in;             \
+    if (N == 0) { BITUNPACK0(sv); }                                    \
+    else { mv = _mm_set1_epi32((1ull<<N)-1); }                         \
+    T2(BITUNPACK128V32_, N)(_iv, _ov, (N == 32 ? BITMAX32 : N), sv);   \
+}
+
+#define IC_BITUNPACK_CASE(N, name, ...) case N: T2(T2(name,_),N)(__VA_ARGS__); break;
+
+#define IC_EXPAND(x) x
+#define IC_UNROLL(...) __VA_ARGS__
+#define IC_CALLFUNC2(N, F, ...) IC_EXPAND(F(N, __VA_ARGS__))
+#define IC_CALLFUNC1(...)       IC_EXPAND(IC_CALLFUNC2(__VA_ARGS__))
+#define IC_CALLFUNC0(N, A)      IC_EXPAND(IC_CALLFUNC1(N, IC_UNROLL A))
+
+#define BITUNPACK_DEFINE256(name, sign, ...) IC_BITUNPACK_REP32(IC_CALLFUNC0, (IC_BITUNPACK256V32_FUNC, name, sign, __VA_ARGS__))
+#define BITUNPACK_DEFINE128(name, sign, ...) IC_BITUNPACK_REP32(IC_CALLFUNC0, (IC_BITUNPACK128V32_FUNC, name, sign, __VA_ARGS__))
+#define BITUNPACK_CALL(name, ...) {switch(b&0x3f) {                        \
+  IC_BITUNPACK_REP32(IC_CALLFUNC0, (IC_BITUNPACK_CASE, name, __VA_ARGS__)) \
+}}
