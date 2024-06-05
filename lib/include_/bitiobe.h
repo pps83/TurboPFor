@@ -1,14 +1,15 @@
 #include <stdint.h>
 #include "conf.h"
 
-#define bitput_t  					     T3(uint, __WORDSIZE, _t)
+#define IC_WORDSIZE                      64 /* bugfix: cannot use __WORDSIZE, 32-bit becomes broken */
+#define bitput_t  					     T3(uint, IC_WORDSIZE, _t)
 #define bitebr_t                         unsigned char
 #define bitedef(  _bw_,_br_)             bitput_t _bw_; bitebr_t _br_
 #define biteini(  _bw_,_br_)             _bw_ = 0, _br_ = sizeof(bitput_t)*8
 #define bitrest(  _bw_, _br_) 			 (sizeof(_bw_)*8+7-_br_)
 #define bitput(   _bw_, _br_, _nb_, _x_) _bw_ |= (bitput_t)(_x_) << (_br_ -= (_nb_))
 //------------------------------------- bitget --------------------------------------------
-#define bitget_t  					     T3(uint, __WORDSIZE, _t)
+#define bitget_t  					     T3(uint, IC_WORDSIZE, _t)
 #define bitdbr_t                         unsigned char
 #define bitddef(  _bw_,_br_)             bitget_t _bw_; bitdbr_t _br_
 #define bitdini(  _bw_,_br_)             _bw_ = _br_ = 0
@@ -31,7 +32,7 @@
 
 #define _bitenormr64(_bw_,_br_,_op_)
 #define _bitenormr32(_bw_,_br_,_op_)     bitenormr( _bw_, _br_, _op_)
-#define bitenormr2(  _bw_,_br_,_op_)     T2(_bitenormr,__WORDSIZE)(_bw_,_br_, _op_)
+#define bitenormr2(  _bw_,_br_,_op_)     T2(_bitenormr,IC_WORDSIZE)(_bw_,_br_, _op_)
 //----------------
 #define bitdinir(    _bw_,_br_,_ip_)     bitdini(_bw_,_br_),_ip_ -= sizeof(_bw_)
 #define bitalignr(   _bw_,_br_,_ip_)     _ip_ += sizeof(_bw_)-((_br_+7)>>3), _br_ = sizeof(_bw_)*8, _bw_=0
@@ -39,4 +40,4 @@
 
 #define _bitdnormr64(_bw_,_br_,_ip_)
 #define _bitdnormr32(_bw_,_br_,_ip_)     bitdnormr( _bw_, _br_, _ip_)
-#define bitdnormr2(  _bw_,_br_,_ip_)     T2(_bitdnormr,__WORDSIZE)( _bw_, _br_, _ip_)
+#define bitdnormr2(  _bw_,_br_,_ip_)     T2(_bitdnormr,IC_WORDSIZE)( _bw_, _br_, _ip_)
