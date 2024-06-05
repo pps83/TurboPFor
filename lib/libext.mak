@@ -280,7 +280,7 @@ endif
 
 ifeq ($(TURBORC), 1)
 CFLAGS+=-D_TURBORC -I$(T)libsais/include -D_NCPUISA -D_NQUANT
-T=$(LB)Turbo-Range-Coder/
+T=$(LB)TurboRC/
 ifeq ($(ANS), 1)
 CFLAGS+=-D_ANS
 $(T)anscdf0.o: $(T)anscdf.c $(T)anscdf_.h
