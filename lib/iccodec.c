@@ -110,8 +110,8 @@ unsigned* getAvailableLzs(void) { return availableLzs; }
   #endif
 
   #ifdef _TURBORC
-#include "ext/Turbo-Range-Coder/include/turborc.h"
-#include "ext/Turbo-Range-Coder/include/anscdf.h"
+#include "ext/TurboRC/include/turborc.h"
+#include "ext/TurboRC/include/anscdf.h"
   #endif
 
   #ifdef _ZSTD
