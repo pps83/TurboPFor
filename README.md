@@ -240,7 +240,7 @@ q/s: queries/second, ms/q:milliseconds/query
 		cd TurboPFor-Integer-Compression
 		make
 
-        To benchmark TurboPFor + general purpose compression codecs (zstd,lz4, Turbo-Range-Coder, bwt, bitshuffle):
+        To benchmark TurboPFor + general purpose compression codecs (zstd,lz4, TurboRC, bwt, bitshuffle):
         git clone --recursive https://github.com/powturbo/TurboPFor-Integer-Compression.git
 		cd TurboPFor-Integer-Compression
         make ICCODEC=1
