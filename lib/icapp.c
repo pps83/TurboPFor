@@ -2002,6 +2002,10 @@ unsigned bench32(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
       #else
     case 175:case 176: printf("pcodec not included\n"); break;
       #endif
+      #ifdef HAVE_PCODEC
+    case 175: TM("",l = pcocomp32( in8, n, out, clamp(codlev, 0, 12)), n,l,      pcodecomp32( out, l, cpy8,n)); break;
+    case 176: TM("",l = pcozcomp32(in8, n, out, clamp(codlev, 0, 12),tmp8), n,l, pcozdecomp32(out, l, cpy8,n)); break;
+      #endif
     default: goto end;
   }
   if(l) {
@@ -2184,6 +2188,10 @@ unsigned bench64(unsigned char *in, unsigned n, unsigned char *out, unsigned cha
     case 176: TM("",l = pcozcomp64(in, n, out, clamp(codlev, 0, 12),tmp), n,l,  pcozdecomp64(out, l, cpy,n)); break;
       #else
     case 175:case 176: printf("pcodec not included\n"); break;
+      #endif
+      #ifdef HAVE_PCODEC
+    case 175: TM("",l = pcocomp64( in8, n, out, clamp(codlev, 0, 12)),      n,l, pcodecomp64( out, l, cpy8,n)); break;
+    case 176: TM("",l = pcozcomp64(in8, n, out, clamp(codlev, 0, 12),tmp8), n,l, pcozdecomp64(out, l, cpy8,n)); break;
       #endif
     default: goto end;
   }
