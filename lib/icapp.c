@@ -54,7 +54,9 @@
   #endif
 #include <math.h> // pow,fabs
 
+#ifndef __STDC_WANT_IEC_60559_TYPES_EXT__
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
+#endif
 #include <float.h>
 #include "../include/ic.h"
 #include "include_/iccodec.h"
