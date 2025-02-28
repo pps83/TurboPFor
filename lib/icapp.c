@@ -807,78 +807,87 @@ static fauto_decompress_i32 auto_decompress_i32_;
 static fauto_decompress_i64 auto_decompress_i64_;
 static ffree_i32 free_i32_;
 static ffree_i64 free_i64_;
-static int qcomp;
+static int qcomp_loaded;
 void qcompini() {
-  if(qcomp)	return; qcomp++;
+  if(qcomp_loaded) return;
         #if _WIN32
   { HINSTANCE hdll; int i;
-	char *qcomp = "q_compress_ffi.dll";
+    char *qcomp = "q_compress_ffi.dll";
     if(hdll = LoadLibrary(qcomp)) {
-      if(!(auto_compress_i32_   =   (fauto_compress_i32)GetProcAddress(hdll, "auto_compress_i32")))   die("auto_compress_i32 not found\n");
-      if(!(auto_compress_i64_   =   (fauto_compress_i64)GetProcAddress(hdll, "auto_compress_i64")))   die("auto_compress_i64 not found\n");
-	  if(!(free_compressed_     =     (ffree_compressed)GetProcAddress(hdll, "free_compressed")))     die("free_compressed not found\n");
-      if(!(auto_decompress_i32_ = (fauto_decompress_i32)GetProcAddress(hdll, "auto_decompress_i32"))) die("auto_decompress_i32 not found\n");
-      if(!(auto_decompress_i64_ = (fauto_decompress_i64)GetProcAddress(hdll, "auto_decompress_i64"))) die("auto_decompress_i64 not found\n");
-	  if(!(free_i32_            =            (ffree_i32)GetProcAddress(hdll, "free_i32")))            die("free_i32 not found\n");
-	  if(!(free_i64_            =            (ffree_i64)GetProcAddress(hdll, "free_i64")))            die("free_i64 not found\n");
+      auto_compress_i32_   =   (fauto_compress_i32)GetProcAddress(hdll, "auto_compress_i32");
+      auto_compress_i64_   =   (fauto_compress_i64)GetProcAddress(hdll, "auto_compress_i64");
+      free_compressed_     =     (ffree_compressed)GetProcAddress(hdll, "free_compressed");
+      auto_decompress_i32_ = (fauto_decompress_i32)GetProcAddress(hdll, "auto_decompress_i32");
+      auto_decompress_i64_ = (fauto_decompress_i64)GetProcAddress(hdll, "auto_decompress_i64");
+      free_i32_            =            (ffree_i32)GetProcAddress(hdll, "free_i32");
+      free_i64_            =            (ffree_i64)GetProcAddress(hdll, "free_i64");
     } else fprintf(stderr,"q_compress_ffi.dll not found\n");
   }
     #elif !defined(_STATIC)
   { char *qcomp = "./libq_compress_ffi.so";
     void *hdll = dlopen(qcomp, RTLD_LAZY);
     if(hdll) {
-      if(!(auto_compress_i32_   =   (fauto_compress_i32)dlsym(hdll, "auto_compress_i32")))   die("fauto_compress_i32 not found\n");
-      if(!(auto_compress_i64_   =   (fauto_compress_i64)dlsym(hdll, "auto_compress_i64")))   die("fauto_compress_i64 not found\n");
-      if(!(free_compressed_     =     (ffree_compressed)dlsym(hdll, "free_compressed")))     die("ffree_compressed not found\n");
-      if(!(auto_decompress_i32_ = (fauto_decompress_i32)dlsym(hdll, "auto_decompress_i32"))) die("auto_decompress_i32 not found\n");
-      if(!(auto_decompress_i64_ = (fauto_decompress_i64)dlsym(hdll, "auto_decompress_i64"))) die("auto_decompress_i64 not found\n");
-      if(!(free_i32_            =            (ffree_i32)dlsym(hdll, "free_i32")))            die("free_i32 not found\n");
-      if(!(free_i64_            =            (ffree_i64)dlsym(hdll, "free_i64")))            die("free_i64 not found\n");
+      auto_compress_i32_   =   (fauto_compress_i32)dlsym(hdll, "auto_compress_i32");
+      auto_compress_i64_   =   (fauto_compress_i64)dlsym(hdll, "auto_compress_i64");
+      free_compressed_     =     (ffree_compressed)dlsym(hdll, "free_compressed");
+      auto_decompress_i32_ = (fauto_decompress_i32)dlsym(hdll, "auto_decompress_i32");
+      auto_decompress_i64_ = (fauto_decompress_i64)dlsym(hdll, "auto_decompress_i64");
+      free_i32_            =            (ffree_i32)dlsym(hdll, "free_i32");
+      free_i64_            =            (ffree_i64)dlsym(hdll, "free_i64");
     } else fprintf(stderr,"qcompress shared library '%s' not found.'%s'\n", qcomp, dlerror());
   }
     #endif
+  qcomp_loaded++;
 }
 
 unsigned qcomp32(unsigned char *in, unsigned inlen, unsigned char *out, int lev) {
-  qcompini(); FfiVec v = auto_compress_i32_((int *)in, inlen/4, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
+  qcompini(); if (!auto_compress_i32_ || !free_compressed_) die("auto_compress_i32 not found\n");
+  FfiVec v = auto_compress_i32_((int *)in, inlen/4, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
   return inlen;
 }
 
 unsigned qdecomp32(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen) {
-  qcompini(); FfiVec v = auto_decompress_i32_(in, inlen); memcpy(out, v.ptr, outlen); free_i32_(v);
+  qcompini(); if (!auto_decompress_i32_) die("auto_decompress_i32 not found\n");
+  FfiVec v = auto_decompress_i32_(in, inlen); memcpy(out, v.ptr, outlen); free_i32_(v);
   return outlen;
 }
 
 unsigned qcomp64(unsigned char *in, unsigned inlen, unsigned char *out, int lev) {
-  qcompini(); FfiVec v = auto_compress_i64_((int64_t *)in, inlen/8, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
+  qcompini(); if (!auto_compress_i64_ || !free_compressed_) die("auto_compress_i64 not found\n");
+  FfiVec v = auto_compress_i64_((int64_t *)in, inlen/8, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
   return inlen;
 }
 
 unsigned qdecomp64(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen) {
-  qcompini(); FfiVec v = auto_decompress_i64_(in, inlen); memcpy(out, v.ptr, outlen); free_i64_(v);
+  qcompini(); if (!auto_decompress_i64_) die("auto_decompress_i64 not found\n"); 
+  FfiVec v = auto_decompress_i64_(in, inlen); memcpy(out, v.ptr, outlen); free_i64_(v);
   return outlen;
 }
 
 unsigned qzcomp32(unsigned char *in, unsigned inlen, unsigned char *out, int lev, unsigned char *tmp) {
   bitzenc(in, inlen, tmp, 4);
-  qcompini(); FfiVec v = auto_compress_i32_((int *)tmp, inlen/4, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
+  qcompini(); if (!auto_compress_i32_ || !free_compressed_) die("auto_compress_i32 not found\n");
+  FfiVec v = auto_compress_i32_((int *)tmp, inlen/4, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
   return inlen;
 }
 
 unsigned qzdecomp32(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen) {
-  qcompini(); FfiVec v = auto_decompress_i32_(in, inlen); memcpy(out, v.ptr, outlen); free_i32_(v);
+  qcompini();  if (!auto_decompress_i32_) die("auto_decompress_i32 not found\n");
+  FfiVec v = auto_decompress_i32_(in, inlen); memcpy(out, v.ptr, outlen); free_i32_(v);
   bitzdec(out, outlen, 4);
   return outlen;
 }
 
 unsigned qzcomp64(unsigned char *in, unsigned inlen, unsigned char *out, int lev, unsigned char *tmp) {
   bitzenc(in, inlen, tmp, 8);
-  qcompini(); FfiVec v = auto_compress_i64_((int64_t *)tmp, inlen/8, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
+  qcompini(); if (!auto_compress_i64_ || !free_compressed_) die("auto_compress_i64 not found\n");
+  FfiVec v = auto_compress_i64_((int64_t *)tmp, inlen/8, lev); memcpy(out, v.ptr, v.len); inlen = v.len; free_compressed_(v);
   return inlen;
 }
 
 unsigned qzdecomp64(unsigned char *in, unsigned inlen, unsigned char *out, unsigned outlen) {
-  qcompini(); FfiVec v = auto_decompress_i64_(in, inlen); memcpy(out, v.ptr, outlen); free_i64_(v);
+  qcompini(); if (!auto_decompress_i64_) die("auto_decompress_i64 not found\n");
+  FfiVec v = auto_decompress_i64_(in, inlen); memcpy(out, v.ptr, outlen); free_i64_(v);
   bitzdec(out, outlen, 8);
   return outlen;
 }
