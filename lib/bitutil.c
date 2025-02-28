@@ -25,7 +25,9 @@
 
 #include <stdlib.h>
 #include <math.h> //nan
+#ifndef __STDC_WANT_IEC_60559_TYPES_EXT__
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
+#endif
 #include <float.h> //_Float16
 
 #include "include_/conf.h"

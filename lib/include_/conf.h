@@ -34,7 +34,9 @@
 #define IC_EXTERN_C_END
 #endif
 
+#ifndef __STDC_WANT_IEC_60559_TYPES_EXT__
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
+#endif
 
 #include <stdint.h>
 #include <stddef.h>
