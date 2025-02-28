@@ -242,7 +242,6 @@ size_t codecenc(unsigned char *in, size_t inlen, unsigned char *out, unsigned ou
 	case ICC_MEMCPY: memcpy(out,in,inlen); return inlen;
 	default: die("codec '%d' '%s' not implemented\n", codid, codstr(codid) );
   }
-  return 0;
 }
 
 size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, unsigned outlen, int codid, int codlev, unsigned char *codprm) {
@@ -314,7 +313,6 @@ size_t codecdec(unsigned char *in, size_t inlen, unsigned char *out, unsigned ou
 	case ICC_MEMCPY: memcpy(out,in, outlen); return inlen;
 	default: die("codec '%d' '%s' not implemented\n", codid, codstr(codid) );
   }
-  return 0;
 }
 
 //------------ block processing -----------------------------------------------
