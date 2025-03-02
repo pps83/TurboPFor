@@ -54,7 +54,7 @@
 }
 
 static unsigned cntcalc32(const unsigned char *__restrict in, unsigned inlen, cnt_t *__restrict cnt) {
-  cnt_t c[4][CSIZE] = {0},i;
+  cnt_t c[4][CSIZE] = {},i;
 
   const unsigned char *ip = in;
   if(inlen >= 64) {
