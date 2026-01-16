@@ -102,13 +102,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">
+      </AdditionalOptions>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4018;4101;4146;4244;4267;4305;4334</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,13 +120,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">
+      </AdditionalOptions>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4018;4101;4146;4244;4267;4305;4334</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,14 +139,16 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">
+      </AdditionalOptions>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4018;4101;4146;4244;4267;4305;4334</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,14 +161,16 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CODEC2;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">/w24146 /w24133 /w24996</AdditionalOptions>
+      <AdditionalOptions Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">
+      </AdditionalOptions>
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-parentheses -Wno-unused-variable -Wno-unused-but-set-variable -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-tautological-constant-out-of-range-compare -Wno-pointer-sign -Wno-unused-label -Wno-unused-function -Wno-logical-op-parentheses -Wno-pointer-type-mismatch -Wno-sometimes-uninitialized</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>..\..\ext</AdditionalIncludeDirectories>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4018;4101;4146;4244;4267;4305;4334</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -91,7 +91,6 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -99,12 +98,12 @@
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
       <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -112,6 +111,7 @@
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
       <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,7 +119,6 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -128,6 +127,7 @@
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
       <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -135,7 +135,6 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>__SSE__;__SSE2__;__SSE3__;__SSSE3__;__SSE4_1__;__SSE4_2__;__BMI__;__BMI2__;_CRT_SECURE_NO_WARNINGS=;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -144,6 +143,7 @@
       <AdditionalOptions Condition=" ('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">-Wno-keyword-macro -Wno-tautological-constant-out-of-range-compare -Wno-register -Wno-sequence-point -Wno-parentheses -Wno-unused-value -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..</AdditionalIncludeDirectories>
       <DisableSpecificWarnings Condition="!('$(PlatformToolset)'=='ClangCL' Or ($(PlatformToolset.StartsWith('Intel')) And $(PlatformToolset.Contains('C++ Compiler'))))">4018;4100;4101;4127;4146;4189;4242;4244;4245;4267;4319;4333;4365;4388;4389;4456;4457;4464;4514;4548;4555;4701;4710;4711;4820;5033;5045;5046;5219;5245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
