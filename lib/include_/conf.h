@@ -80,13 +80,13 @@
     #if defined(__i386__) || defined(__x86_64__)
 //x,__bsr32:     1:0,2:1,3:1,4:2,5:2,6:2,7:2,8:3,9:3,10:3,11:3,12:3,13:3,14:3,15:3,16:4,17:4,18:4,19:4,20:4,21:4,22:4,23:4,24:4,25:4,26:4,27:4,28:4,29:4,30:4,31:4,32:5,...
 //x,  bsr32: 0:0,1:1,2:2,3:2,4:3,5:3,6:3,7:3,8:4,9:4,10:4,11:4,12:4,13:4,14:4,15:4,16:5,17:5,18:5,19:5,20:5,21:5,22:5,23:5,24:5,25:5,26:5,27:5,28:5,29:5,30:5,31:5,32:6,...
-static ALWAYS_INLINE int    __bsr32(unsigned x       ) {             asm("bsr  %1,%0" : "=r" (x) : "rm" (x) ); return x; }
-static ALWAYS_INLINE int      bsr32(unsigned x       ) { int b = -1; asm("bsrl %1,%0" : "+r" (b) : "rm" (x) ); return b + 1; }
+static ALWAYS_INLINE int    __bsr32(unsigned x       ) {             __asm("bsr  %1,%0" : "=r" (x) : "rm" (x) ); return x; }
+static ALWAYS_INLINE int      bsr32(unsigned x       ) { int b = -1; __asm("bsrl %1,%0" : "+r" (b) : "rm" (x) ); return b + 1; }
 static ALWAYS_INLINE int      bsr64(uint64_t x       ) { return x?64 - __builtin_clzll(x):0; }
 static ALWAYS_INLINE int    __bsr64(uint64_t x       ) { return   63 ^ __builtin_clzll(x);   }
 
-static ALWAYS_INLINE unsigned rol32(unsigned x, int s) { asm ("roll %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
-static ALWAYS_INLINE unsigned ror32(unsigned x, int s) { asm ("rorl %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
+static ALWAYS_INLINE unsigned rol32(unsigned x, int s) { __asm("roll %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
+static ALWAYS_INLINE unsigned ror32(unsigned x, int s) { __asm("rorl %%cl,%0" :"=r" (x) :"0" (x),"c" (s)); return x; }
     #else
 static ALWAYS_INLINE int    __bsr32(unsigned x       ) { return   31 ^ __builtin_clz(  x); }
 static ALWAYS_INLINE int      bsr32(unsigned x       ) { return x?32 - __builtin_clz(  x):0; }
