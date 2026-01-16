@@ -1,5 +1,6 @@
 .vs/
 msvc.build/
+build.*/
 *.vcxproj.user
 *.obj
 *.exe
