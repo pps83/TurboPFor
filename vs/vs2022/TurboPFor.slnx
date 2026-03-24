@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="icapp.vcxproj" Id="6876beb8-2b45-48b9-8381-1d4094fe8868" />
+  <Project Path="TurboPFor-a.vcxproj" Id="8e928692-6a6e-4279-8351-5888913c8918" />
+  <Project Path="TurboPFor.vcxproj" Id="a162f37f-183f-4250-88ab-9b9fbde30b04" />
+</Solution>
